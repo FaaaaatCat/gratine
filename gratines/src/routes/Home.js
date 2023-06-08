@@ -1,4 +1,50 @@
-import React from "react";
+import React, { useState } from "react";
+// import { getFirestore } from "firebase/firestore";
+import { dbService } from '../fbase';
+import { collection, addDoc, serverTimestamp, getFirestore } from "firebase/firestore";
 
-const Home = () => <span>Home</span>;
+const Home = () => {
+    const [nweet, setNweet] = useState("");
+
+    // const onSubmit = (event) => {
+    //     event.preventDefault();
+    //     dbService.collection("nweets").add({
+    //         nweet,
+    //         createAt: Date.now(),
+    //     })
+    //     setNweet("");
+    // }
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        console.log(`서브밋 하는 느윗:${nweet}`);
+        await addDoc(collection(dbService, "nweets"), {
+        nweet,
+        createdAt: serverTimestamp(),
+        });
+        setNweet("");
+    };
+    const onChange = (e) => {
+        setNweet(e.target.value);
+    };
+    // const onChange = (event) => {
+    //     const {
+    //         target: { value },
+    //     } = event;
+    //     setNweet(value);
+    // }
+    return (
+        <div>
+            <span>Home</span>
+            <form onSubmit={onSubmit}>
+                <input
+                    value={nweet}
+                    onChange={onChange}
+                    type="text"
+                    placeholder="What's on your mind?"
+                    maxLength={120} />
+                <input type="submit" value="Nweet" />
+            </form>
+        </div>
+    );
+}
 export default Home;
