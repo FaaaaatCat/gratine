@@ -1,11 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // import { getFirestore } from "firebase/firestore";
 import { dbService } from '../fbase';
-import { collection, addDoc, serverTimestamp, getFirestore } from "firebase/firestore";
+import { collection, addDoc, serverTimestamp, getDocs, query, getFirestore } from "firebase/firestore";
 
 const Home = () => {
     const [nweet, setNweet] = useState("");
-
+    const [nweets, setNweets] = useState([]);
+    const getNweets = async () => {
+        const q = query(collection(dbService, "nweets"));
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+            const nweetObj = {
+                ...doc.data(),
+                id: doc.id,
+            }
+            setNweets(prev => [nweetObj, ...prev]);
+        });
+    };
+    useEffect(() => {
+        getNweets();
+    }, []);
     // const onSubmit = (event) => {
     //     event.preventDefault();
     //     dbService.collection("nweets").add({
@@ -16,7 +30,7 @@ const Home = () => {
     // }
     const onSubmit = async (e) => {
         e.preventDefault();
-        console.log(`서브밋 하는 느윗:${nweet}`);
+        console.log(`현재 쓴 트윗:${nweet}`);
         await addDoc(collection(dbService, "nweets"), {
         nweet,
         createdAt: serverTimestamp(),
