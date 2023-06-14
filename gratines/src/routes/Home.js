@@ -7,6 +7,7 @@ import Nweet from "components/Nweet";
 const Home = ( {userObj} ) => {
     const [nweet, setNweet] = useState("");
     const [nweets, setNweets] = useState([]);
+    const [attachment, setAttachment] = useState();
     //forEach를 사용하지 않는 방법(reRender 하지 않아서 더 빨라짐)
     useEffect(() => {
         // getNweets();
@@ -67,6 +68,22 @@ const Home = ( {userObj} ) => {
     //     } = event;
     //     setNweet(value);
     // }
+
+    //사진파일 추가
+    const onFileChange = (event) => {
+        // console.log(event.target.files)
+        const {
+            target: { files },
+        } = event;
+        const theFile = files[0]; //name, size, type, 등등 파일의 정보
+        const reader = new FileReader();
+        reader.onloadend = (finishedEvent) => {
+            setAttachment(finishedEvent.target.result)
+        }
+        reader.readAsDataURL(theFile);
+    }
+    //사진파일 업로드 전 지우기
+    const onClearAttachment = () => setAttachment(null)
     return (
         <div>
             <span>Home</span>
@@ -77,7 +94,18 @@ const Home = ( {userObj} ) => {
                     type="text"
                     placeholder="What's on your mind?"
                     maxLength={120} />
+                <input
+                    type="file"
+                    accept="image/*"
+                    onChange = {onFileChange}
+                />
                 <input type="submit" value="Nweet" />
+                {attachment &&
+                    <div>
+                        <img src={attachment} width="50px" height="50px" />
+                        <button onClick={onClearAttachment}>Clear Image</button>
+                    </div>
+                }
             </form>
             <div>
                 {nweets.map((nweet) => ( //map은 for과 유사함. 배열안의 값들을 다 불러와주는 기능 / 지금으로썬, nweets 배열안의 데이터(doc.id / doc.data())를 다 불러옴

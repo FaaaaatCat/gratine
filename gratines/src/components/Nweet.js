@@ -26,12 +26,17 @@ const Nweet = ({ nweetObj, isOwner }) => {
         });
         setEditing(false);
     }
-    const onChange = (event) => {
-        const {
-            target: { value },
-        } = event;
-        setNewNweet(value);
-    }
+
+    const onChange = (e) => {
+        setNewNweet(e.target.value);
+    };
+    // const onChange = (event) => {
+    //     const {
+    //         target: { value },
+    //     } = event;
+    //     setNewNweet(value);
+    // }
+
     return (
         <div>
             {editing ? ( //편집중인가?
