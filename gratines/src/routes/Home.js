@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 // import { getFirestore } from "firebase/firestore";
 import { dbService } from '../fbase';
 import { collection, addDoc, serverTimestamp, getDocs, query, getFirestore, onSnapshot, orderBy } from "firebase/firestore";
+import Nweet from "components/Nweet";
 
 const Home = ( {userObj} ) => {
     const [nweet, setNweet] = useState("");
@@ -80,9 +81,11 @@ const Home = ( {userObj} ) => {
             </form>
             <div>
                 {nweets.map((nweet) => (
-                    <div key={nweet.id}>
-                        <h4>{nweet.text}</h4>
-                    </div>
+                    <Nweet
+                        key={nweet.id}
+                        nweetObj={nweet} //쓴 데이터
+                        isOwner={nweet.creatorId === userObj.uid} //내가 실제 주인인지
+                    />
                 ))}
             </div>
         </div>
