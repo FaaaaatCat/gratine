@@ -3,18 +3,18 @@ import React, { useEffect, useState } from "react";
 import { dbService } from '../fbase';
 import { collection, addDoc, serverTimestamp, getDocs, query, getFirestore } from "firebase/firestore";
 
-const Home = () => {
+const Home = ( {userObj} ) => {
     const [nweet, setNweet] = useState("");
     const [nweets, setNweets] = useState([]);
     const getNweets = async () => {
         const q = query(collection(dbService, "nweets"));
-        const querySnapshot = await getDocs(q);
-        querySnapshot.forEach((doc) => {
-            const nweetObj = {
-                ...doc.data(),
-                id: doc.id,
+        const dbNweets = await getDocs(q);
+        dbNweets.forEach((document) => {
+            const nweetObject = {
+                ...document.data(), //...은 데이터의 내용물, 즉 spread attribute 기능임
+                id: document.id,
             }
-            setNweets(prev => [nweetObj, ...prev]);
+            setNweets(prev => [nweetObject, ...prev]);
         });
     };
     useEffect(() => {
@@ -32,8 +32,9 @@ const Home = () => {
         e.preventDefault();
         console.log(`현재 쓴 트윗:${nweet}`);
         await addDoc(collection(dbService, "nweets"), {
-        nweet,
+        text : nweet,
         createdAt: serverTimestamp(),
+        creatorId: userObj.uid,
         });
         setNweet("");
     };
@@ -58,6 +59,13 @@ const Home = () => {
                     maxLength={120} />
                 <input type="submit" value="Nweet" />
             </form>
+            <div>
+                {nweets.map((nweet) => (
+                    <div key={nweet.id}>
+                        <h4>{nweet.nweet}</h4>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 }
