@@ -83,7 +83,7 @@ const Home = ( {userObj} ) => {
                 {nweets.map((nweet) => (
                     <Nweet
                         key={nweet.id}
-                        nweetObj={nweet} //쓴 데이터
+                        nweetObj={nweet} //id, createdAt, text 3가지 값 갖고있음
                         isOwner={nweet.creatorId === userObj.uid} //내가 실제 주인인지
                     />
                 ))}
