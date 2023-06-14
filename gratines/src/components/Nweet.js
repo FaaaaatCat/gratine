@@ -62,7 +62,8 @@ const Nweet = ({ nweetObj, isOwner }) => {
                 </>
             ): (
                 <>
-                   <h4>{nweetObj.text}</h4>
+                    <h4>{nweetObj.text}</h4>
+                    {nweetObj.attachmentUrl && <img src={nweetObj.attachmentUrl} width="50px" height="50px" />}
                     {isOwner && ( //주인인가? 주인일때만 편집, 삭제 버튼이 보이도록
                         <>
                             <button onClick={onDeleteClick}>Delete</button>

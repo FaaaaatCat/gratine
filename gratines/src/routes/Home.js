@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 // import { getFirestore } from "firebase/firestore";
-import { dbService } from '../fbase';
+import { v4 as uuidv4 } from 'uuid';
+import { dbService, storageService } from '../fbase';
 import { collection, addDoc, serverTimestamp, getDocs, query, getFirestore, onSnapshot, orderBy } from "firebase/firestore";
+import { ref, uploadString, getDownloadURL } from "@firebase/storage";
 import Nweet from "components/Nweet";
 
-const Home = ( {userObj} ) => {
+const Home = ({ userObj }) => {
     const [nweet, setNweet] = useState("");
     const [nweets, setNweets] = useState([]);
-    const [attachment, setAttachment] = useState();
+    const [attachment, setAttachment] = useState("");
     //forEach를 사용하지 않는 방법(reRender 하지 않아서 더 빨라짐)
     useEffect(() => {
         // getNweets();
@@ -50,13 +52,41 @@ const Home = ( {userObj} ) => {
     // }
     const onSubmit = async (e) => {
         e.preventDefault();
-        console.log(`현재 쓴 트윗:${nweet}`);
-        await addDoc(collection(dbService, "nweets"), { //addDoc은 문서를 추가하는 함수. 아래 항목을 nweets의 데이터베이스에 저장함.
-            text : nweet,
-            createdAt: serverTimestamp(),
+
+        //이미지 첨부하지 않고 텍스트만 올리고 싶을 때도 있기 때문에 attachment가 있을때만 아래 코드 실행
+        //이미지 첨부하지 않은 경우엔 attachmentUrl=""이 된다.
+        let attachmentUrl = "";
+        if (attachment !== "") {
+            //랜덤 uuid 생성하여 파일 경로 참조 만들기
+            const attachmentRef = ref(storageService, `${userObj.uid}/${uuidv4()}`);
+            //storage 참조 경로로 파일 업로드 하기
+            const response = await uploadString(attachmentRef, attachment, "data_url");
+            //storage 참조 경로에 있는 파일의 URL을 다운로드해서 attachmentUrl 변수에 넣어서 업데이트
+            attachmentUrl = await getDownloadURL(response.ref);
+        }
+        //트윗 오브젝트
+        const nweetObj = {
+            text: nweet,
+            createdAt: Date.now(),
             creatorId: userObj.uid,
+            attachmentUrl,
             //nweets에 새로운 데이터를 넣고싶으면 이곳에 추가하기.
-        });
+        };
+
+        //addDoc은 문서를 추가하는 함수. nweetObj의 항목을 nweets의 데이터베이스에 저장함.
+        await addDoc(collection(dbService, "nweets"), nweetObj); 
+        //state 비워서 form 비우기
+        setNweet("");
+        //파일 미리보기 img src 비워주기
+        setAttachment("");
+
+        // console.log(`현재 쓴 트윗:${nweet}`);
+        // await addDoc(collection(dbService, "nweets"), { //직접 저장하고 싶으면 이렇게 쓰자.
+        //     text : nweet,
+        //     createdAt: serverTimestamp(),
+        //     creatorId: userObj.uid,
+        //     //nweets에 새로운 데이터를 넣고싶으면 이곳에 추가하기.
+        // });
         setNweet("");
     };
     const onChange = (e) => {
@@ -83,7 +113,7 @@ const Home = ( {userObj} ) => {
         reader.readAsDataURL(theFile);
     }
     //사진파일 업로드 전 지우기
-    const onClearAttachment = () => setAttachment(null)
+    const onClearAttachment = () => setAttachment("")
     return (
         <div>
             <span>Home</span>
