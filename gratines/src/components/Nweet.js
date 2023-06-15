@@ -1,9 +1,11 @@
-import { dbService } from "fbase";
+import { dbService, storageService } from "fbase";
+import { deleteObject, ref } from "@firebase/storage";
 import { doc, deleteDoc, updateDoc } from "firebase/firestore";
 import React, { useState } from "react";
 
 const Nweet = ({ nweetObj, isOwner }) => {
     const NweetTextRef = doc(dbService, "nweets", `${nweetObj.id}`); //nweetObj.id 는 쓴 트윗의 고유 id임. userObj.id와 다름.
+    const NweetImgRef = ref(storageService, nweetObj.attachmentUrl); //nweetObj.attachmentUrl의 레퍼런스를 얻음
     //console.log(nweetObj.id) //쓴 데이터 갯수만큼 실행 됨 그래서 모든 트윗의 id를 보여줌.
 
     const [editing, setEditing] = useState(false);
@@ -14,6 +16,7 @@ const Nweet = ({ nweetObj, isOwner }) => {
         if (ok) {
             //await dbService.doc(`nweets/${nweetObj.id}`).delete();
             await deleteDoc(NweetTextRef);
+            await deleteObject(NweetImgRef);
         }
 
     }
