@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { getAuth,
     createUserWithEmailAndPassword,
-    signInWithEmailAndPassword } from "firebase/auth";
+    signInWithEmailAndPassword,
+    signInWithPopup,
+    GoogleAuthProvider} from "firebase/auth";
 
 const AuthForm = () => {
     const auth = getAuth();
@@ -9,6 +11,20 @@ const AuthForm = () => {
     const [password, setPassword] = useState("");
     const [newAccount, setNewAccount] = useState(true);
     const [error, setError] = useState("");
+
+    //소셜 로그인 기능
+    const onSocialClick = async(event) => {
+        const {
+            target: { name },
+        } = event;
+        let provider;
+        if(name === "google"){
+            provider = new GoogleAuthProvider();
+            // const result = await signInWithPopup(auth, provider);
+            // const credential = GoogleAuthProvider.credentialFromResult(result);
+        }
+        await signInWithPopup(auth, provider);
+    }
 
     //로그인 기능
     const onChange = (event) => {
@@ -52,9 +68,12 @@ const AuthForm = () => {
     const toggleAccount = () => setNewAccount((prev) => !prev);
     
     return (
-        <div>
+        <div className="login-form-wrap">
+            <button className="gtn-btn btn-google" onClick={onSocialClick} name="google">Continue with Google</button>
+            <p>{newAccount ? "가입하기" : "로그인"}</p>
             <form onSubmit={onSubmit}>
                 <input
+                    className="gtn-input"
                     name="email"
                     type="email"
                     placeholder="Email"
@@ -63,6 +82,7 @@ const AuthForm = () => {
                     onChange={onChange}
                 />
                 <input
+                    className="gtn-input"
                     name="password"
                     type="password"
                     placeholder="Password"
@@ -70,13 +90,12 @@ const AuthForm = () => {
                     value={password}
                     onChange={onChange}
                 />
-                <input
-                    type="submit"
-                    value={newAccount ? "Create Account" : "Log In"}
-                />
+                <button className="gtn-btn" type="submit">{newAccount ? "Create Account" : "Log In"}</button>
                 {error}
             </form>
-            <span onClick={toggleAccount}>{newAccount ? "Log in" : "Create Account"}</span>
+            <span className="login-sub-txt" onClick={toggleAccount}>
+                {newAccount ? <div>이미 계정이 있나요? <span>로그인</span></div> : "새 계정 만들기"}
+            </span>
         </div>
     );
 };

@@ -52,7 +52,8 @@ const Profile = ({ refreshUser, userObj }) => {
         }
     }
     return (
-        <>
+        <div className="pg-profile">
+            <span className="title">This is Profile</span>
             <form onSubmit={onSubmit}>
                 <input
                     onChange={onChange}
@@ -65,8 +66,8 @@ const Profile = ({ refreshUser, userObj }) => {
                     value="Update Profile"
                 />
             </form>
-            <button onClick={onLogOutClick}>Log Out</button>
-        </>
+            <button className="gtn-btn" onClick={onLogOutClick}>Log Out</button>
+        </div>
     )
 };
 export default Profile;

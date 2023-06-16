@@ -1,0 +1,21 @@
+@import "_varient";
+
+
+#root {
+    //인풋
+  .gtn-input {
+    height: $form-height;
+    padding: 0 $form-left-padding;
+    // background-color: red !important; //왜 안되지?
+    border: 1px solid $form-border-color;
+    border-radius: $form-radius;
+  }
+
+  //버튼
+  .gtn-btn{
+    height: 40px;
+    width: 150px;
+    border: 1px solid black;
+    padding: 0 1rem;
+  }
+}
