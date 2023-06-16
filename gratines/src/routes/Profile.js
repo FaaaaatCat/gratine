@@ -23,8 +23,9 @@ const Profile = ({ refreshUser, userObj }) => {
             orderBy("createdAt", "desc") //정렬하기, 내림차순(desc), 오름차순(aece)
         );
         const querySnapshot = await getDocs(q);
+        //원하는값을 필터링 하는법
         querySnapshot.forEach((doc) => {
-            console.log(doc.id, " => ", doc.data()); //원하는값을 필터링 하는법
+            //console.log(doc.id, " => ", doc.data());
         });
     };
     // const getMyNweets = async() => {

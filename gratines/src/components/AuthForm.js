@@ -90,7 +90,7 @@ const AuthForm = () => {
                     value={password}
                     onChange={onChange}
                 />
-                <button className="gtn-btn" type="submit">{newAccount ? "Create Account" : "Log In"}</button>
+                <button className="gtn-btn w-100" type="submit">{newAccount ? "Create Account" : "Log In"}</button>
                 {error}
             </form>
             <span className="login-sub-txt" onClick={toggleAccount}>

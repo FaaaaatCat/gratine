@@ -14,7 +14,11 @@
   }
 }
 //홈페이지
-.pg-home,
+.pg-home{
+  display: flex;
+}
+
+.chatting-area,
 .pg-profile {
   padding: 1rem;
   display: flex;

@@ -15,7 +15,13 @@
   margin: 0 10px;
 }
 
-.pg-home,
+.pg-home {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.chatting-area,
 .pg-profile {
   padding: 1rem;
   display: -webkit-box;
@@ -28,7 +34,7 @@
   gap: 1rem;
 }
 
-.pg-home .title,
+.chatting-area .title,
 .pg-profile .title {
   font-size: 1.2rem;
   font-weight: 600;

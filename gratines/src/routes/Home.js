@@ -48,7 +48,7 @@ const Home = ({ userObj }) => {
     // }
 
     return (
-        <div className="pg-home">
+        <div className="chatting-area">
             <span className="title">This is Home</span>
             <NweetFactory userObj={userObj} />
             <div>
