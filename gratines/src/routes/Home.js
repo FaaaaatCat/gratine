@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Component, useEffect, useState } from "react";
 // import { getFirestore } from "firebase/firestore";
 import { dbService, storageService } from '../fbase';
 import { collection, query, onSnapshot, orderBy } from "firebase/firestore";
@@ -50,7 +50,7 @@ const Home = ({ userObj }) => {
     // }
 
     return (
-        <div>
+        <div className="red">
             <span>Home</span>
             <NweetFactory userObj={userObj} />
             <div>

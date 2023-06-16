@@ -59,7 +59,6 @@ function App() {
       
       <footer>$copy{new Date().getFullYear()} Gratine</footer>
     </>
-    
   );
 }
 

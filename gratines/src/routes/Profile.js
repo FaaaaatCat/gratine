@@ -2,11 +2,18 @@ import React, { useEffect, useState } from "react";
 import { getAuth, signOut, updateProfile  } from "firebase/auth";
 import { authService, dbService } from "fbase";
 import { collection, getDocs, query, where, orderBy } from "firebase/firestore";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Profile = ({ refreshUser, userObj }) => {
     const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
     const auth = getAuth();
-    const onLogOutClick = () => auth.signOut();
+    const navigate = useNavigate();
+
+    //1. 로그아웃 기능
+    const onLogOutClick = () => {
+        auth.signOut();
+        navigate("/");
+    }
 
     //2. 내 nweets 얻는 function 생성
     const getMyNweets = async () => {
@@ -32,6 +39,7 @@ const Profile = ({ refreshUser, userObj }) => {
         getMyNweets();
     },[])
     
+    //3. 새 닉네임을 얻는 기능
     const onChange = (e) => {
         setNewDisplayName(e.target.value);
     };
