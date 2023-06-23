@@ -57,27 +57,70 @@ const NweetFactory = ( {userObj} ) => {
     }
     //사진파일 업로드 전 지우기
     const onClearAttachment = () => setAttachment("")
+
+    //엔터눌러서 채팅치기
+    const handleKeyPress = (e) => {
+        if(e.keyCode === 13){
+            onSubmit(e);
+        }
+    }
+
     return (
-        <form onSubmit={onSubmit}>
-                <input
+        <>
+            {attachment &&
+                    <div className="img-thumb-area">
+                        <img src={attachment} />
+                        <button onClick={onClearAttachment}>이미지 삭제</button>
+                    </div>
+                }
+            <form onSubmit={onSubmit}>
+                
+                <textarea
+                    class="chatting-textarea"
+                    contenteditable="true"
+                    role="textarea"
+                    title="Text Chat Input"
+                    autocomplete="off"
+                    value={nweet}
+                    onChange={onChange}
+                    onKeyDown={handleKeyPress}
+                    placeholder=""
+                />
+                {/* <input
+                    className="chatting-txt-input"
                     value={nweet}
                     onChange={onChange}
                     type="text"
                     placeholder="What's on your mind?"
-                    maxLength={120} />
-                <input
+                    // maxLength={120} //글자제한
+                /> */}
+                {/* <input
+                    className="chatting-picture-input"
                     type="file"
                     accept="image/*"
                     onChange = {onFileChange}
-                />
-                <input type="submit" value="Nweet" />
-                {attachment &&
-                    <div>
-                        <img src={attachment} width="50px" height="50px" />
-                        <button onClick={onClearAttachment}>Clear Image</button>
+                /> */}
+                <label for="file">
+                    <div class="picture-upload-btn">
+                        <span className="material-icons-round">image</span>
+                        이미지 파일
                     </div>
-                }
+                </label>
+                <input
+                    type="file"
+                    name="file"
+                    id="file"
+                    accept="image/*"
+                    onChange = {onFileChange}
+                />
+                <input
+                    className="btn-on-input"
+                    type="submit"
+                    value="전송"
+                />
             </form>
+        </>
+        
     )
 }
 export default NweetFactory;

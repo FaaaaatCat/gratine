@@ -44,8 +44,15 @@ const Nweet = ({ nweetObj, isOwner }) => {
     // }
 
     return (
-        <div>
-            {editing ? ( //편집중인가?
+        <div className="chatting-list">
+            <div className="profile-box"></div>
+            <div className="txt-box">
+                <b>User Name</b>
+                <p>{nweetObj.text}</p>
+                {nweetObj.attachmentUrl && <img src={nweetObj.attachmentUrl} />}
+            </div>
+            {/* 트위터처럼 내가 쓴 글 편집및 삭제 하고싶으면 아래 하기 */}
+            {/* {editing ? ( //편집중인가?
                 <>
                     {isOwner && //주인인가? 주인일때만 아래 항목이 보이도록
                         <>
@@ -77,7 +84,7 @@ const Nweet = ({ nweetObj, isOwner }) => {
                         </>
                     )}
                 </>
-            )}
+            )} */}
         </div>
     )
 }

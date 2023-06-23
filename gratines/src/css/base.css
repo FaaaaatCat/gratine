@@ -2,6 +2,7 @@
 @import url('layout.css');
 @import url('form.css');
 @import url('tools.css');
+@import url('login.css');
 
 /* font */
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.7/dist/web/static/pretendard.css");
@@ -9,7 +10,7 @@
 /* Reset */
 *{-webkit-text-size-adjust:none; box-sizing: border-box;}
 body,p,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,th,td,form,fieldset,legend,input,textarea,button,select{margin:0;padding:0}
-body,input,textarea,select,button,table,h1,h2,h3,h4,h5{font-family:Pretendard; font-size:.8rem;color:#303030;letter-spacing: -0.5px;}
+body,input,textarea,select,button,table,h1,h2,h3,h4,h5{word-break: break-word; font-family:Pretendard; font-size:.8rem;color:#303030;letter-spacing: -0.5px;}
 body{*word-break:break-word; -ms-word-break:break-word;overflow-y:scroll}
 img,fieldset,iframe{border:0 none}
 ul,ol,li{list-style:none; margin: 0; padding: 0;}

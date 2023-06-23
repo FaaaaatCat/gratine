@@ -1,8 +1,7 @@
 @import "_varient";
 
-
 #root {
-    //인풋
+  //인풋
   .gtn-input {
     height: $form-height;
     padding: 0 $form-left-padding;
@@ -12,11 +11,16 @@
   }
 
   //버튼
-  .gtn-btn{
+  .gtn-btn {
     display: block;
-    height: 40px;
-    width: 150px;
+    height: 32px;
+    max-width: 150px;
     border: 1px solid black;
     padding: 0 1rem;
+    transition: all 0.2s;
+    &:hover {
+      filter: brightness(0.9);
+      transition: all 0.2s;
+    }
   }
 }

@@ -7,8 +7,17 @@
 
 #root .gtn-btn {
   display: block;
-  height: 40px;
-  width: 150px;
+  height: 32px;
+  max-width: 150px;
   border: 1px solid black;
   padding: 0 1rem;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+#root .gtn-btn:hover {
+  -webkit-filter: brightness(0.9);
+          filter: brightness(0.9);
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
 }

@@ -1,4 +1,5 @@
 .nav {
+  display: none;
   border-bottom: 1px solid black;
   padding: 1rem;
 }
@@ -15,34 +16,51 @@
   margin: 0 10px;
 }
 
-.pg-home {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+body {
+  overflow: hidden !important;
 }
 
-.chatting-area,
-.pg-profile {
-  padding: 1rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  gap: 1rem;
-}
-
-.chatting-area .title,
-.pg-profile .title {
-  font-size: 1.2rem;
-  font-weight: 600;
-}
-
-.login-area {
-  width: 100vw;
+body #root {
+  overflow: hidden !important;
   height: 100vh;
+}
+
+body #root .app-container {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  margin: 0;
+}
+
+body #root .app-container .profile-area {
+  padding: 1rem;
+  min-width: 300px;
+  overflow-y: auto;
+}
+
+body #root .app-container .chatting-area {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  border: 1px solid black;
+  overflow: hidden !important;
+}
+
+body #root .app-container .chatting-area .chatting-list-container {
+  overflow-y: auto;
+}
+
+body #root .app-container .side-area {
+  min-width: 300px;
+  overflow-y: auto;
+}
+
+.chatting-area {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -50,20 +68,181 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  gap: 2rem;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
 }
 
-.login-area .logo-box {
-  width: 300px;
-  height: 100px;
-  border: 1px solid black;
+.chatting-area .chatting-list-container {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
   background-color: lightgray;
+}
+
+.chatting-area .chatting-list-container .chatting-list {
+  border-bottom: 1px solid black;
+  padding: 0.5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 0.5rem;
+  background-color: white;
+}
+
+.chatting-area .chatting-list-container .chatting-list .profile-box {
+  background-color: gray;
+  width: 28px;
+  height: 28px;
+}
+
+.chatting-area .chatting-list-container .chatting-list .txt-box {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 4px;
+}
+
+.chatting-area .chatting-list-container .chatting-list .txt-box b {
+  font-size: 11px;
+  font-weight: 500;
+  color: #86869a;
+}
+
+.chatting-area .chatting-list-container .chatting-list .txt-box p {
+  font-size: 14px;
+  line-height: 150%;
+  font-weight: 400;
+  color: #61616e;
+}
+
+.chatting-area .chatting-list-container .chatting-list .txt-box img {
+  height: 300px;
+  width: 300px;
+  border: 1px solid gray;
+}
+
+.chatting-area .chatting-form-box {
+  min-height: 40px;
+  border-top: 1px solid black;
+  background-color: black;
+  padding: 0.5rem;
+}
+
+.chatting-area .chatting-form-box .img-thumb-area {
+  margin-bottom: 0.5rem;
+}
+
+.chatting-area .chatting-form-box .img-thumb-area img {
+  width: 50px;
+  height: 50px;
+}
+
+.chatting-area .chatting-form-box .img-thumb-area button {
+  margin-left: 10px;
+  padding: 0.2rem 0.5rem;
+}
+
+.chatting-area .chatting-form-box form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 5px;
+}
+
+.chatting-area .chatting-form-box form .chatting-textarea {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  border-radius: 4px;
+  height: 32px;
+  padding: 5px;
+}
+
+.chatting-area .chatting-form-box form .picture-upload-btn {
+  height: 32px;
+  padding: 0 1rem 0 0.8rem;
+  background: #fff;
+  border: 1px solid #4d4d4d;
+  border-radius: 4px;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 5px;
+  font-weight: 500;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+.chatting-area .chatting-form-box form .picture-upload-btn span {
+  font-size: 18px;
+}
+
+.chatting-area .chatting-form-box form .picture-upload-btn:hover {
+  -webkit-filter: brightness(0.9);
+          filter: brightness(0.9);
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+.chatting-area .chatting-form-box form #file {
+  display: none;
+}
+
+.chatting-area .chatting-form-box form .btn-on-input {
+  height: 32px;
+  padding: 0 1rem;
+  background: #fff;
+  border: 1px solid #4d4d4d;
+  border-radius: 4px;
+  font-weight: 500;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+.chatting-area .chatting-form-box form .btn-on-input:hover {
+  -webkit-filter: brightness(0.9);
+          filter: brightness(0.9);
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+.profile-area {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 1rem;
+}
+
+.profile-area .logo {
+  width: 180px;
+  height: 50px;
+  background-color: lightgray;
+  border: 1px solid black;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -75,44 +254,59 @@
           justify-content: center;
 }
 
-.login-area .login-box {
-  padding: 3rem 2rem;
+.profile-area .profile-wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+.profile-area .profile-wrap .profile-box__my {
+  width: 120px;
+  height: 120px;
+  background-color: lightgray;
   border: 1px solid black;
-  border-radius: 10px;
-  background-color: white;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  gap: 2rem;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
-.login-area .login-box p {
-  font-size: 1.4rem;
-  font-weight: 600;
+.profile-area .profile-wrap h4 {
+  font-size: 1.1rem;
 }
 
-.login-area .login-box .login-form-wrap {
+.profile-area .profile-wrap .profile-info > div {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  gap: 2rem;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 5px;
+  margin-bottom: 5px;
 }
 
-.login-area .login-box .login-form-wrap form {
+.side-area {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -120,14 +314,79 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  gap: 10px;
 }
 
-.login-area .login-box .login-form-wrap .login-sub-txt {
-  cursor: pointer;
+.side-area .history-area {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 33px;
+  padding: 0.5rem;
+  border-top: 1px solid black;
+  background-color: #e6e6e6;
 }
 
-.login-area .login-box .login-form-wrap .login-sub-txt span {
-  color: blue;
-  margin-left: 5px;
+.side-area .history-area span {
+  font-size: 18px;
+}
+
+.side-area .member-area,
+.side-area .function-area {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.side-area .member-area .title,
+.side-area .function-area .title {
+  padding: 0.5rem;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  background-color: #e6e6e6;
+}
+
+.side-area .member-area .member-list,
+.side-area .function-area .member-list {
+  padding: 0.5rem;
+  border-bottom: 1px solid gray;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0.5rem;
+}
+
+.side-area .member-area .member-list .profile-box,
+.side-area .function-area .member-list .profile-box {
+  background-color: gray;
+  width: 28px;
+  height: 28px;
+}
+
+.side-area .member-area .member-list p,
+.side-area .function-area .member-list p {
+  font-size: 14px;
+  line-height: 150%;
+  font-weight: 400;
+  color: #61616e;
+}
+
+.side-area .member-area .function-list,
+.side-area .function-area .function-list {
+  padding: 0.5rem;
+  border-bottom: 1px solid gray;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }

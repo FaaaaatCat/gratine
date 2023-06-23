@@ -8,7 +8,7 @@ import Navigation from "./Navigation";
 const AppRouter = ({isLoggedIn, userObj, refreshUser}) => {
     // const [isLoggedIn, setIsLoggedIn] = useState(true);
     return(
-        <div className="pg-home">
+        <div className="app-container">
             <Router>
                 {isLoggedIn && <Navigation userObj={userObj} />}
                 <Routes>
