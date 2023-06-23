@@ -30,7 +30,7 @@ function App() {
         if (user.displayName === null) {
           const name = user.email.split("@")[0];
           setUserObj({
-            displayName: '새 사용자',
+            displayName: name,
             uid: user.uid,
             updateProfile: (args) => updateProfile(user, { displayName: user.displayName }),
           });
@@ -68,7 +68,7 @@ function App() {
     <>
       {init ?
         <AppRouter
-            isLoggedIn={isLoggedIn}
+          isLoggedIn={isLoggedIn}
             userObj={userObj}
             refreshUser={refreshUser}
         /> : "Initializing..."

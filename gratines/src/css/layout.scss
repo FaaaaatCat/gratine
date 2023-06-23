@@ -29,7 +29,7 @@ body {
       //프로필 영역
       & .profile-area {
         padding: 1rem;
-        min-width: 300px;
+        width: 260px;
         overflow-y: auto;
       }
       //채팅 영역
@@ -43,7 +43,7 @@ body {
       }
       //사이드 영역
       & .side-area {
-        min-width: 300px;
+        width: 260px;
         overflow-y: auto;
       }
     }
@@ -86,7 +86,7 @@ body {
           font-weight: 400;
           color: rgb(97, 97, 110);
         }
-        & img{
+        & img {
           height: 300px;
           width: 300px;
           border: 1px solid gray;
@@ -202,15 +202,18 @@ body {
       font-size: 1.1rem;
     }
     & .profile-info {
-      & > div{
+      & > div {
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 5px;
         margin-bottom: 5px;
-        & p{}
-        & b{}
-        & span{}
+        & p {
+        }
+        & b {
+        }
+        & span {
+        }
       }
     }
   }
@@ -220,7 +223,7 @@ body {
 .side-area {
   display: flex;
   flex-direction: column;
-  & .history-area{
+  & .history-area {
     display: flex;
     justify-content: space-between;
     align-items: center;

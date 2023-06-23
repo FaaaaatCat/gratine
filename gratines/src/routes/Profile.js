@@ -8,14 +8,10 @@ const Profile = ({ refreshUser, userObj }) => {
     const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
     const auth = getAuth();
     const navigate = useNavigate();
+    const [editProfile, setEditProfile] = useState(false);
 
-    //1. 로그아웃 기능
-    const onLogOutClick = () => {
-        auth.signOut();
-        navigate("/");
-    }
-
-    //2. 내 nweets 얻는 function 생성
+    ///////////////////////////////////////////////////////////////////////////////
+    //1. 내 nweets 정보 얻기 (useEffect로 최초 한번만 실행)
     const getMyNweets = async () => {
         const q = query(
             collection(dbService, "nweets"),
@@ -25,23 +21,21 @@ const Profile = ({ refreshUser, userObj }) => {
         const querySnapshot = await getDocs(q);
         //원하는값을 필터링 하는법
         querySnapshot.forEach((doc) => {
-            //console.log(doc.id, " => ", doc.data());
+            // console.log(doc.id);
+            // console.log(doc.data());
         });
     };
-    // const getMyNweets = async() => {
-    //     const nweets = await dbService
-    //     .collection("nweets")
-    //     .where("creatorId", "==", userObj.uid)
-    //     .orderBy("createdAt")
-    //     .get();
-    //     console.log(nweets.docs.map((doc) => doc.data()));
-    // };
     useEffect(() => {
         getMyNweets();
     },[])
     
-    //3. 새 닉네임을 얻는 기능
+    ///////////////////////////////////////////////////////////////////////////////
+    //2. 프로필 수정 기능
+    const onEditProfile = (e) => {
+        setEditProfile(true);
+    }
     const onChange = (e) => {
+        //새 닉네임을 얻는 기능
         setNewDisplayName(e.target.value);
     };
     const onSubmit = async (e) => {
@@ -51,23 +45,66 @@ const Profile = ({ refreshUser, userObj }) => {
             await updateProfile(auth.currentUser, { displayName: newDisplayName });
             refreshUser();
         }
+        setEditProfile(false);
     }
+
+    ///////////////////////////////////////////////////////////////////////////////
+    //3. 로그아웃 기능
+    const onLogOutClick = () => {
+        auth.signOut();
+        navigate("/login");
+    }
+
     return (
-        <div className="pg-profile">
-            <span className="title">This is Profile</span>
-            <form onSubmit={onSubmit}>
-                <input
-                    onChange={onChange}
-                    value={newDisplayName}
-                    type="text"
-                    placeholder="닉네임을 적어주세요"
-                />
-                <input
-                    type="submit"
-                    value="Update Profile"
-                />
-            </form>
-            <button className="gtn-btn" onClick={onLogOutClick}>Log Out</button>
+        <div className="profile-area">
+            <div className="logo">로고</div>
+            <div className="profile-wrap">
+                {editProfile ?
+                    (
+                        <>
+                            <form onSubmit={onSubmit}>
+                                <input
+                                    className="gtn-input"
+                                    onChange={onChange}
+                                    value={newDisplayName}
+                                    type="text"
+                                    placeholder="닉네임을 적어주세요"
+                                />
+                                <input
+                                    className="gtn-btn"
+                                    type="submit"
+                                    value="수정 완료"
+                                />
+                            </form>
+                        </>
+                    ): (
+                        <>
+                            <div className="profile-box__my">내 프로필사진</div>
+                            <h4>{userObj.displayName}</h4>
+                            <div className="profile-info">
+                                <div>
+                                    <p>HP : </p>
+                                    <b>90</b>
+                                    <span> / 100</span>
+                                </div>
+                                <div>
+                                    <p>소지금 : </p>
+                                    <b>1200</b>
+                                    <span> Gold</span>
+                                </div>
+                                <div>
+                                    <p>소지품 : </p>
+                                    <b>인형, 칼, 총</b>
+                                </div>
+                            </div>
+                        </>
+                    )
+                }
+            </div>
+            <div className="flx-row gap-1 w-100">
+                <button className="gtn-btn" onClick={onEditProfile}>프로필 수정</button>
+                <button className="gtn-btn" onClick={onLogOutClick}>로그 아웃</button>
+            </div>
         </div>
     )
 };

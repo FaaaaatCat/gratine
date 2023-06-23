@@ -1,14 +1,14 @@
 #root .gtn-input {
   height: 28px;
   padding: 0 0.5rem;
-  border: 1px solid #F9F8FD;
+  border: 1px solid #9591B1;
   border-radius: 4px;
 }
 
 #root .gtn-btn {
   display: block;
   height: 32px;
-  max-width: 150px;
+  width: 150px;
   border: 1px solid black;
   padding: 0 1rem;
   -webkit-transition: all 0.2s;

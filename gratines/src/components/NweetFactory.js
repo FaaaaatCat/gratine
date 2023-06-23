@@ -8,6 +8,7 @@ import { ref, uploadString, getDownloadURL } from "@firebase/storage";
 const NweetFactory = ( {userObj} ) => {
     const [nweet, setNweet] = useState("");
     const [attachment, setAttachment] = useState("");
+    const [nickName, setNickName] = useState("");
     const onSubmit = async (e) => {
         e.preventDefault();
 
@@ -28,7 +29,10 @@ const NweetFactory = ( {userObj} ) => {
             createdAt: Date.now(),
             creatorId: userObj.uid,
             attachmentUrl,
+            creatorName : userObj.displayName,
             //nweets에 새로운 데이터를 넣고싶으면 이곳에 추가하기.
+            //그리고 파이어베이스 가서 데이터(pre-made query) 추가하기.
+            //우리가 이 쿼리를 사용할거라고 데이터베이스에게 알려줘야 함.
         };
 
         //addDoc은 문서를 추가하는 함수. nweetObj의 항목을 nweets의 데이터베이스에 저장함.
@@ -37,6 +41,8 @@ const NweetFactory = ( {userObj} ) => {
         setNweet("");
         //파일 미리보기 img src 비워주기
         setAttachment("");
+        //쓴사람 이름 저장하기
+        setNickName(userObj.displayName);
     };
     const onChange = (e) => {
         setNweet(e.target.value);
@@ -76,11 +82,10 @@ const NweetFactory = ( {userObj} ) => {
             <form onSubmit={onSubmit}>
                 
                 <textarea
-                    class="chatting-textarea"
-                    contenteditable="true"
+                    className="chatting-textarea"
                     role="textarea"
                     title="Text Chat Input"
-                    autocomplete="off"
+                    autoComplete="off"
                     value={nweet}
                     onChange={onChange}
                     onKeyDown={handleKeyPress}
@@ -100,8 +105,8 @@ const NweetFactory = ( {userObj} ) => {
                     accept="image/*"
                     onChange = {onFileChange}
                 /> */}
-                <label for="file">
-                    <div class="picture-upload-btn">
+                <label htmlFor="file">
+                    <div className="picture-upload-btn">
                         <span className="material-icons-round">image</span>
                         이미지 파일
                     </div>

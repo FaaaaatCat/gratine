@@ -1,15 +1,25 @@
 import { dbService, storageService } from "fbase";
 import { deleteObject, ref } from "@firebase/storage";
-import { doc, deleteDoc, updateDoc } from "firebase/firestore";
-import React, { useState } from "react";
+import { doc, deleteDoc, updateDoc, collection, getDocs, query, } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+import React, { useEffect, useState } from "react";
 
-const Nweet = ({ nweetObj, isOwner }) => {
+const Nweet = ({ nweetObj, isOwner, userObj, refreshUser }) => {
     const NweetTextRef = doc(dbService, "nweets", `${nweetObj.id}`); //nweetObj.id 는 쓴 트윗의 고유 id임. userObj.id와 다름.
     const NweetImgRef = ref(storageService, nweetObj.attachmentUrl); //nweetObj.attachmentUrl의 레퍼런스를 얻음
     //console.log(nweetObj.id) //쓴 데이터 갯수만큼 실행 됨 그래서 모든 트윗의 id를 보여줌.
 
     const [editing, setEditing] = useState(false);
     const [newNweet, setNewNweet] = useState(nweetObj.text);
+
+    // const getUserName = async () => {
+    //     const userName = userObj.displayName;
+    //     setUserName(userName);
+    // };
+    // useEffect(() => {
+    //     getUserName();
+    // },[])
+
     //지우기
     const onDeleteClick = async () => {
         const ok = window.confirm("진짜 삭제할래요?");
@@ -47,7 +57,7 @@ const Nweet = ({ nweetObj, isOwner }) => {
         <div className="chatting-list">
             <div className="profile-box"></div>
             <div className="txt-box">
-                <b>User Name</b>
+                <b>유저닉네임</b>
                 <p>{nweetObj.text}</p>
                 {nweetObj.attachmentUrl && <img src={nweetObj.attachmentUrl} />}
             </div>
