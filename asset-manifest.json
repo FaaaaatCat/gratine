@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/gratine/gratines/static/css/main.7a448e51.css",
+    "main.js": "/gratine/gratines/static/js/main.365d73c7.js",
+    "index.html": "/gratine/gratines/index.html",
+    "main.7a448e51.css.map": "/gratine/gratines/static/css/main.7a448e51.css.map",
+    "main.365d73c7.js.map": "/gratine/gratines/static/js/main.365d73c7.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7a448e51.css",
+    "static/js/main.365d73c7.js"
+  ]
+}
