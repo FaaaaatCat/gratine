@@ -51,11 +51,6 @@
   gap: 2rem;
 }
 
-.login-area .login-box p {
-  font-size: 1.4rem;
-  font-weight: 600;
-}
-
 .login-area .login-box .login-form-wrap {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -71,6 +66,35 @@
       -ms-flex-align: center;
           align-items: center;
   gap: 2rem;
+}
+
+.login-area .login-box .login-form-wrap .login-title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+  gap: 5px;
+}
+
+.login-area .login-box .login-form-wrap .login-title p {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.login-area .login-box .login-form-wrap .login-title span {
+  font-size: 1.4rem;
+  font-weight: 600;
+  display: block;
 }
 
 .login-area .login-box .login-form-wrap form {

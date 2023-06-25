@@ -69,8 +69,10 @@ const AuthForm = () => {
     
     return (
         <div className="login-form-wrap">
-            <button className="gtn-btn btn-google" onClick={onSocialClick} name="google">Continue with Google</button>
-            <p>{newAccount ? "가입하기" : "로그인"}</p>
+            <button className="gtn-btn btn-google" onClick={onSocialClick} name="google">구글 계정으로 로그인</button>
+            <div className="login-title">
+                {newAccount ? <p>그라티네의 정원 <span>가입하기</span></p> : <span>로그인</span>}
+            </div>
             <form onSubmit={onSubmit}>
                 <input
                     className="gtn-input"

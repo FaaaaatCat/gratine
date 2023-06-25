@@ -30,16 +30,29 @@
     align-items: center;
     gap: 2rem;
 
-    & p {
-      font-size: 1.4rem;
-      font-weight: 600;
-    }
     & .login-form-wrap {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       gap: 2rem;
+      & .login-title {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        gap: 5px;
+        & p {
+          font-size: 1.4rem;
+          font-weight: 600;
+        }
+        & span {
+          font-size: 1.4rem;
+          font-weight: 600;
+          display: block;
+        }
+      }
 
       & form {
         display: flex;

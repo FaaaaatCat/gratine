@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { dbService, storageService } from '../fbase';
 import { collection, query, onSnapshot, orderBy } from "firebase/firestore";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Nweet from "components/Nweet";
 import NweetFactory from "components/NweetFactory";
 import Profile from "./Profile";
 
 const Home = ({ userObj, refreshUser }) => {
+    const auth = getAuth();
     const [nweets, setNweets] = useState([]);
     
     //forEach를 사용하지 않는 방법(reRender 하지 않아서 더 빨라짐)
@@ -15,15 +17,22 @@ const Home = ({ userObj, refreshUser }) => {
             orderBy("createdAt", "desc")
         );
         
-        onSnapshot(q, (snapshot) => {
-            const nweetArray = snapshot.docs.map((document) => ({ //snapshot : 트윗을 받을때마다 알림 받는곳. 새로운 스냅샷을 받을때 nweetArray 라는 배열을 만듬
-                id: document.id,
-                // currentUser: '현재 이 글을 쓴 사람의 아이디',
-                ...document.data(), //...은 데이터의 내용물, 즉 spread attribute 기능임
-            }));
+        const unsubscribe = onSnapshot(q, (Snapshot) => {
+            const nweetArray = Snapshot.docs.map((doc) => { //snapshot : 트윗을 받을때마다 알림 받는곳. 새로운 스냅샷을 받을때 nweetArray 라는 배열을 만듬
+                return {
+                    id: doc.id,
+                    ...doc.data(), //...은 데이터의 내용물, 즉 spread attribute 기능임
+                };
+            });
             setNweets(nweetArray); //nweets에 nweetArray 라는 배열을 집어 넣음. 배열엔 doc.id와 doc.data()가 있음
         });
+        onAuthStateChanged(auth, (user) => {
+            if (user == null) {
+                unsubscribe();
+            }
+        });
     }, []);
+
 
     //채팅하나 칠때마다 nweetObj에 저장하는 방법
 
