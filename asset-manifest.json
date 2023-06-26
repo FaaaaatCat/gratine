@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/gratine/static/css/main.7a448e51.css",
-    "main.js": "/gratine/static/js/main.455f688b.js",
-    "index.html": "/gratine/index.html",
-    "main.7a448e51.css.map": "/gratine/static/css/main.7a448e51.css.map",
-    "main.455f688b.js.map": "/gratine/static/js/main.455f688b.js.map"
+    "main.css": "/gratine/gratines/static/css/main.7649c662.css",
+    "main.js": "/gratine/gratines/static/js/main.cf5b6b3b.js",
+    "index.html": "/gratine/gratines/index.html",
+    "main.7649c662.css.map": "/gratine/gratines/static/css/main.7649c662.css.map",
+    "main.cf5b6b3b.js.map": "/gratine/gratines/static/js/main.cf5b6b3b.js.map"
   },
   "entrypoints": [
-    "static/css/main.7a448e51.css",
-    "static/js/main.455f688b.js"
+    "static/css/main.7649c662.css",
+    "static/js/main.cf5b6b3b.js"
   ]
 }
