@@ -12,13 +12,8 @@ const Nweet = ({ nweetObj, isOwner, userObj, refreshUser }) => {
     const [editing, setEditing] = useState(false);
     const [newNweet, setNewNweet] = useState(nweetObj.text);
 
-    // const getUserName = async () => {
-    //     const userName = userObj.displayName;
-    //     setUserName(userName);
-    // };
-    // useEffect(() => {
-    //     getUserName();
-    // },[])
+    // console.log('attachmentUrl =>', nweetObj.attachmentUrl);
+
 
     //지우기
     const onDeleteClick = async () => {
@@ -42,22 +37,15 @@ const Nweet = ({ nweetObj, isOwner, userObj, refreshUser }) => {
         });
         setEditing(false);
     }
-
     const onChange = (e) => {
         setNewNweet(e.target.value);
     };
-    // const onChange = (event) => {
-    //     const {
-    //         target: { value },
-    //     } = event;
-    //     setNewNweet(value);
-    // }
 
     return (
         <div className="chatting-list">
             <div className="profile-box"></div>
             <div className="txt-box">
-                <b>유저닉네임</b>
+                <b>{nweetObj.creatorName}</b>
                 <p>{nweetObj.text}</p>
                 {nweetObj.attachmentUrl && <img src={nweetObj.attachmentUrl} />}
             </div>

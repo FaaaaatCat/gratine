@@ -1,4 +1,14 @@
 @import "_varient";
+$chat-form-height: 32px;
+
+@mixin hoverEffect() {
+  cursor: pointer;
+  transition: all 0.2s;
+  &:hover {
+    filter: brightness(0.9);
+    transition: all 0.2s;
+  }
+}
 
 #root {
   //인풋
@@ -8,19 +18,47 @@
     // background-color: red !important; //왜 안되지?
     border: 1px solid $form-border-color;
     border-radius: $form-radius;
+    @include hoverEffect();
   }
 
   //버튼
-  .gtn-btn {
+  & .gtn-btn {
     display: block;
-    height: 32px;
     width: 150px;
-    border: 1px solid black;
+    height: $chat-form-height;
     padding: 0 1rem;
+    background: #fff;
+    border: 1px solid rgb(77, 77, 77);
+    border-radius: $form-radius;
+    font-weight: 500;
+    @include hoverEffect();
+  }
+
+  #file {
+    display: none;
+  }
+  & .picture-upload-btn {
+    height: $chat-form-height;
+    padding: 0 1rem 0 0.8rem;
+    background: #fff;
+    border: 1px solid rgb(77, 77, 77);
+    border-radius: $form-radius;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font-weight: 500;
     transition: all 0.2s;
-    &:hover {
-      filter: brightness(0.9);
-      transition: all 0.2s;
+    & span {
+      font-size: 18px;
     }
+    @include hoverEffect();
+  }
+  & .chatting-textarea {
+    flex: 1;
+    border-radius: $form-radius;
+    height: $chat-form-height;
+    padding: 5px;
   }
 }

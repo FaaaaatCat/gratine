@@ -9,7 +9,7 @@ const AuthForm = () => {
     const auth = getAuth();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [newAccount, setNewAccount] = useState(true);
+    const [newAccount, setNewAccount] = useState(false);
     const [error, setError] = useState("");
 
     //소셜 로그인 기능
@@ -69,9 +69,9 @@ const AuthForm = () => {
     
     return (
         <div className="login-form-wrap">
-            <button className="gtn-btn btn-google" onClick={onSocialClick} name="google">구글 계정으로 로그인</button>
+            {/* <button className="gtn-btn btn-google" onClick={onSocialClick} name="google">구글 계정으로 로그인</button> */}
             <div className="login-title">
-                {newAccount ? <p>그라티네의 정원 <span>가입하기</span></p> : <span>로그인</span>}
+                {newAccount ?  <p>그라티네의 정원 <span>가입하기</span></p> : <p>그라티네의 정원에 <span>어서오세요</span></p>}
             </div>
             <form onSubmit={onSubmit}>
                 <input
@@ -92,11 +92,11 @@ const AuthForm = () => {
                     value={password}
                     onChange={onChange}
                 />
-                <button className="gtn-btn w-100" type="submit">{newAccount ? "Create Account" : "Log In"}</button>
+                <button className="gtn-btn w-100" type="submit">{newAccount ? "가입 완료" : "로그인"}</button>
                 {error}
             </form>
             <span className="login-sub-txt" onClick={toggleAccount}>
-                {newAccount ? <div>이미 계정이 있나요? <span>로그인</span></div> : "새 계정 만들기"}
+                {newAccount ?  <div>이미 계정이 있나요? <span>로그인</span></div> : <div>신입생인가요? <span>회원가입</span></div>}
             </span>
         </div>
     );

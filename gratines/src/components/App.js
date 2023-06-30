@@ -24,7 +24,7 @@ function App() {
         setUserObj({
           displayName: user.displayName,
           uid: user.uid,
-          updateProfile: (args) => updateProfile(user, { displayName: user.displayName }),
+          photoURL: "https://picsum.photos/120"
         });
         //이메일로 로그인 하면 디스플레이네임이 없는 오류 방지
         if (user.displayName === null) {
@@ -32,16 +32,9 @@ function App() {
           setUserObj({
             displayName: name,
             uid: user.uid,
-            updateProfile: (args) => updateProfile(user, { displayName: user.displayName }),
+            photoURL: "https://picsum.photos/120"
           });
         }
-        // if (user.displayName === null || user.displayName.length == 0) {
-        //   const name = user.email.split("@")[0];
-        //   user.updateProfile({
-        //     displayName: name, //이메일 이름값 말고 다른거 넣고싶으면 name을 "고정값"으로 변경
-        //     //photoURL: user.photoURL // 포토 넣는거!!!!
-        //   });
-        // }
       }
       //로그인 안되었다면
       else{
@@ -58,12 +51,13 @@ function App() {
     setUserObj({
       displayName: user.displayName,
       uid: user.uid,
-      updateProfile: (args) => updateProfile(user, { displayName: user.displayName }),
+      photoURL: "https://picsum.photos/140",
+      updateProfile: (args) => updateProfile(user, {
+        displayName: user.displayName,
+        photoURL: "https://picsum.photos/140",
+      }),
     });
   }
-  // setInterval(()=>{
-  //   console.log(auth.currentUser)
-  // },2000)
   return (
     <>
       {init ?

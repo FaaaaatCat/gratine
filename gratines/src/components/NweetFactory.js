@@ -8,7 +8,6 @@ import { ref, uploadString, getDownloadURL } from "@firebase/storage";
 const NweetFactory = ( {userObj} ) => {
     const [nweet, setNweet] = useState("");
     const [attachment, setAttachment] = useState("");
-    const [nickName, setNickName] = useState("");
     const onSubmit = async (e) => {
         e.preventDefault();
 
@@ -18,7 +17,7 @@ const NweetFactory = ( {userObj} ) => {
         if (attachment !== "") {
             //랜덤 uuid 생성하여 파일 경로 참조 만들기
             const attachmentRef = ref(storageService, `${userObj.uid}/${uuidv4()}`);
-            //storage 참조 경로로 파일 업로드 하기
+            //storage 참조 경로로 파일 업로드 하기 (data_url 은 포맷임)
             const response = await uploadString(attachmentRef, attachment, "data_url");
             //storage 참조 경로에 있는 파일의 URL을 다운로드해서 attachmentUrl 변수에 넣어서 업데이트
             attachmentUrl = await getDownloadURL(response.ref);
@@ -30,6 +29,7 @@ const NweetFactory = ( {userObj} ) => {
             creatorId: userObj.uid,
             attachmentUrl,
             creatorName : userObj.displayName,
+            // creatorProfile : userObj.photoUrl,
             //nweets에 새로운 데이터를 넣고싶으면 이곳에 추가하기.
             //그리고 파이어베이스 가서 데이터(pre-made query) 추가하기.
             //우리가 이 쿼리를 사용할거라고 데이터베이스에게 알려줘야 함.
@@ -41,8 +41,6 @@ const NweetFactory = ( {userObj} ) => {
         setNweet("");
         //파일 미리보기 img src 비워주기
         setAttachment("");
-        //쓴사람 이름 저장하기
-        setNickName(userObj.displayName);
     };
     const onChange = (e) => {
         setNweet(e.target.value);
@@ -119,7 +117,7 @@ const NweetFactory = ( {userObj} ) => {
                     onChange = {onFileChange}
                 />
                 <input
-                    className="btn-on-input"
+                    className="gtn-btn"
                     type="submit"
                     value="전송"
                 />

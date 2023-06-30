@@ -94,7 +94,7 @@ body {
       }
     }
   }
-  $chat-form-height: 32px;
+  
   //채팅 치는 영역
   & .chatting-form-box {
     min-height: 40px;
@@ -118,48 +118,8 @@ body {
       display: flex;
       align-items: center;
       gap: 5px;
-      & .chatting-textarea {
-        flex: 1;
-        border-radius: $form-radius;
-        height: $chat-form-height;
-        padding: 5px;
-      }
-      & .picture-upload-btn {
-        height: $chat-form-height;
-        padding: 0 1rem 0 0.8rem;
-        background: #fff;
-        border: 1px solid rgb(77, 77, 77);
-        border-radius: $form-radius;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 5px;
-        font-weight: 500;
-        transition: all 0.2s;
-        & span {
-          font-size: 18px;
-        }
-        &:hover {
-          filter: brightness(0.9);
-          transition: all 0.2s;
-        }
-      }
-      #file {
-        display: none;
-      }
-      & .btn-on-input {
-        height: $chat-form-height;
-        padding: 0 1rem;
-        background: #fff;
-        border: 1px solid rgb(77, 77, 77);
-        border-radius: $form-radius;
-        font-weight: 500;
-        transition: all 0.2s;
-        &:hover {
-          filter: brightness(0.9);
-          transition: all 0.2s;
-        }
+      & input[type = submit]{
+        width: 100px !important;
       }
     }
   }
@@ -197,6 +157,10 @@ body {
       display: flex;
       align-items: center;
       justify-content: center;
+      & img{
+        width: 100%;
+        height: 100%;
+      }
     }
     & h4 {
       font-size: 1.1rem;
