@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { getAuth, signOut, updateProfile  } from "firebase/auth";
 
 const ShowProfile = ({ userObj, refreshUser }) => {
-    const auth = getAuth();
-    const user1 = auth.currentUser;
+    var json = JSON.parse(localStorage.getItem("gratineUser"));
+    console.log('name ', json.displayName);
+    console.log('photoURL ', json.photoURL);
+    console.log('json ', json);
     return (
         <>
             <div className="profile-box__my">
-                <img src={user1.photoURL} />
+                <img src={json.photoURL} />
             </div>
-            <h4>{user1.displayName}</h4>
+            <h4>{json.displayName}</h4>
             <div className="profile-info">
                 <div>
                     <p>HP : </p>

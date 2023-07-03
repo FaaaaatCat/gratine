@@ -9,8 +9,6 @@ const EditProfile = ({ refreshUser, userObj }) => {
     const auth = getAuth();
     const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
     const [newProfilePic, setNewProfilePic] = useState(userObj.photoURL);
-
-
     
     //사진파일 업로드 전 지우기
     const onClearProfileUrl = () => setNewProfilePic("")
@@ -19,6 +17,14 @@ const EditProfile = ({ refreshUser, userObj }) => {
     const onNameChange = (e) => {
         setNewDisplayName(e.target.value);
     };
+
+    //로컬객체(사용자정보) 선언
+    const [localUser, setlocalUser] = useState({
+        displayName: "",
+        photoURL: "",
+        uid: "",
+        email: ""
+    });
 
     //프로필 수정 저장
     const onSubmit = async (e) => {
@@ -51,13 +57,34 @@ const EditProfile = ({ refreshUser, userObj }) => {
             photoURL: nweetObj.creatorImgUrl,
         });
 
-        
+
+        //기존 로컬스토리지(사용자정보) 가져오기
+        var json = JSON.parse(localStorage.getItem("gratineUser"));
+        setlocalUser({
+            ...localUser,
+            displayName: json.displayName,
+            photoURL: json.photoURL,
+            uid: json.uid,
+            email: json.email,
+        })
+        //선언한 로컬스토리지에 수정값 적용
+        localStorage.setItem(
+            'gratineUser',
+            JSON.stringify({
+                uid: json.uid,
+                displayName: newDisplayName,
+                photoURL: nweetObj.creatorImgUrl,
+                email: json.email
+            })
+        )
+
+
 
         //console.log('newProfilePic =>', newProfilePic)
-        console.log('creatorPicUrl =>', nweetObj.creatorImgUrl)
-        console.log('userObj.photoURL =>', userObj.photoURL)
-        console.log('userObj =>', userObj);
-        console.log('newDisplayName =>', newDisplayName);
+        // console.log('creatorPicUrl =>', nweetObj.creatorImgUrl)
+        // console.log('userObj.photoURL =>', userObj.photoURL)
+        // console.log('userObj =>', userObj);
+        // console.log('newDisplayName =>', newDisplayName);
 
         //완료
         refreshUser();
