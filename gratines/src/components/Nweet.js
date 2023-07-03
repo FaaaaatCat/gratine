@@ -14,7 +14,14 @@ const Nweet = ({ nweetObj, isOwner, userObj, refreshUser }) => {
 
     // console.log('attachmentUrl =>', nweetObj.attachmentUrl);
 
-
+    //편집하기
+    const onSubmit = async (event) => {
+        event.preventDefault();
+        await updateDoc(NweetTextRef, {
+            text: newNweet,
+        });
+        setEditing(false);
+    }
     //지우기
     const onDeleteClick = async () => {
         const ok = window.confirm("진짜 삭제할래요?");
@@ -26,16 +33,6 @@ const Nweet = ({ nweetObj, isOwner, userObj, refreshUser }) => {
                 await deleteObject(NweetImgRef);
             }
         }
-
-    }
-    //편집하기
-    const toggleEditing = () => setEditing((prev) => !prev);
-    const onSubmit = async (event) => {
-        event.preventDefault();
-        await updateDoc(NweetTextRef, {
-            text: newNweet,
-        });
-        setEditing(false);
     }
     const onChange = (e) => {
         setNewNweet(e.target.value);
@@ -43,7 +40,9 @@ const Nweet = ({ nweetObj, isOwner, userObj, refreshUser }) => {
 
     return (
         <div className="chatting-list">
-            <div className="profile-box"></div>
+            <div className="profile-box">
+                <img src={nweetObj.creatorImg} />
+            </div>
             <div className="txt-box">
                 <b>{nweetObj.creatorName}</b>
                 <p>{nweetObj.text}</p>

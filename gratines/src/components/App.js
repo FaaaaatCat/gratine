@@ -21,6 +21,7 @@ function App() {
       //로그인 되었다면
       if(user){
         setIsLoggedIn(true);
+        
         setUserObj({
           displayName: user.displayName,
           uid: user.uid,
@@ -51,12 +52,16 @@ function App() {
     setUserObj({
       displayName: user.displayName,
       uid: user.uid,
-      photoURL: "https://picsum.photos/140",
-      updateProfile: (args) => updateProfile(user, {
-        displayName: user.displayName,
-        photoURL: "https://picsum.photos/140",
-      }),
+      photoURL: user.photoURL,
+      // updateProfile: (args) => updateProfile(user, {
+      //   displayName: user.displayName,
+      //   photoURL: user.photoURL,
+      // }),
     });
+    const user1 = auth.currentUser;
+    console.log('최신이름: =>', user1.displayName);
+    console.log('최신포토: =>', user1.photoURL);
+    console.log(userObj);
   }
   return (
     <>

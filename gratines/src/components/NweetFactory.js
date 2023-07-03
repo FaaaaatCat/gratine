@@ -14,6 +14,7 @@ const NweetFactory = ( {userObj} ) => {
         //이미지 첨부하지 않고 텍스트만 올리고 싶을 때도 있기 때문에 attachment가 있을때만 아래 코드 실행
         //이미지 첨부하지 않은 경우엔 attachmentUrl=""이 된다.
         let attachmentUrl = "";
+        let creatorImgUrl = "";
         if (attachment !== "") {
             //랜덤 uuid 생성하여 파일 경로 참조 만들기
             const attachmentRef = ref(storageService, `${userObj.uid}/${uuidv4()}`);
@@ -28,8 +29,8 @@ const NweetFactory = ( {userObj} ) => {
             createdAt: Date.now(),
             creatorId: userObj.uid,
             attachmentUrl,
-            creatorName : userObj.displayName,
-            // creatorProfile : userObj.photoUrl,
+            creatorName: userObj.displayName,
+            creatorImg: userObj.photoURL
             //nweets에 새로운 데이터를 넣고싶으면 이곳에 추가하기.
             //그리고 파이어베이스 가서 데이터(pre-made query) 추가하기.
             //우리가 이 쿼리를 사용할거라고 데이터베이스에게 알려줘야 함.
@@ -47,12 +48,8 @@ const NweetFactory = ( {userObj} ) => {
     };
 
     //사진파일 추가
-    const onFileChange = (event) => {
-        // console.log(event.target.files)
-        const {
-            target: { files },
-        } = event;
-        const theFile = files[0]; //name, size, type, 등등 파일의 정보
+    const onFileChange = (e) => {
+        const theFile = e.target.files[0]; //name, size, type, 등등 파일의 정보
         const reader = new FileReader();
         reader.onloadend = (finishedEvent) => {
             setAttachment(finishedEvent.target.result)
