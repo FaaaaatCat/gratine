@@ -162,7 +162,7 @@ body #root .app-container .side-area {
   gap: 5px;
 }
 
-.chatting-area .chatting-form-box form input[type=submit] {
+.chatting-area .chatting-form-box form input[type="submit"] {
   width: 100px !important;
 }
 
@@ -217,11 +217,12 @@ body #root .app-container .side-area {
   text-align: center;
 }
 
-.profile-area .profile-wrap .profile-box__my {
+.profile-box__my {
   width: 120px;
   height: 120px;
   background-color: lightgray;
   border: 1px solid black;
+  border-radius: 4px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -231,11 +232,51 @@ body #root .app-container .side-area {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  position: relative;
 }
 
-.profile-area .profile-wrap .profile-box__my img {
+.profile-box__my img {
   width: 100%;
   height: 100%;
+}
+
+.profile-box__my button {
+  display: none;
+}
+
+.profile-box__my.profile-edit:hover::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  display: block;
+  background-color: rgba(0, 0, 0, 0.3);
+  position: absolute;
+}
+
+.profile-box__my.profile-edit:hover button {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  border-radius: 100rem;
+  width: 28px;
+  height: 28px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: #201f1f;
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+
+.profile-box__my.profile-edit:hover button span {
+  color: white;
 }
 
 .profile-area .profile-wrap h4 {

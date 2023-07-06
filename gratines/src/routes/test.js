@@ -5,34 +5,67 @@ import { collection, getDocs, query, where, orderBy, addDoc } from "firebase/fir
 import { v4 as uuidv4 } from 'uuid';
 import { ref, uploadString, getDownloadURL } from "@firebase/storage";
 
+
 const EditProfile = ({ refreshUser, userObj }) => {
     const auth = getAuth();
+    //기존 로컬스토리지(사용자정보) 가져오기
     var json = JSON.parse(localStorage.getItem("gratineUser"));
-    const [newDisplayName, setNewDisplayName] = useState(json.displayName);
-    const [newProfilePic, setNewProfilePic] = useState(json.photoURL);
+    const [localUser, setlocalUser] = useState({
+        displayName: "",
+        photoURL: "",
+        uid: "",
+        email: ""
+    });
+
     const defaultProfile = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fdefault_profile.jpg?alt=media&token=b173d6e0-7a8e-4e49-a06e-9b377bb186a0';
+
+    const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
+    const [newProfilePic, setNewProfilePic] = useState(json.photoURL);
+    //사진파일 지우기
+    const onClearProfileUrl = () => {
+        alert('프로필 사진을 지울까요?')
+        setNewProfilePic(defaultProfile)
+        localStorage.setItem(
+            'gratineUser',
+            JSON.stringify({
+                uid: json.uid,
+                displayName: newDisplayName,
+                photoURL: defaultProfile, //디폴트 프로필사진을 저장한다
+                email: json.email
+            })
+        )
+    }
 
     //새 닉네임을 얻는 기능
     const onNameChange = (e) => {
         setNewDisplayName(e.target.value);
     };
 
-    //사진파일 지우기
-    const onClearProfileUrl = () => {
-        alert('프로필 사진을 지울까요?')
-        setNewProfilePic(defaultProfile)
-    }
-
     //프로필 수정 저장
     const onSubmit = async (e) => {
-        var json = JSON.parse(localStorage.getItem("gratineUser"));
-        
         e.preventDefault();
         let creatorPicUrl = "";
-        if (newProfilePic !== "" && newProfilePic !== defaultProfile) {
-            const profileRef = ref(storageService, `${userObj.uid}/${uuidv4()}`);
-            const profileResponse = await uploadString(profileRef, newProfilePic, "data_url");
-            creatorPicUrl = await getDownloadURL(profileResponse.ref);
+        const profileRef = ref(storageService, `${userObj.uid}/${uuidv4()}`);
+        const profileResponse = await uploadString(profileRef, newProfilePic, "data_url");
+        creatorPicUrl = await getDownloadURL(profileResponse.ref);
+
+        //기존 로컬스토리지(사용자정보) 가져오기
+        var json = JSON.parse(localStorage.getItem("gratineUser"));
+        //프로필사진 없이 저장하면
+        if (json.photoURL === defaultProfile) {
+            localStorage.setItem(
+                'gratineUser',
+                JSON.stringify({
+                    uid: json.uid,
+                    displayName: newDisplayName,
+                    photoURL: creatorPicUrl, //디폴트 프로필사진을 저장한다
+                    email: json.email
+                })
+            )
+            console.log('프로필사진 없게')
+        }
+        //프로필사진 있게 저장하면
+        else {
             localStorage.setItem(
                 'gratineUser',
                 JSON.stringify({
@@ -42,28 +75,7 @@ const EditProfile = ({ refreshUser, userObj }) => {
                     email: json.email
                 })
             )
-        }
-        else if (newProfilePic === defaultProfile) {
-            localStorage.setItem(
-                'gratineUser',
-                JSON.stringify({
-                    uid: json.uid,
-                    displayName: newDisplayName,
-                    photoURL: defaultProfile, //업로드한 프로필사진을 저장한다
-                    email: json.email
-                })
-            )
-        }
-        else {
-            localStorage.setItem(
-                'gratineUser',
-                JSON.stringify({
-                    uid: json.uid,
-                    displayName: newDisplayName,
-                    photoURL: defaultProfile, //디폴트 프로필사진을 저장한다
-                    email: json.email
-                })
-            )
+            console.log('프로필사진 있게')
         }
         //프로필 업데이트
         await updateProfile(auth.currentUser, {
@@ -72,11 +84,13 @@ const EditProfile = ({ refreshUser, userObj }) => {
         });
         //완료
         refreshUser();
-        alert('저장되었습니다')
+        console.log('creatorPicUrl =>',creatorPicUrl);
+        console.log('defaultProfile =>', defaultProfile);
     }
 
     //프로필 사진 추가
     const onProfileChange = async (e) => {
+        console.log(newProfilePic)
         const thePic = e.target.files[0];
         const picReader = new FileReader();
         picReader.onloadend = (finishedEvent) => {

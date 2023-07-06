@@ -68,6 +68,32 @@
   gap: 2rem;
 }
 
+.login-area .login-box .login-form-wrap .notice-box {
+  padding: .5rem;
+  border-radius: 4px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 10px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: lightgray;
+  margin-bottom: 1rem;
+}
+
+.login-area .login-box .login-form-wrap .notice-box a {
+  font-weight: 800;
+  font-size: 1rem;
+}
+
 .login-area .login-box .login-form-wrap .login-title {
   display: -webkit-box;
   display: -ms-flexbox;

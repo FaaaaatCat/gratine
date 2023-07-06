@@ -23,7 +23,6 @@
     border: 1px solid black;
     border-radius: 10px;
     background-color: white;
-    //box-shadow: $form-shadow;
 
     display: flex;
     flex-direction: column;
@@ -36,6 +35,21 @@
       justify-content: center;
       align-items: center;
       gap: 2rem;
+      & .notice-box{
+        padding: .5rem;
+        border-radius: $form-radius;
+        display: flex;
+        gap: 10px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: lightgray;
+        margin-bottom: 1rem;
+        & a{
+          font-weight: 800;
+          font-size: 1rem;
+        }
+      }
       & .login-title {
         display: flex;
         flex-direction: column;

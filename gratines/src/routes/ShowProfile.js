@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-const ShowProfile = ({ userObj, refreshUser }) => {
+const ShowProfile = () => {
     var json = JSON.parse(localStorage.getItem("gratineUser"));
-    console.log('name ', json.displayName);
-    console.log('photoURL ', json.photoURL);
-    console.log('json ', json);
     return (
         <>
             <div className="profile-box__my">

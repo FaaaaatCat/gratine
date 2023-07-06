@@ -15,48 +15,32 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [updateProfile, setUpdateProfile] = useState(false);
   const [userObj, setUserObj] = useState(null);
+  const defaultProfile = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fdefault_profile.jpg?alt=media&token=b173d6e0-7a8e-4e49-a06e-9b377bb186a0';
 
   useEffect(()=>{
     onAuthStateChanged(auth, (user) => {
-      console.log('새로고침')
       //로그인 되었다면
-      if(user){
+      if (user) {
         setIsLoggedIn(true);
+        const name = user.email.split("@")[0];
+        //유저정보에 저장(가장처음세팅)
         setUserObj({
-          displayName: user.displayName,
           uid: user.uid,
-          //photoURL: "https://picsum.photos/120"
+          displayName: name,
+          email: user.email,
+          photoURL: defaultProfile,
         });
-        //로컬스토리지 사용
-        // localStorage.setItem(
-        //   'gratineUser',
-        //   JSON.stringify({
-        //     uid: user.uid,
-        //     displayName: user.displayName,
-        //     email: user.email, // github의 경우 이메일 공개 여부에 따라 null로 할당되기도 함.
-        //     //photoURL: "https://picsum.photos/120",
-        //   })
-        // )
-
-        //이메일로 로그인 하면 디스플레이네임이 없는 오류 방지
-        if (user.displayName === null) {
-          const name = user.email.split("@")[0];
-          setUserObj({
-            displayName: name,
+        //로컬스토리지에 저장(가장처음세팅)
+        localStorage.setItem(
+          'gratineUser',
+          JSON.stringify({
             uid: user.uid,
-            //photoURL: "https://picsum.photos/120"
-          });
-          //로컬스토리지 사용
-          localStorage.setItem(
-            'gratineUser',
-            JSON.stringify({
-              uid: user.uid,
-              displayName: user.displayName,
-              email: user.email, // github의 경우 이메일 공개 여부에 따라 null로 할당되기도 함.
-              photoURL: user.photoURL,
-            })
-          )
-        }
+            displayName: name,
+            email: user.email,
+            photoURL: defaultProfile,
+          })
+        )
+        refreshUser();
       }
       //로그인 안되었다면
       else{
@@ -71,14 +55,16 @@ function App() {
   const refreshUser = () => {
     const user = auth.currentUser;
     setUserObj({
-      displayName: user.displayName,
       uid: user.uid,
+      displayName: user.displayName,
       email: user.email,
       photoURL: user.photoURL,
-      // updateProfile: (args) => updateProfile(user, {
-      //   displayName: user.displayName,
-      //   photoURL: user.photoURL,
-      // }),
+      updateProfile: (args) => updateProfile(user, {
+        uid: user.uid,
+        displayName: user.displayName,
+        email: user.email,
+        photoURL: user.photoURL,
+      })
     });
   }
   return (
@@ -90,7 +76,6 @@ function App() {
             refreshUser={refreshUser}
         /> : "Initializing..."
       }
-      
       {/* <footer>$copy{new Date().getFullYear()} Gratine</footer> */}
     </>
   );

@@ -3,14 +3,16 @@ import { getAuth,
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     signInWithPopup,
-    GoogleAuthProvider} from "firebase/auth";
+    GoogleAuthProvider
+} from "firebase/auth";
 
-const AuthForm = () => {
+const AuthForm = ({userObj, refreshUser}) => {
     const auth = getAuth();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [newAccount, setNewAccount] = useState(false);
     const [error, setError] = useState("");
+    const [profilePic, setProfilePic] = useState("");
 
     //소셜 로그인 기능
     const onSocialClick = async(event) => {
@@ -44,26 +46,31 @@ const AuthForm = () => {
         try{
             let data;
             if(newAccount){
-                //create account
-                // data = await auth.createUserWithEmailAndPassword(
-                //     email, password
-                // )
                 data = await createUserWithEmailAndPassword(
                     auth, email, password
                 )
+                //data.user.photoURL = profilePic;
             }
             else{
-                //log in
                 data = await signInWithEmailAndPassword(
                     auth, email, password
                 )
             }
-            //console.log(data)
         }
         catch(error){
             setError(error.message);
         }
     }
+
+    //프로필 사진 추가
+    const onProfileChange = async (e) => {
+        const thePic = e.target.files[0];
+        const picReader = new FileReader();
+        picReader.onloadend = (finishedEvent) => {
+            setProfilePic(finishedEvent.target.result) //이거 개짱김
+        }
+        picReader.readAsDataURL(thePic);
+    };
 
     const toggleAccount = () => setNewAccount((prev) => !prev);
     
@@ -74,6 +81,12 @@ const AuthForm = () => {
                 {newAccount ?  <p>그라티네의 정원 <span>가입하기</span></p> : <p>그라티네의 정원에 <span>어서오세요</span></p>}
             </div>
             <form onSubmit={onSubmit}>
+                {newAccount && 
+                    <div className="notice-box">
+                        <p>가입 전, 공지사항을 확인해주세요!</p>
+                        <a href="https://www.naver.com/">▶ 공지사항 바로가기</a>
+                    </div>
+                }
                 <input
                     className="gtn-input"
                     name="email"
