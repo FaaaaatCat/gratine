@@ -13,10 +13,16 @@ const NweetFactory = ( {userObj} ) => {
         e.preventDefault();
         var json = JSON.parse(localStorage.getItem("gratineUser"));
 
+        //특수 명령어 입력기능
+        let orderText = '';
+        let orderWhat = '';
+        if (nweet[0] === '/') {
+            orderText = nweet.split(" ")[0];
+            orderWhat = nweet.substr(orderText.length);
+        }
         //이미지 첨부하지 않고 텍스트만 올리고 싶을 때도 있기 때문에 attachment가 있을때만 아래 코드 실행
         //이미지 첨부하지 않은 경우엔 attachmentUrl=""이 된다.
         let attachmentUrl = "";
-        let creatorImgUrl = "";
         if (attachment !== "") {
             //랜덤 uuid 생성하여 파일 경로 참조 만들기
             const attachmentRef = ref(storageService, `${json.uid}/${uuidv4()}`);
@@ -32,7 +38,9 @@ const NweetFactory = ( {userObj} ) => {
             creatorId: json.uid,
             attachmentUrl,
             creatorName: json.displayName,
-            creatorImg: json.photoURL
+            creatorImg: json.photoURL,
+            orderText: orderText,
+            orderWhat: orderWhat,
             //nweets에 새로운 데이터를 넣고싶으면 이곳에 추가하기.
             //그리고 파이어베이스 가서 데이터(pre-made query) 추가하기.
             //우리가 이 쿼리를 사용할거라고 데이터베이스에게 알려줘야 함.

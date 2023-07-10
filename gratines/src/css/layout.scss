@@ -65,6 +65,22 @@ body {
       display: flex;
       gap: 0.5rem;
       background-color: white;
+      //내채팅
+      &.myChat{
+        background-color: rgb(230, 249, 255);
+      }
+      //전체채팅
+      &.wholeChat{
+        background-color: rgb(255, 230, 237) !important;
+        text-align: center;
+        font-style: italic;
+        & .profile-box, b{
+          display: none !important;
+        }
+        & p{
+          font-weight: 700 !important;
+        }
+      }
       & .profile-box {
         background-color: gray;
         width: 28px;

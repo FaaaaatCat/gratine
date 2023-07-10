@@ -37,7 +37,7 @@ function App() {
             uid: user.uid,
             displayName: name,
             email: user.email,
-            photoURL: defaultProfile,
+            photoURL: user.photoURL,
           })
         )
         refreshUser();

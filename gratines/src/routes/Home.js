@@ -2,13 +2,36 @@ import React, { useEffect, useState } from "react";
 import { dbService, storageService } from '../fbase';
 import { collection, query, onSnapshot, orderBy } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { ref, uploadString, getDownloadURL } from "@firebase/storage";
 import Nweet from "components/Nweet";
 import NweetFactory from "components/NweetFactory";
 import Profile from "./Profile";
 
-const Home = ({ userObj, refreshUser }) => {
+const Home = ({ userObj, refreshUser, isLoggedIn }) => {
+    var json = JSON.parse(localStorage.getItem("gratineUser"));
     const auth = getAuth();
     const [nweets, setNweets] = useState([]);
+
+    // var uid = auth.currentUser.uid;
+    // const userStatusDatabaseRef = ref(storageService, `/status/${userObj.uid}`);
+    // var isOfflineForDatabase = {
+    //     state: 'offline',
+    //     last_changed: storageService.ServerValue.TIMESTAMP,
+    // };
+    // var isOnlineForDatabase = {
+    //     state: 'online',
+    //     last_changed: storageService.ServerValue.TIMESTAMP,
+    // };
+    // ref(storageService, '.info/connected').on('value', function(snapshot) {
+    //     if (snapshot.val() == false) {
+    //         return;
+    //     };
+    //     userStatusDatabaseRef.onDisconnect().set(isOfflineForDatabase).then(function() {
+    //         userStatusDatabaseRef.set(isOnlineForDatabase);
+    //     });
+    // });
+
+    
     
     useEffect(() => {
         const q = query(
@@ -43,8 +66,11 @@ const Home = ({ userObj, refreshUser }) => {
                     {nweets.map((nweet) => ( //map은 for과 유사함. 배열안의 값들을 다 불러와주는 기능 / 지금으로썬, nweets 배열안의 데이터(doc.id / doc.data())를 다 불러옴
                         <Nweet
                             key={nweet.id}
-                            nweetObj={nweet} //id, createdAt, text, attachmentUrl 6가지 값 갖고있음
+                            nweetObj={nweet} //id, createdAt, text 등 생성한 값 갖고있음
                             isOwner={nweet.creatorId === userObj.uid} //내가 실제 주인인지 //맞으면 true 값 뱉음
+                            isOrder={nweet.orderWhat !== ""}
+                            orderText={nweet.orderText}
+                            orderWhat={nweet.orderWhat}
                             userObj={userObj}
                             refreshUser={refreshUser}
                         />
@@ -55,7 +81,7 @@ const Home = ({ userObj, refreshUser }) => {
                 </div>
             </div>
             <div className="side-area">
-                <div className="member-area">
+                <div className="member-area d-none">
                     <div className="title">접속중 인원</div>
                     <div className="member-list-container">
                         <div className="member-list">
@@ -72,16 +98,12 @@ const Home = ({ userObj, refreshUser }) => {
                     <div className="title">명령어 보기</div>
                     <div className="function-list-container">
                         <div className="function-list">
-                            <p>상점 이용하기</p>
-                            <b>/상점</b>
-                        </div>
-                        <div className="function-list">
-                            <p>공격하기</p>
-                            <b>/공격</b>
+                            <p>전체 말하기</p>
+                            <b>/전체</b>
                         </div>
                     </div>
                 </div>
-                <div className="history-area">
+                <div className="history-area d-none">
                     <div className="title">지난 대화 기록 불러오기</div>
                     <span className="material-icons-round">arrow_forward</span>
                 </div>

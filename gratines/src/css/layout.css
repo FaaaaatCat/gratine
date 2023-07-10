@@ -87,6 +87,24 @@ body #root .app-container .side-area {
   background-color: white;
 }
 
+.chatting-area .chatting-list-container .chatting-list.myChat {
+  background-color: #e6f9ff;
+}
+
+.chatting-area .chatting-list-container .chatting-list.wholeChat {
+  background-color: #ffe6ed !important;
+  text-align: center;
+  font-style: italic;
+}
+
+.chatting-area .chatting-list-container .chatting-list.wholeChat .profile-box, .chatting-area .chatting-list-container .chatting-list.wholeChat b {
+  display: none !important;
+}
+
+.chatting-area .chatting-list-container .chatting-list.wholeChat p {
+  font-weight: 700 !important;
+}
+
 .chatting-area .chatting-list-container .chatting-list .profile-box {
   background-color: gray;
   width: 28px;
