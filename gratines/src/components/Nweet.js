@@ -12,18 +12,9 @@ const Nweet = ({ nweetObj, isOwner, userObj, refreshUser, isOrder, orderWhat, or
     const [editing, setEditing] = useState(false);
     const [newNweet, setNewNweet] = useState(nweetObj.text);
 
-    ///////////////////////////////////////////////////////////////////////////////
-    //ect. 편집하기
-    const onSubmit = async (event) => {
-        event.preventDefault();
-        await updateDoc(NweetTextRef, {
-            text: newNweet,
-        });
-        setEditing(false);
-    }
-    //지우기
+    //전체 공지 지우기
     const onDeleteClick = async () => {
-        const ok = window.confirm("진짜 삭제할래요?");
+        const ok = window.confirm("공지를 진짜 삭제할래요?");
         if (ok) {
             //await dbService.doc(`nweets/${nweetObj.id}`).delete();
             await deleteDoc(NweetTextRef);
@@ -32,6 +23,17 @@ const Nweet = ({ nweetObj, isOwner, userObj, refreshUser, isOrder, orderWhat, or
                 await deleteObject(NweetImgRef);
             }
         }
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////
+    //ect. 편집하기
+    const toggleEditing = () => setEditing((prev) => !prev);
+    const onSubmit = async (event) => {
+        event.preventDefault();
+        await updateDoc(NweetTextRef, {
+            text: newNweet,
+        });
+        setEditing(false);
     }
     const onChange = (e) => {
         setNewNweet(e.target.value);
@@ -45,45 +47,16 @@ const Nweet = ({ nweetObj, isOwner, userObj, refreshUser, isOrder, orderWhat, or
                 </div>
                 <div className="txt-box">
                     <b>{nweetObj.creatorName}</b>
-                    {isOrder? <p>{nweetObj.orderWhat}</p> : <p>{nweetObj.text}</p>}
+                    {isOrder ?
+                        <>
+                            <p>{nweetObj.orderWhat}</p>
+                            {isOwner && <button onClick={onDeleteClick}><span className="material-icons-round">close</span></button>}
+                        </> : <>
+                            <p>{nweetObj.text}</p>
+                        </>}
                     {nweetObj.attachmentUrl && <img src={nweetObj.attachmentUrl} />}
                 </div>
             </div>
-            
-            {/* 트위터처럼 내가 쓴 글 편집및 삭제 하고싶으면 아래 하기 */}
-            {/* {editing ? ( //편집중인가?
-                <>
-                    {isOwner && //주인인가? 주인일때만 아래 항목이 보이도록
-                        <>
-                            <form onSubmit={onSubmit}>
-                                <input
-                                    onChange={onChange}
-                                    type="text"
-                                    placeholder="편집할 내용을 적어주세요"
-                                    value={newNweet}
-                                    required />
-                                <input
-                                    type="submit"
-                                    value="Update Nweet"
-                                />
-                            </form>
-                            <button onClick={toggleEditing}>Cancle</button>
-                        </>
-                    }
-     
-                </>
-            ): (
-                <>
-                    <h4>{nweetObj.text}</h4>
-                    {nweetObj.attachmentUrl && <img src={nweetObj.attachmentUrl} width="50px" height="50px" />}
-                    {isOwner && ( //주인인가? 주인일때만 편집, 삭제 버튼이 보이도록
-                        <>
-                            <button onClick={onDeleteClick}>Delete</button>
-                            <button onClick={toggleEditing}>Edit</button>
-                        </>
-                    )}
-                </>
-            )} */}
         </>
     )
 }

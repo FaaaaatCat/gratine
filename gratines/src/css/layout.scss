@@ -74,11 +74,31 @@ body {
         background-color: rgb(255, 230, 237) !important;
         text-align: center;
         font-style: italic;
+        position: relative;
         & .profile-box, b{
           display: none !important;
         }
         & p{
           font-weight: 700 !important;
+        }
+        & img{
+          margin: 0 auto;
+        }
+        & button{
+          width: 20px;
+          height: 20px;
+          border-radius: 100px;
+          background-color: gray;
+          position: absolute;
+          top: 5px;
+          right: 10px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          & span{
+            font-size: 14px;
+            color: white;
+          }
         }
       }
       & .profile-box {

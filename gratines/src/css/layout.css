@@ -95,6 +95,7 @@ body #root .app-container .side-area {
   background-color: #ffe6ed !important;
   text-align: center;
   font-style: italic;
+  position: relative;
 }
 
 .chatting-area .chatting-list-container .chatting-list.wholeChat .profile-box, .chatting-area .chatting-list-container .chatting-list.wholeChat b {
@@ -103,6 +104,34 @@ body #root .app-container .side-area {
 
 .chatting-area .chatting-list-container .chatting-list.wholeChat p {
   font-weight: 700 !important;
+}
+
+.chatting-area .chatting-list-container .chatting-list.wholeChat img {
+  margin: 0 auto;
+}
+
+.chatting-area .chatting-list-container .chatting-list.wholeChat button {
+  width: 20px;
+  height: 20px;
+  border-radius: 100px;
+  background-color: gray;
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.chatting-area .chatting-list-container .chatting-list.wholeChat button span {
+  font-size: 14px;
+  color: white;
 }
 
 .chatting-area .chatting-list-container .chatting-list .profile-box {
