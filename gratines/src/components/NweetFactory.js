@@ -35,10 +35,13 @@ const NweetFactory = ( {userObj} ) => {
             //storage 참조 경로에 있는 파일의 URL을 다운로드해서 attachmentUrl 변수에 넣어서 업데이트
             attachmentUrl = await getDownloadURL(response.ref);
         }
+        let todayOrigin = new Date();
+        let today = todayOrigin.toLocaleString();
         //트윗 오브젝트
         const nweetObj = {
             text: nweet,
             createdAt: Date.now(),
+            createdDate: today,
             creatorId: json.uid,
             attachmentUrl,
             creatorName: json.displayName,

@@ -12,7 +12,6 @@ const Nweet = ({ nweetObj, isOwner, isOrder, orderWhat, orderText, isWhole, isDi
     const [editing, setEditing] = useState(false);
     const [newNweet, setNewNweet] = useState(nweetObj.text);
     const [ranNum, setRanNum] = useState("")
-    const [today, setToday] = useState("")
 
     //전체 공지 지우기
     const onDeleteClick = async () => {
@@ -27,11 +26,12 @@ const Nweet = ({ nweetObj, isOwner, isOrder, orderWhat, orderText, isWhole, isDi
         }
     }
     useEffect(() => {
-        //주사위 기능
-
+        //기능 명령어
         if (isOrder) {
+            //전체 말하기 기능
             if (orderWhat === '/전체') {
             }
+            //주사위 기능
             else if (orderWhat === '/주사위') {
                 if (orderText == ' 10') {
                     var ranNumOrigin = Math.random() * (10 - 1) + 1;
@@ -45,12 +45,11 @@ const Nweet = ({ nweetObj, isOwner, isOrder, orderWhat, orderText, isWhole, isDi
                 var ranNum = Math.ceil(ranNumOrigin)
                 setRanNum(ranNum)
             }
+            //출석 기능
             else if (orderWhat === '/출석') {
                 var ranNumOrigin = Math.random() * (10 - 1) + 1;
                 var ranNum = Math.ceil(ranNumOrigin)
-                let today = new Date();
                 setRanNum(ranNum)
-                setToday(today.toLocaleString())
             }
         }
     },[])
@@ -87,7 +86,7 @@ const Nweet = ({ nweetObj, isOwner, isOrder, orderWhat, orderText, isWhole, isDi
                                 </> :
                                 <>
                                     {isDice && <p><span>{nweetObj.creatorName}</span>가 주사위 <span>{ranNum}</span>을 굴렸습니다</p>}
-                                    {isAttend && <p><span>{nweetObj.creatorName}</span>가 출석점수 <span>{ranNum}</span>을 받았습니다. <span>({today})</span></p>}
+                                    {isAttend && <p><span>{nweetObj.creatorName}</span>가 출석점수 <span>{ranNum}</span>을 받았습니다. <span>({nweetObj.createdDate})</span></p>}
                                 </>
                             }
                             
