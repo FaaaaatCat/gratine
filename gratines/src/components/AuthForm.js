@@ -84,7 +84,7 @@ const AuthForm = ({userObj, refreshUser}) => {
                 {newAccount && 
                     <div className="notice-box">
                         <p>가입 전, 공지사항을 확인해주세요!</p>
-                        <a href="https://www.naver.com/">▶ 공지사항 바로가기</a>
+                        <a href="https://www.naver.com/" target="_blank">▶ 공지사항 바로가기</a>
                     </div>
                 }
                 <input
@@ -106,7 +106,7 @@ const AuthForm = ({userObj, refreshUser}) => {
                     onChange={onChange}
                 />
                 <button className="gtn-btn w-100" type="submit">{newAccount ? "가입 완료" : "로그인"}</button>
-                {error}
+                <p>{error}</p>
             </form>
             <span className="login-sub-txt" onClick={toggleAccount}>
                 {newAccount ?  <div>이미 계정이 있나요? <span>로그인</span></div> : <div>신입생인가요? <span>회원가입</span></div>}

@@ -58,6 +58,8 @@ body {
   & .chatting-list-container {
     flex: 1;
     background-color: lightgray;
+    display: flex;
+    flex-direction: column-reverse;
     // 개별 채팅박스
     & .chatting-list {
       border-bottom: 1px solid black;
@@ -69,9 +71,8 @@ body {
       &.myChat{
         background-color: rgb(230, 249, 255);
       }
-      //전체채팅
-      &.wholeChat{
-        background-color: rgb(255, 230, 237) !important;
+      //전체채팅, 오더채팅 (공통)
+      &.wholeChat, &.orderChat{
         text-align: center;
         font-style: italic;
         position: relative;
@@ -80,6 +81,10 @@ body {
         }
         & p{
           font-weight: 700 !important;
+          & span{
+            margin: 0 5px;
+            color: blue;
+          }
         }
         & img{
           margin: 0 auto;
@@ -100,6 +105,14 @@ body {
             color: white;
           }
         }
+      }
+      //전체채팅
+      &.wholeChat{
+        background-color: rgb(255, 230, 237) !important;
+      }
+      //오더채팅
+      &.orderChat{
+        background-color: rgb(204, 225, 251);
       }
       & .profile-box {
         background-color: gray;

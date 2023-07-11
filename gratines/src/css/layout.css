@@ -75,6 +75,13 @@ body #root .app-container .side-area {
       -ms-flex: 1;
           flex: 1;
   background-color: lightgray;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: column-reverse;
+          flex-direction: column-reverse;
 }
 
 .chatting-area .chatting-list-container .chatting-list {
@@ -91,26 +98,30 @@ body #root .app-container .side-area {
   background-color: #e6f9ff;
 }
 
-.chatting-area .chatting-list-container .chatting-list.wholeChat {
-  background-color: #ffe6ed !important;
+.chatting-area .chatting-list-container .chatting-list.wholeChat, .chatting-area .chatting-list-container .chatting-list.orderChat {
   text-align: center;
   font-style: italic;
   position: relative;
 }
 
-.chatting-area .chatting-list-container .chatting-list.wholeChat .profile-box, .chatting-area .chatting-list-container .chatting-list.wholeChat b {
+.chatting-area .chatting-list-container .chatting-list.wholeChat .profile-box, .chatting-area .chatting-list-container .chatting-list.wholeChat b, .chatting-area .chatting-list-container .chatting-list.orderChat .profile-box, .chatting-area .chatting-list-container .chatting-list.orderChat b {
   display: none !important;
 }
 
-.chatting-area .chatting-list-container .chatting-list.wholeChat p {
+.chatting-area .chatting-list-container .chatting-list.wholeChat p, .chatting-area .chatting-list-container .chatting-list.orderChat p {
   font-weight: 700 !important;
 }
 
-.chatting-area .chatting-list-container .chatting-list.wholeChat img {
+.chatting-area .chatting-list-container .chatting-list.wholeChat p span, .chatting-area .chatting-list-container .chatting-list.orderChat p span {
+  margin: 0 5px;
+  color: blue;
+}
+
+.chatting-area .chatting-list-container .chatting-list.wholeChat img, .chatting-area .chatting-list-container .chatting-list.orderChat img {
   margin: 0 auto;
 }
 
-.chatting-area .chatting-list-container .chatting-list.wholeChat button {
+.chatting-area .chatting-list-container .chatting-list.wholeChat button, .chatting-area .chatting-list-container .chatting-list.orderChat button {
   width: 20px;
   height: 20px;
   border-radius: 100px;
@@ -129,9 +140,17 @@ body #root .app-container .side-area {
           justify-content: center;
 }
 
-.chatting-area .chatting-list-container .chatting-list.wholeChat button span {
+.chatting-area .chatting-list-container .chatting-list.wholeChat button span, .chatting-area .chatting-list-container .chatting-list.orderChat button span {
   font-size: 14px;
   color: white;
+}
+
+.chatting-area .chatting-list-container .chatting-list.wholeChat {
+  background-color: #ffe6ed !important;
+}
+
+.chatting-area .chatting-list-container .chatting-list.orderChat {
+  background-color: #cce1fb;
 }
 
 .chatting-area .chatting-list-container .chatting-list .profile-box {

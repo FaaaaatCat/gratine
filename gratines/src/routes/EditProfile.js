@@ -49,7 +49,7 @@ const EditProfile = ({ refreshUser, userObj }) => {
                 JSON.stringify({
                     uid: json.uid,
                     displayName: newDisplayName,
-                    photoURL: defaultProfile, //업로드한 프로필사진을 저장한다
+                    photoURL: defaultProfile, //디폴트 프로필사진을 저장한다
                     email: json.email
                 })
             )

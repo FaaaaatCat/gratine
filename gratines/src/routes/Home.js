@@ -68,11 +68,12 @@ const Home = ({ userObj, refreshUser, isLoggedIn }) => {
                             key={nweet.id}
                             nweetObj={nweet} //id, createdAt, text 등 생성한 값 갖고있음
                             isOwner={nweet.creatorId === userObj.uid} //내가 실제 주인인지 //맞으면 true 값 뱉음
-                            isOrder={nweet.orderWhat !== ""}
+                            isOrder={nweet.orderText !== ""}
                             orderText={nweet.orderText}
                             orderWhat={nweet.orderWhat}
-                            userObj={userObj}
-                            refreshUser={refreshUser}
+                            isWhole={nweet.orderWhat === "/전체"}
+                            isDice={nweet.orderWhat === "/주사위"}
+                            isAttend={nweet.orderWhat === "/출석"}
                         />
                     ))}
                 </div>
@@ -100,6 +101,22 @@ const Home = ({ userObj, refreshUser, isLoggedIn }) => {
                         <div className="function-list">
                             <p>전체 말하기</p>
                             <b>/전체</b>
+                        </div>
+                        <div className="function-list">
+                            <p>출석하기</p>
+                            <b>/출석 캐릭터이름</b>
+                        </div>
+                        <div className="function-list">
+                            <p>주사위굴리기 (1~10사이)</p>
+                            <b>/주사위 10</b>
+                        </div>
+                        <div className="function-list">
+                            <p>주사위굴리기 (1~50사이)</p>
+                            <b>/주사위 50</b>
+                        </div>
+                        <div className="function-list">
+                            <p>주사위굴리기 (1~100사이)</p>
+                            <b>/주사위 100</b>
                         </div>
                     </div>
                 </div>

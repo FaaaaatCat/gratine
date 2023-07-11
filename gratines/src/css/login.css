@@ -137,6 +137,10 @@
   gap: 10px;
 }
 
+.login-area .login-box .login-form-wrap form p {
+  color: red;
+}
+
 .login-area .login-box .login-form-wrap .login-sub-txt {
   cursor: pointer;
 }
