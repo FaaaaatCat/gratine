@@ -82,6 +82,12 @@ const Home = ({ userObj, refreshUser, isLoggedIn }) => {
                 </div>
             </div>
             <div className="side-area">
+                <div className="attend-area">
+                    <div className="title">출석 보상</div>
+                    <div className="atted-gauge-wrap">
+        
+                    </div>
+                </div>
                 <div className="member-area d-none">
                     <div className="title">접속중 인원</div>
                     <div className="member-list-container">

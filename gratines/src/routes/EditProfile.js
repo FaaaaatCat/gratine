@@ -7,9 +7,9 @@ import { ref, uploadString, getDownloadURL } from "@firebase/storage";
 
 const EditProfile = ({ refreshUser, userObj }) => {
     const auth = getAuth();
-    var json = JSON.parse(localStorage.getItem("gratineUser"));
-    const [newDisplayName, setNewDisplayName] = useState(json.displayName);
-    const [newProfilePic, setNewProfilePic] = useState(json.photoURL);
+    var jsonUser = JSON.parse(localStorage.getItem("gratineUser"));
+    const [newDisplayName, setNewDisplayName] = useState(jsonUser.displayName);
+    const [newProfilePic, setNewProfilePic] = useState(jsonUser.photoURL);
     const defaultProfile = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fdefault_profile.jpg?alt=media&token=b173d6e0-7a8e-4e49-a06e-9b377bb186a0';
 
     //새 닉네임을 얻는 기능
@@ -25,51 +25,48 @@ const EditProfile = ({ refreshUser, userObj }) => {
 
     //프로필 수정 저장
     const onSubmit = async (e) => {
-        var json = JSON.parse(localStorage.getItem("gratineUser"));
-        
         e.preventDefault();
+        var jsonUser = JSON.parse(localStorage.getItem("gratineUser"));
         let creatorPicUrl = "";
-        if (newProfilePic !== "" && newProfilePic !== defaultProfile) {
-            const profileRef = ref(storageService, `${userObj.uid}/${uuidv4()}`);
+        //만일 프로필사진에 뭔가 들어있고, 그게 새 사진이라면
+        if (newProfilePic !== null && newProfilePic !== defaultProfile && newProfilePic !== userObj.photoURL) {
+            console.log('들어있어')
+            const profileRef = ref(storageService, `${jsonUser.uid}/${uuidv4()}`);
             const profileResponse = await uploadString(profileRef, newProfilePic, "data_url");
             creatorPicUrl = await getDownloadURL(profileResponse.ref);
+
+            console.log('creatorPicUrl =>',creatorPicUrl)
             localStorage.setItem(
                 'gratineUser',
                 JSON.stringify({
-                    uid: json.uid,
+                    uid: jsonUser.uid,
                     displayName: newDisplayName,
                     photoURL: creatorPicUrl, //업로드한 프로필사진을 저장한다
-                    email: json.email
+                    email: jsonUser.email
                 })
             )
+            await updateProfile(auth.currentUser, {
+                displayName: newDisplayName,
+                photoURL: creatorPicUrl,
+            });
         }
-        else if (newProfilePic === defaultProfile) {
+        //만일 프로필사진이 비어있다면
+        else if (newProfilePic === null || newProfilePic === defaultProfile) {
+            console.log('비어있어')
             localStorage.setItem(
                 'gratineUser',
                 JSON.stringify({
-                    uid: json.uid,
+                    uid: jsonUser.uid,
                     displayName: newDisplayName,
-                    photoURL: defaultProfile, //디폴트 프로필사진을 저장한다
-                    email: json.email
+                    photoURL : defaultProfile,
+                    email: jsonUser.email
                 })
             )
+            await updateProfile(auth.currentUser, {
+                displayName: newDisplayName,
+                photoURL : defaultProfile,
+            });
         }
-        else {
-            localStorage.setItem(
-                'gratineUser',
-                JSON.stringify({
-                    uid: json.uid,
-                    displayName: newDisplayName,
-                    photoURL: defaultProfile, //디폴트 프로필사진을 저장한다
-                    email: json.email
-                })
-            )
-        }
-        //프로필 업데이트
-        await updateProfile(auth.currentUser, {
-            displayName: newDisplayName,
-            photoURL: creatorPicUrl,
-        });
         //완료
         refreshUser();
         alert('저장되었습니다')
@@ -88,7 +85,7 @@ const EditProfile = ({ refreshUser, userObj }) => {
     return (
         <>
             <div className="profile-box__my profile-edit">
-                <img src={newProfilePic} />
+                {newProfilePic ? <img src={newProfilePic} /> : <img src={defaultProfile} />}
                 <button onClick={onClearProfileUrl}>
                     <span className="material-icons-round">close</span>
                 </button>

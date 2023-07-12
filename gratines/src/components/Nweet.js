@@ -17,42 +17,12 @@ const Nweet = ({ nweetObj, isOwner, isOrder, orderWhat, orderText, isWhole, isDi
     const onDeleteClick = async () => {
         const ok = window.confirm("공지를 진짜 삭제할래요?");
         if (ok) {
-            //await dbService.doc(`nweets/${nweetObj.id}`).delete();
             await deleteDoc(NweetTextRef);
-            //await deleteObject(NweetImgRef);
             if (nweetObj.attachmentUrl !== "") {
                 await deleteObject(NweetImgRef);
             }
         }
     }
-    useEffect(() => {
-        //기능 명령어
-        if (isOrder) {
-            //전체 말하기 기능
-            if (orderWhat === '/전체') {
-            }
-            //주사위 기능
-            else if (orderWhat === '/주사위') {
-                if (orderText == ' 10') {
-                    var ranNumOrigin = Math.random() * (10 - 1) + 1;
-                }
-                else if (orderText == ' 50') {
-                    var ranNumOrigin = Math.random() * (50 - 1) + 1;
-                }
-                else if (orderText == ' 100') {
-                    var ranNumOrigin = Math.random() * (100 - 1) + 1;
-                }
-                var ranNum = Math.ceil(ranNumOrigin)
-                setRanNum(ranNum)
-            }
-            //출석 기능
-            else if (orderWhat === '/출석') {
-                var ranNumOrigin = Math.random() * (10 - 1) + 1;
-                var ranNum = Math.ceil(ranNumOrigin)
-                setRanNum(ranNum)
-            }
-        }
-    },[])
 
     ///////////////////////////////////////////////////////////////////////////////
     //ect. 편집하기
@@ -85,8 +55,8 @@ const Nweet = ({ nweetObj, isOwner, isOrder, orderWhat, orderText, isWhole, isDi
                                     {isOwner && <button onClick={onDeleteClick}><span className="material-icons-round">close</span></button>}
                                 </> :
                                 <>
-                                    {isDice && <p><span>{nweetObj.creatorName}</span>가 주사위 <span>{ranNum}</span>을 굴렸습니다</p>}
-                                    {isAttend && <p><span>{nweetObj.creatorName}</span>가 출석점수 <span>{ranNum}</span>을 받았습니다. <span>({nweetObj.createdDate})</span></p>}
+                                    {isDice && <p><span>{nweetObj.creatorName}</span>님이 주사위 <span>{nweetObj.diceNum}</span>을 굴렸습니다</p>}
+                                    {isAttend && <p>[출석완료] <span>{nweetObj.creatorName}</span>님이 화분을 <span>{nweetObj.attendNum}</span> 만큼 키웠습니다. <span>({nweetObj.createdDate})</span></p>}
                                 </>
                             }
                             

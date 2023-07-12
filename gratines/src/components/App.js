@@ -15,32 +15,41 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [updateProfile, setUpdateProfile] = useState(false);
   const [userObj, setUserObj] = useState(null);
-  const defaultProfile = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fdefault_profile.jpg?alt=media&token=b173d6e0-7a8e-4e49-a06e-9b377bb186a0';
 
   useEffect(()=>{
     onAuthStateChanged(auth, (user) => {
-      //로그인 되었다면
+      //로그인 되었다면(가장처음세팅)
+      //새로고침 후에도 적용
       if (user) {
         setIsLoggedIn(true);
-        const name = user.email.split("@")[0];
-        //유저정보에 저장(가장처음세팅)
+        //const name = user.email.split("@")[0];
+        //유저정보에 저장
         setUserObj({
           uid: user.uid,
-          displayName: name,
+          displayName: user.displayName,
           email: user.email,
-          photoURL: defaultProfile,
+          photoURL: user.photoURL,
         });
-        //로컬스토리지에 저장(가장처음세팅)
+        //로컬스토리지에 저장
         localStorage.setItem(
           'gratineUser',
           JSON.stringify({
             uid: user.uid,
-            displayName: name,
+            displayName: user.displayName,
             email: user.email,
             photoURL: user.photoURL,
           })
         )
-        refreshUser();
+        localStorage.setItem(
+          'gratineGame',
+          JSON.stringify({
+            dice: '',
+            attend: '',
+            money: '1000',
+            hp:'100',
+          })
+        )
+        // refreshUser();
       }
       //로그인 안되었다면
       else{

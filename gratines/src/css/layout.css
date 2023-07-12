@@ -394,14 +394,14 @@ body #root .app-container .side-area {
 }
 
 .side-area .member-area,
-.side-area .function-area {
+.side-area .function-area, .side-area .attend-area {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
 }
 
 .side-area .member-area .title,
-.side-area .function-area .title {
+.side-area .function-area .title, .side-area .attend-area .title {
   padding: 0.5rem;
   border-top: 1px solid black;
   border-bottom: 1px solid black;
@@ -409,7 +409,7 @@ body #root .app-container .side-area {
 }
 
 .side-area .member-area .member-list,
-.side-area .function-area .member-list {
+.side-area .function-area .member-list, .side-area .attend-area .member-list {
   padding: 0.5rem;
   border-bottom: 1px solid gray;
   display: -webkit-box;
@@ -422,14 +422,14 @@ body #root .app-container .side-area {
 }
 
 .side-area .member-area .member-list .profile-box,
-.side-area .function-area .member-list .profile-box {
+.side-area .function-area .member-list .profile-box, .side-area .attend-area .member-list .profile-box {
   background-color: gray;
   width: 28px;
   height: 28px;
 }
 
 .side-area .member-area .member-list p,
-.side-area .function-area .member-list p {
+.side-area .function-area .member-list p, .side-area .attend-area .member-list p {
   font-size: 14px;
   line-height: 150%;
   font-weight: 400;
@@ -437,7 +437,7 @@ body #root .app-container .side-area {
 }
 
 .side-area .member-area .function-list,
-.side-area .function-area .function-list {
+.side-area .function-area .function-list, .side-area .attend-area .function-list {
   padding: 0.5rem;
   border-bottom: 1px solid gray;
   display: -webkit-box;
