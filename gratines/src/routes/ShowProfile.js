@@ -17,7 +17,7 @@ const ShowProfile = ({userObj, refreshUser}) => {
             <div className="profile-info">
                 <div>
                     <p>HP : </p>
-                    <b>90</b>
+                    <b>{jsonGame.hp}</b>
                     <span> / 100</span>
                 </div>
                 <div>

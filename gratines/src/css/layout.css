@@ -434,6 +434,12 @@ body #root .app-container .side-area {
   line-height: 150%;
   font-weight: 400;
   color: #61616e;
+  color: #65e7d8;
+}
+
+.side-area .member-area .attend-gauge-wrap,
+.side-area .function-area .attend-gauge-wrap, .side-area .attend-area .attend-gauge-wrap {
+  padding: 3rem;
 }
 
 .side-area .member-area .function-list,

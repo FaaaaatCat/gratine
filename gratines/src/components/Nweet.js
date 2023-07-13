@@ -1,17 +1,17 @@
 import { dbService, storageService } from "fbase";
 import { deleteObject, ref } from "@firebase/storage";
-import { doc, deleteDoc, updateDoc, collection, getDocs, query, } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
+import { doc, deleteDoc, updateDoc, collection, getDocs, query, addDoc, orderBy, onSnapshot  } from "firebase/firestore";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 
-const Nweet = ({ nweetObj, isOwner, isOrder, orderWhat, orderText, isWhole, isDice, isAttend }) => {
+const Nweet = ({ nweetObj, isOwner, isOrder, orderWhat, orderText, isWhole, isDice, isAttend, attendNum}) => {
     const NweetTextRef = doc(dbService, "nweets", `${nweetObj.id}`); //nweetObj.id 는 쓴 트윗의 고유 id임. userObj.id와 다름.
     const NweetImgRef = ref(storageService, nweetObj.attachmentUrl); //nweetObj.attachmentUrl의 레퍼런스를 얻음
     //console.log(nweetObj.id) //쓴 데이터 갯수만큼 실행 됨 그래서 모든 트윗의 id를 보여줌.
-
+    const auth = getAuth();
     const [editing, setEditing] = useState(false);
     const [newNweet, setNewNweet] = useState(nweetObj.text);
-    const [ranNum, setRanNum] = useState("")
+    
 
     //전체 공지 지우기
     const onDeleteClick = async () => {
@@ -48,18 +48,12 @@ const Nweet = ({ nweetObj, isOwner, isOrder, orderWhat, orderText, isWhole, isDi
                     <b>{nweetObj.creatorName}</b>
                     {isOrder ?
                         <>
-                            {
-                                isWhole ?
-                                <>
-                                    <p>{nweetObj.orderText}</p>
-                                    {isOwner && <button onClick={onDeleteClick}><span className="material-icons-round">close</span></button>}
-                                </> :
-                                <>
-                                    {isDice && <p><span>{nweetObj.creatorName}</span>님이 주사위 <span>{nweetObj.diceNum}</span>을 굴렸습니다</p>}
-                                    {isAttend && <p>[출석완료] <span>{nweetObj.creatorName}</span>님이 화분을 <span>{nweetObj.attendNum}</span> 만큼 키웠습니다. <span>({nweetObj.createdDate})</span></p>}
-                                </>
-                            }
-                            
+                            {isWhole && <>
+                                <p>{nweetObj.orderText}</p>
+                                {isOwner && <button onClick={onDeleteClick}><span className="material-icons-round">close</span></button>}
+                            </>}
+                            {isDice && <p>[주사위 {nweetObj.orderText}] <span>{nweetObj.creatorName}</span>님이 주사위 <span>{nweetObj.diceNum}</span>을 굴렸습니다. </p>}
+                            {isAttend && <p>[출석완료] <span>{nweetObj.creatorName}</span>님이 화분을 <span>{nweetObj.attendNum}</span> 만큼 키웠습니다. <span>({nweetObj.createdDate})</span></p>}
                         </> :
                         <>
                             <p>{nweetObj.text}</p>

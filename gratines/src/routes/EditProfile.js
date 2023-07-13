@@ -30,12 +30,9 @@ const EditProfile = ({ refreshUser, userObj }) => {
         let creatorPicUrl = "";
         //만일 프로필사진에 뭔가 들어있고, 그게 새 사진이라면
         if (newProfilePic !== null && newProfilePic !== defaultProfile && newProfilePic !== userObj.photoURL) {
-            console.log('들어있어')
             const profileRef = ref(storageService, `${jsonUser.uid}/${uuidv4()}`);
             const profileResponse = await uploadString(profileRef, newProfilePic, "data_url");
             creatorPicUrl = await getDownloadURL(profileResponse.ref);
-
-            console.log('creatorPicUrl =>',creatorPicUrl)
             localStorage.setItem(
                 'gratineUser',
                 JSON.stringify({
@@ -52,7 +49,6 @@ const EditProfile = ({ refreshUser, userObj }) => {
         }
         //만일 프로필사진이 비어있다면
         else if (newProfilePic === null || newProfilePic === defaultProfile) {
-            console.log('비어있어')
             localStorage.setItem(
                 'gratineUser',
                 JSON.stringify({

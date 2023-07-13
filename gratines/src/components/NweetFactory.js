@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { dbService, storageService } from '../fbase';
 import { v4 as uuidv4 } from 'uuid';
-import { collection, addDoc} from "firebase/firestore";
+import { collection, addDoc, query, orderBy, doc, getDocs} from "firebase/firestore";
 import { ref, uploadString, getDownloadURL } from "@firebase/storage";
 
 
 const NweetFactory = ( {userObj} ) => {
     const [nweet, setNweet] = useState("");
     const [attachment, setAttachment] = useState("");
-    // const [diceNum, setDiceNum] = useState("")
-    // const [attendNum, setAttendNum] = useState("")
+    const [totalAttend, setTotalAttend] = useState();
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        var json = JSON.parse(localStorage.getItem("gratineUser"));
+        var jsonUser = JSON.parse(localStorage.getItem("gratineUser"));
+        var jsonGame = JSON.parse(localStorage.getItem("gratineGame"));
+
 
         //특수 명령어 입력기능
         let orderWhat = '';
@@ -29,10 +30,14 @@ const NweetFactory = ( {userObj} ) => {
         let todayOrigin = new Date();
         let today = todayOrigin.toLocaleString();
 
-        //주사위 굴렸을때 랜덤값 생성 기능
-        let diceNum = '';
-        let attendNum = '';
-        if (orderWhat !== '') {
+
+        //주사위, 출석 기능
+        let diceNum = 0;
+        let attendNum = 0;
+        let totalAttend = 0;
+        let newAttendPrice = 0;
+
+        if (orderWhat !== '' && orderText !=='') {
             //전체 말하기 기능
             if (orderWhat === '/전체') {
             }
@@ -50,7 +55,38 @@ const NweetFactory = ( {userObj} ) => {
             }
             //출석 기능
             else if (orderWhat === '/출석') {
-                attendNum = Math.ceil(Math.random() * (10 - 1) + 1)
+                //1. 출석점수 받아오기
+                const q = query(
+                    collection(dbService, "game"),
+                    orderBy("createdDate", "desc")
+                );
+                const querySnapshot = await getDocs(q);
+                const lastGameData = querySnapshot._snapshot.docChanges[0].doc.data.value.mapValue.fields;
+
+                //2. 기존 점수에 새 점수 더하기
+                //출석점수가 비어있다면(초기)
+                if (lastGameData.attendNum.integerValue === '0') {
+                    console.log('출석처음해')
+                    attendNum = Math.ceil(Math.random() * (10 - 1) + 1)
+                    newAttendPrice += attendNum;
+                }
+                //출석점수가 있다면(사용중)
+                else {
+                    console.log('출석계속해')
+                    attendNum = Math.ceil(Math.random() * (10 - 1) + 1)
+                    totalAttend = Number(lastGameData.totalAttend.integerValue);
+                    newAttendPrice = totalAttend + attendNum;
+                }
+            
+                //3. 새 점수 저장하기
+                const gameObj = {
+                    attendNum: attendNum,
+                    totalAttend: newAttendPrice,
+                    creatorName: jsonUser.displayName,
+                    createdDate: today,
+                }
+                await addDoc(collection(dbService, "game"), gameObj);
+                console.log('저장한닷')
             }
         }
         
@@ -59,7 +95,7 @@ const NweetFactory = ( {userObj} ) => {
         let attachmentUrl = "";
         if (attachment !== "") {
             //랜덤 uuid 생성하여 파일 경로 참조 만들기
-            const attachmentRef = ref(storageService, `${json.uid}/${uuidv4()}`);
+            const attachmentRef = ref(storageService, `${jsonUser.uid}/${uuidv4()}`);
             //storage 참조 경로로 파일 업로드 하기 (data_url 은 포맷임)
             const response = await uploadString(attachmentRef, attachment, "data_url");
             //storage 참조 경로에 있는 파일의 URL을 다운로드해서 attachmentUrl 변수에 넣어서 업데이트
@@ -73,10 +109,10 @@ const NweetFactory = ( {userObj} ) => {
             text: nweet,
             createdAt: Date.now(),
             createdDate: today,
-            creatorId: json.uid,
+            creatorId: jsonUser.uid,
             attachmentUrl,
-            creatorName: json.displayName,
-            creatorImg: json.photoURL,
+            creatorName: jsonUser.displayName,
+            creatorImg: jsonUser.photoURL,
             orderWhat: orderWhat,
             orderText: orderText,
             diceNum: diceNum,
@@ -85,8 +121,10 @@ const NweetFactory = ( {userObj} ) => {
             //그리고 파이어베이스 가서 데이터(pre-made query) 추가하기.
             //우리가 이 쿼리를 사용할거라고 데이터베이스에게 알려줘야 함.
         };
+
         //addDoc은 문서를 추가하는 함수. nweetObj의 항목을 nweets의 데이터베이스에 저장함.
-        await addDoc(collection(dbService, "nweets"), nweetObj); 
+        await addDoc(collection(dbService, "nweets"), nweetObj);
+
         //state 비워서 form 비우기
         setNweet("");
         //파일 미리보기 img src 비워주기

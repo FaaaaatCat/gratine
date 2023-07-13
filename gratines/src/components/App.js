@@ -16,6 +16,7 @@ function App() {
   const [updateProfile, setUpdateProfile] = useState(false);
   const [userObj, setUserObj] = useState(null);
 
+
   useEffect(()=>{
     onAuthStateChanged(auth, (user) => {
       //로그인 되었다면(가장처음세팅)
@@ -41,13 +42,10 @@ function App() {
           })
         )
         localStorage.setItem(
-          'gratineGame',
-          JSON.stringify({
-            dice: '',
-            attend: '',
-            money: '1000',
-            hp:'100',
-          })
+            'gratineGame',
+            JSON.stringify({
+                attend: '',
+            })
         )
         // refreshUser();
       }
