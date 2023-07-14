@@ -440,6 +440,20 @@ body #root .app-container .side-area {
 .side-area .member-area .attend-gauge-wrap,
 .side-area .function-area .attend-gauge-wrap, .side-area .attend-area .attend-gauge-wrap {
   padding: 3rem;
+  position: relative;
+}
+
+.side-area .member-area .attend-gauge-wrap img,
+.side-area .function-area .attend-gauge-wrap img, .side-area .attend-area .attend-gauge-wrap img {
+  width: 40%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  z-index: -1;
+  -webkit-filter: invert(96%) sepia(12%) saturate(137%) hue-rotate(115deg) brightness(100%) contrast(91%);
+          filter: invert(96%) sepia(12%) saturate(137%) hue-rotate(115deg) brightness(100%) contrast(91%);
 }
 
 .side-area .member-area .function-list,

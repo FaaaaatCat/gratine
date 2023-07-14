@@ -317,6 +317,16 @@ body {
     }
     & .attend-gauge-wrap{
       padding: 3rem;
+      position: relative;
+      & img{
+        width: 40%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: -1;
+        filter: invert(96%) sepia(12%) saturate(137%) hue-rotate(115deg) brightness(100%) contrast(91%);
+      }
     }
     & .function-list {
       padding: 0.5rem;

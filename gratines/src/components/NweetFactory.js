@@ -3,7 +3,7 @@ import { dbService, storageService } from '../fbase';
 import { v4 as uuidv4 } from 'uuid';
 import { collection, addDoc, query, orderBy, doc, getDocs} from "firebase/firestore";
 import { ref, uploadString, getDownloadURL } from "@firebase/storage";
-
+import moment from "moment";
 
 const NweetFactory = ( {userObj} ) => {
     const [nweet, setNweet] = useState("");
@@ -29,6 +29,11 @@ const NweetFactory = ( {userObj} ) => {
         //채팅 쓴 날짜 기능
         let todayOrigin = new Date();
         let today = todayOrigin.toLocaleString();
+        let now = moment();
+        let date = moment();
+        console.log(now)
+        console.log(date)
+        
 
 
         //주사위, 출석 기능
@@ -62,13 +67,15 @@ const NweetFactory = ( {userObj} ) => {
                 );
                 const querySnapshot = await getDocs(q);
                 const lastGameData = querySnapshot._snapshot.docChanges[0].doc.data.value.mapValue.fields;
-
+                console.log(lastGameData)
+                console.log(lastGameData.attendNum.integerValue)
                 //2. 기존 점수에 새 점수 더하기
                 //출석점수가 비어있다면(초기)
-                if (lastGameData.attendNum.integerValue === '0') {
+                if (lastGameData.attendNum.integerValue === '0' || lastGameData.attendNum === 0) {
                     console.log('출석처음해')
                     attendNum = Math.ceil(Math.random() * (10 - 1) + 1)
                     newAttendPrice += attendNum;
+                    console.log(date.isSame(now,'day'))
                 }
                 //출석점수가 있다면(사용중)
                 else {
@@ -76,6 +83,7 @@ const NweetFactory = ( {userObj} ) => {
                     attendNum = Math.ceil(Math.random() * (10 - 1) + 1)
                     totalAttend = Number(lastGameData.totalAttend.integerValue);
                     newAttendPrice = totalAttend + attendNum;
+                    console.log(date.isSame(now,'day'))
                 }
             
                 //3. 새 점수 저장하기
@@ -87,6 +95,7 @@ const NweetFactory = ( {userObj} ) => {
                 }
                 await addDoc(collection(dbService, "game"), gameObj);
                 console.log('저장한닷')
+                console.log(gameObj)
             }
         }
         

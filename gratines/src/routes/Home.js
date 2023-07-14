@@ -7,6 +7,7 @@ import 'react-circular-progressbar/dist/styles.css';
 import Nweet from "components/Nweet";
 import NweetFactory from "components/NweetFactory";
 import Profile from "./Profile";
+import plantImg from '../images/plant.png'
 
 const Home = ({ userObj, refreshUser, isLoggedIn }) => {
     var jsonUser = JSON.parse(localStorage.getItem("gratineUser"));
@@ -38,6 +39,7 @@ const Home = ({ userObj, refreshUser, isLoggedIn }) => {
     //채팅 쓴 날짜 기능
     let todayOrigin = new Date();
     let today = todayOrigin.toLocaleString();
+
     //명령어 모음
     let orderList = [' 10', ' 50', ' 100']
     
@@ -140,6 +142,7 @@ const Home = ({ userObj, refreshUser, isLoggedIn }) => {
                 <div className="attend-area">
                     <div className="title">화분키우기 (출석 보상)</div>
                     <div className="attend-gauge-wrap">
+                        
                         <CircularProgressbar
                             counterClockwise
                             background
@@ -169,6 +172,7 @@ const Home = ({ userObj, refreshUser, isLoggedIn }) => {
                                 },
                             }}
                         />
+                        <img src={plantImg} alt="" />
                     </div>
                     <button
                         className="gtn-btn mr-auto ml-auto"
