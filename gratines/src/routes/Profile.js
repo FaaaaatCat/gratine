@@ -6,7 +6,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import EditProfile from "./EditProfile";
 import ShowProfile from "./ShowProfile";
 
-const Profile = ({ refreshUser, userObj }) => {
+const Profile = ({ refreshUser, userObj, fbUserObj, gameObj }) => {
     const auth = getAuth();
     const navigate = useNavigate();
 
@@ -26,7 +26,7 @@ const Profile = ({ refreshUser, userObj }) => {
         });
     };
     useEffect(() => {
-        getMyNweets();
+        //getMyNweets();
     },[])
     
     ///////////////////////////////////////////////////////////////////////////////
@@ -50,11 +50,15 @@ const Profile = ({ refreshUser, userObj }) => {
                         <EditProfile
                             refreshUser={refreshUser}
                             userObj={userObj}
+                            fbUserObj={fbUserObj}
+                            gameObj={gameObj}
                         />
                     ): (
                         <ShowProfile
                             refreshUser={refreshUser}
                             userObj={userObj}
+                            fbUserObj={fbUserObj}
+                            gameObj={gameObj}
                         />
                     )
                 }

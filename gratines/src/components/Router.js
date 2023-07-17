@@ -5,21 +5,34 @@ import Home from "../routes/Home";
 import Profile from "../routes/Profile";
 import Navigation from "./Navigation";
 
-const AppRouter = ({isLoggedIn, userObj, refreshUser}) => {
+const AppRouter = ({isLoggedIn, userObj, refreshUser, fbUserObj}) => {
     // const [isLoggedIn, setIsLoggedIn] = useState(true);
     return(
         <div className="app-container">
             <Router>
-                {isLoggedIn && <Navigation userObj={userObj} />}
+                {isLoggedIn && <Navigation userObj={userObj} fbUserObj={fbUserObj}/>}
                 <Routes>
                     {isLoggedIn ? (
                         <>
-                            <Route exact path="/" element={<Home userObj={userObj} refreshUser={refreshUser} isLoggedIn={isLoggedIn} />} />
+                            <Route exact path="/" element={
+                                <Home
+                                    userObj={userObj}
+                                    fbUserObj={fbUserObj}
+                                    refreshUser={refreshUser}
+                                    isLoggedIn={isLoggedIn}
+                                />}
+                            />
                             {/* <Route exact path="/profile" element={<Profile userObj={userObj} refreshUser={refreshUser} />} /> */}
                         </>
                     ) : (
                         <>
-                            <Route exact path="/" element={<Auth userObj={userObj} refreshUser={refreshUser}  />} />
+                            <Route exact path="/" element={
+                                <Auth
+                                    userObj={userObj}
+                                    fbUserObj={fbUserObj}
+                                    refreshUser={refreshUser}
+                                />}
+                            />
                         </>
                     )}
                     <Route path="*" element={<Navigate replace to="/" />} /> 

@@ -5,11 +5,15 @@ import { getAuth,
     signInWithPopup,
     GoogleAuthProvider
 } from "firebase/auth";
+import { dbService, storageService } from '../fbase';
+import { collection, addDoc} from "firebase/firestore";
 
 const AuthForm = ({userObj, refreshUser}) => {
     const auth = getAuth();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [nickName, setnickName] = useState("");
+    const [photo, setPhoto] = useState("");
     const [newAccount, setNewAccount] = useState(false);
     const [error, setError] = useState("");
     const [profilePic, setProfilePic] = useState("");
@@ -39,9 +43,13 @@ const AuthForm = ({userObj, refreshUser}) => {
         else if (name === "password"){
             setPassword(value);
         }
+        // else if (name === "nickName"){
+        //     setnickName(value);
+        // }
     };
 
-    const onSubmit = async(event) => {
+    const onSubmit = async (event) => {
+        console.log('AUTHFORM 제출')
         event.preventDefault();
         try{
             let data;
@@ -49,7 +57,23 @@ const AuthForm = ({userObj, refreshUser}) => {
                 data = await createUserWithEmailAndPassword(
                     auth, email, password
                 )
-                //data.user.photoURL = profilePic;
+                //[회원가입시] 유저 정보 저장
+                const userGameObj = {
+                    uid: auth.currentUser.uid,
+                    email: auth.currentUser.email,
+                    attend : 0,
+                    totalAttend : 0,
+                }
+                const fbUserObj = {
+                    uid: auth.currentUser.uid,
+                    email: email,
+                    password: password,
+                    gold: 1000,
+                    hp: 100,
+                    //nickName: nickName,
+                }
+                await addDoc(collection(dbService, "user"), fbUserObj);
+                await addDoc(collection(dbService, "userGame"), userGameObj);
             }
             else{
                 data = await signInWithEmailAndPassword(
@@ -82,16 +106,27 @@ const AuthForm = ({userObj, refreshUser}) => {
             </div>
             <form onSubmit={onSubmit}>
                 {newAccount && 
-                    <div className="notice-box">
-                        <p>가입 전, 공지사항을 확인해주세요!</p>
-                        <a href="https://www.naver.com/" target="_blank">▶ 공지사항 바로가기</a>
-                    </div>
+                    <>
+                        <div className="notice-box">
+                            <p>가입 전, 공지사항을 확인해주세요!</p>
+                            <a href="https://www.naver.com/" target="_blank">▶ 공지사항 바로가기</a>
+                        </div>
+                        {/* <input
+                            className="gtn-input"
+                            name="nickName"
+                            type="text"
+                            placeholder="캐릭터 이름"
+                            required
+                            value={nickName}
+                            onChange={onChange}
+                        /> */}
+                    </>
                 }
                 <input
                     className="gtn-input"
                     name="email"
                     type="email"
-                    placeholder="Email"
+                    placeholder="이메일 (email@gratine.com)"
                     required
                     value={email}
                     onChange={onChange}
@@ -100,7 +135,7 @@ const AuthForm = ({userObj, refreshUser}) => {
                     className="gtn-input"
                     name="password"
                     type="password"
-                    placeholder="Password"
+                    placeholder="비밀번호"
                     required
                     value={password}
                     onChange={onChange}

@@ -5,11 +5,10 @@ import { collection, getDocs, query, where, orderBy, addDoc } from "firebase/fir
 import { v4 as uuidv4 } from 'uuid';
 import { ref, uploadString, getDownloadURL } from "@firebase/storage";
 
-const EditProfile = ({ refreshUser, userObj }) => {
+const EditProfile = ({ refreshUser, userObj, fbUserObj }) => {
     const auth = getAuth();
-    var jsonUser = JSON.parse(localStorage.getItem("gratineUser"));
-    const [newDisplayName, setNewDisplayName] = useState(jsonUser.displayName);
-    const [newProfilePic, setNewProfilePic] = useState(jsonUser.photoURL);
+    const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
+    const [newProfilePic, setNewProfilePic] = useState(userObj.photoURL);
     const defaultProfile = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fdefault_profile.jpg?alt=media&token=b173d6e0-7a8e-4e49-a06e-9b377bb186a0';
 
     //새 닉네임을 얻는 기능
@@ -26,22 +25,12 @@ const EditProfile = ({ refreshUser, userObj }) => {
     //프로필 수정 저장
     const onSubmit = async (e) => {
         e.preventDefault();
-        var jsonUser = JSON.parse(localStorage.getItem("gratineUser"));
         let creatorPicUrl = "";
         //만일 프로필사진에 뭔가 들어있고, 그게 새 사진이라면
         if (newProfilePic !== null && newProfilePic !== defaultProfile && newProfilePic !== userObj.photoURL) {
-            const profileRef = ref(storageService, `${jsonUser.uid}/${uuidv4()}`);
+            const profileRef = ref(storageService, `${userObj.uid}/${uuidv4()}`);
             const profileResponse = await uploadString(profileRef, newProfilePic, "data_url");
             creatorPicUrl = await getDownloadURL(profileResponse.ref);
-            localStorage.setItem(
-                'gratineUser',
-                JSON.stringify({
-                    uid: jsonUser.uid,
-                    displayName: newDisplayName,
-                    photoURL: creatorPicUrl, //업로드한 프로필사진을 저장한다
-                    email: jsonUser.email
-                })
-            )
             await updateProfile(auth.currentUser, {
                 displayName: newDisplayName,
                 photoURL: creatorPicUrl,
@@ -49,15 +38,6 @@ const EditProfile = ({ refreshUser, userObj }) => {
         }
         //만일 프로필사진이 비어있다면
         else if (newProfilePic === null || newProfilePic === defaultProfile) {
-            localStorage.setItem(
-                'gratineUser',
-                JSON.stringify({
-                    uid: jsonUser.uid,
-                    displayName: newDisplayName,
-                    photoURL : defaultProfile,
-                    email: jsonUser.email
-                })
-            )
             await updateProfile(auth.currentUser, {
                 displayName: newDisplayName,
                 photoURL : defaultProfile,
