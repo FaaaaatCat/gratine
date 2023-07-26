@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { dbService, storageService } from '../fbase';
 import { v4 as uuidv4 } from 'uuid';
-import { collection, addDoc, query, orderBy, doc, getDocs, updateDoc} from "firebase/firestore";
+import { collection, addDoc, query, orderBy, where, doc, getDocs, updateDoc} from "firebase/firestore";
 import { ref, uploadString, getDownloadURL } from "@firebase/storage";
 import moment from "moment";
 
@@ -9,6 +9,8 @@ const NweetFactory = ({ userObj, fbUserObj, gameObj }) => {
     const UserGameRef = doc(dbService, "userGame", `${gameObj?.id}`);
     const [nweet, setNweet] = useState("");
     const [attachment, setAttachment] = useState("");
+    const [attendCount, setAttendCount] = useState(1);
+
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -20,18 +22,12 @@ const NweetFactory = ({ userObj, fbUserObj, gameObj }) => {
         if (nweet[0] === '/') {
             orderWhat = nweet.split(" ")[0];
             if (orderList.includes(orderWhat)) {
-                orderText = nweet.substr(orderWhat.length);
+                orderText = nweet.substr(orderWhat.length + 1);
             }
         }
         //채팅 쓴 날짜 기능
-        let todayOrigin = new Date();
-        let today = todayOrigin.toLocaleString();
-        let now = moment();
-        let date = moment();
-        console.log(now)
-        console.log(date)
-        
-
+        let todayfull = new Date().toLocaleString();
+        let today = moment().format("YYMMDD")
 
         //주사위, 출석 기능
         let diceNum = 0;
@@ -55,26 +51,26 @@ const NweetFactory = ({ userObj, fbUserObj, gameObj }) => {
                 }
             }
             //출석 기능
-            else if (orderWhat === '/출석') {
+            else if (orderWhat === '/출석' && orderText === today) {
                 //1. 출석점수 받아오기
                 const q = query(
                     collection(dbService, "userGame"),
+                    where("uid", "==", userObj.uid)
                 );
                 const querySnapshot = await getDocs(q);
                 const currentUserGameData = querySnapshot._snapshot.docChanges[0].doc.data.value.mapValue.fields;
                 const currentUserGameData_Total = Number(currentUserGameData.totalAttend.integerValue);
-                console.log(currentUserGameData)
-                console.log(currentUserGameData_Total)
-                console.log(UserGameRef)
+                const currentUserGameData_AttendCount = Number(currentUserGameData.attendCount.integerValue);
+
                 //2. 기존 점수에 새 점수 더하기
-                //출석점수가 비어있다면(초기)
                 attendNum = Math.ceil(Math.random() * (10 - 1) + 1)
                 totalAttend = currentUserGameData_Total + attendNum;
-
+                setAttendCount(currentUserGameData_AttendCount + 1)
                 //3. 새 점수로 업데이트 하기
                 await updateDoc(UserGameRef, {
                     totalAttend : totalAttend,
-                    attend : attendNum,
+                    attend: attendNum,
+                    attendCount: currentUserGameData_AttendCount + 1,
                 })
             }
             //출석 기능(**전체 출석기능 할때 만들었음. 지금은 사용 안함)
@@ -128,13 +124,23 @@ const NweetFactory = ({ userObj, fbUserObj, gameObj }) => {
             attachmentUrl = await getDownloadURL(response.ref);
         }
 
+        let blackNweet = nweet.trim();
+        //이미지도 글자도 없을땐 무시한다.
+        if (nweet == '' && attachment == "") {
+            setNweet("");
+            return;
+        }
+        if (blackNweet == '' || nweet == null) {
+            setNweet("");
+            return;
+        }
 
         //////////////////////////////////////////////////////////////////////////////////////////////
         //트윗 오브젝트 저장
         const nweetObj = {
             text: nweet,
             createdAt: Date.now(),
-            createdDate: today,
+            createdDate: todayfull,
             creatorId: userObj.uid,
             attachmentUrl,
             creatorName: userObj.displayName,
@@ -143,6 +149,7 @@ const NweetFactory = ({ userObj, fbUserObj, gameObj }) => {
             orderText: orderText,
             diceNum: diceNum,
             attendNum: attendNum,
+            attendCount: attendCount,
             //nweets에 새로운 데이터를 넣고싶으면 이곳에 추가하기.
             //그리고 파이어베이스 가서 데이터(pre-made query) 추가하기.
             //우리가 이 쿼리를 사용할거라고 데이터베이스에게 알려줘야 함.

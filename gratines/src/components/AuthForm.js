@@ -49,7 +49,6 @@ const AuthForm = ({userObj, refreshUser}) => {
     };
 
     const onSubmit = async (event) => {
-        console.log('AUTHFORM 제출')
         event.preventDefault();
         try{
             let data;
@@ -61,8 +60,9 @@ const AuthForm = ({userObj, refreshUser}) => {
                 const userGameObj = {
                     uid: auth.currentUser.uid,
                     email: auth.currentUser.email,
-                    attend : 0,
-                    totalAttend : 0,
+                    attendCount : 0,
+                    attendRanNum: 0,
+                    totalAttend: 0,
                 }
                 const fbUserObj = {
                     uid: auth.currentUser.uid,

@@ -18,20 +18,22 @@ function App() {
   const [updateProfile, setUpdateProfile] = useState(false);
   const [userObj, setUserObj] = useState(null);
   const [fbUserObj, setFbUserObj] = useState(null);
-  const [newUserObj, setNewUserObj] = useState(null);
-  const [gameObj, setGameObj] = useState(null);
+  const [attendObj, setAttendObj] = useState(null);
   //const name = user.email.split("@")[0];
 
   useEffect(()=>{
     onAuthStateChanged(auth, (user) => {
-      console.log('APP이다')
       //로그인 되었다면(가장처음세팅)
       //새로고침 후에도 적용
       if (user) {
         setIsLoggedIn(true);
-        console.log('APP - 유저정보 있다')
-        console.log('1')
-        //세팅
+        //유저정보 저장
+        setUserObj({
+          uid: user.uid,
+          displayName: user.displayName,
+          photoURL: user.photoURL,
+        });
+        //게임유저 저장
         setFbUserObj({
           uid: user.uid,
           email: user.email,
@@ -40,23 +42,17 @@ function App() {
           gold: 100,
           hp: 100,
         })
-        //유저정보 저장
-        setUserObj({
+        //출석점수 저장
+        setAttendObj({
           uid: user.uid,
-          displayName: user.displayName,
-          photoURL: user.photoURL,
+          email: user.email,
+          attendCount : 0,
+          attendRanNum : 0,
+          totalAttend: 0,
         });
-        //로컬스토리지에 저장
-        // localStorage.setItem(
-        //   'gratineUser',
-        //   JSON.stringify({
-        //     uid: user.uid,
-        //     photoURL: user.photoURL,
-        //   })
-        // )
+
         //await 끝난후 (새로고침마다) 불러오기
-        
-        //getUserGameObj(user);
+        getUserAttendObj(user);
         getFbUserObj(user);
         refreshUser();
       }
@@ -65,6 +61,7 @@ function App() {
         setIsLoggedIn(false);
         setUserObj(null);
         setFbUserObj(null);
+        getUserAttendObj(null);
       }
       setInit(true);
     });
@@ -72,6 +69,7 @@ function App() {
 
   //회원가입한 유저데이터 읽어오기
   const getFbUserObj = async (user) => {
+    
     //1. 현재 uid와 일치하는 유저 데이터 받아오기
     const q = query(
       collection(dbService, "user"),
@@ -90,37 +88,35 @@ function App() {
       password: fbUserData[0].password,
       gold: fbUserData[0].gold,
       hp: fbUserData[0].hp,
+      attendCount: fbUserData[0].attendCount,
     })
   };
   //유저의 게임데이터 읽어오기
-  const getUserGameObj = async (user) => {
+  const getUserAttendObj = async (user) => {
     //1. 현재 uid와 일치하는 유저 데이터 받아오기
-    const q = query(
-      collection(dbService, "userGame"),
-      where("uid", "==", user.uid)
-    );
+      const q = query(
+          collection(dbService, "userGame"),
+          where("uid", "==", user.uid)
+      );
     //updateFbUserObj(user)
     const querySnapshot = await getDocs(q);
-    const UserGameData = querySnapshot.docs.map(doc => ({
+    const queryData = querySnapshot.docs.map(doc => ({
       id: doc.id,
       ...doc.data()
     }));
-    setGameObj(UserGameData[0])
+    setAttendObj({
+      uid: user.uid,
+      email : user.email,
+      attendCount : queryData[0].attendCount,
+      attendRanNum : queryData[0].attendRanNum,
+      totalAttend: queryData[0].totalAttend,
+    })
   };
-  //유저데이터 업데이트(덧씌우기)
-  const updateFbUserObj = (user) => {
-    // await updateDoc(FbUserRef, {
-    //   uid: fbUserData[0].uid,
-    //   nickName: fbUserData[0].nickName,
-    //   email: fbUserData[0].email,
-    //   password: fbUserData[0].password,
-    //   gold: fbUserData[0].gold,
-    //   hp: fbUserData[0].hp,
-    // });
-  }
   //유저네임 변경시 자동 리프레쉬 업데이트
-  const refreshUser = async() => {
+  const refreshUser = async () => {
+
     const user = auth.currentUser;
+    getUserAttendObj(user);
     await updateCurrentUser(auth, user);
     setUserObj({
       uid: user.uid,
@@ -139,6 +135,7 @@ function App() {
           isLoggedIn={isLoggedIn}
           userObj={userObj}
           fbUserObj={fbUserObj}
+          attendObj = {attendObj}
           refreshUser={refreshUser}
         /> : "Initializing..."
       }

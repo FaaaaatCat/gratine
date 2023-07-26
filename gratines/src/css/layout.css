@@ -86,11 +86,11 @@ body #root .app-container .side-area {
 
 .chatting-area .chatting-list-container .chatting-list {
   border-bottom: 1px solid black;
-  padding: 0.5rem;
+  padding: 0.3rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  gap: 0.5rem;
+  gap: 0.3rem;
   background-color: white;
 }
 
@@ -115,6 +115,14 @@ body #root .app-container .side-area {
 .chatting-area .chatting-list-container .chatting-list.wholeChat p span, .chatting-area .chatting-list-container .chatting-list.orderChat p span {
   margin: 0 5px;
   color: blue;
+}
+
+.chatting-area .chatting-list-container .chatting-list.wholeChat p span:last-child, .chatting-area .chatting-list-container .chatting-list.orderChat p span:last-child {
+  margin: 0;
+  padding: 2px 8px 2px 5px;
+  background-color: blue;
+  border-radius: 100px;
+  color: white !important;
 }
 
 .chatting-area .chatting-list-container .chatting-list.wholeChat img, .chatting-area .chatting-list-container .chatting-list.orderChat img {
@@ -157,6 +165,7 @@ body #root .app-container .side-area {
   background-color: gray;
   width: 28px;
   height: 28px;
+  border-radius: 2px;
 }
 
 .chatting-area .chatting-list-container .chatting-list .profile-box img {
@@ -175,7 +184,7 @@ body #root .app-container .side-area {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  gap: 4px;
+  gap: 2px;
 }
 
 .chatting-area .chatting-list-container .chatting-list .txt-box b {

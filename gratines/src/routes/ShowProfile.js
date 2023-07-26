@@ -4,18 +4,6 @@ const ShowProfile = ({userObj, refreshUser, fbUserObj, gameObj}) => {
     const [isProfile, setIsProfile] = useState();
     const defaultProfile = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fdefault_profile.jpg?alt=media&token=b173d6e0-7a8e-4e49-a06e-9b377bb186a0';
 
-    const showMyProfile = async () => {
-        console.log('-----------------------')
-        console.log('//ShowProfile.js')
-        console.log('fbUserObj =>', fbUserObj)
-        console.log('userObj =>', userObj)
-        console.log('userObj.displayName =>',userObj.displayName)
-        //console.log('-----------------------')
-
-    };
-    useEffect(() => {
-        showMyProfile();
-    },[])
     return (
         <>
             <div className="profile-box__my">

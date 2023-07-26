@@ -5,7 +5,7 @@ import Home from "../routes/Home";
 import Profile from "../routes/Profile";
 import Navigation from "./Navigation";
 
-const AppRouter = ({isLoggedIn, userObj, refreshUser, fbUserObj}) => {
+const AppRouter = ({isLoggedIn, userObj, refreshUser, fbUserObj, attendObj}) => {
     // const [isLoggedIn, setIsLoggedIn] = useState(true);
     return(
         <div className="app-container">
@@ -20,6 +20,7 @@ const AppRouter = ({isLoggedIn, userObj, refreshUser, fbUserObj}) => {
                                     fbUserObj={fbUserObj}
                                     refreshUser={refreshUser}
                                     isLoggedIn={isLoggedIn}
+                                    attendObj = {attendObj}
                                 />}
                             />
                             {/* <Route exact path="/profile" element={<Profile userObj={userObj} refreshUser={refreshUser} />} /> */}
