@@ -9,8 +9,6 @@ const NweetFactory = ({ userObj, fbUserObj, gameObj }) => {
     const UserGameRef = doc(dbService, "userGame", `${gameObj?.id}`);
     const [nweet, setNweet] = useState("");
     const [attachment, setAttachment] = useState("");
-    const [attendCount, setAttendCount] = useState(1);
-
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -27,13 +25,9 @@ const NweetFactory = ({ userObj, fbUserObj, gameObj }) => {
         }
         //채팅 쓴 날짜 기능
         let todayfull = new Date().toLocaleString();
-        let today = moment().format("YYMMDD")
 
         //주사위, 출석 기능
         let diceNum = 0;
-        let attendNum = 0;
-        let totalAttend = 0;
-        // let newAttendPrice = 0; (**전체 출석기능 할때 만들었음. 지금은 사용 안함)
         if (orderWhat !== '' && orderText !=='') {
             //전체 말하기 기능
             if (orderWhat === '/전체') {
@@ -50,66 +44,6 @@ const NweetFactory = ({ userObj, fbUserObj, gameObj }) => {
                     diceNum = Math.ceil(Math.random() * (100 - 1) + 1)
                 }
             }
-            //출석 기능
-            else if (orderWhat === '/출석' && orderText === today) {
-                //1. 출석점수 받아오기
-                const q = query(
-                    collection(dbService, "userGame"),
-                    where("uid", "==", userObj.uid)
-                );
-                const querySnapshot = await getDocs(q);
-                const currentUserGameData = querySnapshot._snapshot.docChanges[0].doc.data.value.mapValue.fields;
-                const currentUserGameData_Total = Number(currentUserGameData.totalAttend.integerValue);
-                const currentUserGameData_AttendCount = Number(currentUserGameData.attendCount.integerValue);
-
-                //2. 기존 점수에 새 점수 더하기
-                attendNum = Math.ceil(Math.random() * (10 - 1) + 1)
-                totalAttend = currentUserGameData_Total + attendNum;
-                setAttendCount(currentUserGameData_AttendCount + 1)
-                //3. 새 점수로 업데이트 하기
-                await updateDoc(UserGameRef, {
-                    totalAttend : totalAttend,
-                    attend: attendNum,
-                    attendCount: currentUserGameData_AttendCount + 1,
-                })
-            }
-            //출석 기능(**전체 출석기능 할때 만들었음. 지금은 사용 안함)
-            // else if (orderWhat === '/출석') {
-            //     //1. 출석점수 받아오기
-            //     const q = query(
-            //         collection(dbService, "game"),
-            //         orderBy("createdDate", "desc")
-            //     );
-            //     const querySnapshot = await getDocs(q);
-            //     const lastGameData = querySnapshot._snapshot.docChanges[0].doc.data.value.mapValue.fields;
-            //     console.log(lastGameData)
-            //     console.log(lastGameData.attendNum.integerValue)
-            //     //2. 기존 점수에 새 점수 더하기
-            //     //출석점수가 비어있다면(초기)
-            //     if (lastGameData.attendNum.integerValue === '0' || lastGameData.attendNum === 0) {
-            //         console.log('출석처음해')
-            //         attendNum = Math.ceil(Math.random() * (10 - 1) + 1)
-            //         newAttendPrice += attendNum;
-            //         console.log(date.isSame(now,'day'))
-            //     }
-            //     //출석점수가 있다면(사용중)
-            //     else {
-            //         console.log('출석계속해')
-            //         attendNum = Math.ceil(Math.random() * (10 - 1) + 1)
-            //         totalAttend = Number(lastGameData.totalAttend.integerValue);
-            //         newAttendPrice = totalAttend + attendNum;
-            //         console.log(date.isSame(now,'day'))
-            //     }
-            
-            //     //3. 새 점수 저장하기 (이거 없애야 할수도 있음)
-            //     const gameObj = {
-            //         attendNum: attendNum,
-            //         totalAttend: newAttendPrice,
-            //         creatorName: userObj.displayName,
-            //         createdDate: today,
-            //     }
-            //     await addDoc(collection(dbService, "game"), gameObj);
-            // }
         }
         
         //이미지 첨부하지 않고 텍스트만 올리고 싶을 때도 있기 때문에 attachment가 있을때만 아래 코드 실행
@@ -148,8 +82,6 @@ const NweetFactory = ({ userObj, fbUserObj, gameObj }) => {
             orderWhat: orderWhat,
             orderText: orderText,
             diceNum: diceNum,
-            attendNum: attendNum,
-            attendCount: attendCount,
             //nweets에 새로운 데이터를 넣고싶으면 이곳에 추가하기.
             //그리고 파이어베이스 가서 데이터(pre-made query) 추가하기.
             //우리가 이 쿼리를 사용할거라고 데이터베이스에게 알려줘야 함.

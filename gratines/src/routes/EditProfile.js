@@ -1,17 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { getAuth, signOut, updateProfile  } from "firebase/auth";
 import { authService, dbService, storageService } from "fbase";
-import { collection, getDocs, query, where, orderBy, addDoc } from "firebase/firestore";
+import { collection, getDocs, query, where, orderBy, addDoc, doc, updateDoc } from "firebase/firestore";
 import { v4 as uuidv4 } from 'uuid';
 import { ref, uploadString, getDownloadURL } from "@firebase/storage";
 
 const EditProfile = ({ refreshUser, userObj, fbUserObj }) => {
     const auth = getAuth();
     const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
+    const [newGold, setNewGold] = useState(fbUserObj.gold);
+    const [newItem, setNewItem] = useState(fbUserObj.item);
     const [newProfilePic, setNewProfilePic] = useState(userObj.photoURL);
     const defaultProfile = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fdefault_profile.jpg?alt=media&token=b173d6e0-7a8e-4e49-a06e-9b377bb186a0';
-
-    //새 닉네임을 얻는 기능
+    //새 소지금액 인풋
+    const onGoldChange = (e) => {
+        setNewGold(e.target.value);
+    };
+    //새 소지품 인풋
+    const onItemChange = (e) => {
+        setNewItem(e.target.value);
+    };
+    //새 닉네임 인풋
     const onNameChange = (e) => {
         setNewDisplayName(e.target.value);
     };
@@ -43,6 +52,20 @@ const EditProfile = ({ refreshUser, userObj, fbUserObj }) => {
                 photoURL : defaultProfile,
             });
         }
+        //소지금액 저장
+        const q = query(
+            collection(dbService, "user"),
+            where("uid", "==", userObj.uid)
+        );
+        const querySnapshot = await getDocs(q);
+        const currentUserGameData_Id = querySnapshot.docs[0].id;
+        const UserGameRef = doc(dbService, "user", currentUserGameData_Id);
+        await updateDoc(UserGameRef, {
+            gold : newGold,
+            item : newItem,
+        })
+
+
         //완료
         refreshUser();
         alert('저장되었습니다')
@@ -66,11 +89,11 @@ const EditProfile = ({ refreshUser, userObj, fbUserObj }) => {
                     <span className="material-icons-round">close</span>
                 </button>
             </div>
-            <form onSubmit={onSubmit} className="profile-wrap">
+            <form onSubmit={onSubmit} className="profile-detail-wrap">
                 <label htmlFor="profile">
                     <div className="picture-upload-btn">
                         <span className="material-icons-round">image</span>
-                        프로필 사진 업로드
+                        사진 업로드
                     </div>
                 </label>
                 <input
@@ -81,6 +104,7 @@ const EditProfile = ({ refreshUser, userObj, fbUserObj }) => {
                     id="profile"
                     accept="image/*"
                 />
+                <div className="label">이름</div>
                 <input
                     className="gtn-input"
                     onChange={onNameChange}
@@ -88,8 +112,23 @@ const EditProfile = ({ refreshUser, userObj, fbUserObj }) => {
                     type="text"
                     placeholder="닉네임을 적어주세요"
                 />
+                <div className="label">소지금(Gold)</div>
                 <input
-                    className="gtn-btn"
+                    type="number"
+                    className="gtn-input"
+                    onChange={onGoldChange}
+                    value={newGold}
+                />
+                <div className="label">소지품</div>
+                <input
+                    type="text"
+                    className="gtn-input"
+                    placeholder="소지품을 입력해주세요"
+                    onChange={onItemChange}
+                    value={newItem}
+                />
+                <input
+                    className="gtn-btn mt-4"
                     type="submit"
                     value="저장"
                 />

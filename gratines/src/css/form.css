@@ -41,6 +41,7 @@
 }
 
 #root .picture-upload-btn {
+  width: 118px;
   height: 32px;
   padding: 0 1rem 0 0.8rem;
   background: #fff;

@@ -38,9 +38,8 @@ function App() {
           uid: user.uid,
           email: user.email,
           password: '',
-          nickName: '',
-          gold: 100,
-          hp: 100,
+          gold: 0,
+          item: '',
         })
         //출석점수 저장
         setAttendObj({
@@ -52,8 +51,8 @@ function App() {
         });
 
         //await 끝난후 (새로고침마다) 불러오기
-        getUserAttendObj(user);
         getFbUserObj(user);
+        getUserAttendObj(user);
         refreshUser();
       }
       //로그인 안되었다면
@@ -61,7 +60,7 @@ function App() {
         setIsLoggedIn(false);
         setUserObj(null);
         setFbUserObj(null);
-        getUserAttendObj(null);
+        setAttendObj(null);
       }
       setInit(true);
     });
@@ -69,7 +68,6 @@ function App() {
 
   //회원가입한 유저데이터 읽어오기
   const getFbUserObj = async (user) => {
-    
     //1. 현재 uid와 일치하는 유저 데이터 받아오기
     const q = query(
       collection(dbService, "user"),
@@ -83,12 +81,10 @@ function App() {
     }));
     setFbUserObj({
       uid: fbUserData[0].uid,
-      nickName: fbUserData[0].nickName,
       email: fbUserData[0].email,
       password: fbUserData[0].password,
       gold: fbUserData[0].gold,
-      hp: fbUserData[0].hp,
-      attendCount: fbUserData[0].attendCount,
+      item: fbUserData[0].item,
     })
   };
   //유저의 게임데이터 읽어오기
@@ -117,6 +113,7 @@ function App() {
 
     const user = auth.currentUser;
     getUserAttendObj(user);
+    getFbUserObj(user);
     await updateCurrentUser(auth, user);
     setUserObj({
       uid: user.uid,

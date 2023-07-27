@@ -288,8 +288,8 @@ body #root .app-container .side-area {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  gap: 1rem;
   text-align: center;
+  gap: 1rem;
 }
 
 .profile-box__my {
@@ -354,6 +354,32 @@ body #root .app-container .side-area {
   color: white;
 }
 
+.profile-area .profile-wrap .profile-detail-wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.profile-area .profile-wrap .profile-detail-wrap .label {
+  white-space: nowrap;
+  width: 100%;
+  text-align: left;
+  padding-top: 20px;
+  padding-bottom: 3px;
+  font-weight: bold;
+}
+
+.profile-area .profile-wrap .profile-detail-wrap .gtn-btn {
+  width: 100% !important;
+}
+
 .profile-area .profile-wrap h4 {
   font-size: 1.1rem;
 }
@@ -370,6 +396,10 @@ body #root .app-container .side-area {
           justify-content: center;
   gap: 5px;
   margin-bottom: 5px;
+}
+
+.profile-area .profile-wrap .profile-info > div p {
+  white-space: nowrap;
 }
 
 .side-area {
