@@ -449,6 +449,7 @@ body #root .app-container .side-area {
 .side-area .member-area .attend-gauge-wrap,
 .side-area .function-area .attend-gauge-wrap, .side-area .attend-area .attend-gauge-wrap {
   padding: 3rem;
+  padding-bottom: 1rem;
   position: relative;
 }
 
@@ -456,13 +457,36 @@ body #root .app-container .side-area {
 .side-area .function-area .attend-gauge-wrap img, .side-area .attend-area .attend-gauge-wrap img {
   width: 40%;
   position: absolute;
-  top: 50%;
+  top: 60%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
   z-index: -1;
   -webkit-filter: invert(96%) sepia(12%) saturate(137%) hue-rotate(115deg) brightness(100%) contrast(91%);
           filter: invert(96%) sepia(12%) saturate(137%) hue-rotate(115deg) brightness(100%) contrast(91%);
+}
+
+.side-area .member-area .attend-info,
+.side-area .function-area .attend-info, .side-area .attend-area .attend-info {
+  text-align: center;
+  margin-bottom: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-size: 1rem;
+}
+
+.side-area .member-area .attend-info b,
+.side-area .function-area .attend-info b, .side-area .attend-area .attend-info b {
+  color: #44D9C7;
+  font-size: 1.4rem;
+  margin-right: 5px;
 }
 
 .side-area .member-area .function-list,

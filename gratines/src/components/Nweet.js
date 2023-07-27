@@ -40,20 +40,19 @@ const Nweet = ({ nweetObj, isOwner, isOrder, orderWhat, orderText, isWhole, isDi
 
     return (
         <>  
-                <div className={'chatting-list ' + (isOwner? 'myChat ':'') + (isOrder? 'orderChat ':'') + (isWhole? 'wholeChat ':'')}>
+                <div className={'chatting-list ' + (isOwner? 'myChat ':'') + (isDice? 'orderChat ':'') + (isWhole? 'wholeChat ':'')}>
                     <div className="profile-box">
                         <img src={nweetObj.creatorImg} />
                     </div>
                     <div className="txt-box">
                         <b>{nweetObj.creatorName}</b>
-                    {isDice || isWhole || isAttend ?
+                        {isDice || isWhole ?
                             <>
                                 {isWhole && <>
                                     <p>{nweetObj.orderText}</p>
                                     {isOwner && <button onClick={onDeleteClick}><span className="material-icons-round">close</span></button>}
                                 </>}
                                 {isDice && <p>[주사위 {nweetObj.orderText}] <span>{nweetObj.creatorName}</span>님이 주사위 <span>{nweetObj.diceNum}</span>을 굴렸습니다. </p>}
-                            {isAttend && <p>[출석완료] <span>{nweetObj.creatorName}</span>님이 화분을 <span>{nweetObj.attendNum}</span> 만큼 키웠습니다. <span>({nweetObj.createdDate})</span> <span>{nweetObj.attendCount}</span></p>}
                             </> :
                             <>
                                 <p>{nweetObj.text}</p>

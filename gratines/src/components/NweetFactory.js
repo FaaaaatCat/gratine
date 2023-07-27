@@ -18,7 +18,7 @@ const NweetFactory = ({ userObj, fbUserObj, gameObj }) => {
         //특수 명령어 입력기능
         let orderWhat = '';
         let orderText = '';
-        let orderList = ['/전체','/출석','/주사위']
+        let orderList = ['/전체','/주사위']
         if (nweet[0] === '/') {
             orderWhat = nweet.split(" ")[0];
             if (orderList.includes(orderWhat)) {
@@ -40,13 +40,13 @@ const NweetFactory = ({ userObj, fbUserObj, gameObj }) => {
             }
             //주사위 기능
             else if (orderWhat === '/주사위') {
-                if (orderText == ' 10') {
+                if (orderText == '10') {
                     diceNum = Math.ceil(Math.random() * (10 - 1) + 1)
                 }
-                else if (orderText == ' 50') {
+                else if (orderText == '50') {
                     diceNum = Math.ceil(Math.random() * (50 - 1) + 1)
                 }
-                else if (orderText == ' 100') {
+                else if (orderText == '100') {
                     diceNum = Math.ceil(Math.random() * (100 - 1) + 1)
                 }
             }
