@@ -16,7 +16,7 @@ const NweetFactory = ({ userObj, fbUserObj, gameObj }) => {
         //특수 명령어 입력기능
         let orderWhat = '';
         let orderText = '';
-        let orderList = ['/전체','/주사위']
+        let orderList = ['/전체','/주사위', '/칵테일']
         if (nweet[0] === '/') {
             orderWhat = nweet.split(" ")[0];
             if (orderList.includes(orderWhat)) {
@@ -44,6 +44,21 @@ const NweetFactory = ({ userObj, fbUserObj, gameObj }) => {
                     diceNum = Math.ceil(Math.random() * (100 - 1) + 1)
                 }
             }
+        }
+        let selectedCock = '';
+        if (orderWhat === '/칵테일') {
+            //칵테일 기능
+            let cockList = ['칵1', '칵2', '칵3', '칵4', '칵5', '칵6', '칵7', '칵8', '칵9', '칵10']
+            var random_index_1 = Math.floor(Math.random() * cockList.length);
+            var random_index_2 = Math.floor(Math.random() * cockList.length);
+            var random_index_3 = Math.floor(Math.random() * cockList.length);
+            var random_index_4 = Math.floor(Math.random() * cockList.length);
+            var random_cock_1 = cockList[random_index_1];
+            var random_cock_2 = cockList[random_index_2];
+            var random_cock_3 = cockList[random_index_3];
+            var random_cock_4 = cockList[random_index_4];
+            let selectedCockArr = [random_cock_1, random_cock_2, random_cock_3, random_cock_4]
+            selectedCock = selectedCockArr.join(' ,');
         }
         
         //이미지 첨부하지 않고 텍스트만 올리고 싶을 때도 있기 때문에 attachment가 있을때만 아래 코드 실행
@@ -82,6 +97,7 @@ const NweetFactory = ({ userObj, fbUserObj, gameObj }) => {
             orderWhat: orderWhat,
             orderText: orderText,
             diceNum: diceNum,
+            selectedCock: selectedCock,
             //nweets에 새로운 데이터를 넣고싶으면 이곳에 추가하기.
             //그리고 파이어베이스 가서 데이터(pre-made query) 추가하기.
             //우리가 이 쿼리를 사용할거라고 데이터베이스에게 알려줘야 함.

@@ -96,16 +96,16 @@ function App() {
       );
     //updateFbUserObj(user)
     const querySnapshot = await getDocs(q);
-    const queryData = querySnapshot.docs.map(doc => ({
+    const userAtdData = querySnapshot.docs.map(doc => ({
       id: doc.id,
       ...doc.data()
     }));
     setAttendObj({
       uid: user.uid,
       email : user.email,
-      attendCount : queryData[0].attendCount,
-      attendRanNum : queryData[0].attendRanNum,
-      totalAttend: queryData[0].totalAttend,
+      attendCount : userAtdData[0].attendCount,
+      attendRanNum : userAtdData[0].attendRanNum,
+      totalAttend: userAtdData[0].totalAttend,
     })
   };
   //유저네임 변경시 자동 리프레쉬 업데이트

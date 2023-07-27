@@ -4,7 +4,7 @@ import { doc, deleteDoc, updateDoc, collection, getDocs, query, addDoc, orderBy,
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 
-const Nweet = ({ nweetObj, isOwner, isOrder, orderWhat, orderText, isWhole, isDice, isAttend}) => {
+const Nweet = ({ nweetObj, isOwner, isOrder, orderWhat, orderText, isWhole, isDice, isCock}) => {
     const NweetTextRef = doc(dbService, "nweets", `${nweetObj.id}`); //nweetObj.id 는 쓴 트윗의 고유 id임. userObj.id와 다름.
     const NweetImgRef = ref(storageService, nweetObj.attachmentUrl); //nweetObj.attachmentUrl의 레퍼런스를 얻음
     //console.log(nweetObj.id) //쓴 데이터 갯수만큼 실행 됨 그래서 모든 트윗의 id를 보여줌.
@@ -40,19 +40,20 @@ const Nweet = ({ nweetObj, isOwner, isOrder, orderWhat, orderText, isWhole, isDi
 
     return (
         <>  
-                <div className={'chatting-list ' + (isOwner? 'myChat ':'') + (isDice? 'orderChat ':'') + (isWhole? 'wholeChat ':'')}>
+                <div className={'chatting-list ' + (isOwner? 'myChat ':'') + (isDice || isCock ? 'orderChat ':'') + (isWhole? 'wholeChat ':'')}>
                     <div className="profile-box">
                         <img src={nweetObj.creatorImg} />
                     </div>
                     <div className="txt-box">
                         <b>{nweetObj.creatorName}</b>
-                        {isDice || isWhole ?
+                        {isDice || isWhole || isCock?
                             <>
                                 {isWhole && <>
                                     <p>{nweetObj.orderText}</p>
                                     {isOwner && <button onClick={onDeleteClick}><span className="material-icons-round">close</span></button>}
                                 </>}
                                 {isDice && <p>[주사위 {nweetObj.orderText}] <span>{nweetObj.creatorName}</span>님이 주사위 <span>{nweetObj.diceNum}</span>을 굴렸습니다. </p>}
+                                {isCock && <p>[칵테일 제조] <span>{nweetObj.creatorName}</span>님이 칵테일 재료 <span>{nweetObj.selectedCock}</span>를 뽑았습니다. </p>}
                             </> :
                             <>
                                 <p>{nweetObj.text}</p>

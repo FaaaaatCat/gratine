@@ -58,7 +58,7 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, attendObj }) => {
             setNweets(nweetArray); //nweets에 nweetArray 라는 배열을 집어 넣음. 배열엔 doc.id와 doc.data()가 있음
             // getMyAttend();
             //(**보류)트윗쓸때마다 출석했는지 확인하고 기능넣기
-            // if (nweetArray[0].orderWhat === "/출석" && nweetArray[0].orderText !== '') {
+            // if (nweetArray[0].orderWhat === "/칵테일"){
             //     getAttend();
             // }
         });
@@ -162,6 +162,7 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, attendObj }) => {
                             orderWhat={nweet.orderWhat}
                             isWhole={nweet.orderWhat === "/전체"}
                             isDice={nweet.orderWhat === "/주사위" && orderList.includes(nweet.orderText)}
+                            isCock={nweet.orderWhat === "/칵테일"}
                             gameObj={gameObj}
                         />
                     ))}
@@ -233,7 +234,7 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, attendObj }) => {
                     </div>
                 </div>
                 <div className="function-area">
-                    <div className="title">명령어 보기</div>
+                    <div className="title">기본 명령어</div>
                     <div className="function-list-container">
                         <div className="function-list">
                             <p>전체 말하기</p>
@@ -255,6 +256,15 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, attendObj }) => {
                             <p>주사위굴리기 (Yes or No)</p>
                             <b>/주사위 선택</b>
                         </div> */}
+                    </div>
+                </div>
+                <div className="function-area">
+                    <div className="title">특수 명령어</div>
+                    <div className="function-list-container">
+                        <div className="function-list">
+                            <p>칵테일 제조</p>
+                            <b>/칵테일</b>
+                        </div>
                     </div>
                 </div>
                 <div className="history-area d-none">
