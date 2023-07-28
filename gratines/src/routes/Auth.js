@@ -8,6 +8,7 @@ const Auth = ({userObj, refreshUser, fbUserObj}) => {
             <div className="login-box">
                 <AuthForm userObj={userObj} fbUserObj={fbUserObj} refreshUser={refreshUser}  />
             </div>
+            <div className="mt-1">v.0.5</div>
         </div>
     )
 }

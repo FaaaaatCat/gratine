@@ -69,7 +69,7 @@ const AuthForm = ({userObj, refreshUser}) => {
                     email: email,
                     password: password,
                     gold: 0,
-                    item: '행운의 열쇠',
+                    item: '완드, 학생증',
                 }
                 await addDoc(collection(dbService, "user"), fbUserObj);
                 await addDoc(collection(dbService, "userGame"), userGameObj);

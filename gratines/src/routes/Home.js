@@ -237,20 +237,20 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, attendObj }) => {
                     <div className="title">기본 명령어</div>
                     <div className="function-list-container">
                         <div className="function-list">
-                            <p>전체 말하기</p>
                             <b>/전체</b>
+                            <p>전체 말하기</p>
                         </div>
                         <div className="function-list">
-                            <p>주사위굴리기 (1~10사이)</p>
                             <b>/주사위 10</b>
+                            <p>주사위굴리기 (1~10사이)</p>
                         </div>
                         <div className="function-list">
-                            <p>주사위굴리기 (1~50사이)</p>
                             <b>/주사위 50</b>
+                            <p>주사위굴리기 (1~50사이)</p>
                         </div>
                         <div className="function-list">
-                            <p>주사위굴리기 (1~100사이)</p>
                             <b>/주사위 100</b>
+                            <p>주사위굴리기 (1~100사이)</p>
                         </div>
                         {/* <div className="function-list">
                             <p>주사위굴리기 (Yes or No)</p>
@@ -262,8 +262,12 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, attendObj }) => {
                     <div className="title">특수 명령어</div>
                     <div className="function-list-container">
                         <div className="function-list">
-                            <p>칵테일 제조</p>
                             <b>/칵테일</b>
+                            <p>칵테일 제조</p>
+                        </div>
+                        <div className="function-list">
+                            <b>/인형</b>
+                            <p>랜덤 인형 뽑기</p>
                         </div>
                     </div>
                 </div>
