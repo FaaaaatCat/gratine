@@ -13,6 +13,44 @@ $gray-800: #373353;
 $gray-900: #292938;
 $black: #000;
 
+//color
+$yellow-100: #FBF9EB;
+$yellow-200: #F6F1CE;
+$yellow-300: #ECE094;
+$yellow-400: #E3CF59;
+$yellow-500: #DBC22E;
+$yellow-600: #B7A11F;
+$yellow-700: #9A871A;
+$yellow-800: #605410;
+$yellow-900: #342E09;
+
+$brown-100: #F0EEEC;
+$brown-200: #E9E5E2;
+$brown-300: #E2DDD8;
+$brown-400: #CBC4BC;
+$brown-500: #B5AA9F;
+$brown-600: #988978;
+$brown-700: #746758;
+$brown-800: #433C34;
+$brown-900: #1D1A16;
+
+$purple-100: #F8F8FA;
+$purple-200: #e9e8f1;
+$purple-300: #d8d7e7;
+$purple-400: #B2B0CB;
+$purple-500: #8A88AF;
+$purple-600: #6C699B;
+$purple-700: #4F4D73;
+$purple-800: #33324A;
+$purple-900: #171622;
+
+$mint : #44D9C7;
+$purple : #625BD3;
+$brown : rgb(103, 71, 56);
+//
+$chat-form-height: 32px;
+$form-font-weight: 600;
+
 //폼 관련 값
 $form-height: 28px;
 $form-radius: 4px;
@@ -25,6 +63,8 @@ $form-txt: $gray-700;
 $form-disable-txt: $gray-400;
 $form-placeholder-txt: $gray-400;
 
+//카드 관련값
+$card-radius : 10px;
 
 //쉐도우
 $layout-shadow: 0 0 1rem rgba(30, 10, 10, 0.15);
@@ -33,4 +73,12 @@ $card-shadow: 0rem 0.47rem 2.19rem rgba(8, 10, 37, 0.03),
   0rem 0.94rem 1.41rem rgba(8, 10, 37, 0.03),
   0rem 0.25rem 0.53rem rgba(8, 10, 37, 0.05),
   0rem 0.13rem 0.19rem rgba(8, 10, 37, 0.03);
+$nameplate-shadow: 0rem 0.47rem 2.19rem rgba(37, 8, 8, 0.06),
+  0rem 0.94rem 1.41rem rgba(37, 8, 8, 0.06),
+  0rem 0.25rem 0.53rem rgba(37, 8, 8, 0.1),
+  0rem 0.13rem 0.19rem rgba(37, 8, 8, 0.06);
 $form-active-shadow: 0px 0px 10px rgba(255, 50, 50, 0.2);
+
+//미디어쿼리
+$breakpoint-mobile : 480px;
+$breakpoint-labtop : 1000px;

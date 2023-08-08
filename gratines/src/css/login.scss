@@ -20,8 +20,8 @@
   }
   & .login-box {
     padding: 3rem 2rem;
-    border: 1px solid black;
-    border-radius: 10px;
+    border-radius: $card-radius;
+    box-shadow: $card-shadow;
     background-color: white;
 
     display: flex;
@@ -43,11 +43,15 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        background-color: lightgray;
+        background-color: $yellow-200;
         margin-bottom: 1rem;
+        & p{
+          color: $brown-700;
+        }
         & a{
           font-weight: 800;
           font-size: 1rem;
+          color: $brown-700;
         }
       }
       & .login-title {
@@ -81,7 +85,7 @@
       & .login-sub-txt {
         cursor: pointer;
         & span {
-          color: blue;
+          color: $purple;
           margin-left: 5px;
         }
       }

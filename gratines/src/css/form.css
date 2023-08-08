@@ -20,10 +20,14 @@
   width: 150px;
   height: 32px;
   padding: 0 1rem;
-  background: #fff;
-  border: 1px solid #4d4d4d;
+  background: white;
+  color: #433C34;
   border-radius: 4px;
-  font-weight: 500;
+  border: none;
+  outline: none;
+  -webkit-box-shadow: 1.5px 1.5px 4.5px rgba(29, 12, 23, 0.18);
+          box-shadow: 1.5px 1.5px 4.5px rgba(29, 12, 23, 0.18);
+  font-weight: 600;
   cursor: pointer;
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
@@ -36,6 +40,74 @@
   transition: all 0.2s;
 }
 
+#root .gtn-btn.btn-brown {
+  background: linear-gradient(-45deg, #b78c1f 0%, #4e4234 100%);
+  color: white;
+  font-weight: 500;
+}
+
+#root .gtn-btn.btn-yellow {
+  background-color: #ECE094;
+  color: #674738;
+}
+
+#root .gtn-btn.btn-mint {
+  background-color: #44D9C7;
+}
+
+#root .gtn-btn.btn-white {
+  background: white;
+  color: #433C34;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+#root .gtn-btn.btn-white span {
+  position: absolute;
+  width: 25%;
+  height: 100%;
+  background-color: #ffdb26;
+  -webkit-transform: translateY(150%);
+          transform: translateY(150%);
+  border-radius: 50%;
+  left: calc((var(--n) - 1) * 25%);
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  -webkit-transition-delay: calc((var(--n) - 1) * 0.1s);
+          transition-delay: calc((var(--n) - 1) * 0.1s);
+  z-index: -1;
+}
+
+#root .gtn-btn.btn-white:hover {
+  color: black;
+  -webkit-filter: none;
+          filter: none;
+}
+
+#root .gtn-btn.btn-white:hover span {
+  -webkit-transform: translateY(0) scale(2);
+          transform: translateY(0) scale(2);
+}
+
+#root .gtn-btn.btn-white:hover span:nth-child(1) {
+  --n: 1;
+}
+
+#root .gtn-btn.btn-white:hover span:nth-child(2) {
+  --n: 2;
+}
+
+#root .gtn-btn.btn-white:hover span:nth-child(3) {
+  --n: 3;
+}
+
+#root .gtn-btn.btn-white:hover span:nth-child(4) {
+  --n: 4;
+}
+
 #root #file {
   display: none;
 }
@@ -44,9 +116,12 @@
   width: 118px;
   height: 32px;
   padding: 0 1rem 0 0.8rem;
-  background: #fff;
-  border: 1px solid #4d4d4d;
+  background: #E2DDD8;
+  border: 1px solid #CBC4BC;
+  color: #433C34;
   border-radius: 4px;
+  -webkit-box-shadow: 1.5px 1.5px 4.5px rgba(29, 12, 23, 0.18);
+          box-shadow: 1.5px 1.5px 4.5px rgba(29, 12, 23, 0.18);
   cursor: pointer;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -58,7 +133,7 @@
       -ms-flex-pack: center;
           justify-content: center;
   gap: 5px;
-  font-weight: 500;
+  font-weight: 600;
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
   cursor: pointer;

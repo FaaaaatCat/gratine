@@ -35,8 +35,9 @@
 
 .login-area .login-box {
   padding: 3rem 2rem;
-  border: 1px solid black;
   border-radius: 10px;
+  -webkit-box-shadow: 0rem 0.47rem 2.19rem rgba(8, 10, 37, 0.03), 0rem 0.94rem 1.41rem rgba(8, 10, 37, 0.03), 0rem 0.25rem 0.53rem rgba(8, 10, 37, 0.05), 0rem 0.13rem 0.19rem rgba(8, 10, 37, 0.03);
+          box-shadow: 0rem 0.47rem 2.19rem rgba(8, 10, 37, 0.03), 0rem 0.94rem 1.41rem rgba(8, 10, 37, 0.03), 0rem 0.25rem 0.53rem rgba(8, 10, 37, 0.05), 0rem 0.13rem 0.19rem rgba(8, 10, 37, 0.03);
   background-color: white;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -85,13 +86,18 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background-color: lightgray;
+  background-color: #F6F1CE;
   margin-bottom: 1rem;
+}
+
+.login-area .login-box .login-form-wrap .notice-box p {
+  color: #746758;
 }
 
 .login-area .login-box .login-form-wrap .notice-box a {
   font-weight: 800;
   font-size: 1rem;
+  color: #746758;
 }
 
 .login-area .login-box .login-form-wrap .login-title {
@@ -146,6 +152,6 @@
 }
 
 .login-area .login-box .login-form-wrap .login-sub-txt span {
-  color: blue;
+  color: #625BD3;
   margin-left: 5px;
 }

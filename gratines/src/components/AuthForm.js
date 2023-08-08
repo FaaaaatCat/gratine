@@ -139,11 +139,20 @@ const AuthForm = ({userObj, refreshUser}) => {
                     value={password}
                     onChange={onChange}
                 />
-                <button className="gtn-btn w-100" type="submit">{newAccount ? "가입 완료" : "로그인"}</button>
+                <button className="gtn-btn btn-white w-100" type="submit">
+                    {newAccount ? "가입 완료" : "로그인"}
+                    <span></span><span></span><span></span><span></span>
+                </button>
                 <p>{error}</p>
             </form>
             <span className="login-sub-txt" onClick={toggleAccount}>
-                {newAccount ?  <div>이미 계정이 있나요? <span>로그인</span></div> : <div>신입생인가요? <span>회원가입</span></div>}
+                {newAccount ?
+                    <div>이미 계정이 있나요?
+                        <span>로그인</span>
+                    </div>
+                    : <div>신입생인가요?
+                        <span>회원가입</span>
+                    </div>}
             </span>
         </div>
     );

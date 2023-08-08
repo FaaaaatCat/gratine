@@ -23,6 +23,10 @@ body {
 body #root {
   overflow: hidden !important;
   height: 100vh;
+  background-image: url("https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbackground.avif?alt=media&token=9984bbfd-f7ba-406e-aabc-61b2d38c32ed");
+  background-image: url("https://images.unsplash.com/photo-1457735720963-e277a46f2c68?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 body #root .app-container {
@@ -30,24 +34,28 @@ body #root .app-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
   margin: 0;
+  gap: 1rem;
+  padding: 1rem;
+  position: relative;
 }
 
 body #root .app-container .profile-area {
-  padding: 1rem;
-  width: 260px;
-  overflow-y: auto;
+  width: 280px;
 }
 
 body #root .app-container .chatting-area {
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-  border: 1px solid black;
+  width: 600px;
+  border-radius: 10px;
+  -webkit-box-shadow: 0rem 0.47rem 2.19rem rgba(8, 10, 37, 0.03), 0rem 0.94rem 1.41rem rgba(8, 10, 37, 0.03), 0rem 0.25rem 0.53rem rgba(8, 10, 37, 0.05), 0rem 0.13rem 0.19rem rgba(8, 10, 37, 0.03);
+          box-shadow: 0rem 0.47rem 2.19rem rgba(8, 10, 37, 0.03), 0rem 0.94rem 1.41rem rgba(8, 10, 37, 0.03), 0rem 0.25rem 0.53rem rgba(8, 10, 37, 0.05), 0rem 0.13rem 0.19rem rgba(8, 10, 37, 0.03);
   overflow: hidden !important;
 }
 
@@ -56,189 +64,15 @@ body #root .app-container .chatting-area .chatting-list-container {
 }
 
 body #root .app-container .side-area {
-  width: 260px;
-  overflow-y: auto;
+  width: 348px;
 }
 
-.chatting-area {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-}
-
-.chatting-area .chatting-list-container {
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-  background-color: lightgray;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: reverse;
-      -ms-flex-direction: column-reverse;
-          flex-direction: column-reverse;
-}
-
-.chatting-area .chatting-list-container .chatting-list {
-  border-bottom: 1px solid black;
-  padding: 0.3rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  gap: 0.3rem;
-  background-color: white;
-}
-
-.chatting-area .chatting-list-container .chatting-list.myChat {
-  background-color: #e6f9ff;
-}
-
-.chatting-area .chatting-list-container .chatting-list.wholeChat, .chatting-area .chatting-list-container .chatting-list.orderChat {
-  text-align: center;
-  font-style: italic;
-  position: relative;
-}
-
-.chatting-area .chatting-list-container .chatting-list.wholeChat .profile-box, .chatting-area .chatting-list-container .chatting-list.wholeChat b, .chatting-area .chatting-list-container .chatting-list.orderChat .profile-box, .chatting-area .chatting-list-container .chatting-list.orderChat b {
-  display: none !important;
-}
-
-.chatting-area .chatting-list-container .chatting-list.wholeChat p, .chatting-area .chatting-list-container .chatting-list.orderChat p {
-  font-weight: 700 !important;
-}
-
-.chatting-area .chatting-list-container .chatting-list.wholeChat p span, .chatting-area .chatting-list-container .chatting-list.orderChat p span {
-  margin: 0 5px;
-  color: blue;
-}
-
-.chatting-area .chatting-list-container .chatting-list.wholeChat p span:last-child, .chatting-area .chatting-list-container .chatting-list.orderChat p span:last-child {
-  margin: 0;
-  padding: 2px 8px 2px 5px;
-  background-color: blue;
-  border-radius: 100px;
-  color: white !important;
-}
-
-.chatting-area .chatting-list-container .chatting-list.wholeChat img, .chatting-area .chatting-list-container .chatting-list.orderChat img {
-  margin: 0 auto;
-}
-
-.chatting-area .chatting-list-container .chatting-list.wholeChat button, .chatting-area .chatting-list-container .chatting-list.orderChat button {
-  width: 20px;
-  height: 20px;
-  border-radius: 100px;
-  background-color: gray;
+body #root .app-container .home-bg {
   position: absolute;
-  top: 5px;
-  right: 10px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-
-.chatting-area .chatting-list-container .chatting-list.wholeChat button span, .chatting-area .chatting-list-container .chatting-list.orderChat button span {
-  font-size: 14px;
-  color: white;
-}
-
-.chatting-area .chatting-list-container .chatting-list.wholeChat {
-  background-color: #ffe6ed !important;
-}
-
-.chatting-area .chatting-list-container .chatting-list.orderChat {
-  background-color: #cce1fb;
-}
-
-.chatting-area .chatting-list-container .chatting-list .profile-box {
-  background-color: gray;
-  width: 28px;
-  height: 28px;
-  border-radius: 2px;
-}
-
-.chatting-area .chatting-list-container .chatting-list .profile-box img {
-  width: 100%;
-  height: 100%;
-}
-
-.chatting-area .chatting-list-container .chatting-list .txt-box {
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  gap: 2px;
-}
-
-.chatting-area .chatting-list-container .chatting-list .txt-box b {
-  font-size: 11px;
-  font-weight: 500;
-  color: #86869a;
-}
-
-.chatting-area .chatting-list-container .chatting-list .txt-box p {
-  font-size: 14px;
-  line-height: 150%;
-  font-weight: 400;
-  color: #61616e;
-}
-
-.chatting-area .chatting-list-container .chatting-list .txt-box img {
-  height: 300px;
-  width: 300px;
-  border: 1px solid gray;
-}
-
-.chatting-area .chatting-form-box {
-  min-height: 40px;
-  border-top: 1px solid black;
-  background-color: black;
-  padding: 0.5rem;
-}
-
-.chatting-area .chatting-form-box .img-thumb-area {
-  margin-bottom: 0.5rem;
-}
-
-.chatting-area .chatting-form-box .img-thumb-area img {
-  width: 50px;
-  height: 50px;
-}
-
-.chatting-area .chatting-form-box .img-thumb-area button {
-  margin-left: 10px;
-  padding: 0.2rem 0.5rem;
-}
-
-.chatting-area .chatting-form-box form {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  gap: 5px;
-}
-
-.chatting-area .chatting-form-box form input[type="submit"] {
-  width: 100px !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .profile-area {
@@ -255,14 +89,14 @@ body #root .app-container .side-area {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 1rem;
 }
 
-.profile-area .logo {
+.logo {
   width: 180px;
-  height: 50px;
-  background-color: lightgray;
-  border: 1px solid black;
+  height: 30px;
+  background-image: url("https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Flogo.png?alt=media&token=e45f8be9-4a1f-444a-8fbd-f2f1f2bb48b3");
+  background-repeat: no-repeat;
+  background-size: cover;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -272,9 +106,16 @@ body #root .app-container .side-area {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  font-size: 0;
 }
 
 .profile-area .profile-wrap {
+  width: 100%;
+  background-color: white;
+  padding: 2rem 1rem;
+  border-radius: 10px;
+  -webkit-box-shadow: 0rem 0.47rem 2.19rem rgba(8, 10, 37, 0.03), 0rem 0.94rem 1.41rem rgba(8, 10, 37, 0.03), 0rem 0.25rem 0.53rem rgba(8, 10, 37, 0.05), 0rem 0.13rem 0.19rem rgba(8, 10, 37, 0.03);
+          box-shadow: 0rem 0.47rem 2.19rem rgba(8, 10, 37, 0.03), 0rem 0.94rem 1.41rem rgba(8, 10, 37, 0.03), 0rem 0.25rem 0.53rem rgba(8, 10, 37, 0.05), 0rem 0.13rem 0.19rem rgba(8, 10, 37, 0.03);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -289,14 +130,15 @@ body #root .app-container .side-area {
       -ms-flex-pack: center;
           justify-content: center;
   text-align: center;
-  gap: 1rem;
 }
 
 .profile-box__my {
   width: 120px;
   height: 120px;
   background-color: lightgray;
-  border: 1px solid black;
+  border: 1px solid white;
+  -webkit-box-shadow: 0rem 0.47rem 2.19rem rgba(37, 8, 8, 0.06), 0rem 0.94rem 1.41rem rgba(37, 8, 8, 0.06), 0rem 0.25rem 0.53rem rgba(37, 8, 8, 0.1), 0rem 0.13rem 0.19rem rgba(37, 8, 8, 0.06);
+          box-shadow: 0rem 0.47rem 2.19rem rgba(37, 8, 8, 0.06), 0rem 0.94rem 1.41rem rgba(37, 8, 8, 0.06), 0rem 0.25rem 0.53rem rgba(37, 8, 8, 0.1), 0rem 0.13rem 0.19rem rgba(37, 8, 8, 0.06);
   border-radius: 4px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -308,6 +150,7 @@ body #root .app-container .side-area {
       -ms-flex-pack: center;
           justify-content: center;
   position: relative;
+  overflow: hidden;
 }
 
 .profile-box__my img {
@@ -354,6 +197,107 @@ body #root .app-container .side-area {
   color: white;
 }
 
+.profile-area .profile-wrap .nameplate {
+  background: linear-gradient(-45deg, #e1c2a4 0%, #f1eea4 60%, #e1c2a4 100%);
+  border: 1px solid white;
+  border-radius: 100px;
+  -webkit-box-shadow: 0rem 0.47rem 2.19rem rgba(37, 8, 8, 0.06), 0rem 0.94rem 1.41rem rgba(37, 8, 8, 0.06), 0rem 0.25rem 0.53rem rgba(37, 8, 8, 0.1), 0rem 0.13rem 0.19rem rgba(37, 8, 8, 0.06);
+          box-shadow: 0rem 0.47rem 2.19rem rgba(37, 8, 8, 0.06), 0rem 0.94rem 1.41rem rgba(37, 8, 8, 0.06), 0rem 0.25rem 0.53rem rgba(37, 8, 8, 0.1), 0rem 0.13rem 0.19rem rgba(37, 8, 8, 0.06);
+  width: 100%;
+  margin: 1rem 0;
+  padding: 0.5rem 0.8rem;
+  font-size: 1.3rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 0px;
+}
+
+.profile-area .profile-wrap .nameplate img {
+  width: 38px;
+  height: 32px;
+}
+
+.profile-area .profile-wrap .nameplate img:last-child {
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+}
+
+.profile-area .profile-wrap .nameplate .name-wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 1px;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.profile-area .profile-wrap .nameplate .name-wrap h4 {
+  font-size: 1.2rem;
+  color: #674738;
+}
+
+.profile-area .profile-wrap .nameplate .name-wrap p {
+  font-size: 0.7rem;
+  white-space: nowrap;
+  text-transform: capitalize;
+}
+
+.profile-area .profile-wrap .profile-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 10px;
+}
+
+.profile-area .profile-wrap .profile-info .profile-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 5px;
+  margin-bottom: 5px;
+}
+
+.profile-area .profile-wrap .profile-info .profile-item p {
+  white-space: nowrap;
+  color: white;
+  background-color: #988978;
+  border-radius: 100px;
+}
+
+.profile-area .profile-wrap .profile-info .profile-item b {
+  color: #433C34;
+}
+
+.profile-area .profile-wrap .profile-info .profile-item span {
+  color: #746758;
+}
+
 .profile-area .profile-wrap .profile-detail-wrap {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -380,11 +324,97 @@ body #root .app-container .side-area {
   width: 100% !important;
 }
 
-.profile-area .profile-wrap h4 {
-  font-size: 1.1rem;
+.chatting-area {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
-.profile-area .profile-wrap .profile-info > div {
+.chatting-area .logo-box {
+  display: none;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.chatting-area .chatting-list-container {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  background-color: lightgray;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: column-reverse;
+          flex-direction: column-reverse;
+  -webkit-box-shadow: 0rem 0.47rem 2.19rem rgba(8, 10, 37, 0.03), 0rem 0.94rem 1.41rem rgba(8, 10, 37, 0.03), 0rem 0.25rem 0.53rem rgba(8, 10, 37, 0.05), 0rem 0.13rem 0.19rem rgba(8, 10, 37, 0.03);
+          box-shadow: 0rem 0.47rem 2.19rem rgba(8, 10, 37, 0.03), 0rem 0.94rem 1.41rem rgba(8, 10, 37, 0.03), 0rem 0.25rem 0.53rem rgba(8, 10, 37, 0.05), 0rem 0.13rem 0.19rem rgba(8, 10, 37, 0.03);
+}
+
+.chatting-area .chatting-list-container .chatting-list {
+  border-bottom: 1px solid #CBC4BC;
+  padding: 0.3rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 0.3rem;
+  background-color: white;
+}
+
+.chatting-area .chatting-list-container .chatting-list.myChat {
+  background-color: #e9e8f1;
+}
+
+.chatting-area .chatting-list-container .chatting-list.wholeChat, .chatting-area .chatting-list-container .chatting-list.orderChat {
+  text-align: center;
+  font-style: italic;
+  position: relative;
+}
+
+.chatting-area .chatting-list-container .chatting-list.wholeChat .profile-box,
+.chatting-area .chatting-list-container .chatting-list.wholeChat b, .chatting-area .chatting-list-container .chatting-list.orderChat .profile-box,
+.chatting-area .chatting-list-container .chatting-list.orderChat b {
+  display: none !important;
+}
+
+.chatting-area .chatting-list-container .chatting-list.wholeChat p, .chatting-area .chatting-list-container .chatting-list.orderChat p {
+  font-weight: 700 !important;
+}
+
+.chatting-area .chatting-list-container .chatting-list.wholeChat p span, .chatting-area .chatting-list-container .chatting-list.orderChat p span {
+  margin: 0 5px;
+  color: #625BD3;
+}
+
+.chatting-area .chatting-list-container .chatting-list.wholeChat p span:last-child, .chatting-area .chatting-list-container .chatting-list.orderChat p span:last-child {
+  margin: 0 5px;
+  padding: 2px 8px 2px 5px;
+  background-color: #F8F8FA;
+  border-radius: 100px;
+  color: #625BD3 !important;
+}
+
+.chatting-area .chatting-list-container .chatting-list.wholeChat img, .chatting-area .chatting-list-container .chatting-list.orderChat img {
+  margin: 0 auto;
+}
+
+.chatting-area .chatting-list-container .chatting-list.wholeChat button, .chatting-area .chatting-list-container .chatting-list.orderChat button {
+  width: 20px;
+  height: 20px;
+  border-radius: 100px;
+  background-color: gray;
+  position: absolute;
+  top: 5px;
+  right: 10px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -394,12 +424,173 @@ body #root .app-container .side-area {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  gap: 5px;
-  margin-bottom: 5px;
 }
 
-.profile-area .profile-wrap .profile-info > div p {
-  white-space: nowrap;
+.chatting-area .chatting-list-container .chatting-list.wholeChat button span, .chatting-area .chatting-list-container .chatting-list.orderChat button span {
+  font-size: 14px;
+  color: white;
+}
+
+.chatting-area .chatting-list-container .chatting-list.wholeChat {
+  background-color: #F6F1CE !important;
+}
+
+.chatting-area .chatting-list-container .chatting-list.orderChat {
+  background-color: #d8d7e7 !important;
+}
+
+.chatting-area .chatting-list-container .chatting-list .profile-box {
+  background-color: gray;
+  width: 28px;
+  height: 28px;
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.chatting-area .chatting-list-container .chatting-list .profile-box img {
+  width: 100%;
+  height: 100%;
+}
+
+.chatting-area .chatting-list-container .chatting-list .txt-box {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 2px;
+}
+
+.chatting-area .chatting-list-container .chatting-list .txt-box b {
+  font-size: 11px;
+  font-weight: 500;
+  color: #988978;
+}
+
+.chatting-area .chatting-list-container .chatting-list .txt-box p {
+  font-size: 14px;
+  line-height: 150%;
+  font-weight: 400;
+  color: #433C34;
+}
+
+.chatting-area .chatting-list-container .chatting-list .txt-box img {
+  height: 300px;
+  width: 300px;
+  border: 1px solid gray;
+}
+
+.chatting-area .chatting-form-box {
+  min-height: 40px;
+  background-color: #433C34;
+  padding: 0.5rem;
+}
+
+.chatting-area .chatting-form-box .img-thumb-area {
+  margin-bottom: 0.5rem;
+}
+
+.chatting-area .chatting-form-box .img-thumb-area img {
+  width: 50px;
+  height: 50px;
+}
+
+.chatting-area .chatting-form-box .img-thumb-area button {
+  margin-left: 10px;
+  padding: 0.2rem 0.5rem;
+}
+
+.chatting-area .chatting-form-box form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 5px;
+  position: relative;
+}
+
+.chatting-area .chatting-form-box form input[type="submit"] {
+  width: 60px !important;
+  background: #ECE094 !important;
+  color: #342E09 !important;
+  font-weight: 600 !important;
+}
+
+.chatting-area .chatting-form-box form .tooltip {
+  position: absolute;
+  bottom: calc(100% + 1rem);
+  left: 0;
+  right: 0.3rem;
+  background-color: #433C34;
+  padding: 0.5rem;
+  border-radius: 4px;
+  -webkit-box-shadow: 1.5px 1.5px 4.5px rgba(29, 12, 23, 0.18);
+          box-shadow: 1.5px 1.5px 4.5px rgba(29, 12, 23, 0.18);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.chatting-area .chatting-form-box form .tooltip .function-list-container {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  border-right: 1px solid #746758;
+  padding-right: 1rem;
+  margin-right: 1rem;
+}
+
+.chatting-area .chatting-form-box form .tooltip .function-list-container:last-child {
+  border: none;
+  margin: 0;
+}
+
+.chatting-area .chatting-form-box form .tooltip .function-list-container .title {
+  color: #B5AA9F;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 5px;
+  padding-left: 6px;
+  margin: 5px 0;
+}
+
+.chatting-area .chatting-form-box form .tooltip .function-list-container .title span {
+  color: #B5AA9F;
+  font-size: 0.8rem;
+}
+
+.chatting-area .chatting-form-box form .tooltip .function-list-container .function-list {
+  padding: 0.5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 5px;
+}
+
+.chatting-area .chatting-form-box form .tooltip .function-list-container .function-list b {
+  font-weight: 300;
+  font-size: 1rem;
+  color: white;
+}
+
+.chatting-area .chatting-form-box form .tooltip .function-list-container .function-list p {
+  font-weight: 200;
+  color: #CBC4BC;
 }
 
 .side-area {
@@ -410,47 +601,33 @@ body #root .app-container .side-area {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  gap: 1rem;
 }
 
-.side-area .history-area {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  height: 33px;
-  padding: 0.5rem;
-  border-top: 1px solid black;
-  background-color: #e6e6e6;
-}
-
-.side-area .history-area span {
-  font-size: 18px;
-}
-
-.side-area .member-area,
-.side-area .function-area, .side-area .attend-area {
+.side-area > div {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
+  background-color: white;
+  border-radius: 10px;
+  -webkit-box-shadow: 0rem 0.47rem 2.19rem rgba(8, 10, 37, 0.03), 0rem 0.94rem 1.41rem rgba(8, 10, 37, 0.03), 0rem 0.25rem 0.53rem rgba(8, 10, 37, 0.05), 0rem 0.13rem 0.19rem rgba(8, 10, 37, 0.03);
+          box-shadow: 0rem 0.47rem 2.19rem rgba(8, 10, 37, 0.03), 0rem 0.94rem 1.41rem rgba(8, 10, 37, 0.03), 0rem 0.25rem 0.53rem rgba(8, 10, 37, 0.05), 0rem 0.13rem 0.19rem rgba(8, 10, 37, 0.03);
+  overflow: hidden;
 }
 
-.side-area .member-area .title,
-.side-area .function-area .title, .side-area .attend-area .title {
-  padding: 0.5rem;
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
-  background-color: #e6e6e6;
+.side-area > div .title {
+  padding: 0.6rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #433C34;
 }
 
-.side-area .member-area .member-list,
-.side-area .function-area .member-list, .side-area .attend-area .member-list {
+.side-area .member-area {
+  overflow-y: auto;
+}
+
+.side-area .member-area .member-list {
   padding: 0.5rem;
-  border-bottom: 1px solid gray;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -460,46 +637,76 @@ body #root .app-container .side-area {
   gap: 0.5rem;
 }
 
-.side-area .member-area .member-list .profile-box,
-.side-area .function-area .member-list .profile-box, .side-area .attend-area .member-list .profile-box {
-  background-color: gray;
+.side-area .member-area .member-list .profile-box {
+  background-color: #746758;
   width: 28px;
   height: 28px;
+  border-radius: 100px;
 }
 
-.side-area .member-area .member-list p,
-.side-area .function-area .member-list p, .side-area .attend-area .member-list p {
+.side-area .member-area .member-list p {
   font-size: 14px;
   line-height: 150%;
   font-weight: 400;
-  color: #61616e;
-  color: #65e7d8;
+  color: #746758;
 }
 
-.side-area .member-area .attend-gauge-wrap,
-.side-area .function-area .attend-gauge-wrap, .side-area .attend-area .attend-gauge-wrap {
-  padding: 3rem;
-  padding-bottom: 1rem;
+.side-area .attend-area {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.side-area .attend-area .content-wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 1rem;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.side-area .attend-area .attend-gauge-wrap {
+  width: 100px;
+  margin: 0 auto;
   position: relative;
 }
 
-.side-area .member-area .attend-gauge-wrap img,
-.side-area .function-area .attend-gauge-wrap img, .side-area .attend-area .attend-gauge-wrap img {
-  width: 40%;
+.side-area .attend-area .attend-gauge-wrap text {
+  font-size: 20px;
+  fill: #44D9C7;
+  font-weight: 800;
+}
+
+.side-area .attend-area .attend-gauge-wrap img {
+  width: 50%;
   position: absolute;
-  top: 60%;
+  top: 50%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
-  z-index: -1;
-  -webkit-filter: invert(96%) sepia(12%) saturate(137%) hue-rotate(115deg) brightness(100%) contrast(91%);
-          filter: invert(96%) sepia(12%) saturate(137%) hue-rotate(115deg) brightness(100%) contrast(91%);
+  opacity: 0.06;
+  -webkit-filter: invert(96%) sepia(12%) saturate(137%) hue-rotate(115deg) brightness(5%) contrast(91%);
+          filter: invert(96%) sepia(12%) saturate(137%) hue-rotate(115deg) brightness(5%) contrast(91%);
 }
 
-.side-area .member-area .attend-info,
-.side-area .function-area .attend-info, .side-area .attend-area .attend-info {
+.side-area .attend-area .attend-info {
   text-align: center;
-  margin-bottom: 1rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -512,21 +719,75 @@ body #root .app-container .side-area {
   font-size: 1rem;
 }
 
-.side-area .member-area .attend-info b,
-.side-area .function-area .attend-info b, .side-area .attend-area .attend-info b {
+.side-area .attend-area .attend-info b {
   color: #44D9C7;
   font-size: 1.4rem;
   margin-right: 5px;
 }
 
-.side-area .member-area .function-list,
-.side-area .function-area .function-list, .side-area .attend-area .function-list {
-  padding: 0.5rem;
-  border-bottom: 1px solid gray;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #F6F1CE;
+  border-radius: 4px;
+  background-clip: padding-box;
+  border: 1px solid transparent;
+}
+
+*::-webkit-scrollbar-track {
+  background-color: #9A871A;
+  border-radius: 10px;
+}
+
+@media (max-width: 1000px) {
+  .side-area {
+    display: none;
+  }
+  .profile-area {
+    width: 200px !important;
+  }
+  .profile-area .nameplate {
+    padding: .3rem .4rem !important;
+  }
+  .profile-area .nameplate img {
+    width: 20px !important;
+    height: 20px !important;
+  }
+  .profile-area .nameplate h4 {
+    font-size: .9rem !important;
+  }
+  .profile-area .nameplate p {
+    font-size: .5rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-container {
+    padding: .5rem !important;
+  }
+  .profile-area {
+    display: none !important;
+  }
+  .chatting-area {
+    -webkit-box-shadow: none !important;
+            box-shadow: none !important;
+  }
+  .chatting-area .chatting-list-container {
+    border-radius: 10px 10px 0 0;
+    -webkit-box-shadow: 0rem 0.47rem 2.19rem rgba(8, 10, 37, 0.03), 0rem 0.94rem 1.41rem rgba(8, 10, 37, 0.03), 0rem 0.25rem 0.53rem rgba(8, 10, 37, 0.05), 0rem 0.13rem 0.19rem rgba(8, 10, 37, 0.03);
+            box-shadow: 0rem 0.47rem 2.19rem rgba(8, 10, 37, 0.03), 0rem 0.94rem 1.41rem rgba(8, 10, 37, 0.03), 0rem 0.25rem 0.53rem rgba(8, 10, 37, 0.05), 0rem 0.13rem 0.19rem rgba(8, 10, 37, 0.03);
+  }
+  .chatting-area .logo-box {
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+  }
+  .chatting-area .logo-box .logo {
+    -webkit-transform: scale(0.7);
+            transform: scale(0.7);
+    margin-bottom: 0.5rem;
+  }
 }

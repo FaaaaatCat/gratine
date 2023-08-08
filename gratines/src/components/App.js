@@ -19,6 +19,7 @@ function App() {
   const [userObj, setUserObj] = useState(null);
   const [fbUserObj, setFbUserObj] = useState(null);
   const [attendObj, setAttendObj] = useState(null);
+  const defaultProfile = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fdefault_profile.png?alt=media&token=9003c59f-8f33-4d0a-822c-034682416355';
   //const name = user.email.split("@")[0];
 
   useEffect(()=>{
@@ -28,6 +29,13 @@ function App() {
       if (user) {
         setIsLoggedIn(true);
         //유저정보 저장
+        if (user.displayName === '') {
+          setUserObj({
+            uid: user.uid,
+            displayName: '미확인 유저',
+            photoURL: defaultProfile,
+          });
+        }
         setUserObj({
           uid: user.uid,
           displayName: user.displayName,
@@ -49,7 +57,6 @@ function App() {
           attendRanNum : 0,
           totalAttend: 0,
         });
-
         //await 끝난후 (새로고침마다) 불러오기
         getFbUserObj(user);
         getUserAttendObj(user);

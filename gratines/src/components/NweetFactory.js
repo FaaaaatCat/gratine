@@ -9,7 +9,20 @@ const NweetFactory = ({ userObj, fbUserObj, gameObj }) => {
     const UserGameRef = doc(dbService, "userGame", `${gameObj?.id}`);
     const [nweet, setNweet] = useState("");
     const [attachment, setAttachment] = useState("");
+    const [tooltip, setTooltip] = useState(false);
 
+    //텍스트 읽는 부분
+    const onChange = (e) => {
+        setNweet(e.target.value);
+        if (e.target.value[0] === '/') {
+            setTooltip(true)
+        }
+        else {
+            setTooltip(false)
+        }
+    };
+
+    //전송
     const onSubmit = async (e) => {
         e.preventDefault();
 
@@ -123,9 +136,6 @@ const NweetFactory = ({ userObj, fbUserObj, gameObj }) => {
         //파일 미리보기 img src 비워주기
         setAttachment("");
     };
-    const onChange = (e) => {
-        setNweet(e.target.value);
-    };
 
     //사진파일 추가
     const onFileChange = (e) => {
@@ -143,6 +153,7 @@ const NweetFactory = ({ userObj, fbUserObj, gameObj }) => {
     const handleKeyPress = (e) => {
         if(e.keyCode === 13){
             onSubmit(e);
+            setTooltip(false)
         }
     }
 
@@ -155,6 +166,44 @@ const NweetFactory = ({ userObj, fbUserObj, gameObj }) => {
                 </div>
             }
             <form onSubmit={onSubmit}>
+                {tooltip &&
+                    <div className="tooltip">
+                        <div className="function-list-container">
+                            <div className="title"><span className="material-icons-round">info_outline</span> 기본 명령어</div>
+                            <div className="function-list">
+                                <b>/전체 메세지</b>
+                                <p>전체 말하기</p>
+                            </div>
+                            <div className="function-list">
+                                <b>/주사위 10</b>
+                                <p>주사위굴리기 (1~10사이)</p>
+                            </div>
+                            <div className="function-list">
+                                <b>/주사위 50</b>
+                                <p>주사위굴리기 (1~50사이)</p>
+                            </div>
+                            <div className="function-list">
+                                <b>/주사위 100</b>
+                                <p>주사위굴리기 (1~100사이)</p>
+                            </div>
+                            {/* <div className="function-list">
+                                <p>주사위굴리기 (Yes or No)</p>
+                                <b>/주사위 선택</b>
+                            </div> */}
+                        </div>
+                        <div className="function-list-container">
+                            <div className="title"><span className="material-icons-round">info_outline</span>특수 명령어</div>
+                            <div className="function-list">
+                                <b>/칵테일</b>
+                                <p>칵테일 제조</p>
+                            </div>
+                            <div className="function-list">
+                                <b>/인형</b>
+                                <p>랜덤 인형 뽑기</p>
+                            </div>
+                        </div>
+                    </div>
+                }
                 <textarea
                     className="chatting-textarea"
                     role="textarea"

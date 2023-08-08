@@ -4,7 +4,7 @@ import AuthForm from "components/AuthForm";
 const Auth = ({userObj, refreshUser, fbUserObj}) => {
     return (
         <div className="login-area">
-            <div className="logo-box">로고 이미지</div>
+            <div className="logo" style={{transform: 'scale(1.2)'}}></div>
             <div className="login-box">
                 <AuthForm userObj={userObj} fbUserObj={fbUserObj} refreshUser={refreshUser}  />
             </div>

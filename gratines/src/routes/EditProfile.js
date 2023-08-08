@@ -11,7 +11,7 @@ const EditProfile = ({ refreshUser, userObj, fbUserObj }) => {
     const [newGold, setNewGold] = useState(fbUserObj.gold);
     const [newItem, setNewItem] = useState(fbUserObj.item);
     const [newProfilePic, setNewProfilePic] = useState(userObj.photoURL);
-    const defaultProfile = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fdefault_profile.jpg?alt=media&token=b173d6e0-7a8e-4e49-a06e-9b377bb186a0';
+    const defaultProfile = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fdefault_profile.png?alt=media&token=9003c59f-8f33-4d0a-822c-034682416355';
     //새 소지금액 인풋
     const onGoldChange = (e) => {
         setNewGold(e.target.value);
@@ -91,7 +91,7 @@ const EditProfile = ({ refreshUser, userObj, fbUserObj }) => {
             </div>
             <form onSubmit={onSubmit} className="profile-detail-wrap">
                 <label htmlFor="profile">
-                    <div className="picture-upload-btn">
+                    <div className="picture-upload-btn mt-2">
                         <span className="material-icons-round">image</span>
                         사진 업로드
                     </div>
@@ -128,7 +128,7 @@ const EditProfile = ({ refreshUser, userObj, fbUserObj }) => {
                     value={newItem}
                 />
                 <input
-                    className="gtn-btn mt-4"
+                    className="gtn-btn btn-brown mt-4"
                     type="submit"
                     value="저장"
                 />

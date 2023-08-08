@@ -151,6 +151,9 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, attendObj }) => {
                 gameObj={gameObj}
             />
             <div className="chatting-area">
+                <div className="logo-box">
+                    <div className="logo">로고</div>
+                </div>
                 <div className="chatting-list-container">
                     {nweets.map((nweet) => ( //map은 for과 유사함. 배열안의 값들을 다 불러와주는 기능 / 지금으로썬, nweets 배열안의 데이터(doc.id / doc.data())를 다 불러옴
                         <Nweet
@@ -177,50 +180,7 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, attendObj }) => {
                 </div>
             </div>
             <div className="side-area">
-                <div className="attend-area">
-                    <div className="title">화분키우기 (출석 보상)</div>
-                    <div className="attend-gauge-wrap">
-                        <CircularProgressbar
-                            counterClockwise
-                            background
-                            value={attendObj.totalAttend}
-                            maxValue={100}
-                            text={`${attendObj.totalAttend}%`}
-                            styles={{
-                                path: {
-                                    // stroke: `rgba(102, 234, 218, ${percentage / 100})`,
-                                    stroke: '#44D9C7',
-                                    strokeLinecap: 'round', //butt
-                                    transition: 'stroke-dashoffset 0.5s ease 0s',
-                                    transformOrigin: 'center center',
-                                },
-                                trail: {
-                                    stroke: '#E3F1EF',
-                                    strokeLinecap: 'round',
-                                },
-                                text: {
-                                    fill: '#44D9C7',
-                                    fontSize: '16px',
-                                    fontWeight: '800',
-                                },
-                                background: {
-                                    // fill: '#E3F1EF',
-                                    fill: 'transparent',
-                                },
-                            }}
-                        />
-                        <img src={plantImg} alt="" />
-                    </div>
-                    <div className="attend-info"><b>{ attendObj.attendCount }</b>회 출석했습니다</div>
-                    <button className="gtn-btn mr-auto ml-auto" onClick={countAttend}>
-                        출석하기
-                    </button>
-                    <button
-                        className="gtn-btn mr-auto ml-auto"
-                        onClick={resetAttend}
-                    >화분 리셋 (테스트용)</button>
-                </div>
-                <div className="member-area d-none">
+                <div className="member-area">
                     <div className="title">접속중 인원</div>
                     <div className="member-list-container">
                         <div className="member-list">
@@ -231,49 +191,54 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, attendObj }) => {
                             <div className="profile-box"></div>
                             <p>User Name</p>
                         </div>
-                    </div>
-                </div>
-                <div className="function-area">
-                    <div className="title">기본 명령어</div>
-                    <div className="function-list-container">
-                        <div className="function-list">
-                            <b>/전체</b>
-                            <p>전체 말하기</p>
-                        </div>
-                        <div className="function-list">
-                            <b>/주사위 10</b>
-                            <p>주사위굴리기 (1~10사이)</p>
-                        </div>
-                        <div className="function-list">
-                            <b>/주사위 50</b>
-                            <p>주사위굴리기 (1~50사이)</p>
-                        </div>
-                        <div className="function-list">
-                            <b>/주사위 100</b>
-                            <p>주사위굴리기 (1~100사이)</p>
-                        </div>
-                        {/* <div className="function-list">
-                            <p>주사위굴리기 (Yes or No)</p>
-                            <b>/주사위 선택</b>
-                        </div> */}
-                    </div>
-                </div>
-                <div className="function-area">
-                    <div className="title">특수 명령어</div>
-                    <div className="function-list-container">
-                        <div className="function-list">
-                            <b>/칵테일</b>
-                            <p>칵테일 제조</p>
-                        </div>
-                        <div className="function-list">
-                            <b>/인형</b>
-                            <p>랜덤 인형 뽑기</p>
+                        <div className="member-list">
+                            <div className="profile-box"></div>
+                            <p>User Name</p>
                         </div>
                     </div>
                 </div>
-                <div className="history-area d-none">
-                    <div className="title">지난 대화 기록 불러오기</div>
-                    <span className="material-icons-round">arrow_forward</span>
+                <div className="attend-area">
+                    <div className="title">화분키우기 (출석 보상)</div>
+                    <div className="content-wrap">
+                        <div className="attend-gauge-wrap">
+                            <img src={plantImg} alt="" />
+                            <CircularProgressbar
+                                counterClockwise
+                                background
+                                value={attendObj.totalAttend}
+                                maxValue={100}
+                                text={`${attendObj.totalAttend}%`}
+                                styles={{
+                                    path: {
+                                        // stroke: `rgba(102, 234, 218, ${percentage / 100})`,
+                                        stroke: '#44D9C7',
+                                        strokeLinecap: 'round', //butt
+                                        transition: 'stroke-dashoffset 0.5s ease 0s',
+                                        transformOrigin: 'center center',
+                                    },
+                                    trail: {
+                                        stroke: '#E7E7E7',
+                                        strokeLinecap: 'round',
+                                    },
+                                    background: {
+                                        // fill: '#E3F1EF',
+                                        fill: 'transparent',
+                                    },
+                                }}
+                            />
+                        </div>
+                        <div className="attend-info"><b>{ attendObj.attendCount }</b>회 출석했습니다</div>
+                        <button className="gtn-btn btn-mint mr-auto ml-auto" onClick={countAttend}>
+                            출석하기
+                        </button>
+                        {/* <button
+                            className="gtn-btn mr-auto ml-auto"
+                            onClick={resetAttend}
+                        >화분 리셋 (테스트용)</button> */}
+                    </div>
+                </div>
+                <div className="vending-area">
+                    <div className="title">상점</div>
                 </div>
             </div>
         </>

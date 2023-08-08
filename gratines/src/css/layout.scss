@@ -21,21 +21,30 @@ body {
   & #root {
     overflow: hidden !important;
     height: 100vh;
+    //background-image: url("https://images.unsplash.com/photo-1623181392587-1d107a876150?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80");
+    //background-image: url("https://images.unsplash.com/photo-1620625852956-6af595d8294a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=735&q=80");
+    background-image: url("https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbackground.avif?alt=media&token=9984bbfd-f7ba-406e-aabc-61b2d38c32ed");
+    background-image: url("https://images.unsplash.com/photo-1457735720963-e277a46f2c68?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80");
+    background-repeat: no-repeat;
+    background-size: cover;
     & .app-container {
       height: 100%;
       display: flex;
+      justify-content: center;
       flex-direction: row;
       margin: 0;
+      gap: 1rem;
+      padding: 1rem;
+      position: relative;
       //프로필 영역
       & .profile-area {
-        padding: 1rem;
-        width: 260px;
-        overflow-y: auto;
+        width: 280px;
       }
       //채팅 영역
       & .chatting-area {
-        flex: 1;
-        border: 1px solid black;
+        width: 600px;
+        border-radius: $card-radius;
+        box-shadow: $card-shadow;
         overflow: hidden !important;
         & .chatting-list-container {
           overflow-y: auto;
@@ -43,183 +52,62 @@ body {
       }
       //사이드 영역
       & .side-area {
-        width: 260px;
-        overflow-y: auto;
+        width: 348px;
+        // overflow-y: auto;
+      }
+      //배경
+      & .home-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
       }
     }
   }
 }
-
-//채팅 영역
-.chatting-area {
-  display: flex;
-  flex-direction: column;
-  //채팅 보이는 영역
-  & .chatting-list-container {
-    flex: 1;
-    background-color: lightgray;
-    display: flex;
-    flex-direction: column-reverse;
-    // 개별 채팅박스
-    & .chatting-list {
-      border-bottom: 1px solid black;
-      padding: 0.3rem;
-      display: flex;
-      gap: 0.3rem;
-      background-color: white;
-      //내채팅
-      &.myChat{
-        background-color: rgb(230, 249, 255);
-      }
-      //전체채팅, 오더채팅 (공통)
-      &.wholeChat, &.orderChat{
-        text-align: center;
-        font-style: italic;
-        position: relative;
-        & .profile-box, b{
-          display: none !important;
-        }
-        & p{
-          font-weight: 700 !important;
-          & span{
-            margin: 0 5px;
-            color: blue;
-            &:last-child{
-              margin: 0;
-              padding: 2px 8px 2px 5px;
-              background-color: blue;
-              border-radius: 100px;
-              color: white !important;
-            }
-          }
-        }
-        & img{
-          margin: 0 auto;
-        }
-        & button{
-          width: 20px;
-          height: 20px;
-          border-radius: 100px;
-          background-color: gray;
-          position: absolute;
-          top: 5px;
-          right: 10px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          & span{
-            font-size: 14px;
-            color: white;
-          }
-        }
-      }
-      //전체채팅
-      &.wholeChat{
-        background-color: rgb(255, 230, 237) !important;
-      }
-      //오더채팅
-      &.orderChat{
-        background-color: rgb(204, 225, 251);
-      }
-      & .profile-box {
-        background-color: gray;
-        width: 28px;
-        height: 28px;
-        border-radius: 2px;
-        & img {
-          width: 100%;
-          height: 100%;
-        }
-      }
-      & .txt-box {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        gap: 2px;
-        & b {
-          font-size: 11px;
-          font-weight: 500;
-          color: rgb(134, 134, 154);
-        }
-        & p {
-          font-size: 14px;
-          line-height: 150%;
-          font-weight: 400;
-          color: rgb(97, 97, 110);
-        }
-        & img {
-          height: 300px;
-          width: 300px;
-          border: 1px solid gray;
-        }
-      }
-    }
-  }
-
-  //채팅 치는 영역
-  & .chatting-form-box {
-    min-height: 40px;
-    border-top: 1px solid black;
-    background-color: black;
-    padding: 0.5rem;
-    //이미지 썸네일
-    & .img-thumb-area {
-      margin-bottom: 0.5rem;
-      & img {
-        width: 50px;
-        height: 50px;
-      }
-      & button {
-        margin-left: 10px;
-        padding: 0.2rem 0.5rem;
-      }
-    }
-    // 폼 작성
-    & form {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      & input[type="submit"] {
-        width: 100px !important;
-      }
-    }
-  }
-}
-
 //프로필 영역
 .profile-area {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
-  & .logo {
+  @at-root .logo {
     width: 180px;
-    height: 50px;
-    background-color: lightgray;
-    border: 1px solid black;
+    height: 30px;
+    background-image: url("https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Flogo.png?alt=media&token=e45f8be9-4a1f-444a-8fbd-f2f1f2bb48b3");
+    background-repeat: no-repeat;
+    background-size: cover;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 0;
   }
   //내 프로필 영역
   & .profile-wrap {
+    width: 100%;
+    background-color: white;
+    padding: 2rem 1rem;
+    border-radius: $card-radius;
+    box-shadow: $card-shadow;
+
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    gap: 1rem;
     @at-root .profile-box__my {
       width: 120px;
       height: 120px;
       background-color: lightgray;
-      border: 1px solid black;
+      border: 1px solid white;
+      box-shadow: $nameplate-shadow;
       border-radius: $form-radius;
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
+      overflow: hidden;
       & img {
         width: 100%;
         height: 100%;
@@ -256,12 +144,81 @@ body {
           }
         }
       }
-  }
-    & .profile-detail-wrap{
+    }
+    //이름
+    & .nameplate {
+      // background-color: $yellow-300;
+      background: linear-gradient(
+        -45deg,
+        rgb(225, 194, 164) 0%,
+        rgb(241, 238, 164) 60%,
+        rgb(225, 194, 164) 100%
+      );
+      border: 1px solid white;
+      border-radius: 100px;
+      box-shadow: $nameplate-shadow;
+      width: 100%;
+      margin: 1rem 0;
+      padding: 0.5rem 0.8rem;
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0px;
+      & img {
+        width: 38px;
+        height: 32px;
+        &:last-child {
+          transform: rotateY(180deg);
+        }
+      }
+      & .name-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1px;
+        flex: 1;
+        & h4 {
+          font-size: 1.2rem;
+          color: $brown;
+        }
+        & p {
+          font-size: 0.7rem;
+          white-space: nowrap;
+          text-transform: capitalize;
+        }
+      }
+    }
+    & .profile-info {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      & .profile-item {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        margin-bottom: 5px;
+        & p {
+          white-space: nowrap;
+          color: white;
+          background-color: $brown-600;
+          border-radius: 100px;
+        }
+        & b {
+          color: $brown-800;
+        }
+        & span {
+          color: $brown-700;
+        }
+      }
+    }
+    //프로필 수정
+    & .profile-detail-wrap {
       display: flex;
       flex-direction: column;
       align-items: center;
-      & .label{
+      & .label {
         white-space: nowrap;
         width: 100%;
         text-align: left;
@@ -269,26 +226,205 @@ body {
         padding-bottom: 3px;
         font-weight: bold;
       }
-      & .gtn-btn{
+      & .gtn-btn {
         width: 100% !important;
       }
     }
-    & h4 {
-      font-size: 1.1rem;
-    }
-    & .profile-info {
-      & > div {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 5px;
-        margin-bottom: 5px;
+  }
+}
+
+//채팅 영역
+.chatting-area {
+  display: flex;
+  flex-direction: column;
+  & .logo-box{
+    display: none;
+    align-items: center;
+    justify-content: center;
+  }
+  //채팅 보이는 영역
+  & .chatting-list-container {
+    flex: 1;
+    background-color: lightgray;
+    display: flex;
+    flex-direction: column-reverse;
+    box-shadow: $card-shadow;
+    // 개별 채팅박스
+    & .chatting-list {
+      border-bottom: 1px solid $brown-400;
+      padding: 0.3rem;
+      display: flex;
+      gap: 0.3rem;
+      background-color: white;
+      //내채팅
+      &.myChat {
+        background-color: $purple-200;
+      }
+      //전체채팅
+      &.wholeChat,
+      &.orderChat {
+        text-align: center;
+        font-style: italic;
+        position: relative;
+        & .profile-box,
+        b {
+          display: none !important;
+        }
         & p {
-          white-space: nowrap;
+          font-weight: 700 !important;
+          & span {
+            margin: 0 5px;
+            color: $purple;
+            &:last-child {
+              margin: 0 5px;
+              padding: 2px 8px 2px 5px;
+              background-color: $purple-100;
+              border-radius: 100px;
+              color: $purple !important;
+            }
+          }
         }
+        & img {
+          margin: 0 auto;
+        }
+        & button {
+          width: 20px;
+          height: 20px;
+          border-radius: 100px;
+          background-color: gray;
+          position: absolute;
+          top: 5px;
+          right: 10px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          & span {
+            font-size: 14px;
+            color: white;
+          }
+        }
+      }
+      //전체채팅
+      &.wholeChat {
+        background-color: $yellow-200 !important;
+      }
+      //오더채팅
+      &.orderChat {
+        background-color: $purple-300 !important;
+      }
+      & .profile-box {
+        background-color: gray;
+        width: 28px;
+        height: 28px;
+        border-radius: 100px;
+        overflow: hidden;
+        & img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      & .txt-box {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
         & b {
+          font-size: 11px;
+          font-weight: 500;
+          color: $brown-600;
         }
-        & span {
+        & p {
+          font-size: 14px;
+          line-height: 150%;
+          font-weight: 400;
+          color: $brown-800;
+        }
+        & img {
+          height: 300px;
+          width: 300px;
+          border: 1px solid gray;
+        }
+      }
+    }
+  }
+
+  //채팅 치는 영역
+  & .chatting-form-box {
+    min-height: 40px;
+    background-color: $brown-800;
+    padding: 0.5rem;
+    //이미지 썸네일
+    & .img-thumb-area {
+      margin-bottom: 0.5rem;
+      & img {
+        width: 50px;
+        height: 50px;
+      }
+      & button {
+        margin-left: 10px;
+        padding: 0.2rem 0.5rem;
+      }
+    }
+    // 폼 작성
+    & form {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      position: relative;
+      & input[type="submit"] {
+        width: 60px !important;
+        background: $yellow-300 !important;
+        color: $yellow-900 !important;
+        font-weight: $form-font-weight !important;
+      }
+      //툴팁
+      & .tooltip {
+        position: absolute;
+        bottom: calc(100% + 1rem);
+        left: 0;
+        right: 0.3rem;
+        background-color: $brown-800;
+        padding: 0.5rem;
+        border-radius: $form-radius;
+        box-shadow: $form-shadow;
+
+        display: flex;
+        & .function-list-container {
+          flex: 1;
+          border-right: 1px solid $brown-700;
+          padding-right: 1rem;
+          margin-right: 1rem;
+          &:last-child {
+            border: none;
+            margin: 0;
+          }
+          & .title {
+            color: $brown-500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding-left: 6px;
+            margin: 5px 0;
+            & span {
+              color: $brown-500;
+              font-size: 0.8rem;
+            }
+          }
+          & .function-list {
+            padding: 0.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            & b {
+              font-weight: 300;
+              font-size: 1rem;
+              color: white;
+            }
+            & p {
+              font-weight: 200;
+              color: $brown-400;
+            }
+          }
         }
       }
     }
@@ -299,79 +435,144 @@ body {
 .side-area {
   display: flex;
   flex-direction: column;
-  & .history-area {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    height: 33px;
-    padding: 0.5rem;
-    border-top: 1px solid black;
-    background-color: rgb(230, 230, 230);
-    & span {
-      font-size: 18px;
+  gap: 1rem;
+  & > div {
+    flex: 1;
+    background-color: white;
+    border-radius: $card-radius;
+    box-shadow: $card-shadow;
+    overflow: hidden;
+    & .title {
+      padding: 0.6rem;
+      font-size: 1rem;
+      font-weight: 700;
+      color: $brown-800;
     }
   }
-  & .member-area,
-  .function-area, .attend-area {
-    flex: 1;
-    & .title {
-      padding: 0.5rem;
-      border-top: 1px solid black;
-      border-bottom: 1px solid black;
-      background-color: rgb(230, 230, 230);
-    }
+  & .member-area {
+    overflow-y: auto;
     & .member-list {
       padding: 0.5rem;
-      border-bottom: 1px solid gray;
       display: flex;
       align-items: center;
       gap: 0.5rem;
       & .profile-box {
-        background-color: gray;
+        background-color: $brown-700;
         width: 28px;
         height: 28px;
+        border-radius: 100px;
       }
       & p {
         font-size: 14px;
         line-height: 150%;
         font-weight: 400;
-        color: rgb(97, 97, 110);
-        color: #65e7d8;
+        color: $brown-700;
       }
     }
-    & .attend-gauge-wrap{
-      padding: 3rem;
-      padding-bottom: 1rem;
+  }
+  & .attend-area {
+    display: flex;
+    flex-direction: column;
+    & .content-wrap {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      gap: 1rem;
+      justify-content: center;
+      align-items: center;
+    }
+    & .attend-gauge-wrap {
+      width: 100px;
+      margin: 0 auto;
       position: relative;
-      & img{
-        width: 40%;
+      & text {
+        font-size: 20px;
+        fill: $mint;
+        font-weight: 800;
+      }
+      & img {
+        width: 50%;
         position: absolute;
-        top: 60%;
+        top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        z-index: -1;
-        filter: invert(96%) sepia(12%) saturate(137%) hue-rotate(115deg) brightness(100%) contrast(91%);
+        opacity: 0.06;
+        filter: invert(96%) sepia(12%) saturate(137%) hue-rotate(115deg)
+          brightness(5%) contrast(91%);
       }
     }
-    & .attend-info{
+    & .attend-info {
       text-align: center;
-      margin-bottom: 1rem;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 1rem;
-      & b{
-        color: #44D9C7;
+      & b {
+        color: $mint;
         font-size: 1.4rem;
         margin-right: 5px;
       }
     }
-    & .function-list {
-      padding: 0.5rem;
-      border-bottom: 1px solid gray;
-      display: flex;
-      justify-content: space-between;
+  }
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: $yellow-200;
+  border-radius: $form-radius;
+  background-clip: padding-box;
+  border: 1px solid transparent; //pdding 대신 여백사용할때
+}
+*::-webkit-scrollbar-track {
+  background-color: $yellow-700;
+  border-radius: 10px;
+}
+
+
+//미디어쿼리
+@media (max-width:$breakpoint-labtop){
+  .side-area{
+    display: none;
+  }
+  .profile-area{
+    width: 200px !important;
+    & .nameplate{
+      padding: .3rem .4rem !important;
+      & img{
+        width: 20px !important;
+        height: 20px !important;
+      }
+      & h4{
+        font-size: .9rem !important;
+      }
+      & p{
+        font-size: .5rem !important;
+      }
+    }
+  }
+}
+@media (max-width:$breakpoint-mobile){
+  .app-container{
+    padding: .5rem !important;
+  }
+  .profile-area{
+    display: none !important;
+  }
+  .chatting-area{
+    box-shadow: none !important;
+    & .chatting-list-container{
+      border-radius: $card-radius $card-radius 0 0;
+      box-shadow: $card-shadow;
+    }
+    & .logo-box{
+        display: flex !important;
+        & .logo{
+          transform: scale(0.7);
+          margin-bottom: 0.5rem;
+        }
     }
   }
 }
