@@ -9,6 +9,7 @@ import NweetFactory from "components/NweetFactory";
 import Profile from "./Profile";
 import plantImg from '../images/plant.png'
 import moment from "moment";
+import Member from "./Member";
 
 const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, attendObj }) => {
     var gratineUser = JSON.parse(localStorage.getItem("gratineUser"));
@@ -182,20 +183,7 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, attendObj }) => {
             <div className="side-area">
                 <div className="member-area">
                     <div className="title">접속중 인원</div>
-                    <div className="member-list-container">
-                        <div className="member-list">
-                            <div className="profile-box"></div>
-                            <p>User Name</p>
-                        </div>
-                        <div className="member-list">
-                            <div className="profile-box"></div>
-                            <p>User Name</p>
-                        </div>
-                        <div className="member-list">
-                            <div className="profile-box"></div>
-                            <p>User Name</p>
-                        </div>
-                    </div>
+                    <Member />
                 </div>
                 <div className="attend-area">
                     <div className="title">화분키우기 (출석 보상)</div>
@@ -217,12 +205,13 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, attendObj }) => {
                                         transformOrigin: 'center center',
                                     },
                                     trail: {
-                                        stroke: '#E7E7E7',
+                                        // stroke: '#E7E7E7',
+                                        stroke: 'white',
                                         strokeLinecap: 'round',
                                     },
                                     background: {
-                                        // fill: '#E3F1EF',
                                         fill: 'transparent',
+                                        //fill: 'white',
                                     },
                                 }}
                             />

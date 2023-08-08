@@ -1,5 +1,13 @@
 @import "_varient";
 
+@mixin cardDesign() {
+  background-color: $card-bg-color;
+  border: $card-border;
+  border-radius: $card-radius;
+  box-shadow: $card-shadow;
+  backdrop-filter: blur(10px);
+}
+
 //네비게이션
 .nav {
   //임시
@@ -23,19 +31,72 @@ body {
     height: 100vh;
     //background-image: url("https://images.unsplash.com/photo-1623181392587-1d107a876150?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80");
     //background-image: url("https://images.unsplash.com/photo-1620625852956-6af595d8294a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=735&q=80");
-    background-image: url("https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbackground.avif?alt=media&token=9984bbfd-f7ba-406e-aabc-61b2d38c32ed");
-    background-image: url("https://images.unsplash.com/photo-1457735720963-e277a46f2c68?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80");
-    background-repeat: no-repeat;
-    background-size: cover;
+    //background-image: url("https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbackground.avif?alt=media&token=9984bbfd-f7ba-406e-aabc-61b2d38c32ed");
+    //background-image: url("https://images.unsplash.com/photo-1457735720963-e277a46f2c68?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80");
+    //background-color: $purple-100;
+    // background-repeat: no-repeat;
+    // background-size: cover;
+    background: linear-gradient(
+      34deg,
+      #e4ddd6 20%,
+      #eceae2 45%,
+      #fffcf5 50%,
+      #e4ddd6 60%
+    );
+    background: linear-gradient(
+        34deg,
+        #e4ddd6 10%,
+        #eceae2 35%,
+        transparent 50%,
+        #e4ddd6 70%
+      ),
+      url(https://grainy-gradients.vercel.app/noise.svg);
+    // background:
+    // linear-gradient(40deg, #3B572E, #e4ddd6),
+    // url(https://grainy-gradients.vercel.app/noise.svg);
+    position: relative;
+    //배경 글씨
+    &::before {
+      content: "Gratines Garden";
+      font-family: "Pinyon Script", cursive;
+      color: $brown-500;
+      background: -webkit-linear-gradient(white, $brown-500);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      white-space: nowrap;
+      font-size: 30rem;
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      transform: translateY(-50%) translateX(-50%) rotate(-10deg);
+      mix-blend-mode: multiply;
+    }
+
     & .app-container {
       height: 100%;
       display: flex;
       justify-content: center;
       flex-direction: row;
       margin: 0;
-      gap: 1rem;
-      padding: 1rem;
+      gap: $layout-gap;
+      padding: $layout-gap;
       position: relative;
+      //배경 글씨
+      &::before {
+        content: "long story telling";
+        font-family: "Pinyon Script", cursive;
+        color: $brown-400;
+        background: -webkit-linear-gradient(white, $brown-500);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        white-space: nowrap;
+        font-size: 16rem;
+        position: absolute;
+        top: 80%;
+        left: 50%;
+        transform: translateY(-50%) translateX(-50%) rotate(-10deg);
+        mix-blend-mode: multiply;
+      }
       //프로필 영역
       & .profile-area {
         width: 280px;
@@ -43,8 +104,6 @@ body {
       //채팅 영역
       & .chatting-area {
         width: 600px;
-        border-radius: $card-radius;
-        box-shadow: $card-shadow;
         overflow: hidden !important;
         & .chatting-list-container {
           overflow-y: auto;
@@ -53,7 +112,6 @@ body {
       //사이드 영역
       & .side-area {
         width: 348px;
-        // overflow-y: auto;
       }
       //배경
       & .home-bg {
@@ -72,6 +130,10 @@ body {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  padding: 2rem 1rem;
+  @include cardDesign();
+
+  //로고
   @at-root .logo {
     width: 180px;
     height: 30px;
@@ -86,10 +148,6 @@ body {
   //내 프로필 영역
   & .profile-wrap {
     width: 100%;
-    background-color: white;
-    padding: 2rem 1rem;
-    border-radius: $card-radius;
-    box-shadow: $card-shadow;
 
     display: flex;
     flex-direction: column;
@@ -184,6 +242,7 @@ body {
           color: $brown;
         }
         & p {
+          color: $yellow-700;
           font-size: 0.7rem;
           white-space: nowrap;
           text-transform: capitalize;
@@ -237,7 +296,8 @@ body {
 .chatting-area {
   display: flex;
   flex-direction: column;
-  & .logo-box{
+  @include cardDesign();
+  & .logo-box {
     display: none;
     align-items: center;
     justify-content: center;
@@ -248,7 +308,6 @@ body {
     background-color: lightgray;
     display: flex;
     flex-direction: column-reverse;
-    box-shadow: $card-shadow;
     // 개별 채팅박스
     & .chatting-list {
       border-bottom: 1px solid $brown-400;
@@ -435,13 +494,11 @@ body {
 .side-area {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: $layout-gap;
   & > div {
     flex: 1;
-    background-color: white;
-    border-radius: $card-radius;
-    box-shadow: $card-shadow;
     overflow: hidden;
+    @include cardDesign();
     & .title {
       padding: 0.6rem;
       font-size: 1rem;
@@ -451,28 +508,49 @@ body {
   }
   & .member-area {
     overflow-y: auto;
+    & .member-list-container {
+      display: flex;
+      flex-wrap: wrap;
+    }
     & .member-list {
+      width: 56px;
       padding: 0.5rem;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 0.5rem;
+      gap: 5px;
       & .profile-box {
         background-color: $brown-700;
-        width: 28px;
-        height: 28px;
-        border-radius: 100px;
+        width: 40px;
+        height: 40px;
+        border-radius: 6px;
       }
       & p {
-        font-size: 14px;
-        line-height: 150%;
+        text-align: center;
+        font-size: 0.7rem;
         font-weight: 400;
+        line-height: 1;
         color: $brown-700;
+
+        width: 100%;
+        overflow: hidden;
+        white-space: normal;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        word-break: keep-all;
       }
     }
   }
+  & .vending-area {
+    flex: 3;
+  }
   & .attend-area {
+    flex: 2;
     display: flex;
     flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.4);
     & .content-wrap {
       display: flex;
       flex: 1;
@@ -486,19 +564,24 @@ body {
       margin: 0 auto;
       position: relative;
       & text {
+        position: absolute !important;
+        z-index: 10;
         font-size: 20px;
         fill: $mint;
         font-weight: 800;
       }
       & img {
+        z-index: 1;
         width: 50%;
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        opacity: 0.06;
-        filter: invert(96%) sepia(12%) saturate(137%) hue-rotate(115deg)
-          brightness(5%) contrast(91%);
+        // filter: invert(96%) sepia(12%) saturate(137%) hue-rotate(115deg)
+        //   brightness(105%) contrast(91%);
+        
+        filter: invert(1) brightness(1000%);
+        mix-blend-mode: multiply;
       }
     }
     & .attend-info {
@@ -531,48 +614,47 @@ body {
   border-radius: 10px;
 }
 
-
 //미디어쿼리
-@media (max-width:$breakpoint-labtop){
-  .side-area{
+@media (max-width: $breakpoint-labtop) {
+  .side-area {
     display: none;
   }
-  .profile-area{
+  .profile-area {
     width: 200px !important;
-    & .nameplate{
-      padding: .3rem .4rem !important;
-      & img{
+    & .nameplate {
+      padding: 0.3rem 0.4rem !important;
+      & img {
         width: 20px !important;
         height: 20px !important;
       }
-      & h4{
-        font-size: .9rem !important;
+      & h4 {
+        font-size: 0.9rem !important;
       }
-      & p{
-        font-size: .5rem !important;
+      & p {
+        font-size: 0.5rem !important;
       }
     }
   }
 }
-@media (max-width:$breakpoint-mobile){
-  .app-container{
-    padding: .5rem !important;
+@media (max-width: $breakpoint-mobile) {
+  .app-container {
+    padding: 0.5rem !important;
   }
-  .profile-area{
+  .profile-area {
     display: none !important;
   }
-  .chatting-area{
+  .chatting-area {
     box-shadow: none !important;
-    & .chatting-list-container{
+    & .chatting-list-container {
       border-radius: $card-radius $card-radius 0 0;
       box-shadow: $card-shadow;
     }
-    & .logo-box{
-        display: flex !important;
-        & .logo{
-          transform: scale(0.7);
-          margin-bottom: 0.5rem;
-        }
+    & .logo-box {
+      display: flex !important;
+      & .logo {
+        transform: scale(0.7);
+        margin-bottom: 0.5rem;
+      }
     }
   }
 }
