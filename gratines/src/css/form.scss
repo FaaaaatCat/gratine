@@ -8,6 +8,9 @@
     transition: all 0.2s;
   }
 }
+@mixin formFont(){
+  font-family:Pretendard !important;
+}
 
 #root {
   //인풋
@@ -18,6 +21,7 @@
     border: 1px solid $form-border-color;
     border-radius: $form-radius;
     @include hoverEffect();
+    @include formFont();
   }
 
   //버튼
@@ -34,6 +38,7 @@
     box-shadow: $form-shadow;
     font-weight: 600;
     @include hoverEffect();
+    @include formFont();
     &.btn-brown {
       background: linear-gradient(
         -45deg,
@@ -95,6 +100,7 @@
     display: none;
   }
   & .picture-upload-btn {
+    @include formFont();
     width: 118px;
     height: $chat-form-height;
     padding: 0 1rem 0 0.8rem;
@@ -116,6 +122,7 @@
     @include hoverEffect();
   }
   & .chatting-textarea {
+    @include formFont();
     flex: 1;
     border-radius: $form-radius;
     height: $chat-form-height;

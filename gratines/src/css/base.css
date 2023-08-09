@@ -6,12 +6,28 @@
 
 /* font */
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.7/dist/web/static/pretendard.css");
-@import url('https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Nanum+Myeongjo:wght@400;700;800&family=Pinyon+Script&display=swap');
+@font-face {
+    font-family: 'BookkMyungjo-Bd';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/BookkMyungjo-Bd.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+@import url('//cdn.jsdelivr.net/font-iropke-batang/1.2/font-iropke-batang.css');
 /* Reset */
 *{-webkit-text-size-adjust:none; box-sizing: border-box;}
 body,p,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,th,td,form,fieldset,legend,input,textarea,button,select{margin:0;padding:0}
-body,input,textarea,select,button,table,h1,h2,h3,h4,h5{word-break: break-word; font-family:Pretendard; font-size:.8rem;color:#303030;letter-spacing: -0.5px;}
+body,input,textarea,select,button,table,h1,h2,h3,h4,h5{
+  font-family: 'Pretendard';
+  font-family: 'Nanum Myeongjo', serif;
+  font-family: 'Gowun Batang', serif;
+  font-family: 'BookkMyungjo-Bd';
+  font-family: 'Iropke Batang';
+  font-size:.8rem;
+  color:#303030;
+  letter-spacing: -0.5px;
+  word-break: break-word;
+}
 body{*word-break:break-word; -ms-word-break:break-word;overflow-y:scroll}
 img,fieldset,iframe{border:0 none}
 ul,ol,li{list-style:none; margin: 0; padding: 0;}

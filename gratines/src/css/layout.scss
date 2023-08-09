@@ -71,7 +71,13 @@ body {
       transform: translateY(-50%) translateX(-50%) rotate(-10deg);
       mix-blend-mode: multiply;
     }
-
+    &::after{
+      content: 'created by @topports';
+      position: absolute;
+      bottom: 0.5rem;
+      right: 0.5rem;
+      color: $yellow-800
+    }
     & .app-container {
       height: 100%;
       display: flex;
@@ -124,6 +130,7 @@ body {
     }
   }
 }
+
 //프로필 영역
 .profile-area {
   display: flex;
@@ -310,14 +317,26 @@ body {
     flex-direction: column-reverse;
     // 개별 채팅박스
     & .chatting-list {
-      border-bottom: 1px solid $brown-400;
+      //background-color: rgb(247, 245, 245);
+      background-color: #F8F7F5;
+      border-bottom: 1px solid $brown-300;
       padding: 0.3rem;
       display: flex;
       gap: 0.3rem;
-      background-color: white;
       //내채팅
       &.myChat {
         background-color: $purple-200;
+        border-bottom: 1px solid $purple-300;
+      }
+      //전체채팅
+      &.wholeChat {
+        background-color: $yellow-200 !important;
+      }
+      //오더채팅
+      &.orderChat {
+        background-color: $purple-300 !important;
+        border-top: 1px solid $purple-400;
+        border-bottom: 2px solid $purple-400;
       }
       //전체채팅
       &.wholeChat,
@@ -335,9 +354,9 @@ body {
             margin: 0 5px;
             color: $purple;
             &:last-child {
+              background-color: $purple-100;
               margin: 0 5px;
               padding: 2px 8px 2px 5px;
-              background-color: $purple-100;
               border-radius: 100px;
               color: $purple !important;
             }
@@ -363,14 +382,6 @@ body {
           }
         }
       }
-      //전체채팅
-      &.wholeChat {
-        background-color: $yellow-200 !important;
-      }
-      //오더채팅
-      &.orderChat {
-        background-color: $purple-300 !important;
-      }
       & .profile-box {
         background-color: gray;
         width: 28px;
@@ -390,13 +401,13 @@ body {
         & b {
           font-size: 11px;
           font-weight: 500;
-          color: $brown-600;
+          color: $brown-700;
         }
         & p {
           font-size: 14px;
           line-height: 150%;
           font-weight: 400;
-          color: $brown-800;
+          color: $brown-900;
         }
         & img {
           height: 300px;
@@ -590,10 +601,12 @@ body {
       align-items: center;
       justify-content: center;
       font-size: 1rem;
+      font-weight: 700;
       & b {
         color: $mint;
         font-size: 1.4rem;
         margin-right: 5px;
+        font-weight: 700;
       }
     }
   }

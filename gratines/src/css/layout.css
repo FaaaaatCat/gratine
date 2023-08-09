@@ -45,6 +45,14 @@ body #root::before {
   mix-blend-mode: multiply;
 }
 
+body #root::after {
+  content: 'created by @topports';
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  color: #605410;
+}
+
 body #root .app-container {
   height: 100%;
   display: -webkit-box;
@@ -400,17 +408,28 @@ body #root .app-container .home-bg {
 }
 
 .chatting-area .chatting-list-container .chatting-list {
-  border-bottom: 1px solid #CBC4BC;
+  background-color: #F8F7F5;
+  border-bottom: 1px solid #E2DDD8;
   padding: 0.3rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   gap: 0.3rem;
-  background-color: white;
 }
 
 .chatting-area .chatting-list-container .chatting-list.myChat {
   background-color: #e9e8f1;
+  border-bottom: 1px solid #d8d7e7;
+}
+
+.chatting-area .chatting-list-container .chatting-list.wholeChat {
+  background-color: #F6F1CE !important;
+}
+
+.chatting-area .chatting-list-container .chatting-list.orderChat {
+  background-color: #d8d7e7 !important;
+  border-top: 1px solid #B2B0CB;
+  border-bottom: 2px solid #B2B0CB;
 }
 
 .chatting-area .chatting-list-container .chatting-list.wholeChat, .chatting-area .chatting-list-container .chatting-list.orderChat {
@@ -435,9 +454,9 @@ body #root .app-container .home-bg {
 }
 
 .chatting-area .chatting-list-container .chatting-list.wholeChat p span:last-child, .chatting-area .chatting-list-container .chatting-list.orderChat p span:last-child {
+  background-color: #F8F8FA;
   margin: 0 5px;
   padding: 2px 8px 2px 5px;
-  background-color: #F8F8FA;
   border-radius: 100px;
   color: #625BD3 !important;
 }
@@ -470,14 +489,6 @@ body #root .app-container .home-bg {
   color: white;
 }
 
-.chatting-area .chatting-list-container .chatting-list.wholeChat {
-  background-color: #F6F1CE !important;
-}
-
-.chatting-area .chatting-list-container .chatting-list.orderChat {
-  background-color: #d8d7e7 !important;
-}
-
 .chatting-area .chatting-list-container .chatting-list .profile-box {
   background-color: gray;
   width: 28px;
@@ -508,14 +519,14 @@ body #root .app-container .home-bg {
 .chatting-area .chatting-list-container .chatting-list .txt-box b {
   font-size: 11px;
   font-weight: 500;
-  color: #988978;
+  color: #746758;
 }
 
 .chatting-area .chatting-list-container .chatting-list .txt-box p {
   font-size: 14px;
   line-height: 150%;
   font-weight: 400;
-  color: #433C34;
+  color: #1D1A16;
 }
 
 .chatting-area .chatting-list-container .chatting-list .txt-box img {
@@ -794,12 +805,14 @@ body #root .app-container .home-bg {
       -ms-flex-pack: center;
           justify-content: center;
   font-size: 1rem;
+  font-weight: 700;
 }
 
 .side-area .attend-area .attend-info b {
   color: #44D9C7;
   font-size: 1.4rem;
   margin-right: 5px;
+  font-weight: 700;
 }
 
 *::-webkit-scrollbar {
