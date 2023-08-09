@@ -86,6 +86,7 @@ body #root .app-container::before {
   -webkit-transform: translateY(-50%) translateX(-50%) rotate(-10deg);
           transform: translateY(-50%) translateX(-50%) rotate(-10deg);
   mix-blend-mode: multiply;
+  z-index: -1;
 }
 
 body #root .app-container .profile-area {
@@ -180,7 +181,7 @@ body #root .app-container .home-bg {
   border: 1px solid white;
   -webkit-box-shadow: 0rem 0.47rem 2.19rem rgba(37, 8, 8, 0.06), 0rem 0.94rem 1.41rem rgba(37, 8, 8, 0.06), 0rem 0.25rem 0.53rem rgba(37, 8, 8, 0.1), 0rem 0.13rem 0.19rem rgba(37, 8, 8, 0.06);
           box-shadow: 0rem 0.47rem 2.19rem rgba(37, 8, 8, 0.06), 0rem 0.94rem 1.41rem rgba(37, 8, 8, 0.06), 0rem 0.25rem 0.53rem rgba(37, 8, 8, 0.1), 0rem 0.13rem 0.19rem rgba(37, 8, 8, 0.06);
-  border-radius: 4px;
+  border-radius: 10px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -330,6 +331,7 @@ body #root .app-container .home-bg {
   color: white;
   background-color: #988978;
   border-radius: 100px;
+  padding: 0.1rem .4rem;
 }
 
 .profile-area .profile-wrap .profile-info .profile-item b {

@@ -29,13 +29,6 @@ function App() {
       if (user) {
         setIsLoggedIn(true);
         //유저정보 저장
-        if (user.displayName === '') {
-          setUserObj({
-            uid: user.uid,
-            displayName: '미확인 유저',
-            photoURL: defaultProfile,
-          });
-        }
         setUserObj({
           uid: user.uid,
           displayName: user.displayName,
@@ -48,6 +41,7 @@ function App() {
           password: '',
           gold: 0,
           item: '',
+          login: true,
         })
         //출석점수 저장
         setAttendObj({
@@ -92,6 +86,7 @@ function App() {
       password: fbUserData[0].password,
       gold: fbUserData[0].gold,
       item: fbUserData[0].item,
+      login: true,
     })
   };
   //유저의 게임데이터 읽어오기
@@ -122,15 +117,44 @@ function App() {
     getUserAttendObj(user);
     getFbUserObj(user);
     await updateCurrentUser(auth, user);
-    setUserObj({
-      uid: user.uid,
-      displayName: user.displayName,
-      photoURL: user.photoURL,
-      updateProfile: (args) => updateProfile(user, {
+
+    //이름 또는 사진이 없을시 디폴트로 저장
+    if (user.displayName === '' || user.displayName === null) {
+      if (user.photoURL === '' || user.photoURL === null) {
+        setUserObj({
+          uid: user.uid,
+          displayName: 'user',
+          photoURL: defaultProfile,
+          updateProfile: (args) => updateProfile(user, {
+            displayName: 'user',
+            photoURL: defaultProfile,
+          })
+        });
+      }
+      else {
+        setUserObj({
+          uid: user.uid,
+          displayName: 'user',
+          photoURL: user.photoURL,
+          updateProfile: (args) => updateProfile(user, {
+            displayName: 'user',
+            photoURL: user.photoURL,
+          })
+        });
+      }
+    }
+    //이름 또는 사진이 있다면 바뀐값으로 저장
+    else {
+      setUserObj({
+        uid: user.uid,
         displayName: user.displayName,
         photoURL: user.photoURL,
-      })
-    });
+        updateProfile: (args) => updateProfile(user, {
+          displayName: user.displayName,
+          photoURL: user.photoURL,
+        })
+      });
+    }
   }
   return (
     <>

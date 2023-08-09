@@ -102,6 +102,7 @@ body {
         left: 50%;
         transform: translateY(-50%) translateX(-50%) rotate(-10deg);
         mix-blend-mode: multiply;
+        z-index: -1;
       }
       //프로필 영역
       & .profile-area {
@@ -167,7 +168,7 @@ body {
       background-color: lightgray;
       border: 1px solid white;
       box-shadow: $nameplate-shadow;
-      border-radius: $form-radius;
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -270,6 +271,7 @@ body {
           color: white;
           background-color: $brown-600;
           border-radius: 100px;
+          padding: 0.1rem .4rem;
         }
         & b {
           color: $brown-800;

@@ -12,7 +12,6 @@ import moment from "moment";
 import Member from "./Member";
 
 const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, attendObj }) => {
-    var gratineUser = JSON.parse(localStorage.getItem("gratineUser"));
     const auth = getAuth();
     const [nweets, setNweets] = useState([]);
     const [gameObj, setGameObj] = useState(null);
@@ -183,7 +182,10 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, attendObj }) => {
             <div className="side-area">
                 <div className="member-area">
                     <div className="title">접속중 인원</div>
-                    <Member />
+                    <Member
+                        isLoggedIn={isLoggedIn}
+                        fbUserObj={fbUserObj}
+                    />
                 </div>
                 <div className="attend-area">
                     <div className="title">화분키우기 (출석 보상)</div>

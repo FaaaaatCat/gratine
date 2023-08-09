@@ -18,10 +18,10 @@
 *{-webkit-text-size-adjust:none; box-sizing: border-box;}
 body,p,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,th,td,form,fieldset,legend,input,textarea,button,select{margin:0;padding:0}
 body,input,textarea,select,button,table,h1,h2,h3,h4,h5{
-  font-family: 'Pretendard';
+  /* font-family: 'Pretendard';
   font-family: 'Nanum Myeongjo', serif;
   font-family: 'Gowun Batang', serif;
-  font-family: 'BookkMyungjo-Bd';
+  font-family: 'BookkMyungjo-Bd'; */
   font-family: 'Iropke Batang';
   font-size:.8rem;
   color:#303030;
