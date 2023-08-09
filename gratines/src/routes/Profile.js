@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getAuth } from "firebase/auth";
 import { authService, dbService, storageService } from "fbase";
-import { collection, getDocs, query, where, orderBy, addDoc, onSnapshot } from "firebase/firestore";
+import { collection, getDocs, query, where, orderBy, doc, updateDoc } from "firebase/firestore";
 import { Navigate, useNavigate } from "react-router-dom";
 import EditProfile from "./EditProfile";
 import ShowProfile from "./ShowProfile";
@@ -36,7 +36,18 @@ const Profile = ({ refreshUser, userObj, fbUserObj, gameObj }) => {
 
     ///////////////////////////////////////////////////////////////////////////////
     //3. 로그아웃 기능
-    const onLogOutClick = () => {
+    const onLogOutClick = async() => {
+        const q = query(
+            collection(dbService, "user"),
+            where("uid", "==", userObj.uid)
+        );
+        const querySnapshot = await getDocs(q);
+        const currentUserGameData_Id = querySnapshot.docs[0].id;
+        const UserGameRef = doc(dbService, "user", currentUserGameData_Id);
+        await updateDoc(UserGameRef, {
+            login : false,
+        })
+
         auth.signOut();
         navigate("/login");
     }  

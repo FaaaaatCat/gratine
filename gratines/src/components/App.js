@@ -42,6 +42,8 @@ function App() {
           gold: 0,
           item: '',
           login: true,
+          displayName: user.displayName,
+          photoURL: user.photoURL,
         })
         //출석점수 저장
         setAttendObj({
@@ -87,6 +89,8 @@ function App() {
       gold: fbUserData[0].gold,
       item: fbUserData[0].item,
       login: true,
+      displayName: fbUserData[0].displayName,
+      photoURL: fbUserData[0].photoURL,
     })
   };
   //유저의 게임데이터 읽어오기

@@ -47,6 +47,7 @@ const EditProfile = ({ refreshUser, userObj, fbUserObj }) => {
         }
         //만일 프로필사진이 비어있다면
         else if (newProfilePic === null || newProfilePic === defaultProfile) {
+            creatorPicUrl = defaultProfile;
             await updateProfile(auth.currentUser, {
                 displayName: newDisplayName,
                 photoURL : defaultProfile,
@@ -62,7 +63,9 @@ const EditProfile = ({ refreshUser, userObj, fbUserObj }) => {
         const UserGameRef = doc(dbService, "user", currentUserGameData_Id);
         await updateDoc(UserGameRef, {
             gold : newGold,
-            item : newItem,
+            item: newItem,
+            displayName: newDisplayName,
+            photoURL: creatorPicUrl,
         })
 
 

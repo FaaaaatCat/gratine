@@ -43,13 +43,6 @@ const Member = ({ isLoggedIn, fbUserObj }) => {
         //     )
         // });
     }
-    const saveLoginUser = async () => {
-        const loginUserData = {
-            userName: auth.currentUser.displayName,
-            userPhoto: auth.currentUser.photoURL,
-        }
-        await addDoc(collection(dbService, "loginUser"), loginUserData);
-    }
 
     return (
         <>
@@ -58,8 +51,8 @@ const Member = ({ isLoggedIn, fbUserObj }) => {
                     <>
                         {loginUsers.map((loginUser) => (
                             <div className="member-list">
-                                <div className="profile-box"></div>
-                                <p>{loginUser.email}</p>
+                                <img src={loginUser.photoURL} className="profile-box" />
+                                <p>{loginUser.displayName}</p>
                             </div>
                         ) )}
                     </>
