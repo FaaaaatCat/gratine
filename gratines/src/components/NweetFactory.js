@@ -39,6 +39,17 @@ const NweetFactory = ({ userObj, fbUserObj, gameObj }) => {
         //채팅 쓴 날짜 기능
         let todayfull = new Date().toLocaleString();
 
+        //전체 말하기 기능
+        let blankOrder = orderText.trim();
+        if (orderWhat === '/전체' && orderText === '') {
+            setNweet("");
+            return;
+        }
+        if (orderWhat === '/전체' && blankOrder === '') {
+            setNweet("");
+            return;
+        }
+
         //주사위 기능
         let diceNum = 0;
         if (orderWhat !== '' && orderText !=='') {

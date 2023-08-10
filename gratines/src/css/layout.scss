@@ -71,12 +71,15 @@ body {
       transform: translateY(-50%) translateX(-50%) rotate(-10deg);
       mix-blend-mode: multiply;
     }
-    &::after{
-      content: 'created by @topports';
+    &::after {
+      content: "created by @topports";
       position: absolute;
       bottom: 0.5rem;
       right: 0.5rem;
-      color: $yellow-800
+      color: $yellow-800;
+      background-color: $brown-100;
+      padding: 0 5px;
+      border-radius: 100px;
     }
     & .app-container {
       height: 100%;
@@ -165,7 +168,7 @@ body {
     @at-root .profile-box__my {
       width: 120px;
       height: 120px;
-      background-color: lightgray;
+      background-color: $brown-100;
       border: 1px solid white;
       box-shadow: $nameplate-shadow;
       border-radius: 10px;
@@ -271,7 +274,7 @@ body {
           color: white;
           background-color: $brown-600;
           border-radius: 100px;
-          padding: 0.1rem .4rem;
+          padding: 0.1rem 0.4rem;
         }
         & b {
           color: $brown-800;
@@ -320,7 +323,7 @@ body {
     // 개별 채팅박스
     & .chatting-list {
       //background-color: rgb(247, 245, 245);
-      background-color: #F8F7F5;
+      background-color: #f8f7f5;
       border-bottom: 1px solid $brown-300;
       padding: 0.3rem;
       display: flex;
@@ -333,12 +336,17 @@ body {
       //전체채팅
       &.wholeChat {
         background-color: $yellow-200 !important;
+        padding: 0.3rem 0.8rem;
+        & *{
+          color: $brown-700 !important;
+        }
       }
       //오더채팅
       &.orderChat {
         background-color: $purple-300 !important;
         border-top: 1px solid $purple-400;
         border-bottom: 2px solid $purple-400;
+        padding: 0.3rem 0.8rem;
       }
       //전체채팅
       &.wholeChat,
@@ -371,7 +379,8 @@ body {
           width: 20px;
           height: 20px;
           border-radius: 100px;
-          background-color: gray;
+          background-color: $brown-800;
+          opacity: 0.85;
           position: absolute;
           top: 5px;
           right: 10px;
@@ -385,14 +394,17 @@ body {
         }
       }
       & .profile-box {
-        background-color: gray;
+        background-color: $brown-500;
         width: 28px;
         height: 28px;
-        border-radius: 100px;
+        border-radius: 200px;
         overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         & img {
-          width: 100%;
-          height: 100%;
+          width: calc(100% + 2px);
+          height: calc(100% + 2px);
         }
       }
       & .txt-box {
@@ -508,8 +520,8 @@ body {
   display: flex;
   flex-direction: column;
   gap: $layout-gap;
+  //공통
   & > div {
-    flex: 1;
     overflow: hidden;
     @include cardDesign();
     & .title {
@@ -518,9 +530,20 @@ body {
       font-weight: 700;
       color: $brown-800;
     }
+    &.memeber-area {
+      flex: 1;
+      overflow-y: auto;
+    }
+    &.attend-area {
+      flex: 2;
+    }
+    &.vending-area {
+      flex: 3;
+      overflow-y: auto;
+    }
   }
+  //접속중 인원
   & .member-area {
-    overflow-y: auto;
     & .member-list-container {
       display: flex;
       flex-wrap: wrap;
@@ -533,7 +556,7 @@ body {
       align-items: center;
       gap: 5px;
       & .profile-box {
-        background-color: $brown-700;
+        background-color: white;
         width: 40px;
         height: 40px;
         border-radius: 6px;
@@ -556,11 +579,114 @@ body {
       }
     }
   }
+  //상점
   & .vending-area {
-    flex: 3;
+    & .vending-list-container {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 0 0.5rem;
+      gap: 0.5rem;
+      & .vending-item {
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: $card-shadow;
+        border: 1px solid $brown-200;
+        width: 100px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        overflow: hidden;
+        position: relative;
+        transition: all 0.2s;
+        &::after,
+        &.soldOut::after {
+          content: "Buy";
+          background: radial-gradient(
+            circle,
+            rgba(255, 255, 255, 0.9) 0%,
+            rgba(255, 220, 106, 0.4) 100%
+          );
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: $brown;
+          font-size: 1rem;
+          font-weight: 800;
+          opacity: 0;
+        }
+        &:hover::after {
+          opacity: 1;
+          cursor: pointer;
+        }
+        &.soldOut::after {
+          background: radial-gradient(
+            circle,
+            rgba(255, 255, 255, 0.8) 0%,
+            rgba(237, 234, 230, 1) 100%
+          );
+          color: $brown-500;
+          font-weight: 400;
+          font-size: 0.9rem;
+          cursor: not-allowed !important;
+          content: "SoldOut";
+          opacity: 1;
+        }
+
+        & .img-box {
+          width: 100%;
+          height: 100px;
+          border-bottom: 1px solid $brown-300;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          & img {
+            width: 48px;
+            height: 48px;
+          }
+        }
+        & .txt-box {
+          width: 100%;
+          padding: 0.5rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          gap: 5px;
+          & p {
+            text-align: center;
+            font-size: 0.7rem;
+            font-weight: 400;
+            line-height: 1;
+            color: $brown-700;
+
+            width: 100%;
+            overflow: hidden;
+            white-space: normal;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            word-break: keep-all;
+          }
+          & span {
+            background-color: $brown;
+            color: white;
+            border-radius: 100px;
+            text-align: center;
+            width: 50px;
+            display: block;
+          }
+        }
+      }
+    }
   }
+  //화분키우기(출석보상)
   & .attend-area {
-    flex: 2;
     display: flex;
     flex-direction: column;
     background-color: rgba(255, 255, 255, 0.4);
@@ -592,7 +718,7 @@ body {
         transform: translate(-50%, -50%);
         // filter: invert(96%) sepia(12%) saturate(137%) hue-rotate(115deg)
         //   brightness(105%) contrast(91%);
-        
+
         filter: invert(1) brightness(1000%);
         mix-blend-mode: multiply;
       }
@@ -652,8 +778,11 @@ body {
   }
 }
 @media (max-width: $breakpoint-mobile) {
+  #root::after {
+    display: none !important;
+  }
   .app-container {
-    padding: 0.5rem !important;
+    padding: 0 !important;
   }
   .profile-area {
     display: none !important;

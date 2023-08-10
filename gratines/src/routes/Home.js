@@ -10,6 +10,7 @@ import Profile from "./Profile";
 import plantImg from '../images/plant.png'
 import moment from "moment";
 import Member from "./Member";
+import Vending from "./Vending";
 
 const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, attendObj }) => {
     const auth = getAuth();
@@ -35,7 +36,7 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, attendObj }) => {
     //     });
     // });
 
-    //채팅 쓴 날짜 기능
+    //오늘 날짜
     let today = moment().format("YYMMDD")
     let todayfull = new Date().toLocaleString();
 
@@ -230,6 +231,10 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, attendObj }) => {
                 </div>
                 <div className="vending-area">
                     <div className="title">상점</div>
+                    <Vending
+                        userObj={userObj}
+                        fbUserObj={fbUserObj}
+                    />
                 </div>
             </div>
         </>

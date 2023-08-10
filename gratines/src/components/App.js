@@ -38,7 +38,6 @@ function App() {
         setFbUserObj({
           uid: user.uid,
           email: user.email,
-          password: '',
           gold: 0,
           item: '',
           login: true,
@@ -54,9 +53,10 @@ function App() {
           totalAttend: 0,
         });
         //await 끝난후 (새로고침마다) 불러오기
+        refreshUser();
         getFbUserObj(user);
         getUserAttendObj(user);
-        refreshUser();
+        loginDB(user);
       }
       //로그인 안되었다면
       else {
@@ -64,10 +64,42 @@ function App() {
         setUserObj(null);
         setFbUserObj(null);
         setAttendObj(null);
+        //logoutDB(user);
       }
       setInit(true);
+      window.addEventListener('pagehide', function () {
+        logoutDB(user)
+      });
     });
   }, [])
+
+  //fbUser에 로그인값을 false로 만들기
+  const logoutDB = async(user) => {
+      const q = query(
+          collection(dbService, "user"),
+          where("uid", "==", user.uid)
+      );
+      const querySnapshot = await getDocs(q);
+      const currentUserGameData_Id = querySnapshot.docs[0].id;
+      const UserGameRef = doc(dbService, "user", currentUserGameData_Id);
+      await updateDoc(UserGameRef, {
+          login : false,
+      })
+  }
+  //fbUser에 로그인값을 true로 만들기
+  const loginDB = async(user) => {
+      const q = query(
+          collection(dbService, "user"),
+          where("uid", "==", user.uid)
+      );
+      const querySnapshot = await getDocs(q);
+      const currentUserGameData_Id = querySnapshot.docs[0].id;
+      const UserGameRef = doc(dbService, "user", currentUserGameData_Id);
+      await updateDoc(UserGameRef, {
+          login : true,
+      })
+  }  
+
 
   //회원가입한 유저데이터 읽어오기
   const getFbUserObj = async (user) => {
@@ -85,7 +117,6 @@ function App() {
     setFbUserObj({
       uid: fbUserData[0].uid,
       email: fbUserData[0].email,
-      password: fbUserData[0].password,
       gold: fbUserData[0].gold,
       item: fbUserData[0].item,
       login: true,
@@ -116,15 +147,10 @@ function App() {
   };
   //유저네임 변경시 자동 리프레쉬 업데이트
   const refreshUser = async () => {
-
     const user = auth.currentUser;
-    getUserAttendObj(user);
-    getFbUserObj(user);
-    await updateCurrentUser(auth, user);
-
     //이름 또는 사진이 없을시 디폴트로 저장
-    if (user.displayName === '' || user.displayName === null) {
-      if (user.photoURL === '' || user.photoURL === null) {
+    if (user.displayName === "" || user.displayName === null) {
+      if (user.photoURL === "" || user.photoURL === null) {
         setUserObj({
           uid: user.uid,
           displayName: 'user',
@@ -159,6 +185,9 @@ function App() {
         })
       });
     }
+    getUserAttendObj(user);
+    getFbUserObj(user);
+    await updateCurrentUser(auth, user);
   }
   return (
     <>

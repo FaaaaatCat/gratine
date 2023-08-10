@@ -47,10 +47,9 @@ const Profile = ({ refreshUser, userObj, fbUserObj, gameObj }) => {
         await updateDoc(UserGameRef, {
             login : false,
         })
-
         auth.signOut();
         navigate("/login");
-    }  
+    }
 
     return (
         <div className="profile-area">

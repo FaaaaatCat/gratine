@@ -17,6 +17,7 @@ const AuthForm = ({userObj, refreshUser}) => {
     const [newAccount, setNewAccount] = useState(false);
     const [error, setError] = useState("");
     const [profilePic, setProfilePic] = useState("");
+    const defaultProfile = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fdefault_profile.png?alt=media&token=9003c59f-8f33-4d0a-822c-034682416355';
 
     //소셜 로그인 기능
     const onSocialClick = async(event) => {
@@ -43,12 +44,9 @@ const AuthForm = ({userObj, refreshUser}) => {
         else if (name === "password"){
             setPassword(value);
         }
-        // else if (name === "nickName"){
-        //     setnickName(value);
-        // }
     };
 
-    const onSubmit = async (event) => {
+    const onSubmit = async (event) => { 
         event.preventDefault();
         try{
             let data;
@@ -67,12 +65,11 @@ const AuthForm = ({userObj, refreshUser}) => {
                 const fbUserObj = {
                     uid: auth.currentUser.uid,
                     email: email,
-                    password: password,
                     gold: 0,
                     item: '완드, 학생증',
                     login: true,
-                    displayName: '',
-                    photoURL: '',
+                    displayName: 'user',
+                    photoURL: defaultProfile,
                 }
                 await addDoc(collection(dbService, "user"), fbUserObj);
                 await addDoc(collection(dbService, "userGame"), userGameObj);

@@ -20,7 +20,7 @@ const AppRouter = ({isLoggedIn, userObj, refreshUser, fbUserObj, attendObj}) => 
                                     fbUserObj={fbUserObj}
                                     refreshUser={refreshUser}
                                     isLoggedIn={isLoggedIn}
-                                    attendObj = {attendObj}
+                                    attendObj={attendObj}
                                 />}
                             />
                             {/* <Route exact path="/profile" element={<Profile userObj={userObj} refreshUser={refreshUser} />} /> */}

@@ -46,11 +46,14 @@ body #root::before {
 }
 
 body #root::after {
-  content: 'created by @topports';
+  content: "created by @topports";
   position: absolute;
   bottom: 0.5rem;
   right: 0.5rem;
   color: #605410;
+  background-color: #F0EEEC;
+  padding: 0 5px;
+  border-radius: 100px;
 }
 
 body #root .app-container {
@@ -177,7 +180,7 @@ body #root .app-container .home-bg {
 .profile-box__my {
   width: 120px;
   height: 120px;
-  background-color: lightgray;
+  background-color: #F0EEEC;
   border: 1px solid white;
   -webkit-box-shadow: 0rem 0.47rem 2.19rem rgba(37, 8, 8, 0.06), 0rem 0.94rem 1.41rem rgba(37, 8, 8, 0.06), 0rem 0.25rem 0.53rem rgba(37, 8, 8, 0.1), 0rem 0.13rem 0.19rem rgba(37, 8, 8, 0.06);
           box-shadow: 0rem 0.47rem 2.19rem rgba(37, 8, 8, 0.06), 0rem 0.94rem 1.41rem rgba(37, 8, 8, 0.06), 0rem 0.25rem 0.53rem rgba(37, 8, 8, 0.1), 0rem 0.13rem 0.19rem rgba(37, 8, 8, 0.06);
@@ -331,7 +334,7 @@ body #root .app-container .home-bg {
   color: white;
   background-color: #988978;
   border-radius: 100px;
-  padding: 0.1rem .4rem;
+  padding: 0.1rem 0.4rem;
 }
 
 .profile-area .profile-wrap .profile-info .profile-item b {
@@ -410,7 +413,7 @@ body #root .app-container .home-bg {
 }
 
 .chatting-area .chatting-list-container .chatting-list {
-  background-color: #F8F7F5;
+  background-color: #f8f7f5;
   border-bottom: 1px solid #E2DDD8;
   padding: 0.3rem;
   display: -webkit-box;
@@ -426,12 +429,18 @@ body #root .app-container .home-bg {
 
 .chatting-area .chatting-list-container .chatting-list.wholeChat {
   background-color: #F6F1CE !important;
+  padding: 0.3rem 0.8rem;
+}
+
+.chatting-area .chatting-list-container .chatting-list.wholeChat * {
+  color: #746758 !important;
 }
 
 .chatting-area .chatting-list-container .chatting-list.orderChat {
   background-color: #d8d7e7 !important;
   border-top: 1px solid #B2B0CB;
   border-bottom: 2px solid #B2B0CB;
+  padding: 0.3rem 0.8rem;
 }
 
 .chatting-area .chatting-list-container .chatting-list.wholeChat, .chatting-area .chatting-list-container .chatting-list.orderChat {
@@ -471,7 +480,8 @@ body #root .app-container .home-bg {
   width: 20px;
   height: 20px;
   border-radius: 100px;
-  background-color: gray;
+  background-color: #433C34;
+  opacity: 0.85;
   position: absolute;
   top: 5px;
   right: 10px;
@@ -492,16 +502,25 @@ body #root .app-container .home-bg {
 }
 
 .chatting-area .chatting-list-container .chatting-list .profile-box {
-  background-color: gray;
+  background-color: #B5AA9F;
   width: 28px;
   height: 28px;
-  border-radius: 100px;
+  border-radius: 200px;
   overflow: hidden;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .chatting-area .chatting-list-container .chatting-list .profile-box img {
-  width: 100%;
-  height: 100%;
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
 }
 
 .chatting-area .chatting-list-container .chatting-list .txt-box {
@@ -657,9 +676,6 @@ body #root .app-container .home-bg {
 }
 
 .side-area > div {
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
   overflow: hidden;
   background-color: rgba(255, 255, 255, 0.7);
   border: 1px solid white;
@@ -677,7 +693,23 @@ body #root .app-container .home-bg {
   color: #433C34;
 }
 
-.side-area .member-area {
+.side-area > div.memeber-area {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  overflow-y: auto;
+}
+
+.side-area > div.attend-area {
+  -webkit-box-flex: 2;
+      -ms-flex: 2;
+          flex: 2;
+}
+
+.side-area > div.vending-area {
+  -webkit-box-flex: 3;
+      -ms-flex: 3;
+          flex: 3;
   overflow-y: auto;
 }
 
@@ -706,7 +738,7 @@ body #root .app-container .home-bg {
 }
 
 .side-area .member-area .member-list .profile-box {
-  background-color: #746758;
+  background-color: white;
   width: 40px;
   height: 40px;
   border-radius: 6px;
@@ -728,16 +760,142 @@ body #root .app-container .home-bg {
   word-break: keep-all;
 }
 
-.side-area .vending-area {
-  -webkit-box-flex: 3;
-      -ms-flex: 3;
-          flex: 3;
+.side-area .vending-area .vending-list-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  padding: 0 0.5rem;
+  gap: 0.5rem;
+}
+
+.side-area .vending-area .vending-list-container .vending-item {
+  background-color: white;
+  border-radius: 8px;
+  -webkit-box-shadow: 0rem 0.47rem 2.19rem rgba(8, 10, 37, 0.02), 0rem 0.94rem 1.41rem rgba(8, 10, 37, 0.02), 0rem 0.25rem 0.53rem rgba(8, 10, 37, 0.04), 0rem 0.13rem 0.19rem rgba(8, 10, 37, 0.02);
+          box-shadow: 0rem 0.47rem 2.19rem rgba(8, 10, 37, 0.02), 0rem 0.94rem 1.41rem rgba(8, 10, 37, 0.02), 0rem 0.25rem 0.53rem rgba(8, 10, 37, 0.04), 0rem 0.13rem 0.19rem rgba(8, 10, 37, 0.02);
+  border: 1px solid #E9E5E2;
+  width: 100px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  overflow: hidden;
+  position: relative;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+.side-area .vending-area .vending-list-container .vending-item::after, .side-area .vending-area .vending-list-container .vending-item.soldOut::after {
+  content: "Buy";
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, rgba(255, 220, 106, 0.4) 100%);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  color: #674738;
+  font-size: 1rem;
+  font-weight: 800;
+  opacity: 0;
+}
+
+.side-area .vending-area .vending-list-container .vending-item:hover::after {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.side-area .vending-area .vending-list-container .vending-item.soldOut::after {
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, #edeae6 100%);
+  color: #B5AA9F;
+  font-weight: 400;
+  font-size: 0.9rem;
+  cursor: not-allowed !important;
+  content: "SoldOut";
+  opacity: 1;
+}
+
+.side-area .vending-area .vending-list-container .vending-item .img-box {
+  width: 100%;
+  height: 100px;
+  border-bottom: 1px solid #E2DDD8;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.side-area .vending-area .vending-list-container .vending-item .img-box img {
+  width: 48px;
+  height: 48px;
+}
+
+.side-area .vending-area .vending-list-container .vending-item .txt-box {
+  width: 100%;
+  padding: 0.5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 5px;
+}
+
+.side-area .vending-area .vending-list-container .vending-item .txt-box p {
+  text-align: center;
+  font-size: 0.7rem;
+  font-weight: 400;
+  line-height: 1;
+  color: #746758;
+  width: 100%;
+  overflow: hidden;
+  white-space: normal;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  word-break: keep-all;
+}
+
+.side-area .vending-area .vending-list-container .vending-item .txt-box span {
+  background-color: #674738;
+  color: white;
+  border-radius: 100px;
+  text-align: center;
+  width: 50px;
+  display: block;
 }
 
 .side-area .attend-area {
-  -webkit-box-flex: 2;
-      -ms-flex: 2;
-          flex: 2;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -857,8 +1015,11 @@ body #root .app-container .home-bg {
 }
 
 @media (max-width: 480px) {
+  #root::after {
+    display: none !important;
+  }
   .app-container {
-    padding: 0.5rem !important;
+    padding: 0 !important;
   }
   .profile-area {
     display: none !important;

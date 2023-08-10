@@ -28,7 +28,6 @@ const Member = ({ isLoggedIn, fbUserObj }) => {
                 };
             });
             setLoginUsers(loginUserArray);
-            console.log(loginUserArray)
         });
         onAuthStateChanged(auth, (user) => {
             if (user == null) {
