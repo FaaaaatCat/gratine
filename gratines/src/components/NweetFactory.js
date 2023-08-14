@@ -64,23 +64,32 @@ const NweetFactory = ({ userObj, fbUserObj, gameObj }) => {
                 else if (orderText == '100') {
                     diceNum = Math.ceil(Math.random() * (100 - 1) + 1)
                 }
+                else if (orderText == '선택') {
+                    const rollDice = Math.ceil(Math.random() * (2 - 0) + 0)
+                    if (rollDice === 1) {
+                        diceNum = 'YES'
+                    }
+                    else {
+                        diceNum = 'NO'
+                    }
+                }
             }
         }
         //칵테일 기능
-        let selectedCock = '';
-        if (orderWhat === '/칵테일') {
-            let cockList = ['칵1', '칵2', '칵3', '칵4', '칵5', '칵6', '칵7', '칵8', '칵9', '칵10']
-            var random_index_1 = Math.floor(Math.random() * cockList.length);
-            var random_index_2 = Math.floor(Math.random() * cockList.length);
-            var random_index_3 = Math.floor(Math.random() * cockList.length);
-            var random_index_4 = Math.floor(Math.random() * cockList.length);
-            var random_cock_1 = cockList[random_index_1];
-            var random_cock_2 = cockList[random_index_2];
-            var random_cock_3 = cockList[random_index_3];
-            var random_cock_4 = cockList[random_index_4];
-            let selectedCockArr = [random_cock_1, random_cock_2, random_cock_3, random_cock_4]
-            selectedCock = selectedCockArr.join(' ,');
-        }
+        // let selectedCock = '';
+        // if (orderWhat === '/칵테일') {
+        //     let cockList = ['칵1', '칵2', '칵3', '칵4', '칵5', '칵6', '칵7', '칵8', '칵9', '칵10']
+        //     var random_index_1 = Math.floor(Math.random() * cockList.length);
+        //     var random_index_2 = Math.floor(Math.random() * cockList.length);
+        //     var random_index_3 = Math.floor(Math.random() * cockList.length);
+        //     var random_index_4 = Math.floor(Math.random() * cockList.length);
+        //     var random_cock_1 = cockList[random_index_1];
+        //     var random_cock_2 = cockList[random_index_2];
+        //     var random_cock_3 = cockList[random_index_3];
+        //     var random_cock_4 = cockList[random_index_4];
+        //     let selectedCockArr = [random_cock_1, random_cock_2, random_cock_3, random_cock_4]
+        //     selectedCock = selectedCockArr.join(' ,');
+        // }
 
         
         //이미지 첨부하지 않고 텍스트만 올리고 싶을 때도 있기 때문에 attachment가 있을때만 아래 코드 실행
@@ -96,18 +105,18 @@ const NweetFactory = ({ userObj, fbUserObj, gameObj }) => {
         }
 
         //인형 기능
-        let random_bear = '';
-        if (orderWhat === '/인형') {
-            let bear_1 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbears_1.JPG?alt=media&token=d1844607-6814-4969-95b7-f62a84d9d247'
-            let bear_2 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbears_2.JPG?alt=media&token=4942eb5d-6e7b-444f-ba5b-e71e58b70cf2'
-            let bear_3 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbears_3.JPG?alt=media&token=f54417dc-4018-4d53-949a-431810186f01'
-            let bear_4 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbears_4.JPG?alt=media&token=2640217f-6083-4b81-8314-4c1b6e384f55'
-            let bear_5 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbears_5.JPG?alt=media&token=bade5db1-55dd-4b02-ac9f-74fb6247bb54'
-            let bearList = [bear_1, bear_2, bear_3, bear_4, bear_5];
-            var random_index = Math.floor(Math.random() * bearList.length);
-            random_bear = bearList[random_index]
-            attachmentUrl = random_bear;
-        }
+        // let random_bear = '';
+        // if (orderWhat === '/인형') {
+        //     let bear_1 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbears_1.JPG?alt=media&token=d1844607-6814-4969-95b7-f62a84d9d247'
+        //     let bear_2 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbears_2.JPG?alt=media&token=4942eb5d-6e7b-444f-ba5b-e71e58b70cf2'
+        //     let bear_3 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbears_3.JPG?alt=media&token=f54417dc-4018-4d53-949a-431810186f01'
+        //     let bear_4 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbears_4.JPG?alt=media&token=2640217f-6083-4b81-8314-4c1b6e384f55'
+        //     let bear_5 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbears_5.JPG?alt=media&token=bade5db1-55dd-4b02-ac9f-74fb6247bb54'
+        //     let bearList = [bear_1, bear_2, bear_3, bear_4, bear_5];
+        //     var random_index = Math.floor(Math.random() * bearList.length);
+        //     random_bear = bearList[random_index]
+        //     attachmentUrl = random_bear;
+        // }
 
         let blackNweet = nweet.trim();
         //이미지도 글자도 없을땐 무시한다.
@@ -133,7 +142,6 @@ const NweetFactory = ({ userObj, fbUserObj, gameObj }) => {
             orderWhat: orderWhat,
             orderText: orderText,
             diceNum: diceNum,
-            selectedCock: selectedCock,
             //nweets에 새로운 데이터를 넣고싶으면 이곳에 추가하기.
             //그리고 파이어베이스 가서 데이터(pre-made query) 추가하기.
             //우리가 이 쿼리를 사용할거라고 데이터베이스에게 알려줘야 함.
@@ -181,10 +189,7 @@ const NweetFactory = ({ userObj, fbUserObj, gameObj }) => {
                     <div className="tooltip">
                         <div className="function-list-container">
                             <div className="title"><span className="material-icons-round">info_outline</span> 기본 명령어</div>
-                            <div className="function-list">
-                                <b>/전체 메세지</b>
-                                <p>전체 말하기</p>
-                            </div>
+                            
                             <div className="function-list">
                                 <b>/주사위 10</b>
                                 <p>주사위굴리기 (1~10사이)</p>
@@ -197,20 +202,16 @@ const NweetFactory = ({ userObj, fbUserObj, gameObj }) => {
                                 <b>/주사위 100</b>
                                 <p>주사위굴리기 (1~100사이)</p>
                             </div>
-                            {/* <div className="function-list">
-                                <p>주사위굴리기 (Yes or No)</p>
+                            <div className="function-list">
                                 <b>/주사위 선택</b>
-                            </div> */}
+                                <p>주사위굴리기 (Yes or No)</p>
+                            </div>
                         </div>
                         <div className="function-list-container">
-                            <div className="title"><span className="material-icons-round">info_outline</span>특수 명령어</div>
+                            <div className="title"><span className="material-icons-round">info_outline</span>관리자 명령어</div>
                             <div className="function-list">
-                                <b>/칵테일</b>
-                                <p>칵테일 제조</p>
-                            </div>
-                            <div className="function-list">
-                                <b>/인형</b>
-                                <p>랜덤 인형 뽑기</p>
+                                <b>/전체 메세지</b>
+                                <p>전체 말하기</p>
                             </div>
                         </div>
                     </div>

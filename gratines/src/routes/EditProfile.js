@@ -7,10 +7,10 @@ import { ref, uploadString, getDownloadURL } from "@firebase/storage";
 
 const EditProfile = ({ refreshUser, userObj, fbUserObj }) => {
     const auth = getAuth();
-    const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
+    const [newDisplayName, setNewDisplayName] = useState(fbUserObj.displayName);
     const [newGold, setNewGold] = useState(fbUserObj.gold);
     const [newItem, setNewItem] = useState(fbUserObj.item);
-    const [newProfilePic, setNewProfilePic] = useState(userObj.photoURL);
+    const [newProfilePic, setNewProfilePic] = useState(fbUserObj.photoURL);
     const defaultProfile = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fdefault_profile.png?alt=media&token=9003c59f-8f33-4d0a-822c-034682416355';
     //새 소지금액 인풋
     const onGoldChange = (e) => {

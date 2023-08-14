@@ -41,7 +41,7 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, attendObj }) => {
     let todayfull = new Date().toLocaleString();
 
     //명령어 모음
-    let orderList = ['10', '50', '100']
+    let orderList = ['10', '50', '100', '선택']
     
     useEffect(() => {
         //트윗 받기
@@ -166,7 +166,7 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, attendObj }) => {
                             orderWhat={nweet.orderWhat}
                             isWhole={nweet.orderWhat === "/전체"}
                             isDice={nweet.orderWhat === "/주사위" && orderList.includes(nweet.orderText)}
-                            isCock={nweet.orderWhat === "/칵테일"}
+                            isBuy={nweet.buy === true}
                             gameObj={gameObj}
                         />
                     ))}
@@ -184,6 +184,7 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, attendObj }) => {
                 <div className="member-area">
                     <div className="title">접속중 인원</div>
                     <Member
+                        userObj={userObj}
                         isLoggedIn={isLoggedIn}
                         fbUserObj={fbUserObj}
                     />
@@ -219,10 +220,12 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, attendObj }) => {
                                 }}
                             />
                         </div>
-                        <div className="attend-info"><b>{ attendObj.attendCount }</b>회 출석했습니다</div>
-                        <button className="gtn-btn btn-mint mr-auto ml-auto" onClick={countAttend}>
-                            출석하기
-                        </button>
+                        <div className="attend-info">
+                            <div><b>{attendObj.attendCount}</b>회 출석했습니다</div>
+                            <button className="gtn-btn btn-mint mr-auto ml-auto" onClick={countAttend}>
+                                출석하기
+                            </button>
+                        </div>
                         {/* <button
                             className="gtn-btn mr-auto ml-auto"
                             onClick={resetAttend}

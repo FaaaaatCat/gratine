@@ -6,7 +6,8 @@ import { getAuth,
     GoogleAuthProvider
 } from "firebase/auth";
 import { dbService, storageService } from '../fbase';
-import { collection, addDoc} from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore";
+import symbol from "../images/symbol.png"
 
 const AuthForm = ({userObj, refreshUser}) => {
     const auth = getAuth();
@@ -68,7 +69,7 @@ const AuthForm = ({userObj, refreshUser}) => {
                     gold: 0,
                     item: '완드, 학생증',
                     login: true,
-                    displayName: 'user',
+                    displayName: auth.currentUser.email.split("@")[0],
                     photoURL: defaultProfile,
                 }
                 await addDoc(collection(dbService, "user"), fbUserObj);
@@ -98,63 +99,90 @@ const AuthForm = ({userObj, refreshUser}) => {
     const toggleAccount = () => setNewAccount((prev) => !prev);
     
     return (
-        <div className="login-form-wrap">
-            {/* <button className="gtn-btn btn-google" onClick={onSocialClick} name="google">구글 계정으로 로그인</button> */}
-            <div className="login-title">
-                {newAccount ?  <p>그라티네의 정원 <span>가입하기</span></p> : <p>그라티네의 정원에 <span>어서오세요</span></p>}
-            </div>
-            <form onSubmit={onSubmit}>
-                {newAccount && 
-                    <>
-                        <div className="notice-box">
-                            <p>가입 전, 공지사항을 확인해주세요!</p>
-                            <a href="https://www.naver.com/" target="_blank">▶ 공지사항 바로가기</a>
+        <>
+            <div className={"login-letter" + (newAccount ? ' letter-long ' : '')}>
+                <div className="frame-1"></div>
+                <div className="frame-2"></div>
+                <div className="frame-3"></div>
+                <div className="frame-4"></div>
+                {/* <button className="gtn-btn btn-google" onClick={onSocialClick} name="google">구글 계정으로 로그인</button> */}
+                <img src={symbol} className="symbol" alt="" />
+                        {newAccount && 
+                            <>
+                                <div className="notice-box">
+                                    <p>가입 전, 공지사항을 확인해주세요!</p>
+                                    <a href="https://www.naver.com/" target="_blank">▶ 공지사항 바로가기</a>
+                                </div>
+                            </>
+                        }
+                <div className="login-cont-wrap">
+                    <div className="login-txt-wrap">
+                        <div className="login-title">
+                            {newAccount ?  <p>그라티네의 정원 <span>가입하기</span></p> : <p>그라티네의 정원에 <span>어서오세요</span></p>}
                         </div>
-                        {/* <input
-                            className="gtn-input"
-                            name="nickName"
-                            type="text"
-                            placeholder="캐릭터 이름"
-                            required
-                            value={nickName}
-                            onChange={onChange}
-                        /> */}
-                    </>
-                }
-                <input
-                    className="gtn-input"
-                    name="email"
-                    type="email"
-                    placeholder="이메일 (email@gratine.com)"
-                    required
-                    value={email}
-                    onChange={onChange}
-                />
-                <input
-                    className="gtn-input"
-                    name="password"
-                    type="password"
-                    placeholder="비밀번호"
-                    required
-                    value={password}
-                    onChange={onChange}
-                />
-                <button className="gtn-btn btn-white w-100" type="submit">
-                    {newAccount ? "가입 완료" : "로그인"}
-                    <span></span><span></span><span></span><span></span>
-                </button>
-                <p>{error}</p>
-            </form>
-            <span className="login-sub-txt" onClick={toggleAccount}>
-                {newAccount ?
-                    <div>이미 계정이 있나요?
-                        <span>로그인</span>
+                        <span className="login-sub-txt" onClick={toggleAccount}>
+                            {newAccount ?
+                                <div>이미 계정이 있나요?
+                                    <span>로그인</span>
+                                </div>
+                                : <div>신입생인가요?
+                                    <span>회원가입</span>
+                                </div>}
+                        </span>
                     </div>
-                    : <div>신입생인가요?
-                        <span>회원가입</span>
-                    </div>}
-            </span>
-        </div>
+                    <form onSubmit={onSubmit}>
+                        <input
+                            className="gtn-input"
+                            name="email"
+                            type="email"
+                            placeholder="이메일 (email@gratine.com)"
+                            required
+                            value={email}
+                            onChange={onChange}
+                        />
+                        <input
+                            className="gtn-input"
+                            name="password"
+                            type="password"
+                            placeholder="비밀번호"
+                            required
+                            value={password}
+                            onChange={onChange}
+                        />
+                        <button className="gtn-btn btn-white w-100" type="submit">
+                            {newAccount ? "가입 완료" : "로그인"}
+                            <span></span><span></span><span></span><span></span>
+                        </button>
+                        <p>{error}</p>
+                    </form>
+                </div>
+                <div className="login-functions">
+                    <div className="function-item">
+                        <div className="img"></div>
+                        <p>공지사항</p>
+                    </div>
+                    <div className="function-item">
+                        <div className="img"></div>
+                        <p>상점계</p>
+                    </div>
+                    <div className="function-item">
+                        <div className="img"></div>
+                        <p>진행계</p>
+                    </div>
+                </div>
+                <div className="ending-ment d-none">
+                    <p>Two O Clock Party will begin </p>
+                    <p className="mt-2"></p>
+                    <p>White garden church </p>
+                    <p>Your Address Insert Here</p>
+                    <p>Country</p>
+                    <div className="signature"></div>
+                    {/* <p>Minerva McGonagall</p> */}
+                </div>
+            </div>
+            <div className="login-letter-envelope envelope-long d-none">
+            </div>
+        </>
     );
 };
 

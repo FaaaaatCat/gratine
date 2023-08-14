@@ -625,3 +625,11 @@
 .material-icons-round.md-48 {
   font-size: 48px;
 }
+
+.bg-red {
+  background: red !important;
+}
+
+.bg-purple {
+  background: #625BD3 !important;
+}

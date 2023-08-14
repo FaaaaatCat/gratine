@@ -348,6 +348,13 @@ body {
         border-bottom: 2px solid $purple-400;
         padding: 0.3rem 0.8rem;
       }
+      //구매채팅
+      &.buyChat{
+        background-color: $brown-200;
+        & .txt-box p{
+          font-weight: 500;
+        }
+      }
       //전체채팅
       &.wholeChat,
       &.orderChat {
@@ -523,6 +530,7 @@ body {
   //공통
   & > div {
     overflow: hidden;
+    overflow-y: auto;
     @include cardDesign();
     & .title {
       padding: 0.6rem;
@@ -532,14 +540,12 @@ body {
     }
     &.memeber-area {
       flex: 1;
-      overflow-y: auto;
     }
     &.attend-area {
       flex: 2;
     }
     &.vending-area {
       flex: 3;
-      overflow-y: auto;
     }
   }
   //접속중 인원
@@ -595,7 +601,6 @@ body {
         display: flex;
         flex-direction: column;
         align-items: center;
-        overflow: hidden;
         position: relative;
         transition: all 0.2s;
         &::after,
@@ -636,7 +641,21 @@ body {
           content: "SoldOut";
           opacity: 1;
         }
-
+        & .eventTag{
+          position: absolute;
+          top: -5px;
+          left: -5px;
+          width: 40px;
+          height: 20px;
+          border-radius: 100px;
+          background-color: $purple;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          font-weight: 400;
+          transform: rotate(-20deg);
+        }
         & .img-box {
           width: 100%;
           height: 100px;
@@ -693,14 +712,13 @@ body {
     & .content-wrap {
       display: flex;
       flex: 1;
-      flex-direction: column;
-      gap: 1rem;
+      flex-direction: row;
+      gap: 1.5rem;
       justify-content: center;
       align-items: center;
     }
     & .attend-gauge-wrap {
-      width: 100px;
-      margin: 0 auto;
+      width: 80px; //게이지 크기
       position: relative;
       & text {
         position: absolute !important;
@@ -724,12 +742,14 @@ body {
       }
     }
     & .attend-info {
-      text-align: center;
       display: flex;
-      align-items: center;
-      justify-content: center;
+      flex-direction: column;
+      gap: 10px;
       font-size: 1rem;
       font-weight: 700;
+      & div{
+        
+      }
       & b {
         color: $mint;
         font-size: 1.4rem;

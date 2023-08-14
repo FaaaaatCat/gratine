@@ -4,22 +4,37 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { collection, onSnapshot, addDoc, query, orderBy, where, doc, getDocs, updateDoc} from "firebase/firestore";
 import { ref, uploadString, getDownloadURL } from "@firebase/storage";
 
-const Member = ({ isLoggedIn, fbUserObj }) => {
+const Member = ({ isLoggedIn, fbUserObj, userObj }) => {
     const auth = getAuth();
     const [appendDiv, setAppendDiv] = useState(false);
     const [loginUsers, setLoginUsers] = useState([]);
     useEffect(() => {
         if (isLoggedIn) {
             readLoginUser();
-            //saveLoginUser();
+        }
+        else {
+            setLogOut();
         }
     }, []);
+
+    const setLogOut = async () => {
+        const q = query(
+            collection(dbService, "user"),
+            where("uid", "==", userObj.uid)
+        );
+        const querySnapshot = await getDocs(q);
+        const currentUserGameData_Id = querySnapshot.docs[0].id;
+        const UserGameRef = doc(dbService, "user", currentUserGameData_Id);
+        await updateDoc(UserGameRef, {
+            login : false,
+        })
+    }
     const readLoginUser = async () => {
         const q = query(
           collection(dbService, "user"),
           where("login", "==", true)
         );
-        const querySnapshot = await getDocs(q);
+        //const querySnapshot = await getDocs(q);
         const unsubscribe = onSnapshot(q, (Snapshot) => {
             const loginUserArray = Snapshot.docs.map((doc) => { //snapshot : 트윗을 받을때마다 알림 받는곳. 새로운 스냅샷을 받을때 nweetArray 라는 배열을 만듬
                 return {

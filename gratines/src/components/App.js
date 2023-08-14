@@ -20,7 +20,6 @@ function App() {
   const [fbUserObj, setFbUserObj] = useState(null);
   const [attendObj, setAttendObj] = useState(null);
   const defaultProfile = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fdefault_profile.png?alt=media&token=9003c59f-8f33-4d0a-822c-034682416355';
-  //const name = user.email.split("@")[0];
 
   useEffect(()=>{
     onAuthStateChanged(auth, (user) => {
@@ -67,9 +66,22 @@ function App() {
         //logoutDB(user);
       }
       setInit(true);
-      window.addEventListener('pagehide', function () {
-        logoutDB(user)
+      window.addEventListener('pagehide', function (e) {
+        e.preventDefault();
+        logoutDB(auth.currentUser)
       });
+      window.addEventListener('beforeunload', function (e) {
+        e.preventDefault();
+        logoutDB(auth.currentUser)
+      });
+    });
+    window.addEventListener('pagehide', function (e) {
+      e.preventDefault();
+      logoutDB(auth.currentUser)
+    });
+    window.addEventListener('beforeunload', function (e) {
+      e.preventDefault();
+      logoutDB(auth.currentUser)
     });
   }, [])
 

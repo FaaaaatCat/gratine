@@ -7,13 +7,13 @@ const ShowProfile = ({userObj, refreshUser, fbUserObj, gameObj}) => {
     return (
         <>
             <div className="profile-box__my">
-                {userObj.photoURL ? <img src={userObj.photoURL} /> : <img src={defaultProfile} />}
+                {fbUserObj.photoURL ? <img src={fbUserObj.photoURL} /> : <img src={defaultProfile} />}
             </div>
             <div className="nameplate">
                 <img src={leafImg} alt="" />
                 <div className="name-wrap">
                     <h4>
-                        {userObj.displayName ? <>{userObj.displayName}</> : <>이름을 적어주세요</>}
+                        {fbUserObj.displayName ? <>{fbUserObj.displayName}</> : <>이름을 적어주세요</>}
                     </h4>
                     <p>Gratines Student</p>
                 </div>
