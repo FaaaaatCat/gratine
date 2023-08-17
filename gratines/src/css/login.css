@@ -37,8 +37,6 @@
   -webkit-box-shadow: 0rem 0.47rem 2.19rem rgba(8, 10, 37, 0.02), 0rem 0.94rem 1.41rem rgba(8, 10, 37, 0.02), 0rem 0.25rem 0.53rem rgba(8, 10, 37, 0.04), 0rem 0.13rem 0.19rem rgba(8, 10, 37, 0.02);
           box-shadow: 0rem 0.47rem 2.19rem rgba(8, 10, 37, 0.02), 0rem 0.94rem 1.41rem rgba(8, 10, 37, 0.02), 0rem 0.25rem 0.53rem rgba(8, 10, 37, 0.04), 0rem 0.13rem 0.19rem rgba(8, 10, 37, 0.02);
   background-color: #44463a;
-  -webkit-transition: all 0.2s;
-  transition: all 0.2s;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -88,12 +86,6 @@
           transform: rotateY(180deg) rotateX(180deg);
 }
 
-.login-area .login-box .login-letter.letter-long {
-  height: 550px;
-  -webkit-transition: all 0.2s;
-  transition: all 0.2s;
-}
-
 .login-area .login-box .login-letter .symbol {
   width: 140px;
   height: 140px;
@@ -123,7 +115,6 @@
       -ms-flex-align: center;
           align-items: center;
   background-color: #F6F1CE;
-  margin-bottom: 1rem;
 }
 
 .login-area .login-box .login-letter .notice-box p {
@@ -217,6 +208,62 @@
   color: red;
 }
 
+.login-area .login-box .login-letter .border {
+  position: relative;
+  width: 100%;
+}
+
+.login-area .login-box .login-letter .border img,
+.login-area .login-box .login-letter .border .line {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+          transform: translateX(-50%) translateY(-50%);
+}
+
+.login-area .login-box .login-letter .border img {
+  height: 14px;
+  -webkit-filter: invert(92%) sepia(13%) saturate(1384%) hue-rotate(338deg) brightness(108%) contrast(85%);
+          filter: invert(92%) sepia(13%) saturate(1384%) hue-rotate(338deg) brightness(108%) contrast(85%);
+}
+
+.login-area .login-box .login-letter .border .line {
+  width: 110%;
+  height: 1px;
+  background-color: #ECE094;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.login-area .login-box .login-letter .border .line div {
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-bottom-color: #ECE094;
+  position: relative;
+  top: -6px;
+}
+
+.login-area .login-box .login-letter .border .line div::after {
+  content: "";
+  position: absolute;
+  left: -6px;
+  top: 6px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-top-color: #ECE094;
+}
+
 .login-area .login-box .login-letter .ending-ment {
   color: #B7A11F;
   text-align: center;
@@ -253,13 +300,13 @@
           align-items: center;
   gap: 10px;
   cursor: pointer;
-  -webkit-transition: all .2s;
-  transition: all .2s;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
 }
 
 .login-area .login-box .login-letter .login-functions .function-item:hover {
-  -webkit-transition: all .2s;
-  transition: all .2s;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
   -webkit-filter: brightness(0.9);
           filter: brightness(0.9);
 }
@@ -271,13 +318,52 @@
   background: #E3CF59;
 }
 
-.login-area .login-box .login-letter-envelope {
-  position: absolute;
-  top: calc(100% - 150px);
-  left: -25px;
-  width: calc(100% + 50px);
-  height: 700px;
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-image: url("https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fletter.png?alt=media&token=37e2fb0a-05ca-4061-a852-3a3cdf9f48c7");
+@media (max-width: 1000px) {
+  #root .login-area {
+    padding: 10px;
+  }
+  #root .login-area .login-box {
+    width: 450px;
+  }
+  #root .login-area .login-box .login-letter {
+    padding: 2rem;
+    padding-top: 0.5rem;
+  }
+  #root .login-area .login-box .login-letter .login-cont-wrap {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  #root .login-area .login-box .login-letter .login-cont-wrap .login-txt-wrap {
+    text-align: center;
+  }
+  #root .login-area .login-box .login-letter .border {
+    width: 80%;
+  }
+}
+
+@media (max-width: 480px) {
+  #root .login-area {
+    padding: 10px;
+  }
+  #root .login-area .login-box {
+    width: 100%;
+  }
+  #root .login-area .login-box .login-letter {
+    padding: 1rem;
+    padding-bottom: 3rem;
+  }
+  #root .login-area .login-box .login-letter .login-cont-wrap {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  #root .login-area .login-box .login-letter .login-cont-wrap .login-txt-wrap {
+    text-align: center;
+  }
+  #root .login-area .login-box .login-letter .border {
+    width: 80%;
+  }
 }

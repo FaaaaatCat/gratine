@@ -3,13 +3,12 @@ import { dbService, storageService } from '../fbase';
 import { v4 as uuidv4 } from 'uuid';
 import { collection, addDoc, query, orderBy, where, doc, getDocs, updateDoc} from "firebase/firestore";
 import { ref, uploadString, getDownloadURL } from "@firebase/storage";
-import moment from "moment";
 
-const NweetFactory = ({ userObj, fbUserObj, gameObj }) => {
-    const UserGameRef = doc(dbService, "userGame", `${gameObj?.id}`);
+const NweetFactory = ({ userObj, fbUserObj}) => {
     const [nweet, setNweet] = useState("");
     const [attachment, setAttachment] = useState("");
     const [tooltip, setTooltip] = useState(false);
+    const [textHeight, setTextHeight] = useState(32);
 
     //텍스트 읽는 부분
     const onChange = (e) => {
@@ -137,7 +136,7 @@ const NweetFactory = ({ userObj, fbUserObj, gameObj }) => {
             createdDate: todayfull,
             creatorId: userObj.uid,
             attachmentUrl,
-            creatorName: userObj.displayName,
+            creatorName: fbUserObj.displayName,
             creatorImg: userObj.photoURL,
             orderWhat: orderWhat,
             orderText: orderText,
@@ -168,11 +167,23 @@ const NweetFactory = ({ userObj, fbUserObj, gameObj }) => {
     //사진파일 업로드 전 지우기
     const onClearAttachment = () => setAttachment("")
 
-    //엔터눌러서 채팅치기
+    //엔터 & shift+엔터
     const handleKeyPress = (e) => {
-        if(e.keyCode === 13){
-            onSubmit(e);
-            setTooltip(false)
+        console.log(nweet)
+        if (nweet == '') {
+            setTextHeight(32)
+        }
+        if (e.keyCode == 13) {
+            e.preventDefault();
+            if (e.shiftKey) {
+                setNweet(nweet + '\r')
+                setTextHeight(textHeight + 15)
+            }
+            else {
+                onSubmit(e);
+                setTooltip(false)
+                setTextHeight(32)
+            }
         }
     }
 
@@ -225,6 +236,7 @@ const NweetFactory = ({ userObj, fbUserObj, gameObj }) => {
                     onChange={onChange}
                     onKeyDown={handleKeyPress}
                     placeholder=""
+                    style={{height: textHeight + 'px'}}
                     // maxLength={120} //글자제한
                 />
                 <label htmlFor="file">

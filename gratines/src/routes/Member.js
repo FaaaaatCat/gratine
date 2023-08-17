@@ -6,17 +6,17 @@ import { ref, uploadString, getDownloadURL } from "@firebase/storage";
 
 const Member = ({ isLoggedIn, fbUserObj, userObj }) => {
     const auth = getAuth();
-    const [appendDiv, setAppendDiv] = useState(false);
     const [loginUsers, setLoginUsers] = useState([]);
     useEffect(() => {
         if (isLoggedIn) {
             readLoginUser();
         }
         else {
-            setLogOut();
+            //setLogOut();
         }
     }, []);
 
+    //유저정보를 로그아웃으로 만드는 기능
     const setLogOut = async () => {
         const q = query(
             collection(dbService, "user"),
@@ -29,12 +29,13 @@ const Member = ({ isLoggedIn, fbUserObj, userObj }) => {
             login : false,
         })
     }
+
+    //로그인된 유저 불러오는 기능
     const readLoginUser = async () => {
         const q = query(
           collection(dbService, "user"),
           where("login", "==", true)
         );
-        //const querySnapshot = await getDocs(q);
         const unsubscribe = onSnapshot(q, (Snapshot) => {
             const loginUserArray = Snapshot.docs.map((doc) => { //snapshot : 트윗을 받을때마다 알림 받는곳. 새로운 스냅샷을 받을때 nweetArray 라는 배열을 만듬
                 return {
@@ -49,11 +50,9 @@ const Member = ({ isLoggedIn, fbUserObj, userObj }) => {
                 unsubscribe();
             }
         });
-
         // querySnapshot.forEach((doc) => {
         //     return (
         //         console.log(doc._document.data.value.mapValue.fields)
-                
         //     )
         // });
     }

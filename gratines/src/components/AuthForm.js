@@ -8,6 +8,8 @@ import { getAuth,
 import { dbService, storageService } from '../fbase';
 import { collection, addDoc } from "firebase/firestore";
 import symbol from "../images/symbol.png"
+import border from "../images/decoLine_1.png"
+import frame from "../images/frame_1.png"
 
 const AuthForm = ({userObj, refreshUser}) => {
     const auth = getAuth();
@@ -62,6 +64,7 @@ const AuthForm = ({userObj, refreshUser}) => {
                     attendCount : 0,
                     attendRanNum: 0,
                     totalAttend: 0,
+                    attendDate: '',
                 }
                 const fbUserObj = {
                     uid: auth.currentUser.uid,
@@ -100,21 +103,13 @@ const AuthForm = ({userObj, refreshUser}) => {
     
     return (
         <>
-            <div className={"login-letter" + (newAccount ? ' letter-long ' : '')}>
+            <div className={"login-letter"}>
                 <div className="frame-1"></div>
                 <div className="frame-2"></div>
                 <div className="frame-3"></div>
                 <div className="frame-4"></div>
                 {/* <button className="gtn-btn btn-google" onClick={onSocialClick} name="google">구글 계정으로 로그인</button> */}
                 <img src={symbol} className="symbol" alt="" />
-                        {newAccount && 
-                            <>
-                                <div className="notice-box">
-                                    <p>가입 전, 공지사항을 확인해주세요!</p>
-                                    <a href="https://www.naver.com/" target="_blank">▶ 공지사항 바로가기</a>
-                                </div>
-                            </>
-                        }
                 <div className="login-cont-wrap">
                     <div className="login-txt-wrap">
                         <div className="login-title">
@@ -156,20 +151,37 @@ const AuthForm = ({userObj, refreshUser}) => {
                         <p>{error}</p>
                     </form>
                 </div>
-                <div className="login-functions">
-                    <div className="function-item">
-                        <div className="img"></div>
-                        <p>공지사항</p>
+                <div className="border">
+                    <div className="line">
+                        <div></div>
+                        <div></div>
                     </div>
-                    <div className="function-item">
-                        <div className="img"></div>
-                        <p>상점계</p>
-                    </div>
-                    <div className="function-item">
-                        <div className="img"></div>
-                        <p>진행계</p>
-                    </div>
+                    <img src={frame} alt="" />
                 </div>
+                {newAccount ? 
+                    <>
+                        <div className="notice-box">
+                            <p>가입 전, 공지사항을 확인해주세요!</p>
+                            <a href="https://www.naver.com/" target="_blank">▶ 공지사항 바로가기</a>
+                        </div>
+                    </> :
+                    <>
+                        <div className="login-functions">
+                            <div className="function-item">
+                                <div className="img"></div>
+                                <p>공지사항</p>
+                            </div>
+                            <div className="function-item">
+                                <div className="img"></div>
+                                <p>상점계</p>
+                            </div>
+                            <div className="function-item">
+                                <div className="img"></div>
+                                <p>진행계</p>
+                            </div>
+                        </div>
+                    </>
+                }
                 <div className="ending-ment d-none">
                     <p>Two O Clock Party will begin </p>
                     <p className="mt-2"></p>
@@ -179,8 +191,6 @@ const AuthForm = ({userObj, refreshUser}) => {
                     <div className="signature"></div>
                     {/* <p>Minerva McGonagall</p> */}
                 </div>
-            </div>
-            <div className="login-letter-envelope envelope-long d-none">
             </div>
         </>
     );

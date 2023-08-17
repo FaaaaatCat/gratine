@@ -2,43 +2,20 @@ import React, { useEffect, useState } from "react";
 import { dbService, storageService } from '../fbase';
 import { collection, addDoc, query, onSnapshot, orderBy,where, doc, getDocs, updateDoc } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { CircularProgressbar } from 'react-circular-progressbar';
-import 'react-circular-progressbar/dist/styles.css';
+
 import Nweet from "components/Nweet";
 import NweetFactory from "components/NweetFactory";
 import Profile from "./Profile";
-import plantImg from '../images/plant.png'
-import moment from "moment";
 import Member from "./Member";
 import Vending from "./Vending";
+import Attend from "./Attend";
+import plantImg from '../images/plant.png'
+import light from '../images/후광.png'
 
 const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, attendObj }) => {
     const auth = getAuth();
     const [nweets, setNweets] = useState([]);
-    const [gameObj, setGameObj] = useState(null);
-
-    // var uid = auth.currentUser.uid;
-    // const userStatusDatabaseRef = ref(storageService, `/status/${userObj.uid}`);
-    // var isOfflineForDatabase = {
-    //     state: 'offline',
-    //     last_changed: storageService.ServerValue.TIMESTAMP,
-    // };
-    // var isOnlineForDatabase = {
-    //     state: 'online',
-    //     last_changed: storageService.ServerValue.TIMESTAMP,
-    // };
-    // ref(storageService, '.info/connected').on('value', function(snapshot) {
-    //     if (snapshot.val() == false) {
-    //         return;
-    //     };
-    //     userStatusDatabaseRef.onDisconnect().set(isOfflineForDatabase).then(function() {
-    //         userStatusDatabaseRef.set(isOnlineForDatabase);
-    //     });
-    // });
-
-    //오늘 날짜
-    let today = moment().format("YYMMDD")
-    let todayfull = new Date().toLocaleString();
+    const [infoView, setInfoView] = useState(false);
 
     //명령어 모음
     let orderList = ['10', '50', '100', '선택']
@@ -86,60 +63,12 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, attendObj }) => {
     //     // querySnapshot.forEach(doc => console.log(doc));
     // };
 
-    const countAttend = async () => {
-        //1. 게임 데이터 경로 생성
-        const q = query(
-            collection(dbService, "userGame"),
-            where("uid", "==", userObj.uid)
-        );
-        const querySnapshot = await getDocs(q);
-        const currentUserGameData = querySnapshot.docs[0]._document.data.value.mapValue.fields;
-        const currentUserGameData_Id = querySnapshot.docs[0].id;
-        const currentUserGameData_Total = Number(currentUserGameData.totalAttend.integerValue);
-        const currentUserGameData_AttendCount = Number(currentUserGameData.attendCount.integerValue);
-        let attendRanNum = Math.ceil(Math.random() * (10 - 1) + 1);
-        const ok = window.confirm("출석하시나요? 출석은 하루에 한번만 눌러주세요!");
-        //2. 출석횟수 업데이트(+1)
-        if (ok) {
-            const UserGameRef = doc(dbService, "userGame", currentUserGameData_Id);
-            await updateDoc(UserGameRef, {
-                attendRanNum : attendRanNum,
-                attendCount : currentUserGameData_AttendCount + 1,
-                totalAttend : currentUserGameData_Total + attendRanNum,
-            })
-            refreshUser();
-        }
-        //트윗으로도 알리기(오류도 있고 굳이 싶어 안넣음)
-        // const attendMention = `[출석완료] ${userObj.displayName} 님이 출석했습니다. ${todayfull} `
-        // const attendNweetObj = {
-        //     text: attendMention,
-        //     createdAt: Date.now(),
-        //     createdDate: todayfull,
-        //     creatorId: userObj.uid,
-        //     creatorName: userObj.displayName,
-        // };
-        // await addDoc(collection(dbService, "nweets"), attendNweetObj);
+    const viewInfo = () => {
+        setInfoView(true)
     }
-
-    //출석 리셋 기능
-    const resetAttend = async () => {
-        const q = query(
-            collection(dbService, "userGame"),
-            where("uid", "==", userObj.uid)
-        );
-        const querySnapshot = await getDocs(q);
-        const currentUserGameData_Id = querySnapshot.docs[0].id;
-        const ok = window.confirm("화분 게이지를 진짜 삭제할래요?");
-        const UserGameRef = doc(dbService, "userGame", currentUserGameData_Id);
-        if (ok) {
-            await updateDoc(UserGameRef, {
-                totalAttend: 0,
-                attendCount: 0,
-            })
-            refreshUser();
-        }
+    const hideInfo = () => {
+        setInfoView(false)
     }
-
 
 
     
@@ -149,7 +78,6 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, attendObj }) => {
                 userObj={userObj}
                 refreshUser={refreshUser}
                 fbUserObj={fbUserObj}
-                gameObj={gameObj}
             />
             <div className="chatting-area">
                 <div className="logo-box">
@@ -167,7 +95,6 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, attendObj }) => {
                             isWhole={nweet.orderWhat === "/전체"}
                             isDice={nweet.orderWhat === "/주사위" && orderList.includes(nweet.orderText)}
                             isBuy={nweet.buy === true}
-                            gameObj={gameObj}
                         />
                     ))}
                 </div>
@@ -176,13 +103,12 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, attendObj }) => {
                         userObj={userObj}
                         refreshUser={refreshUser}
                         fbUserObj={fbUserObj}
-                        gameObj={gameObj}
                     />
                 </div>
             </div>
             <div className="side-area">
                 <div className="member-area">
-                    <div className="title">접속중 인원</div>
+                    <div className="title">모든 멤버</div>
                     <Member
                         userObj={userObj}
                         isLoggedIn={isLoggedIn}
@@ -190,47 +116,32 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, attendObj }) => {
                     />
                 </div>
                 <div className="attend-area">
-                    <div className="title">화분키우기 (출석 보상)</div>
-                    <div className="content-wrap">
-                        <div className="attend-gauge-wrap">
-                            <img src={plantImg} alt="" />
-                            <CircularProgressbar
-                                counterClockwise
-                                background
-                                value={attendObj.totalAttend}
-                                maxValue={100}
-                                text={`${attendObj.totalAttend}%`}
-                                styles={{
-                                    path: {
-                                        // stroke: `rgba(102, 234, 218, ${percentage / 100})`,
-                                        stroke: '#44D9C7',
-                                        strokeLinecap: 'round', //butt
-                                        transition: 'stroke-dashoffset 0.5s ease 0s',
-                                        transformOrigin: 'center center',
-                                    },
-                                    trail: {
-                                        // stroke: '#E7E7E7',
-                                        stroke: 'white',
-                                        strokeLinecap: 'round',
-                                    },
-                                    background: {
-                                        fill: 'transparent',
-                                        //fill: 'white',
-                                    },
-                                }}
-                            />
-                        </div>
-                        <div className="attend-info">
-                            <div><b>{attendObj.attendCount}</b>회 출석했습니다</div>
-                            <button className="gtn-btn btn-mint mr-auto ml-auto" onClick={countAttend}>
-                                출석하기
-                            </button>
-                        </div>
-                        {/* <button
-                            className="gtn-btn mr-auto ml-auto"
-                            onClick={resetAttend}
-                        >화분 리셋 (테스트용)</button> */}
+                    <div className="title">화분키우기 (출석 보상)
+                        <span className="info-wrap">
+                            <div
+                                className="info-btn"
+                                onMouseOver={viewInfo}
+                                onMouseOut={hideInfo}
+                            >
+                                <span className="material-icons-round">info</span>
+                            </div>
+                            <div className={'info-box ' + (infoView? '':'d-none')}>
+                                <div className="img-wrap">
+                                    <img src={plantImg} alt="" />
+                                    <img src={light} alt="" />
+                                </div>
+                                <p>
+                                    출석시 1~10 사이의 랜덤 경험치를 생성합니다.<br />
+                                    경험치를 모아 화분을 완성해보세요.
+                                </p>
+                            </div>
+                        </span>
                     </div>
+                    <Attend
+                        attendObj={attendObj}
+                        userObj={userObj}
+                        refreshUser={refreshUser}
+                    />
                 </div>
                 <div className="vending-area">
                     <div className="title">상점</div>

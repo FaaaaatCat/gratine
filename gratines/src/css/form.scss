@@ -14,10 +14,10 @@
 
 #root {
   //인풋
-  .gtn-input {
+  & .gtn-input {
     height: $form-height;
     padding: 0 $form-left-padding;
-    // background-color: red !important; //왜 안되지?
+    // background-color: white !important; //왜 안되지?
     border: 1px solid $form-border-color;
     border-radius: $form-radius;
     @include hoverEffect();
@@ -127,5 +127,6 @@
     border-radius: $form-radius;
     height: $chat-form-height;
     padding: 5px;
+    transition: all .1s;
   }
 }

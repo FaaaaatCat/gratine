@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { dbService, storageService } from '../fbase';
 import { collection, addDoc, query, onSnapshot, orderBy,where, doc, getDocs, updateDoc } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import moment from "moment";
 import bearImg1 from '../images/bears/bears_1.JPG'
 import bearImg2 from '../images/bears/bears_2.JPG'
 import bearImg3 from '../images/bears/bears_3.JPG'
@@ -15,7 +14,6 @@ const Vending = ({userObj, fbUserObj}) => {
     const [item, setItem] = useState("");
 
     //오늘 날짜
-    let today = moment().format("YYMMDD")
     let todayfull = new Date().toLocaleString();
 
 

@@ -142,8 +142,8 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 2rem 1rem;
+  overflow: hidden;
   @include cardDesign();
-
   //로고
   @at-root .logo {
     width: 180px;
@@ -159,12 +159,51 @@ body {
   //내 프로필 영역
   & .profile-wrap {
     width: 100%;
-
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
+
+    & .bg-test {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: -1;
+      -webkit-mask-image: linear-gradient(black, transparent);
+      mask-image: linear-gradient(black, transparent);
+      & img {
+        width: 500px;
+        opacity: 0.4;
+        filter: blur(0.5px);
+        // mask-size: 10px 10px;
+        // -webkit-mask-size: 10px 10px;
+        // mask-image: linear-gradient(45deg, #000000 25%, rgba(0, 0, 0, 0.2) 25%),
+        //   linear-gradient(-45deg, #000000 25%, rgba(0, 0, 0, 0.2) 25%),
+        //   linear-gradient(45deg, rgba(0, 0, 0, 0.2) 75%, #000000 75%),
+        //   linear-gradient(-45deg, rgba(0, 0, 0, 0.2) 75%, #000000 75%);
+        // -webkit-mask-image: linear-gradient(
+        //     45deg,
+        //     #000000 25%,
+        //     rgba(0, 0, 0, 0.2) 25%
+        //   ),
+        //   linear-gradient(-45deg, #000000 25%, rgba(0, 0, 0, 0.2) 25%),
+        //   linear-gradient(45deg, rgba(0, 0, 0, 0.2) 75%, #000000 75%),
+        //   linear-gradient(-45deg, rgba(0, 0, 0, 0.2) 75%, #000000 75%);
+      }
+      &::after {
+        content: "";
+        width: 100%;
+        height: 100%;
+        display: block;
+        position: absolute;
+        background-color: rgba(141, 77, 58, 0.712);
+        mix-blend-mode: overlay;
+      }
+    }
     @at-root .profile-box__my {
       width: 120px;
       height: 120px;
@@ -228,7 +267,7 @@ body {
       box-shadow: $nameplate-shadow;
       width: 100%;
       margin: 1rem 0;
-      padding: 0.5rem 0.8rem;
+      padding: 0.5rem;
       font-size: 1.3rem;
       display: flex;
       align-items: center;
@@ -337,8 +376,9 @@ body {
       &.wholeChat {
         background-color: $yellow-200 !important;
         padding: 0.3rem 0.8rem;
-        & *{
+        & * {
           color: $brown-700 !important;
+          line-height: 1.3rem;
         }
       }
       //오더채팅
@@ -349,9 +389,9 @@ body {
         padding: 0.3rem 0.8rem;
       }
       //구매채팅
-      &.buyChat{
+      &.buyChat {
         background-color: $brown-200;
-        & .txt-box p{
+        & .txt-box p {
           font-weight: 500;
         }
       }
@@ -424,7 +464,10 @@ body {
           font-weight: 500;
           color: $brown-700;
         }
-        & p {
+        & pre {
+          white-space: pre-wrap;
+          font-family: "Iropke Batang";
+          margin: 0;
           font-size: 14px;
           line-height: 150%;
           font-weight: 400;
@@ -450,10 +493,20 @@ body {
       & img {
         width: 50px;
         height: 50px;
+        border-radius: $form-radius;
       }
       & button {
         margin-left: 10px;
         padding: 0.2rem 0.5rem;
+        font-family: "Pretendard";
+        background-color: $brown-200;
+        padding: 0.5rem;
+        border-radius: $form-radius;
+        transition: all 0.2s;
+        &:hover {
+          transition: all 0.2s;
+          background-color: $brown-400;
+        }
       }
     }
     // 폼 작성
@@ -537,6 +590,71 @@ body {
       font-size: 1rem;
       font-weight: 700;
       color: $brown-800;
+      display: flex;
+      align-items: center;
+      & .info-wrap {
+        & .info-btn {
+          display: inline-block;
+          width: 18px;
+          height: 18px;
+          border-radius: 100px;
+          margin-left: 4px;
+          cursor: pointer;
+          & span {
+            font-size: 16px;
+            opacity: 0.4;
+          }
+        }
+        & .info-box {
+          background: linear-gradient(0deg, #{$brown-500} 0%, #{$brown-400} 50%, #{$brown-300} 100%);
+          border-top: 1px solid white;
+          padding: 0.5rem;
+          position: absolute;
+          top: 40px;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          z-index: 10;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          overflow: hidden;
+          & .img-wrap {
+            width: 100px;
+            height: 100px;
+            position: relative;
+            margin: 15px 0;
+            & img {
+              filter: invert(1);
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translateX(-50%) translateY(-50%);
+              &:nth-child(1){
+                width: 100px;
+                filter: invert(1) drop-shadow(0px 0px 15px white);
+              }
+              &:nth-child(2){
+                width: 240px;
+              }
+            }
+          }
+          & p{
+            background-color: $brown-600;
+            z-index: 20;
+            line-height: 1.4rem;
+            font-size: 0.9rem;
+            color: $yellow-100;
+            font-weight: 400;
+            padding: 6px 12px;
+            border: 1px solid white;
+            border-radius: $form-radius;
+          }
+        }
+      }
     }
     &.memeber-area {
       flex: 1;
@@ -641,7 +759,7 @@ body {
           content: "SoldOut";
           opacity: 1;
         }
-        & .eventTag{
+        & .eventTag {
           position: absolute;
           top: -5px;
           left: -5px;
@@ -736,7 +854,6 @@ body {
         transform: translate(-50%, -50%);
         // filter: invert(96%) sepia(12%) saturate(137%) hue-rotate(115deg)
         //   brightness(105%) contrast(91%);
-
         filter: invert(1) brightness(1000%);
         mix-blend-mode: multiply;
       }
@@ -747,8 +864,13 @@ body {
       gap: 10px;
       font-size: 1rem;
       font-weight: 700;
-      & div{
-        
+      & .btn-disable {
+        background: $brown-200 !important;
+        color: $brown-500 !important;
+        cursor: auto !important;
+        &:hover {
+          filter: none !important;
+        }
       }
       & b {
         color: $mint;

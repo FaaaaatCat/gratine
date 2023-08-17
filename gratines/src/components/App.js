@@ -50,6 +50,7 @@ function App() {
           attendCount : 0,
           attendRanNum : 0,
           totalAttend: 0,
+          attendDate: '',
         });
         //await 끝난후 (새로고침마다) 불러오기
         refreshUser();
@@ -66,22 +67,14 @@ function App() {
         //logoutDB(user);
       }
       setInit(true);
-      window.addEventListener('pagehide', function (e) {
-        e.preventDefault();
-        logoutDB(auth.currentUser)
-      });
-      window.addEventListener('beforeunload', function (e) {
-        e.preventDefault();
-        logoutDB(auth.currentUser)
-      });
-    });
-    window.addEventListener('pagehide', function (e) {
-      e.preventDefault();
-      logoutDB(auth.currentUser)
-    });
-    window.addEventListener('beforeunload', function (e) {
-      e.preventDefault();
-      logoutDB(auth.currentUser)
+      // window.addEventListener('pagehide', function (e) {
+      //   e.preventDefault();
+      //   logoutDB(auth.currentUser)
+      // });
+      // window.addEventListener('beforeunload', function (e) {
+      //   e.preventDefault();
+      //   logoutDB(auth.currentUser)
+      // });
     });
   }, [])
 
@@ -155,6 +148,7 @@ function App() {
       attendCount : userAtdData[0].attendCount,
       attendRanNum : userAtdData[0].attendRanNum,
       totalAttend: userAtdData[0].totalAttend,
+      attendDate: userAtdData[0].attendDate
     })
   };
   //유저네임 변경시 자동 리프레쉬 업데이트

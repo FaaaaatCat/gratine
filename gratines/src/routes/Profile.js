@@ -5,8 +5,9 @@ import { collection, getDocs, query, where, orderBy, doc, updateDoc } from "fire
 import { Navigate, useNavigate } from "react-router-dom";
 import EditProfile from "./EditProfile";
 import ShowProfile from "./ShowProfile";
+import bg from "../images/테스트_전신.png"
 
-const Profile = ({ refreshUser, userObj, fbUserObj, gameObj }) => {
+const Profile = ({ refreshUser, userObj, fbUserObj }) => {
     const auth = getAuth();
     const navigate = useNavigate();
 
@@ -36,7 +37,9 @@ const Profile = ({ refreshUser, userObj, fbUserObj, gameObj }) => {
 
     ///////////////////////////////////////////////////////////////////////////////
     //3. 로그아웃 기능
-    const onLogOutClick = async() => {
+
+    //유저정보를 로그아웃으로 만드는 기능
+    const setLogOut = async () => {
         const q = query(
             collection(dbService, "user"),
             where("uid", "==", userObj.uid)
@@ -47,6 +50,11 @@ const Profile = ({ refreshUser, userObj, fbUserObj, gameObj }) => {
         await updateDoc(UserGameRef, {
             login : false,
         })
+    }
+
+    //완전 로그아웃 기능
+    const onLogOutClick = async() => {
+        //setLogOut();
         auth.signOut();
         navigate("/login");
     }
@@ -61,17 +69,18 @@ const Profile = ({ refreshUser, userObj, fbUserObj, gameObj }) => {
                             refreshUser={refreshUser}
                             userObj={userObj}
                             fbUserObj={fbUserObj}
-                            gameObj={gameObj}
                         />
                     ): (
                         <ShowProfile
                             refreshUser={refreshUser}
                             userObj={userObj}
                             fbUserObj={fbUserObj}
-                            gameObj={gameObj}
                         />
                     )
                 }
+                <div className="bg-test d-none">
+                    <img src={bg} alt="" />
+                </div>
             </div>
             <div className="flx-row gap-1 w-100">
                 {editing ?
