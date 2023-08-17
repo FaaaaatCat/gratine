@@ -255,13 +255,13 @@ body {
     }
     //이름
     & .nameplate {
-      // background-color: $yellow-300;
-      background: linear-gradient(
-        -45deg,
-        rgb(225, 194, 164) 0%,
-        rgb(241, 238, 164) 60%,
-        rgb(225, 194, 164) 100%
-      );
+      background-color: $yellow-300;
+      // background: linear-gradient(
+      //   -45deg,
+      //   rgb(225, 194, 164) 0%,
+      //   rgb(241, 238, 164) 60%,
+      //   rgb(225, 194, 164) 100%
+      // );
       border: 1px solid white;
       border-radius: 100px;
       box-shadow: $nameplate-shadow;
@@ -606,7 +606,12 @@ body {
           }
         }
         & .info-box {
-          background: linear-gradient(0deg, #{$brown-500} 0%, #{$brown-400} 50%, #{$brown-300} 100%);
+          background: linear-gradient(
+            0deg,
+            #{$brown-500} 0%,
+            #{$brown-400} 50%,
+            #{$brown-300} 100%
+          );
           border-top: 1px solid white;
           padding: 0.5rem;
           position: absolute;
@@ -633,16 +638,16 @@ body {
               top: 50%;
               left: 50%;
               transform: translateX(-50%) translateY(-50%);
-              &:nth-child(1){
+              &:nth-child(1) {
                 width: 100px;
                 filter: invert(1) drop-shadow(0px 0px 15px white);
               }
-              &:nth-child(2){
+              &:nth-child(2) {
                 width: 240px;
               }
             }
           }
-          & p{
+          & p {
             background-color: $brown-600;
             z-index: 20;
             line-height: 1.4rem;
@@ -679,7 +684,15 @@ body {
       flex-direction: column;
       align-items: center;
       gap: 5px;
+      &:hover {
+        cursor: pointer;
+        & .profile-box {
+          transition: all 0.1s;
+          box-shadow: 0px 0px 5px rgba(96, 86, 83, 0.4);
+        }
+      }
       & .profile-box {
+        transition: all 0.1s;
         background-color: white;
         width: 40px;
         height: 40px;

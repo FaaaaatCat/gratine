@@ -281,7 +281,7 @@ body #root .app-container .home-bg {
 }
 
 .profile-area .profile-wrap .nameplate {
-  background: linear-gradient(-45deg, #e1c2a4 0%, #f1eea4 60%, #e1c2a4 100%);
+  background-color: #ECE094;
   border: 1px solid white;
   border-radius: 100px;
   -webkit-box-shadow: 0rem 0.47rem 2.19rem rgba(37, 8, 8, 0.06), 0rem 0.94rem 1.41rem rgba(37, 8, 8, 0.06), 0rem 0.25rem 0.53rem rgba(37, 8, 8, 0.1), 0rem 0.13rem 0.19rem rgba(37, 8, 8, 0.06);
@@ -887,7 +887,20 @@ body #root .app-container .home-bg {
   gap: 5px;
 }
 
+.side-area .member-area .member-list:hover {
+  cursor: pointer;
+}
+
+.side-area .member-area .member-list:hover .profile-box {
+  -webkit-transition: all 0.1s;
+  transition: all 0.1s;
+  -webkit-box-shadow: 0px 0px 5px rgba(96, 86, 83, 0.4);
+          box-shadow: 0px 0px 5px rgba(96, 86, 83, 0.4);
+}
+
 .side-area .member-area .member-list .profile-box {
+  -webkit-transition: all 0.1s;
+  transition: all 0.1s;
   background-color: white;
   width: 40px;
   height: 40px;

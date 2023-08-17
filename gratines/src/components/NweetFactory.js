@@ -169,15 +169,25 @@ const NweetFactory = ({ userObj, fbUserObj}) => {
 
     //엔터 & shift+엔터
     const handleKeyPress = (e) => {
-        console.log(nweet)
         if (nweet == '') {
             setTextHeight(32)
         }
         if (e.keyCode == 13) {
             e.preventDefault();
             if (e.shiftKey) {
-                setNweet(nweet + '\r')
+                const text = nweet;
+                const selectionStart = e.target.selectionStart;
+                const selectionEnd = e.target.selectionEnd;
+                const newText = text.substring(0, selectionStart) +
+                                '\n' +
+                                text.substring(selectionEnd);
+                setNweet(newText)
                 setTextHeight(textHeight + 15)
+
+                // 줄 바꾸기 이후 커서 위치 조정
+                const newCursorPos = selectionStart + 1;
+                e.target.selectionStart = newCursorPos;
+                e.target.selectionEnd = newCursorPos;
             }
             else {
                 onSubmit(e);

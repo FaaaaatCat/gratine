@@ -97,8 +97,6 @@ const Attend = ({ attendObj, userObj, refreshUser }) => {
         );
         const querySnapshot = await getDocs(q);
         const lastAttendDate = querySnapshot.docs[0]._document.data.value.mapValue.fields.attendDate.stringValue
-        console.log('lastAttendDate =>',lastAttendDate)
-        console.log('todayFormat=>', todayFormat)
         if (lastAttendDate === todayFormat) {
             setAttendAble(false);
             return;

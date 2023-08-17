@@ -16,7 +16,7 @@
   transition: all 0.2s;
 }
 
-#root .gtn-btn {
+.gtn-btn {
   display: block;
   width: 150px;
   height: 32px;
@@ -35,29 +35,29 @@
   font-family: Pretendard !important;
 }
 
-#root .gtn-btn:hover {
+.gtn-btn:hover {
   -webkit-filter: brightness(0.9);
           filter: brightness(0.9);
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
 }
 
-#root .gtn-btn.btn-brown {
+.gtn-btn.btn-brown {
   background: linear-gradient(-45deg, #b78c1f 0%, #4e4234 100%);
   color: white;
   font-weight: 500;
 }
 
-#root .gtn-btn.btn-yellow {
+.gtn-btn.btn-yellow {
   background-color: #ECE094;
   color: #674738;
 }
 
-#root .gtn-btn.btn-mint {
+.gtn-btn.btn-mint {
   background-color: #44D9C7;
 }
 
-#root .gtn-btn.btn-white {
+.gtn-btn.btn-white {
   background: white;
   color: #433C34;
   position: relative;
@@ -67,7 +67,7 @@
   transition: 0.5s;
 }
 
-#root .gtn-btn.btn-white span {
+.gtn-btn.btn-white span {
   position: absolute;
   width: 25%;
   height: 100%;
@@ -83,30 +83,30 @@
   z-index: -1;
 }
 
-#root .gtn-btn.btn-white:hover {
+.gtn-btn.btn-white:hover {
   color: black;
   -webkit-filter: none;
           filter: none;
 }
 
-#root .gtn-btn.btn-white:hover span {
+.gtn-btn.btn-white:hover span {
   -webkit-transform: translateY(0) scale(2);
           transform: translateY(0) scale(2);
 }
 
-#root .gtn-btn.btn-white:hover span:nth-child(1) {
+.gtn-btn.btn-white:hover span:nth-child(1) {
   --n: 1;
 }
 
-#root .gtn-btn.btn-white:hover span:nth-child(2) {
+.gtn-btn.btn-white:hover span:nth-child(2) {
   --n: 2;
 }
 
-#root .gtn-btn.btn-white:hover span:nth-child(3) {
+.gtn-btn.btn-white:hover span:nth-child(3) {
   --n: 3;
 }
 
-#root .gtn-btn.btn-white:hover span:nth-child(4) {
+.gtn-btn.btn-white:hover span:nth-child(4) {
   --n: 4;
 }
 
@@ -162,6 +162,135 @@
   border-radius: 4px;
   height: 32px;
   padding: 5px;
-  -webkit-transition: all .1s;
-  transition: all .1s;
+  -webkit-transition: all 0.1s;
+  transition: all 0.1s;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1D1A16;
+}
+
+.ReactModalPortal > div {
+  background-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+.ReactModalPortal > div > div {
+  border-radius: 4px;
+  -webkit-box-shadow: 0rem 0.47rem 2.19rem rgba(8, 10, 37, 0.02), 0rem 0.94rem 1.41rem rgba(8, 10, 37, 0.02), 0rem 0.25rem 0.53rem rgba(8, 10, 37, 0.04), 0rem 0.13rem 0.19rem rgba(8, 10, 37, 0.02);
+          box-shadow: 0rem 0.47rem 2.19rem rgba(8, 10, 37, 0.02), 0rem 0.94rem 1.41rem rgba(8, 10, 37, 0.02), 0rem 0.25rem 0.53rem rgba(8, 10, 37, 0.04), 0rem 0.13rem 0.19rem rgba(8, 10, 37, 0.02);
+  background-color: white;
+  outline: none !important;
+  margin: 0 auto;
+  margin-top: 1rem;
+  padding: 0 !important;
+}
+
+.ReactModalPortal > div > div .modal-header {
+  padding: 10px 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.ReactModalPortal > div > div .modal-header p {
+  font-size: 1rem;
+}
+
+.ReactModalPortal > div > div .modal-header span {
+  cursor: pointer;
+  color: #746758;
+}
+
+.ReactModalPortal > div > div .modal-header span:hover {
+  color: #1D1A16;
+}
+
+.ReactModalPortal > div > div .modal-body {
+  padding: 1rem;
+}
+
+.ReactModalPortal > div > div .modal-btn {
+  margin-top: 1rem;
+  border-top: 1px solid #E9E5E2;
+  background-color: #F0EEEC;
+  padding: 10px 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 10px;
+}
+
+.ReactModalPortal > div > div .modal-btn button {
+  width: 100px;
+}
+
+.ReactModalPortal .modal__member {
+  width: 400px;
+}
+
+.ReactModalPortal .modal__member .modal-body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+  gap: 10px;
+}
+
+.ReactModalPortal .modal__member .modal-body .profile-img {
+  width: 200px;
+  height: 200px;
+  background-color: #E2DDD8;
+  border: 1px solid #E2DDD8;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.ReactModalPortal .modal__member .modal-body .profile-img img {
+  width: 100%;
+  height: 100%;
+}
+
+.ReactModalPortal .modal__member .modal-body .nameplate {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.ReactModalPortal .modal__member .modal-body .profile-info .info-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 5px;
+}
+
+.ReactModalPortal .modal__member .modal-body .profile-info .info-item span {
+  color: #B5AA9F;
+  font-size: 1rem;
+}
+
+.ReactModalPortal .modal__member .modal-body .profile-info .info-item p {
+  color: #746758;
 }
