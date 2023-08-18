@@ -125,7 +125,7 @@
     @include formFont();
     flex: 1;
     border-radius: $form-radius;
-    height: $chat-form-height;
+    min-height: $chat-form-height !important;
     padding: 5px;
     transition: all 0.1s;
     font-size: 14px;

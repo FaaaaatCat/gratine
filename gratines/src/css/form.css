@@ -160,7 +160,7 @@
       -ms-flex: 1;
           flex: 1;
   border-radius: 4px;
-  height: 32px;
+  min-height: 32px !important;
   padding: 5px;
   -webkit-transition: all 0.1s;
   transition: all 0.1s;

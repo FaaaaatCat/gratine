@@ -255,13 +255,16 @@ body {
     }
     //이름
     & .nameplate {
-      background-color: $yellow-300;
-      // background: linear-gradient(
-      //   -45deg,
-      //   rgb(225, 194, 164) 0%,
-      //   rgb(241, 238, 164) 60%,
-      //   rgb(225, 194, 164) 100%
-      // );
+      background-color: $brown-300;
+      background: linear-gradient(
+        -45deg,
+        rgb(210, 200, 190) 0%,
+        rgb(233, 231, 229) 30%,
+        rgb(247, 245, 243) 40%,
+        rgb(233, 231, 229) 50%,
+        rgb(210, 200, 190) 70%,
+        rgb(211, 211, 211) 100%
+      );
       border: 1px solid white;
       border-radius: 100px;
       box-shadow: $nameplate-shadow;

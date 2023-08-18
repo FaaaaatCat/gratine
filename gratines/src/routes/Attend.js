@@ -58,7 +58,7 @@ const Attend = ({ attendObj, userObj, refreshUser }) => {
             const currentUserGameData_Total = Number(currentUserGameData.totalAttend.integerValue);
             const currentUserGameData_AttendCount = Number(currentUserGameData.attendCount.integerValue);
             let attendRanNum = Math.ceil(Math.random() * (10 - 1) + 1);
-            const ok = window.confirm("출석 완료! XX Gold를 드립니다. 소지금에 추가해주세요!");
+            const ok = window.confirm("출석 완료! XX Gold를 드립니다. 소지금에 직접 추가해주세요!");
             if (ok) {
                 const UserGameRef = doc(dbService, "userGame", currentUserGameData_Id);
                 await updateDoc(UserGameRef, {

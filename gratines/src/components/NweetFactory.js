@@ -8,10 +8,10 @@ const NweetFactory = ({ userObj, fbUserObj}) => {
     const [nweet, setNweet] = useState("");
     const [attachment, setAttachment] = useState("");
     const [tooltip, setTooltip] = useState(false);
-    const [textHeight, setTextHeight] = useState(32);
+    const [textHeight, setTextHeight] = useState(0);
 
     //텍스트 읽는 부분
-    const onChange = (e) => {
+    const onInput = (e) => {
         setNweet(e.target.value);
         if (e.target.value[0] === '/') {
             setTooltip(true)
@@ -176,13 +176,14 @@ const NweetFactory = ({ userObj, fbUserObj}) => {
             e.preventDefault();
             if (e.shiftKey) {
                 const text = nweet;
+                const lines = text.split('\n').length;
                 const selectionStart = e.target.selectionStart;
                 const selectionEnd = e.target.selectionEnd;
                 const newText = text.substring(0, selectionStart) +
                                 '\n' +
                                 text.substring(selectionEnd);
                 setNweet(newText)
-                setTextHeight(textHeight + 15)
+                setTextHeight(32 + lines * 15)
 
                 // 줄 바꾸기 이후 커서 위치 조정
                 const newCursorPos = selectionStart + 1;
@@ -243,7 +244,7 @@ const NweetFactory = ({ userObj, fbUserObj}) => {
                     title="Text Chat Input"
                     autoComplete="off"
                     value={nweet}
-                    onChange={onChange}
+                    onInput={onInput}
                     onKeyDown={handleKeyPress}
                     placeholder=""
                     style={{height: textHeight + 'px'}}

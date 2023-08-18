@@ -14,7 +14,8 @@ const EditProfile = ({ refreshUser, userObj, fbUserObj }) => {
     const defaultProfile = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fdefault_profile.png?alt=media&token=9003c59f-8f33-4d0a-822c-034682416355';
     //새 소지금액 인풋
     const onGoldChange = (e) => {
-        setNewGold(e.target.value);
+        setNewGold(Number(e.target.value));
+        console.log(newGold)
     };
     //새 소지품 인풋
     const onItemChange = (e) => {
