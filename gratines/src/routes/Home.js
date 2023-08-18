@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { dbService, storageService } from '../fbase';
 import { collection, addDoc, query, onSnapshot, orderBy,where, doc, getDocs, updateDoc } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-
+import { Link } from 'react-router-dom';
 import Nweet from "components/Nweet";
 import NweetFactory from "components/NweetFactory";
 import Profile from "./Profile";
@@ -20,8 +20,8 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, attendObj }) => {
     //명령어 모음
     let orderList = ['10', '50', '100', '선택']
     
+    //트윗 읽어오기 기능
     useEffect(() => {
-        //트윗 받기
         const q = query(
             collection(dbService, "nweets"),
             orderBy("createdAt", "desc")
@@ -34,11 +34,6 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, attendObj }) => {
                 };
             });
             setNweets(nweetArray); //nweets에 nweetArray 라는 배열을 집어 넣음. 배열엔 doc.id와 doc.data()가 있음
-            // getMyAttend();
-            //(**보류)트윗쓸때마다 출석했는지 확인하고 기능넣기
-            // if (nweetArray[0].orderWhat === "/칵테일"){
-            //     getAttend();
-            // }
         });
         onAuthStateChanged(auth, (user) => {
             if (user == null) {
@@ -47,28 +42,21 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, attendObj }) => {
         });
     }, []);
 
-    //출석점수 기능(**전체 출석기능 할때 만들었음. 지금은 사용 안함)
-    // const getTotalAttend = async () => {
-    //     //1. 게임 데이터 받아오기
-    //     const q = query(
-    //         collection(dbService, "game"),
-    //         orderBy("createdDate", "desc")
-    //     );
-    //     const querySnapshot = await getDocs(q);
-    //     const lastGameData = querySnapshot._snapshot.docChanges[0].doc.data.value.mapValue.fields;
-        
-    //     //2. 세팅하기
-    //     setAtdTotal(lastGameData.totalAttend.integerValue);
-    //     //다 가져오기
-    //     // querySnapshot.forEach(doc => console.log(doc));
-    // };
-
+    //출석창 info hover 기능
     const viewInfo = () => {
         setInfoView(true)
     }
     const hideInfo = () => {
         setInfoView(false)
     }
+
+    //지난대화기록 새창 띄우기
+    const openHistoryWindow = () => {
+        const newWindow = window.open('', '_blank');
+        newWindow.location.href = 'https://www.google.com';
+        // newWindow.location.href = './History.js';
+        //newWindow.document.write('<html><body><h1>New Window</h1></body></html>');
+    };
 
 
     
@@ -149,6 +137,16 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, attendObj }) => {
                         userObj={userObj}
                         fbUserObj={fbUserObj}
                     />
+                </div>
+                <div className="history-area">
+                    <div className="title">지난 대화기록 보기
+                        <button className="gtn-btn btn-icon-only ml-auto" onClick={openHistoryWindow}>
+                            <span className="material-icons-round">arrow_forward</span>
+                        </button>
+                        {/* <Link to="/History" target="_blank">
+                            테스트로 히스토리 가기
+                        </Link> */}
+                    </div>
                 </div>
             </div>
         </>

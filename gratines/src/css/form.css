@@ -1,5 +1,5 @@
 #root .gtn-input {
-  height: 28px;
+  height: 32px;
   padding: 0 0.5rem;
   border: 1px solid #9591B1;
   border-radius: 4px;
@@ -40,6 +40,16 @@
           filter: brightness(0.9);
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
+}
+
+.gtn-btn.btn-icon-only {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+}
+
+.gtn-btn.btn-icon-only span {
+  color: #746758;
 }
 
 .gtn-btn.btn-brown {

@@ -28,7 +28,7 @@
   @at-root .gtn-btn {
     display: block;
     width: 150px;
-    height: $chat-form-height;
+    height: $form-height;
     padding: 0 1rem;
     background: white;
     color: $brown-800;
@@ -39,6 +39,14 @@
     font-weight: 600;
     @include hoverEffect();
     @include formFont();
+    &.btn-icon-only{
+      width: $form-height;
+      height: $form-height;
+      padding: 0;
+      & span{
+        color: $brown-700;
+      }
+    }
     &.btn-brown {
       background: linear-gradient(
         -45deg,
