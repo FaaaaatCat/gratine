@@ -1,52 +1,110 @@
-
-
-//---purple gray----
+//---default gray----
 $white: #fff;
-$gray-100: #F9F8FD;
-$gray-200: #ECEAF2;
-$gray-300: #DAD7E3;
-$gray-400: #C5C2D3; //disable-bg
-$gray-500: #9591B1; //form-border
-$gray-600: #716C94;
-$gray-700: #4D4772;
+$gray-100: #f9f8fd;
+$gray-200: #eceaf2;
+$gray-300: #dad7e3;
+$gray-400: #c5c2d3; //disable-bg
+$gray-500: #9591b1; //form-border
+$gray-600: #716c94;
+$gray-700: #4d4772;
 $gray-800: #373353;
 $gray-900: #292938;
 $black: #000;
 
-//color
-$yellow-100: #FBF9EB;
-$yellow-200: #F6F1CE;
-$yellow-300: #ECE094;
-$yellow-400: #E3CF59;
-$yellow-500: #DBC22E;
-$yellow-600: #B7A11F;
-$yellow-700: #9A871A;
-$yellow-800: #605410;
-$yellow-900: #342E09;
+//color(theme-wood)
+// $yellow-100: #fbf9eb;
+// $yellow-200: #f6f1ce;
+// $yellow-300: #ece094;
+// $yellow-400: #e3cf59;
+// $yellow-500: #dbc22e;
+// $yellow-600: #b7a11f;
+// $yellow-700: #9a871a;
+// $yellow-800: #605410;
+// $yellow-900: #342e09;
 
-$brown-100: #F0EEEC;
-$brown-200: #E9E5E2;
-$brown-300: #E2DDD8;
-$brown-400: #CBC4BC;
-$brown-500: #B5AA9F;
-$brown-600: #988978;
-$brown-700: #746758;
-$brown-800: #433C34;
-$brown-900: #1D1A16;
+// $brown-100: #f0eeec;
+// $brown-200: #e9e5e2;
+// $brown-300: #e2ddd8;
+// $brown-400: #cbc4bc;
+// $brown-500: #b5aa9f;
+// $brown-600: #988978;
+// $brown-700: #746758;
+// $brown-800: #433c34;
+// $brown-900: #1d1a16;
 
-$purple-100: #F8F8FA;
-$purple-200: #e9e8f1;
-$purple-300: #d8d7e7;
-$purple-400: #B2B0CB;
-$purple-500: #8A88AF;
-$purple-600: #6C699B;
-$purple-700: #4F4D73;
-$purple-800: #33324A;
-$purple-900: #171622;
+// $purple-100: #f8f8fa;
+// $purple-200: #e9e8f1;
+// $purple-300: #d8d7e7;
+// $purple-400: #b2b0cb;
+// $purple-500: #8a88af;
+// $purple-600: #6c699b;
+// $purple-700: #4f4d73;
+// $purple-800: #33324a;
+// $purple-900: #171622;
 
-$mint : #44D9C7;
-$purple : #625BD3;
-$brown : rgb(103, 71, 56);
+// $mint: #44d9c7;
+// $purple: #625bd3;
+// $brown: rgb(103, 71, 56);
+
+//color(theme-wood)
+$yellow-100: #F8F8E7;
+$yellow-200: #EFF0CD;
+$yellow-300: #DFE099;
+$yellow-400: #CED065;
+$yellow-500: #C2C43E;
+$yellow-600: #9D9F30;
+$yellow-700: #767824;
+$yellow-800: #505118;
+$yellow-900: #343901;
+
+//채도낮은 브라운
+$brown-100: #F2F1EE;
+$brown-200: #E2E2DC;
+$brown-300: #D3D3C9;
+$brown-400: #C4C3B6;
+$brown-500: #ADAC9A;
+$brown-600: #96957E;
+$brown-700: #73725D;
+$brown-800: #4D4D3F;
+$brown-900: #313128;
+
+//채도높은 브라운
+// $brown-100: #F7F6F2;
+// $brown-200: #E9E9DE;
+// $brown-300: #DCDBC9;
+// $brown-400: #C7C6AB;
+// $brown-500: #B3B18C;
+// $brown-600: #9F9C6D;
+// $brown-700: #838056;
+// $brown-800: #5A583B;
+// $brown-900: #3B3A27;
+
+//청록
+$purple-100: #F5FBF8;
+$purple-200: #DEF0E9;
+$purple-300: #C6E6D9;
+$purple-400: #97D1B9;
+$purple-500: #4AA781;
+$purple-600: #007663;
+$purple-700: #255541;
+$purple-800: #1B3D2F;
+$purple-900: #11251D;
+
+
+//초록
+$purple-100: #F6FAF3;
+$purple-200: #E3F0E1;
+$purple-300: #CDE4C6;
+$purple-400: #A7D1A0;
+$purple-500: #6EB06D;
+$purple-600: #2F8254;
+$purple-700: #3D5F38;
+$purple-800: #2B4328;
+$purple-900: #1B2B15;
+
+$mint: #007663;
+$purple: #007663;
+$brown: rgb(103, 71, 56);
 
 //채팅폼 관련 값
 $chat-form-height: 32px;
@@ -68,9 +126,9 @@ $form-placeholder-txt: $gray-400;
 $layout-gap: 0.2rem;
 
 //카드 관련값
-$card-radius : 4px;
-$card-bg-color : rgba(255,255,255,0.7);
-$card-border : 1px solid white;
+$card-radius: 4px;
+$card-bg-color: rgba(255, 255, 255, 0.7);
+$card-border: 1px solid white;
 
 //쉐도우
 $form-shadow: 1.5px 1.5px 4.5px rgba(29, 12, 23, 0.18);
@@ -78,6 +136,10 @@ $card-shadow: 0rem 0.47rem 2.19rem rgba(8, 10, 37, 0.02),
   0rem 0.94rem 1.41rem rgba(8, 10, 37, 0.02),
   0rem 0.25rem 0.53rem rgba(8, 10, 37, 0.04),
   0rem 0.13rem 0.19rem rgba(8, 10, 37, 0.02);
+$card-strong-shadow: 0rem 0.47rem 2.19rem rgba(8, 10, 37, 0.1),
+  0rem 0.94rem 1.41rem rgba(8, 10, 37, 0.1),
+  0rem 0.25rem 0.53rem rgba(8, 10, 37, 0.2),
+  0rem 0.13rem 0.19rem rgba(8, 10, 37, 0.1);
 $layout-shadow: 0 0 1rem rgba(30, 10, 10, 0.15);
 $nameplate-shadow: 0rem 0.47rem 2.19rem rgba(37, 8, 8, 0.06),
   0rem 0.94rem 1.41rem rgba(37, 8, 8, 0.06),
@@ -86,5 +148,5 @@ $nameplate-shadow: 0rem 0.47rem 2.19rem rgba(37, 8, 8, 0.06),
 $form-active-shadow: 0px 0px 10px rgba(255, 50, 50, 0.2);
 
 //미디어쿼리
-$breakpoint-mobile : 480px;
-$breakpoint-labtop : 1000px;
+$breakpoint-mobile: 480px;
+$breakpoint-labtop: 1000px;

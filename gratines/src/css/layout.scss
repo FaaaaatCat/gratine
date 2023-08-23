@@ -7,42 +7,31 @@
   box-shadow: $card-shadow;
   backdrop-filter: blur(10px);
 }
-
-//네비게이션
-.nav {
-  //임시
-  display: none;
-  border-bottom: 1px solid black;
-  padding: 1rem;
-  & ul {
-    display: flex;
-    & li {
-      padding: 0.5rem;
-      background-color: lightblue;
-      margin: 0 10px;
-    }
+//로고
+@at-root .logo {
+  width: 180px;
+  height: 30px;
+  background-image: url("https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Flogo.png?alt=media&token=e45f8be9-4a1f-444a-8fbd-f2f1f2bb48b3");
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0;
+  &.logo_black {
+    background-image: url("https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Flogo2.png?alt=media&token=1b862dd5-1aa0-4321-9fcf-77d6388514d3");
+    width: 148px;
+    height: 58px;
   }
 }
+
 //전체
 body {
   overflow: hidden !important;
   & #root {
+    position: relative;
     overflow: hidden !important;
     height: 100vh;
-    //background-image: url("https://images.unsplash.com/photo-1623181392587-1d107a876150?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80");
-    //background-image: url("https://images.unsplash.com/photo-1620625852956-6af595d8294a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=735&q=80");
-    //background-image: url("https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbackground.avif?alt=media&token=9984bbfd-f7ba-406e-aabc-61b2d38c32ed");
-    //background-image: url("https://images.unsplash.com/photo-1457735720963-e277a46f2c68?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80");
-    //background-color: $purple-100;
-    // background-repeat: no-repeat;
-    // background-size: cover;
-    background: linear-gradient(
-      34deg,
-      #e4ddd6 20%,
-      #eceae2 45%,
-      #fffcf5 50%,
-      #e4ddd6 60%
-    );
     background: linear-gradient(
         34deg,
         #e4ddd6 10%,
@@ -51,26 +40,14 @@ body {
         #e4ddd6 70%
       ),
       url(https://grainy-gradients.vercel.app/noise.svg);
-    // background:
-    // linear-gradient(40deg, #3B572E, #e4ddd6),
-    // url(https://grainy-gradients.vercel.app/noise.svg);
-    position: relative;
-    //배경 글씨
-    &::before {
-      content: "Gratines Garden";
-      font-family: "Pinyon Script", cursive;
-      color: $brown-500;
-      background: -webkit-linear-gradient(white, $brown-500);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      white-space: nowrap;
-      font-size: 30rem;
-      position: absolute;
-      top: 30%;
-      left: 50%;
-      transform: translateY(-50%) translateX(-50%) rotate(-10deg);
-      mix-blend-mode: multiply;
-    }
+    background: linear-gradient(
+        34deg,
+        $brown-300 10%,
+        $brown-100 35%,
+        transparent 50%,
+        $brown-300 70%
+      ),
+      url(https://grainy-gradients.vercel.app/noise.svg);
     &::after {
       content: "created by @topports";
       position: absolute;
@@ -82,54 +59,73 @@ body {
       border-radius: 100px;
     }
     & .app-container {
+      width: 100%;
       height: 100%;
-      display: flex;
-      justify-content: center;
-      flex-direction: row;
-      margin: 0;
-      gap: $layout-gap;
-      padding: $layout-gap;
-      position: relative;
-      //배경 글씨
-      &::before {
-        content: "long story telling";
-        font-family: "Pinyon Script", cursive;
-        color: $brown-400;
-        background: -webkit-linear-gradient(white, $brown-500);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        white-space: nowrap;
-        font-size: 16rem;
-        position: absolute;
-        top: 80%;
-        left: 50%;
-        transform: translateY(-50%) translateX(-50%) rotate(-10deg);
-        mix-blend-mode: multiply;
-        z-index: -1;
-      }
-      //프로필 영역
-      & .profile-area {
-        width: 280px;
-      }
-      //채팅 영역
-      & .chatting-area {
-        width: 600px;
-        overflow: hidden !important;
-        & .chatting-list-container {
-          overflow-y: auto;
+      //홈 전체
+      & .home-wrap {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        margin: 0;
+        gap: $layout-gap;
+        padding: $layout-gap;
+        position: relative;
+        //프로필 영역
+        & .profile-area {
+          width: 280px;
         }
-      }
-      //사이드 영역
-      & .side-area {
-        width: 348px;
-      }
-      //배경
-      & .home-bg {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
+        //채팅 영역
+        & .chatting-area {
+          width: 600px;
+          overflow: hidden !important;
+          & .chatting-list-container {
+            overflow-y: auto;
+          }
+        }
+        //사이드 영역
+        & .side-area {
+          width: 348px;
+        }
+        //배경 글씨
+        & .home-bg {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          &::after {
+            content: "Gratines Garden";
+            font-family: "Pinyon Script", cursive;
+            color: $brown-500;
+            background: -webkit-linear-gradient(white, $brown-500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            white-space: nowrap;
+            font-size: 30rem;
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translateY(-50%) translateX(-50%) rotate(-10deg);
+            mix-blend-mode: multiply;
+          }
+          &::before {
+            content: "Gratines Garden long story telling";
+            font-family: "Pinyon Script", cursive;
+            color: $brown-400;
+            background: -webkit-linear-gradient(white, $brown-500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            white-space: nowrap;
+            font-size: 16rem;
+            position: absolute;
+            top: 80%;
+            left: 50%;
+            transform: translateY(-50%) translateX(-50%) rotate(-10deg);
+            mix-blend-mode: multiply;
+            z-index: -1;
+          }
+        }
       }
     }
   }
@@ -145,16 +141,9 @@ body {
   overflow: hidden;
   @include cardDesign();
   //로고
-  @at-root .logo {
-    width: 180px;
-    height: 30px;
-    background-image: url("https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Flogo.png?alt=media&token=e45f8be9-4a1f-444a-8fbd-f2f1f2bb48b3");
-    background-repeat: no-repeat;
-    background-size: cover;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0;
+  & .logo {
+    filter: invert(20%) sepia(2%) saturate(3614%) hue-rotate(314deg)
+      brightness(104%) contrast(91%);
   }
   //내 프로필 영역
   & .profile-wrap {
@@ -265,6 +254,15 @@ body {
         rgb(210, 200, 190) 70%,
         rgb(211, 211, 211) 100%
       );
+      background: linear-gradient(
+        -45deg,
+        $brown-400 0%,
+        $brown-200 30%,
+        $brown-100 40%,
+        $brown-300,
+        $brown-400,
+        $gray-300 100%
+      );
       border: 1px solid white;
       border-radius: 100px;
       box-shadow: $nameplate-shadow;
@@ -351,13 +349,11 @@ body {
   display: flex;
   flex-direction: column;
   @include cardDesign();
-  & .logo-box {
+  & .mobile-header {
     display: none;
-    align-items: center;
-    justify-content: center;
   }
   //채팅 보이는 영역
-  & .chatting-list-container {
+  @at-root .chatting-list-container {
     flex: 1;
     background-color: lightgray;
     display: flex;
@@ -518,11 +514,14 @@ body {
       align-items: center;
       gap: 5px;
       position: relative;
-      & input[type="submit"] {
-        width: 60px !important;
-        background: $yellow-300 !important;
-        color: $yellow-900 !important;
-        font-weight: $form-font-weight !important;
+      & button[type="submit"] {
+        width: 60px;
+        background: $yellow-300;
+        color: $yellow-900;
+        font-weight: $form-font-weight;
+        & span {
+          display: none;
+        }
       }
       //툴팁
       & .tooltip {
@@ -896,6 +895,14 @@ body {
       }
     }
   }
+  //히스토리 보기
+  & .history-area {
+    & .gtn-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
 }
 
 *::-webkit-scrollbar {
@@ -939,7 +946,7 @@ body {
   #root::after {
     display: none !important;
   }
-  .app-container {
+  .home-wrap {
     padding: 0 !important;
   }
   .profile-area {
@@ -951,11 +958,34 @@ body {
       border-radius: $card-radius $card-radius 0 0;
       box-shadow: $card-shadow;
     }
-    & .logo-box {
+    & .chatting-form-box {
+      & button[type="submit"] {
+        width: $form-height !important;
+        height: $form-height !important;
+        padding: 0 !important;
+        font-size: 0;
+        gap: 0;
+        & span {
+          font-size: 18px;
+          display: block !important;
+        }
+      }
+    }
+    & .mobile-header {
       display: flex !important;
-      & .logo {
-        transform: scale(0.7);
-        margin-bottom: 0.5rem;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 0 0.5rem;
+      height: 40px;
+      border-bottom: 1px solid $brown-500;
+      font-size: 1rem;
+      font-weight: bold;
+      & .logo{
+        transform: scale(0.7) translateX(-20%);
+      }
+      & button{
+        width: unset;
       }
     }
   }

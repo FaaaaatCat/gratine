@@ -263,11 +263,14 @@ const NweetFactory = ({ userObj, fbUserObj}) => {
                     accept="image/*"
                     onChange = {onFileChange}
                 />
-                <input
+                <button
                     className="gtn-btn"
                     type="submit"
                     value="전송"
-                />
+                >
+                    전송
+                    <span className="material-icons-round">send</span>
+                </button>
             </form>
         </>
     )

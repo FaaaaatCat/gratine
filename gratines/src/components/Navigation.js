@@ -2,8 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Navigation = ({ userObj, refreshUser }) => {
-    if (userObj.displayName === null) {
-    }
     return (
         <>
             <nav className="nav">
@@ -12,7 +10,7 @@ const Navigation = ({ userObj, refreshUser }) => {
                         <Link to="/">Home</Link>
                     </li>
                     <li>
-                        <Link to="/profile">{userObj.displayName}의 profile</Link>
+                        <Link to="/History" target="_blank">히스토리 가기</Link>
                     </li>
                 </ul>
             </nav>

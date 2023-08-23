@@ -61,7 +61,7 @@ const Profile = ({ refreshUser, userObj, fbUserObj }) => {
 
     return (
         <div className="profile-area">
-            <div className="logo">로고</div>
+            <div className="logo logo_black">로고</div>
             <div className="profile-wrap">
                 {editing ?
                     (

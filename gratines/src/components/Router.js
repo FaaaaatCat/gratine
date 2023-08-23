@@ -2,7 +2,7 @@ import React from "react";
 import {HashRouter as Router, Routes, Route, Navigate} from "react-router-dom";
 import Auth from "../routes/Auth";
 import Home from "../routes/Home";
-import Profile from "../routes/Profile";
+import History from "./History";
 import Navigation from "./Navigation";
 
 const AppRouter = ({isLoggedIn, userObj, refreshUser, fbUserObj, attendObj}) => {
@@ -10,7 +10,7 @@ const AppRouter = ({isLoggedIn, userObj, refreshUser, fbUserObj, attendObj}) => 
     return(
         <div className="app-container">
             <Router>
-                {isLoggedIn && <Navigation userObj={userObj} fbUserObj={fbUserObj}/>}
+                {/* {isLoggedIn && <Navigation userObj={userObj} fbUserObj={fbUserObj}/>} */}
                 <Routes>
                     {isLoggedIn ? (
                         <>
@@ -23,7 +23,12 @@ const AppRouter = ({isLoggedIn, userObj, refreshUser, fbUserObj, attendObj}) => 
                                     attendObj={attendObj}
                                 />}
                             />
-                            {/* <Route exact path="/profile" element={<Profile userObj={userObj} refreshUser={refreshUser} />} /> */}
+                            <Route exact path="/History" element={
+                                <History
+                                    userObj={userObj}
+                                    refreshUser={refreshUser}
+                                />
+                            } />
                         </>
                     ) : (
                         <>
@@ -36,7 +41,9 @@ const AppRouter = ({isLoggedIn, userObj, refreshUser, fbUserObj, attendObj}) => 
                             />
                         </>
                     )}
-                    <Route path="*" element={<Navigate replace to="/" />} /> 
+                    <Route path="*" element={
+                        <Navigate replace to="/" />
+                    } /> 
                 </Routes>
             </Router>
         </div>

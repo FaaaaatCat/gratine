@@ -13,6 +13,17 @@
 }
 
 #root {
+  //셀렉트
+  & .gtn-select {
+    height: $form-height;
+    padding: 0 0.5rem;
+    border: none;
+    box-shadow: $form-shadow;
+    border-radius: $form-radius;
+    @include hoverEffect();
+    @include formFont();
+  }
+
   //인풋
   & .gtn-input {
     height: $form-height;
@@ -22,6 +33,14 @@
     border-radius: $form-radius;
     @include hoverEffect();
     @include formFont();
+    &:focus {
+      outline: none !important;
+      border: 1px solid $yellow-800;
+      box-shadow: $card-strong-shadow;
+      &:hover {
+        filter: none !important;
+      }
+    }
   }
 
   //버튼
@@ -39,11 +58,11 @@
     font-weight: 600;
     @include hoverEffect();
     @include formFont();
-    &.btn-icon-only{
+    &.btn-icon-only {
       width: $form-height;
       height: $form-height;
       padding: 0;
-      & span{
+      & span {
         color: $brown-700;
       }
     }
@@ -62,6 +81,7 @@
     }
     &.btn-mint {
       background-color: $mint;
+      color: white;
     }
     &.btn-white {
       background: white;
@@ -128,7 +148,14 @@
       font-size: 18px;
     }
     @include hoverEffect();
+    @media (max-width: $breakpoint-mobile) {
+      width: $form-height;
+      padding: 0;
+      font-size: 0;
+      gap: 0;
+    }
   }
+
   & .chatting-textarea {
     @include formFont();
     flex: 1;

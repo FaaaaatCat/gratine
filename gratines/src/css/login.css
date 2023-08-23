@@ -14,29 +14,99 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  overflow-y: auto;
+}
+
+.login-area::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-image: url("https://static.vecteezy.com/system/resources/thumbnails/007/128/160/original/lens-flare-bright-afternoon-sun-with-lens-flare-lens-flare-transition-light-effect-lens-flare-effect-on-black-background-light-streaks-lights-optical-lens-flares-free-video.jpg");
+  position: absolute;
+  -webkit-filter: hue-rotate(60deg) brightness(400%) grayscale(70%);
+          filter: hue-rotate(60deg) brightness(400%) grayscale(70%);
+  opacity: 0.5;
+  -webkit-transform: rotate(-180deg);
+          transform: rotate(-180deg);
+  mix-blend-mode: soft-light;
 }
 
 .login-area .logo {
-  -webkit-transform: scale(1.2);
-          transform: scale(1.2);
+  -webkit-filter: invert(1) drop-shadow(0px 0px 2px #ffffff);
+          filter: invert(1) drop-shadow(0px 0px 2px #ffffff);
+  height: 116px;
+  width: 296px;
+  min-height: 116px;
   margin-bottom: 2rem;
+  position: relative;
 }
 
-.login-area .login-box {
+.login-area .logo::before {
+  content: "";
   width: 600px;
-  height: 500px;
-  position: relative;
+  height: 600px;
+  background: radial-gradient(circle, rgba(255, 150, 192, 0.8) 0%, rgba(173, 125, 255, 0) 50%);
+  position: absolute;
+  mix-blend-mode: color-burn;
+  display: none;
 }
 
-.login-area .login-box .login-letter {
+.login-area .copyright {
+  color: white;
+  position: absolute;
+  bottom: 10px;
+}
+
+.login-area .sunshine {
+  position: absolute;
+  -webkit-filter: hue-rotate(60deg) brightness(400%) grayscale(70%);
+          filter: hue-rotate(60deg) brightness(400%) grayscale(70%);
+  -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+  mix-blend-mode: soft-light;
+  -webkit-animation-name: rotateLight;
+          animation-name: rotateLight;
+  -webkit-animation-duration: 6s;
+          animation-duration: 6s;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-direction: alternate;
+          animation-direction: alternate;
+}
+
+.login-area .theme-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 5px;
+}
+
+.login-area .theme-btn button {
+  padding: 0 5px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+}
+
+.login-area .login-letter {
   position: relative;
-  width: 100%;
+  width: 600px;
   padding: 1rem 3rem 3rem 3rem;
   gap: 2rem;
   border-radius: 4px;
-  -webkit-box-shadow: 0rem 0.47rem 2.19rem rgba(8, 10, 37, 0.02), 0rem 0.94rem 1.41rem rgba(8, 10, 37, 0.02), 0rem 0.25rem 0.53rem rgba(8, 10, 37, 0.04), 0rem 0.13rem 0.19rem rgba(8, 10, 37, 0.02);
-          box-shadow: 0rem 0.47rem 2.19rem rgba(8, 10, 37, 0.02), 0rem 0.94rem 1.41rem rgba(8, 10, 37, 0.02), 0rem 0.25rem 0.53rem rgba(8, 10, 37, 0.04), 0rem 0.13rem 0.19rem rgba(8, 10, 37, 0.02);
-  background-color: #44463a;
+  -webkit-box-shadow: 0rem 0.47rem 2.19rem rgba(8, 10, 37, 0.1), 0rem 0.94rem 1.41rem rgba(8, 10, 37, 0.1), 0rem 0.25rem 0.53rem rgba(8, 10, 37, 0.2), 0rem 0.13rem 0.19rem rgba(8, 10, 37, 0.1);
+          box-shadow: 0rem 0.47rem 2.19rem rgba(8, 10, 37, 0.1), 0rem 0.94rem 1.41rem rgba(8, 10, 37, 0.1), 0rem 0.25rem 0.53rem rgba(8, 10, 37, 0.2), 0rem 0.13rem 0.19rem rgba(8, 10, 37, 0.1);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -49,7 +119,7 @@
           align-items: center;
 }
 
-.login-area .login-box .login-letter div[class*="frame-"] {
+.login-area .login-letter div[class*="frame-"] {
   position: absolute;
   width: 50px;
   height: 50px;
@@ -60,43 +130,41 @@
   background-image: url("https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fframe.png?alt=media&token=88efe3ab-2819-4c38-a0df-f911263bc059");
 }
 
-.login-area .login-box .login-letter div[class*="frame-"].frame-1 {
+.login-area .login-letter div[class*="frame-"].frame-1 {
   top: 0;
   left: 0;
 }
 
-.login-area .login-box .login-letter div[class*="frame-"].frame-2 {
+.login-area .login-letter div[class*="frame-"].frame-2 {
   top: 0;
   right: 0;
   -webkit-transform: rotateY(180deg);
           transform: rotateY(180deg);
 }
 
-.login-area .login-box .login-letter div[class*="frame-"].frame-3 {
+.login-area .login-letter div[class*="frame-"].frame-3 {
   bottom: 0;
   left: 0;
   -webkit-transform: rotateX(180deg);
           transform: rotateX(180deg);
 }
 
-.login-area .login-box .login-letter div[class*="frame-"].frame-4 {
+.login-area .login-letter div[class*="frame-"].frame-4 {
   bottom: 0;
   right: 0;
   -webkit-transform: rotateY(180deg) rotateX(180deg);
           transform: rotateY(180deg) rotateX(180deg);
 }
 
-.login-area .login-box .login-letter .symbol {
+.login-area .login-letter .symbol {
   width: 140px;
   height: 140px;
   background-repeat: none;
   background-size: contain;
   opacity: 1;
-  -webkit-filter: invert(63%) sepia(2%) saturate(2103%) hue-rotate(29deg) brightness(77%) contrast(108%);
-          filter: invert(63%) sepia(2%) saturate(2103%) hue-rotate(29deg) brightness(77%) contrast(108%);
 }
 
-.login-area .login-box .login-letter .notice-box {
+.login-area .login-letter .notice-box {
   width: 100%;
   padding: 0.5rem;
   border-radius: 4px;
@@ -114,20 +182,20 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background-color: #F6F1CE;
+  background-color: #EFF0CD;
 }
 
-.login-area .login-box .login-letter .notice-box p {
-  color: #746758;
+.login-area .login-letter .notice-box p {
+  color: #73725D;
 }
 
-.login-area .login-box .login-letter .notice-box a {
+.login-area .login-letter .notice-box a {
   font-weight: 800;
   font-size: 1rem;
-  color: #746758;
+  color: #73725D;
 }
 
-.login-area .login-box .login-letter .login-cont-wrap {
+.login-area .login-letter .login-cont-wrap {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -138,7 +206,7 @@
   width: 100%;
 }
 
-.login-area .login-box .login-letter .login-cont-wrap .login-txt-wrap {
+.login-area .login-letter .login-cont-wrap .login-txt-wrap {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -149,11 +217,11 @@
   gap: 1rem;
 }
 
-.login-area .login-box .login-letter .login-cont-wrap .login-txt-wrap * {
+.login-area .login-letter .login-cont-wrap .login-txt-wrap * {
   color: #d6d9d2;
 }
 
-.login-area .login-box .login-letter .login-cont-wrap .login-txt-wrap .login-title {
+.login-area .login-letter .login-cont-wrap .login-txt-wrap .login-title {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -170,27 +238,21 @@
   gap: 5px;
 }
 
-.login-area .login-box .login-letter .login-cont-wrap .login-txt-wrap .login-title p {
+.login-area .login-letter .login-cont-wrap .login-txt-wrap .login-title p {
   font-size: 1.4rem;
   font-weight: 600;
 }
 
-.login-area .login-box .login-letter .login-cont-wrap .login-txt-wrap .login-title span {
-  font-size: 1.4rem;
-  font-weight: 600;
-  display: block;
-}
-
-.login-area .login-box .login-letter .login-cont-wrap .login-txt-wrap .login-sub-txt {
+.login-area .login-letter .login-cont-wrap .login-txt-wrap .login-sub-txt {
   cursor: pointer;
 }
 
-.login-area .login-box .login-letter .login-cont-wrap .login-txt-wrap .login-sub-txt span {
-  color: #E3CF59;
+.login-area .login-letter .login-cont-wrap .login-txt-wrap .login-sub-txt span {
+  color: #CED065;
   margin-left: 5px;
 }
 
-.login-area .login-box .login-letter .login-cont-wrap form {
+.login-area .login-letter .login-cont-wrap form {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -204,17 +266,17 @@
   gap: 10px;
 }
 
-.login-area .login-box .login-letter .login-cont-wrap form p {
+.login-area .login-letter .login-cont-wrap form p {
   color: red;
 }
 
-.login-area .login-box .login-letter .border {
+.login-area .login-letter .border {
   position: relative;
   width: 100%;
 }
 
-.login-area .login-box .login-letter .border img,
-.login-area .login-box .login-letter .border .line {
+.login-area .login-letter .border img,
+.login-area .login-letter .border .line {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -222,16 +284,16 @@
           transform: translateX(-50%) translateY(-50%);
 }
 
-.login-area .login-box .login-letter .border img {
+.login-area .login-letter .border img {
   height: 14px;
   -webkit-filter: invert(92%) sepia(13%) saturate(1384%) hue-rotate(338deg) brightness(108%) contrast(85%);
           filter: invert(92%) sepia(13%) saturate(1384%) hue-rotate(338deg) brightness(108%) contrast(85%);
 }
 
-.login-area .login-box .login-letter .border .line {
+.login-area .login-letter .border .line {
   width: 110%;
   height: 1px;
-  background-color: #ECE094;
+  background-color: #DFE099;
   position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -244,16 +306,16 @@
           align-items: center;
 }
 
-.login-area .login-box .login-letter .border .line div {
+.login-area .login-letter .border .line div {
   width: 0;
   height: 0;
   border: 6px solid transparent;
-  border-bottom-color: #ECE094;
+  border-bottom-color: #DFE099;
   position: relative;
   top: -6px;
 }
 
-.login-area .login-box .login-letter .border .line div::after {
+.login-area .login-letter .border .line div::after {
   content: "";
   position: absolute;
   left: -6px;
@@ -261,15 +323,10 @@
   width: 0;
   height: 0;
   border: 6px solid transparent;
-  border-top-color: #ECE094;
+  border-top-color: #DFE099;
 }
 
-.login-area .login-box .login-letter .ending-ment {
-  color: #B7A11F;
-  text-align: center;
-}
-
-.login-area .login-box .login-letter .login-functions {
+.login-area .login-letter .login-functions {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -283,15 +340,15 @@
   width: 90%;
 }
 
-.login-area .login-box .login-letter .login-functions .function-item {
+.login-area .login-letter .login-functions .function-item {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
   padding: 6px;
   border-radius: 4px;
-  border: 1px solid #9A871A;
-  background-color: #605410;
-  color: #E3CF59;
+  border: 1px solid #767824;
+  background-color: #505118;
+  color: #CED065;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -304,66 +361,219 @@
   transition: all 0.2s;
 }
 
-.login-area .login-box .login-letter .login-functions .function-item:hover {
+.login-area .login-letter .login-functions .function-item:hover {
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
   -webkit-filter: brightness(0.9);
           filter: brightness(0.9);
 }
 
-.login-area .login-box .login-letter .login-functions .function-item .img {
+.login-area .login-letter .login-functions .function-item .img {
   width: 28px;
   height: 28px;
   border-radius: 4px;
-  background: #E3CF59;
+  background: #CED065;
+}
+
+@-webkit-keyframes rotateLight {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(20deg);
+            transform: rotate(20deg);
+  }
+}
+
+@keyframes rotateLight {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(20deg);
+            transform: rotate(20deg);
+  }
+}
+
+@-webkit-keyframes tiltDown {
+  from {
+    background-position: top center;
+  }
+  to {
+    background-position: center center;
+  }
+}
+
+@keyframes tiltDown {
+  from {
+    background-position: top center;
+  }
+  to {
+    background-position: center center;
+  }
+}
+
+#root .app-container .login-area.theme-spring {
+  background-image: url("https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2FspringBackground2.avif?alt=media&token=c423004b-139e-4768-afea-0c0e0682580d");
+  -webkit-animation-name: tiltDown;
+          animation-name: tiltDown;
+  -webkit-animation-duration: 100s;
+          animation-duration: 100s;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-direction: alternate;
+          animation-direction: alternate;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+}
+
+#root .app-container .login-area.theme-spring .login-letter {
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  background-color: rgba(255, 255, 255, 0.3);
+  background: -webkit-gradient(linear, left bottom, left top, from(rgba(255, 250, 150, 0.644)), color-stop(50%, rgba(3, 56, 42, 0.311)), to(rgba(255, 251, 175, 0.5)));
+  background: linear-gradient(0deg, rgba(255, 250, 150, 0.644) 0%, rgba(3, 56, 42, 0.311) 50%, rgba(255, 251, 175, 0.5) 100%);
+  -webkit-backdrop-filter: blur(3px);
+          backdrop-filter: blur(3px);
+  border-radius: 10px;
+  -webkit-box-shadow: 0rem 0.47rem 2.19rem rgba(8, 10, 37, 0.02), 0rem 0.94rem 1.41rem rgba(8, 10, 37, 0.02), 0rem 0.25rem 0.53rem rgba(8, 10, 37, 0.04), 0rem 0.13rem 0.19rem rgba(8, 10, 37, 0.02);
+          box-shadow: 0rem 0.47rem 2.19rem rgba(8, 10, 37, 0.02), 0rem 0.94rem 1.41rem rgba(8, 10, 37, 0.02), 0rem 0.25rem 0.53rem rgba(8, 10, 37, 0.04), 0rem 0.13rem 0.19rem rgba(8, 10, 37, 0.02);
+}
+
+#root .app-container .login-area.theme-spring .login-letter div[class*="frame-"] {
+  -webkit-filter: invert(0);
+          filter: invert(0);
+}
+
+#root .app-container .login-area.theme-spring .login-letter .symbol {
+  width: 140px;
+  height: 140px;
+  background-repeat: none;
+  background-size: contain;
+  -webkit-filter: invert(1);
+          filter: invert(1);
+  opacity: 0.7;
+}
+
+#root .app-container .login-area.theme-spring .login-letter .login-cont-wrap .login-txt-wrap .login-title p {
+  color: white;
+}
+
+#root .app-container .login-area.theme-spring .login-letter .login-cont-wrap .login-txt-wrap .login-title p span {
+  color: #DFE099;
+}
+
+#root .app-container .login-area.theme-spring .login-letter .function-item {
+  border: 1px solid #C2C43E;
+  background-color: #EFF0CD;
+  color: #505118;
+}
+
+#root .app-container .login-area.theme-spring .login-letter .function-item .img {
+  background: #CED065;
+  border: 1px solid #C2C43E;
+}
+
+#root .app-container .login-area.theme-wood {
+  background-image: url("https://images.unsplash.com/photo-1426170042593-200f250dfdaf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80");
+}
+
+#root .app-container .login-area.theme-wood .login-letter {
+  background-color: #352d22;
+  border-radius: 10px;
+  -webkit-box-shadow: 0rem 0.47rem 2.19rem rgba(8, 10, 37, 0.02), 0rem 0.94rem 1.41rem rgba(8, 10, 37, 0.02), 0rem 0.25rem 0.53rem rgba(8, 10, 37, 0.04), 0rem 0.13rem 0.19rem rgba(8, 10, 37, 0.02);
+          box-shadow: 0rem 0.47rem 2.19rem rgba(8, 10, 37, 0.02), 0rem 0.94rem 1.41rem rgba(8, 10, 37, 0.02), 0rem 0.25rem 0.53rem rgba(8, 10, 37, 0.04), 0rem 0.13rem 0.19rem rgba(8, 10, 37, 0.02);
+}
+
+#root .app-container .login-area.theme-wood .login-letter div[class*="frame-"] {
+  -webkit-filter: invert(10%) sepia(62%) saturate(200%) hue-rotate(326deg) brightness(90%) contrast(102%);
+          filter: invert(10%) sepia(62%) saturate(200%) hue-rotate(326deg) brightness(90%) contrast(102%);
+}
+
+#root .app-container .login-area.theme-wood .login-letter .symbol {
+  width: 140px;
+  height: 140px;
+  background-repeat: none;
+  background-size: contain;
+  -webkit-filter: invert(24%) sepia(9%) saturate(6371%) hue-rotate(23deg) brightness(150%) contrast(89%);
+          filter: invert(24%) sepia(9%) saturate(6371%) hue-rotate(23deg) brightness(150%) contrast(89%);
+  opacity: 0.5;
+}
+
+#root .app-container .login-area.theme-wood .login-letter .login-cont-wrap .login-txt-wrap .login-title p {
+  color: #96957E;
+}
+
+#root .app-container .login-area.theme-wood .login-letter .login-cont-wrap .login-txt-wrap .login-title p span {
+  color: #9D9F30;
+}
+
+#root .app-container .login-area.theme-wood .login-letter .notice-box {
+  background-color: #C2C43E;
+}
+
+#root .app-container .login-area.theme-wood .login-letter .notice-box p {
+  color: #4D4D3F;
+}
+
+#root .app-container .login-area.theme-wood .login-letter .notice-box a {
+  color: #4D4D3F;
+}
+
+#root .app-container .login-area.theme-wood .login-letter .function-item {
+  border: 1px solid #767824;
+  background-color: #505118;
+  color: #CED065;
+}
+
+#root .app-container .login-area.theme-wood .login-letter .function-item .img {
+  background: #CED065;
+}
+
+@media (max-height: 740px) {
+  .login-area {
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    padding: 1rem 0;
+  }
 }
 
 @media (max-width: 1000px) {
   #root .login-area {
     padding: 10px;
   }
-  #root .login-area .login-box {
-    width: 450px;
+  #root .login-area .logo {
+    -webkit-transform: scale(0.5);
+            transform: scale(0.5);
+    margin: 0;
   }
-  #root .login-area .login-box .login-letter {
+  #root .login-area .login-letter {
+    width: 100%;
     padding: 2rem;
     padding-top: 0.5rem;
   }
-  #root .login-area .login-box .login-letter .login-cont-wrap {
+  #root .login-area .login-letter .login-cont-wrap {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
   }
-  #root .login-area .login-box .login-letter .login-cont-wrap .login-txt-wrap {
+  #root .login-area .login-letter .login-cont-wrap .login-txt-wrap {
     text-align: center;
   }
-  #root .login-area .login-box .login-letter .border {
+  #root .login-area .login-letter .login-functions {
+    width: 110%;
+    gap: 3px;
+  }
+  #root .login-area .login-letter .border {
     width: 80%;
   }
-}
-
-@media (max-width: 480px) {
-  #root .login-area {
-    padding: 10px;
-  }
-  #root .login-area .login-box {
-    width: 100%;
-  }
-  #root .login-area .login-box .login-letter {
-    padding: 1rem;
-    padding-bottom: 3rem;
-  }
-  #root .login-area .login-box .login-letter .login-cont-wrap {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-  }
-  #root .login-area .login-box .login-letter .login-cont-wrap .login-txt-wrap {
-    text-align: center;
-  }
-  #root .login-area .login-box .login-letter .border {
-    width: 80%;
+  #root .login-area .copyright {
+    color: white;
+    position: relative;
+    margin-top: 3rem;
   }
 }

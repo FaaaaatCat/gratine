@@ -40,7 +40,7 @@ const Nweet = ({ nweetObj, isOwner, isOrder, orderWhat, orderText, isWhole, isDi
 
     return (
         <>  
-                <div className={'chatting-list ' + (isOwner? 'myChat ':'') + (isDice? 'orderChat ':'') + (isBuy? 'buyChat ':'') + (isWhole? 'wholeChat ':'')}>
+            <div className={'chatting-list ' + (isOwner? 'myChat ':'') + (isDice? 'orderChat ':'') + (isBuy? 'buyChat ':'') + (isWhole? 'wholeChat ':'')}>
                 <div className="profile-box">
                     <img src={nweetObj.creatorImg} />
                 </div>

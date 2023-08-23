@@ -8,206 +8,376 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  & .logo {
-    transform: scale(1.2);
-    margin-bottom: 2rem;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  transition: all 0.5s;
+  overflow-y: auto;
+  &::before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background-image: url("https://static.vecteezy.com/system/resources/thumbnails/007/128/160/original/lens-flare-bright-afternoon-sun-with-lens-flare-lens-flare-transition-light-effect-lens-flare-effect-on-black-background-light-streaks-lights-optical-lens-flares-free-video.jpg");
+    position: absolute;
+    filter: hue-rotate(60deg) brightness(400%) grayscale(70%);
+    opacity: 0.5;
+    transform: rotate(-180deg);
+    mix-blend-mode: soft-light;
   }
-  & .login-box {
-    width: 600px;
-    height: 500px;
+  & .logo {
+    filter: invert(1) drop-shadow(0px 0px 2px #ffffff);
+    height: 116px;
+    width: 296px;
+    min-height: 116px;
+    margin-bottom: 2rem;
     position: relative;
-    //편지지
-    & .login-letter {
-      position: relative;
-      width: 100%;
-      padding: 1rem 3rem 3rem 3rem;
-      gap: 2rem;
-      border-radius: 4px;
-      box-shadow: $card-shadow;
-      background-color: #44463a;
+    &::before {
+      content: "";
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(
+        circle,
+        rgba(255, 150, 192, 0.8) 0%,
+        rgba(173, 125, 255, 0) 50%
+      );
+      position: absolute;
+      mix-blend-mode: color-burn;
+      display: none;
+    }
+  }
+
+  //데코들
+  & .copyright {
+    color: white;
+    position: absolute;
+    bottom: 10px;
+  }
+  & .sunshine {
+    position: absolute;
+    filter: hue-rotate(60deg) brightness(400%) grayscale(70%);
+    transform: rotate(0deg);
+    mix-blend-mode: soft-light;
+    animation-name: rotateLight;
+    animation-duration: 6s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    //display: none;
+  }
+  //임시
+  .theme-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    & button {
+      padding: 0 5px;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+    }
+  }
+}
+
+//편지지
+.login-area .login-letter {
+  position: relative;
+  width: 600px;
+  padding: 1rem 3rem 3rem 3rem;
+  gap: 2rem;
+  border-radius: 4px;
+  box-shadow: $card-strong-shadow;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  & div[class*="frame-"] {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    filter: sepia(1%) saturate(2208%) hue-rotate(332deg) brightness(110%)
+      contrast(83%) drop-shadow(0px 0px 3px rgba(135, 122, 22, 0.8));
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url("https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fframe.png?alt=media&token=88efe3ab-2819-4c38-a0df-f911263bc059");
+    &.frame-1 {
+      top: 0;
+      left: 0;
+    }
+    &.frame-2 {
+      top: 0;
+      right: 0;
+      transform: rotateY(180deg);
+    }
+    &.frame-3 {
+      bottom: 0;
+      left: 0;
+      transform: rotateX(180deg);
+    }
+    &.frame-4 {
+      bottom: 0;
+      right: 0;
+      transform: rotateY(180deg) rotateX(180deg);
+    }
+  }
+  & .symbol {
+    width: 140px;
+    height: 140px;
+    background-repeat: none;
+    background-size: contain;
+    opacity: 1;
+  }
+  & .notice-box {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: $form-radius;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: $yellow-200;
+    & p {
+      color: $brown-700;
+    }
+    & a {
+      font-weight: 800;
+      font-size: 1rem;
+      color: $brown-700;
+    }
+  }
+  & .login-cont-wrap {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    width: 100%;
+    & .login-txt-wrap {
       display: flex;
       flex-direction: column;
+      gap: 1rem;
+      & * {
+        color: #d6d9d2;
+      }
+      & .login-title {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        & p {
+          font-size: 1.4rem;
+          font-weight: 600;
+        }
+      }
+      & .login-sub-txt {
+        cursor: pointer;
+        & span {
+          color: $yellow-400;
+          margin-left: 5px;
+        }
+      }
+    }
+    & form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 10px;
+      & p {
+        color: red;
+      }
+    }
+  }
+  & .border {
+    position: relative;
+    width: 100%;
+    & img,
+    & .line {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-50%);
+    }
+    & img {
+      height: 14px;
+      filter: invert(92%) sepia(13%) saturate(1384%) hue-rotate(338deg)
+        brightness(108%) contrast(85%);
+    }
+    & .line {
+      width: 110%;
+      height: 1px;
+      background-color: $yellow-300;
+      position: relative;
+      $decoSize: 6px;
+      display: flex;
+      justify-content: space-between;
       align-items: center;
+      & div {
+        width: 0;
+        height: 0;
+        border: $decoSize solid transparent;
+        border-bottom-color: $yellow-300;
+        position: relative;
+        top: -$decoSize;
+        &::after {
+          content: "";
+          position: absolute;
+          left: -$decoSize;
+          top: $decoSize;
+          width: 0;
+          height: 0;
+          border: $decoSize solid transparent;
+          border-top-color: $yellow-300;
+        }
+      }
+    }
+  }
+  & .login-functions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 90%;
+    & .function-item {
+      flex: 1;
+      padding: 6px;
+      border-radius: $form-radius;
+      border: 1px solid $yellow-700;
+      background-color: $yellow-800;
+      color: $yellow-400;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+      &:hover {
+        transition: all 0.2s;
+        filter: brightness(0.9);
+      }
+      & .img {
+        width: 28px;
+        height: 28px;
+        border-radius: 4px;
+        background: $yellow-400;
+      }
+    }
+  }
+}
+//테마
+@keyframes rotateLight {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(20deg);
+  }
+}
+@keyframes tiltDown {
+  from {
+    background-position: top center;
+  }
+  to {
+    background-position: center center;
+  }
+}
+#root .app-container .login-area {
+  &.theme-spring {
+    background-image: url("https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2FspringBackground2.avif?alt=media&token=c423004b-139e-4768-afea-0c0e0682580d");
+    animation-name: tiltDown;
+    animation-duration: 100s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: linear;
+    & .login-letter {
+      transition: all 0.3s;
+      background-color: rgba(255, 255, 255, 0.3);
+      background: linear-gradient(
+        0deg,
+        rgba(255, 250, 150, 0.644) 0%,
+        rgba(3, 56, 42, 0.311) 50%,
+        rgba(255, 251, 175, 0.5) 100%
+      );
+      backdrop-filter: blur(3px);
+      border-radius: 10px;
+      box-shadow: $card-shadow;
       & div[class*="frame-"] {
-        position: absolute;
-        width: 50px;
-        height: 50px;
-        filter: sepia(1%) saturate(2208%) hue-rotate(332deg) brightness(110%)
-          contrast(83%) drop-shadow(0px 0px 3px rgba(135, 122, 22, 0.8));
-        background-repeat: no-repeat;
-        background-size: contain;
-        background-image: url("https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fframe.png?alt=media&token=88efe3ab-2819-4c38-a0df-f911263bc059");
-        &.frame-1 {
-          top: 0;
-          left: 0;
-        }
-        &.frame-2 {
-          top: 0;
-          right: 0;
-          transform: rotateY(180deg);
-        }
-        &.frame-3 {
-          bottom: 0;
-          left: 0;
-          transform: rotateX(180deg);
-        }
-        &.frame-4 {
-          bottom: 0;
-          right: 0;
-          transform: rotateY(180deg) rotateX(180deg);
-        }
+        filter: invert(0);
       }
       & .symbol {
         width: 140px;
         height: 140px;
         background-repeat: none;
         background-size: contain;
-        opacity: 1;
-        filter: invert(63%) sepia(2%) saturate(2103%) hue-rotate(29deg)
-          brightness(77%) contrast(108%);
-        //background-image: url("https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fsymbol.png?alt=media&token=5cf887eb-0e42-48dc-979f-66adf8e6d217");
-      }
-      & .notice-box {
-        width: 100%;
-        padding: 0.5rem;
-        border-radius: $form-radius;
-        display: flex;
-        gap: 10px;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        background-color: $yellow-200;
-        & p {
-          color: $brown-700;
-        }
-        & a {
-          font-weight: 800;
-          font-size: 1rem;
-          color: $brown-700;
-        }
+        filter: invert(1);
+        opacity: 0.7;
       }
       & .login-cont-wrap {
-        display: flex;
-        justify-content: space-between;
-        gap: 2rem;
-        width: 100%;
         & .login-txt-wrap {
-          display: flex;
-          flex-direction: column;
-          gap: 1rem;
-          & * {
-            color: #d6d9d2;
-          }
           & .login-title {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 5px;
             & p {
-              font-size: 1.4rem;
-              font-weight: 600;
-            }
-            & span {
-              font-size: 1.4rem;
-              font-weight: 600;
-              display: block;
-            }
-          }
-          & .login-sub-txt {
-            cursor: pointer;
-            & span {
-              color: $yellow-400;
-              margin-left: 5px;
-            }
-          }
-        }
-        & form {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          gap: 10px;
-          & p {
-            color: red;
-          }
-        }
-      }
-      & .border {
-        position: relative;
-        width: 100%;
-        & img,
-        & .line {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translateX(-50%) translateY(-50%);
-        }
-        & img {
-          height: 14px;
-          filter: invert(92%) sepia(13%) saturate(1384%) hue-rotate(338deg)
-            brightness(108%) contrast(85%);
-        }
-        & .line {
-          width: 110%;
-          height: 1px;
-          background-color: $yellow-300;
-          position: relative;
-          $decoSize: 6px;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          & div {
-            width: 0;
-            height: 0;
-            border: $decoSize solid transparent;
-            border-bottom-color: $yellow-300;
-            position: relative;
-            top: -$decoSize;
-            &::after {
-              content: "";
-              position: absolute;
-              left: -$decoSize;
-              top: $decoSize;
-              width: 0;
-              height: 0;
-              border: $decoSize solid transparent;
-              border-top-color: $yellow-300;
+              color: white;
+              & span {
+                color: $yellow-300;
+              }
             }
           }
         }
       }
-      & .ending-ment {
-        color: $yellow-600;
-        text-align: center;
+      & .function-item {
+        border: 1px solid $yellow-500;
+        background-color: $yellow-200;
+        color: $yellow-800;
+        & .img {
+          background: $yellow-400;
+          border: 1px solid $yellow-500;
+        }
       }
-      & .login-functions {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        width: 90%;
-        & .function-item {
-          flex: 1;
-          padding: 6px;
-          border-radius: $form-radius;
-          border: 1px solid $yellow-700;
-          background-color: $yellow-800;
-          color: $yellow-400;
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          cursor: pointer;
-          transition: all 0.2s;
-          &:hover {
-            transition: all 0.2s;
-            filter: brightness(0.9);
+    }
+  }
+  &.theme-wood {
+    background-image: url("https://images.unsplash.com/photo-1426170042593-200f250dfdaf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80");
+    & .login-letter {
+      background-color: #352d22;
+      border-radius: 10px;
+      box-shadow: $card-shadow;
+      & div[class*="frame-"] {
+        filter: invert(10%) sepia(62%) saturate(200%) hue-rotate(326deg)
+          brightness(90%) contrast(102%);
+      }
+      & .symbol {
+        width: 140px;
+        height: 140px;
+        background-repeat: none;
+        background-size: contain;
+        filter: invert(24%) sepia(9%) saturate(6371%) hue-rotate(23deg)
+          brightness(150%) contrast(89%);
+        opacity: 0.5;
+      }
+      & .login-cont-wrap {
+        & .login-txt-wrap {
+          & .login-title {
+            & p {
+              color: $brown-600;
+              & span {
+                color: $yellow-600;
+              }
+            }
           }
-          & .img {
-            width: 28px;
-            height: 28px;
-            border-radius: 4px;
-            background: $yellow-400;
-          }
+        }
+      }
+      & .notice-box {
+        background-color: $yellow-500;
+        & p {
+          color: $brown-800;
+        }
+        & a {
+          color: $brown-800;
+        }
+      }
+      & .function-item {
+        border: 1px solid $yellow-700;
+        background-color: $yellow-800;
+        color: $yellow-400;
+        & .img {
+          background: $yellow-400;
         }
       }
     }
@@ -215,48 +385,42 @@
 }
 
 //미디어쿼리
+@media (max-height: 740px) {
+  .login-area {
+    justify-content: flex-start;
+    padding: 1rem 0;
+  }
+}
 @media (max-width: $breakpoint-labtop) {
   #root {
     & .login-area {
       padding: 10px;
-      & .login-box {
-        width: 450px;
-        & .login-letter {
-          padding: 2rem;
-          padding-top: 0.5rem;
-          & .login-cont-wrap {
-            flex-direction: column;
-            & .login-txt-wrap {
-              text-align: center;
-            }
+      & .logo {
+        transform: scale(0.5);
+        margin: 0;
+      }
+      & .login-letter {
+        width: 100%;
+        padding: 2rem;
+        padding-top: 0.5rem;
+        & .login-cont-wrap {
+          flex-direction: column;
+          & .login-txt-wrap {
+            text-align: center;
           }
-          & .border {
-            width: 80%;
-          }
+        }
+        & .login-functions {
+          width: 110%;
+          gap: 3px;
+        }
+        & .border {
+          width: 80%;
         }
       }
-    }
-  }
-}
-@media (max-width: $breakpoint-mobile) {
-  #root {
-    & .login-area {
-      padding: 10px;
-      & .login-box {
-        width: 100%;
-        & .login-letter {
-          padding: 1rem;
-          padding-bottom: 3rem;
-          & .login-cont-wrap {
-            flex-direction: column;
-            & .login-txt-wrap {
-              text-align: center;
-            }
-          }
-          & .border {
-            width: 80%;
-          }
-        }
+      & .copyright {
+        color: white;
+        position: relative;
+        margin-top: 3rem;
       }
     }
   }

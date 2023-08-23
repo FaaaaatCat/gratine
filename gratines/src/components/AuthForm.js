@@ -113,7 +113,7 @@ const AuthForm = ({userObj, refreshUser}) => {
                 <div className="login-cont-wrap">
                     <div className="login-txt-wrap">
                         <div className="login-title">
-                            {newAccount ?  <p>그라티네의 정원 <span>가입하기</span></p> : <p>그라티네의 정원에 <span>어서오세요</span></p>}
+                            {newAccount ?  <p><span>그라티네의 정원</span><br></br>가입하기</p> : <p><span>그라티네의 정원</span>에<br></br>어서오세요</p>}
                         </div>
                         <span className="login-sub-txt" onClick={toggleAccount}>
                             {newAccount ?

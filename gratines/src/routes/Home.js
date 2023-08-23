@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { dbService, storageService } from '../fbase';
 import { collection, addDoc, query, onSnapshot, orderBy,where, doc, getDocs, updateDoc } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import Nweet from "components/Nweet";
 import NweetFactory from "components/NweetFactory";
 import Profile from "./Profile";
@@ -14,6 +14,7 @@ import light from '../images/후광.png'
 
 const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, attendObj }) => {
     const auth = getAuth();
+    const navigate = useNavigate();
     const [nweets, setNweets] = useState([]);
     const [infoView, setInfoView] = useState(false);
 
@@ -42,6 +43,9 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, attendObj }) => {
         });
     }, []);
 
+
+
+
     //출석창 info hover 기능
     const viewInfo = () => {
         setInfoView(true)
@@ -50,26 +54,29 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, attendObj }) => {
         setInfoView(false)
     }
 
-    //지난대화기록 새창 띄우기
-    const openHistoryWindow = () => {
-        const newWindow = window.open('', '_blank');
-        newWindow.location.href = 'https://www.google.com';
-        // newWindow.location.href = './History.js';
-        //newWindow.document.write('<html><body><h1>New Window</h1></body></html>');
-    };
-
-
+    //로그아웃 기능
+    const onLogOutClick = async() => {
+        auth.signOut();
+        navigate("/login");
+    }
     
     return (
-        <>
+        <div className="home-wrap">
+            <div className="home-bg"></div>
             <Profile
                 userObj={userObj}
                 refreshUser={refreshUser}
                 fbUserObj={fbUserObj}
             />
             <div className="chatting-area">
-                <div className="logo-box">
-                    <div className="logo">로고</div>
+                <div className="mobile-header">
+                    <div className="logo"></div>
+                    <button
+                        className="gtn-btn"
+                        onClick={onLogOutClick}
+                    >
+                        로그아웃
+                    </button>
                 </div>
                 <div className="chatting-list-container">
                     {nweets.map((nweet) => ( //map은 for과 유사함. 배열안의 값들을 다 불러와주는 기능 / 지금으로썬, nweets 배열안의 데이터(doc.id / doc.data())를 다 불러옴
@@ -140,16 +147,17 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, attendObj }) => {
                 </div>
                 <div className="history-area">
                     <div className="title">지난 대화기록 보기
-                        <button className="gtn-btn btn-icon-only ml-auto" onClick={openHistoryWindow}>
+                        <Link
+                            to="/History"
+                            target="_blank"
+                            className="gtn-btn btn-icon-only ml-auto"
+                        >
                             <span className="material-icons-round">arrow_forward</span>
-                        </button>
-                        {/* <Link to="/History" target="_blank">
-                            테스트로 히스토리 가기
-                        </Link> */}
+                        </Link>
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     );
 }
 export default Home;
