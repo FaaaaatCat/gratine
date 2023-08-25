@@ -18,7 +18,6 @@ function App() {
   const [updateProfile, setUpdateProfile] = useState(false);
   const [userObj, setUserObj] = useState(null);
   const [fbUserObj, setFbUserObj] = useState(null);
-  const [attendObj, setAttendObj] = useState(null);
   const defaultProfile = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fdefault_profile.png?alt=media&token=9003c59f-8f33-4d0a-822c-034682416355';
 
   useEffect(()=>{
@@ -42,20 +41,14 @@ function App() {
           login: true,
           displayName: user.displayName,
           photoURL: user.photoURL,
-        })
-        //출석점수 저장
-        setAttendObj({
-          uid: user.uid,
-          email: user.email,
           attendCount : 0,
           attendRanNum : 0,
           totalAttend: 0,
           attendDate: '',
-        });
+        })
         //await 끝난후 (새로고침마다) 불러오기
         refreshUser();
         getFbUserObj(user);
-        getUserAttendObj(user);
         loginDB(user);
       }
       //로그인 안되었다면
@@ -63,7 +56,6 @@ function App() {
         setIsLoggedIn(false);
         setUserObj(null);
         setFbUserObj(null);
-        setAttendObj(null);
         //logoutDB(user);
       }
       setInit(true);
@@ -127,28 +119,10 @@ function App() {
       login: true,
       displayName: fbUserData[0].displayName,
       photoURL: fbUserData[0].photoURL,
-    })
-  };
-  //유저의 게임데이터 읽어오기
-  const getUserAttendObj = async (user) => {
-    //1. 현재 uid와 일치하는 유저 데이터 받아오기
-      const q = query(
-          collection(dbService, "userGame"),
-          where("uid", "==", user.uid)
-      );
-    //updateFbUserObj(user)
-    const querySnapshot = await getDocs(q);
-    const userAtdData = querySnapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data()
-    }));
-    setAttendObj({
-      uid: user.uid,
-      email : user.email,
-      attendCount : userAtdData[0].attendCount,
-      attendRanNum : userAtdData[0].attendRanNum,
-      totalAttend: userAtdData[0].totalAttend,
-      attendDate: userAtdData[0].attendDate
+      attendCount : fbUserData[0].attendCount,
+      attendRanNum : fbUserData[0].attendRanNum,
+      totalAttend: fbUserData[0].totalAttend,
+      attendDate: fbUserData[0].attendDate
     })
   };
   //유저네임 변경시 자동 리프레쉬 업데이트
@@ -191,7 +165,6 @@ function App() {
         })
       });
     }
-    getUserAttendObj(user);
     getFbUserObj(user);
     await updateCurrentUser(auth, user);
   }
@@ -202,7 +175,6 @@ function App() {
           isLoggedIn={isLoggedIn}
           userObj={userObj}
           fbUserObj={fbUserObj}
-          attendObj = {attendObj}
           refreshUser={refreshUser}
         /> : "Initializing..."
       }

@@ -12,7 +12,7 @@ import Attend from "./Attend";
 import plantImg from '../images/plant.png'
 import light from '../images/후광.png'
 
-const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, attendObj }) => {
+const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
     const auth = getAuth();
     const navigate = useNavigate();
     const [nweets, setNweets] = useState([]);
@@ -133,8 +133,8 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, attendObj }) => {
                         </span>
                     </div>
                     <Attend
-                        attendObj={attendObj}
                         userObj={userObj}
+                        fbUserObj={fbUserObj}
                         refreshUser={refreshUser}
                     />
                 </div>
@@ -143,6 +143,7 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, attendObj }) => {
                     <Vending
                         userObj={userObj}
                         fbUserObj={fbUserObj}
+                        refreshUser={refreshUser}
                     />
                 </div>
                 <div className="history-area">

@@ -15,8 +15,6 @@ const AuthForm = ({userObj, refreshUser}) => {
     const auth = getAuth();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [nickName, setnickName] = useState("");
-    const [photo, setPhoto] = useState("");
     const [newAccount, setNewAccount] = useState(false);
     const [error, setError] = useState("");
     const [profilePic, setProfilePic] = useState("");
@@ -58,14 +56,6 @@ const AuthForm = ({userObj, refreshUser}) => {
                     auth, email, password
                 )
                 //[회원가입시] 유저 정보 저장
-                const userGameObj = {
-                    uid: auth.currentUser.uid,
-                    email: auth.currentUser.email,
-                    attendCount : 0,
-                    attendRanNum: 0,
-                    totalAttend: 0,
-                    attendDate: '',
-                }
                 const fbUserObj = {
                     uid: auth.currentUser.uid,
                     email: email,
@@ -74,9 +64,12 @@ const AuthForm = ({userObj, refreshUser}) => {
                     login: true,
                     displayName: auth.currentUser.email.split("@")[0],
                     photoURL: defaultProfile,
+                    attendCount : 0,
+                    attendRanNum: 0,
+                    totalAttend: 0,
+                    attendDate: '',
                 }
                 await addDoc(collection(dbService, "user"), fbUserObj);
-                await addDoc(collection(dbService, "userGame"), userGameObj);
             }
             else{
                 data = await signInWithEmailAndPassword(

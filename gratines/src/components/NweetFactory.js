@@ -137,7 +137,7 @@ const NweetFactory = ({ userObj, fbUserObj}) => {
             creatorId: userObj.uid,
             attachmentUrl,
             creatorName: fbUserObj.displayName,
-            creatorImg: userObj.photoURL,
+            creatorImg: fbUserObj.photoURL,
             orderWhat: orderWhat,
             orderText: orderText,
             diceNum: diceNum,
@@ -232,7 +232,7 @@ const NweetFactory = ({ userObj, fbUserObj}) => {
                         <div className="function-list-container">
                             <div className="title"><span className="material-icons-round">info_outline</span>관리자 명령어</div>
                             <div className="function-list">
-                                <b>/전체 메세지</b>
+                                <b>/전체</b>
                                 <p>전체 말하기</p>
                             </div>
                         </div>

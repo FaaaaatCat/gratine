@@ -11,32 +11,31 @@ const Member = ({ isLoggedIn, fbUserObj, userObj }) => {
     const user = auth.currentUser;
     const navigate = useNavigate();
     const [loginUsers, setLoginUsers] = useState([]);
-    const [userGameData, setUserGameData] = useState([]);
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState('');
     const [isMe, setIsMe] = useState(false);
+    const defaultProfile = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fdefault_profile.png?alt=media&token=9003c59f-8f33-4d0a-822c-034682416355';
 
     useEffect(() => {
         if (isLoggedIn) {
             readLoginUser();
-            readUSerGameData();
         }
         else {
             //setLogOut();
         }
     }, []);
 
-    //로그인된 유저데이터 (user, userGame) 불러오는 기능
+    //로그인된 유저데이터 (user) 불러오는 기능
     const readLoginUser = async () => {
         const q = query(
           collection(dbService, "user"),
           //where("login", "==", true)
         );
         const unsubscribe = onSnapshot(q, (Snapshot) => {
-            const loginUserArray = Snapshot.docs.map((doc) => { //snapshot : 트윗을 받을때마다 알림 받는곳. 새로운 스냅샷을 받을때 nweetArray 라는 배열을 만듬
+            const loginUserArray = Snapshot.docs.map((doc) => {
                 return {
                     id: doc.id,
-                    ...doc.data(), //...은 데이터의 내용물, 즉 spread attribute 기능임
+                    ...doc.data(),
                 };
             });
             setLoginUsers(loginUserArray);
@@ -46,30 +45,12 @@ const Member = ({ isLoggedIn, fbUserObj, userObj }) => {
                 unsubscribe();
             }
         });
-        // querySnapshot.forEach((doc) => {
-        //     return (
-        //         console.log(doc._document.data.value.mapValue.fields)
-        //     )
-        // });
     }
-    const readUSerGameData = async () => {
-        const q = query(
-          collection(dbService, "userGame")
-        );
-        const unsubscribe = onSnapshot(q, (Snapshot) => {
-            const userGameArray = Snapshot.docs.map((doc) => { //snapshot : 트윗을 받을때마다 알림 받는곳. 새로운 스냅샷을 받을때 nweetArray 라는 배열을 만듬
-                return {
-                    id: doc.id,
-                    ...doc.data(), //...은 데이터의 내용물, 즉 spread attribute 기능임
-                };
-            });
-            setUserGameData(userGameArray);
-        });
-        onAuthStateChanged(auth, (user) => {
-            if (user == null) {
-                unsubscribe();
-            }
-        });
+
+    //회원정보 삭제 기능
+    const deleteUserData = async () => {
+        const userRef = doc(dbService, "user", `${loginUsers.id}`);
+        await deleteDoc(userRef);
     }
 
     // 회원탈퇴 기능
@@ -79,7 +60,6 @@ const Member = ({ isLoggedIn, fbUserObj, userObj }) => {
             await deleteUser(user).then(() => {
                 window.confirm("회원탈퇴가 성공적으로 처리되었습니다.")
                 deleteUserData();
-                deleteUserGameData();
                 auth.signOut();
                 navigate("/login");
                 console.log("회원탈퇴가 성공적으로 처리되었습니다.")
@@ -89,15 +69,7 @@ const Member = ({ isLoggedIn, fbUserObj, userObj }) => {
         }
     }
 
-    //회원정보 삭제 기능
-    const userRef = doc(dbService, "user", `${loginUsers.id}`);
-    const userGameRef = doc(dbService, "user", `${userGameData.id}`);
-    const deleteUserData = async () => {
-        await deleteDoc(userRef);
-    }
-    const deleteUserGameData = async () => {
-        await deleteDoc(userGameRef);
-    }
+
 
 
     /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -142,7 +114,7 @@ const Member = ({ isLoggedIn, fbUserObj, userObj }) => {
                                 className="member-list"
                                 onClick={() => openModal(loginUser)}
                             >
-                                <img src={loginUser.photoURL} className="profile-box" />
+                                {fbUserObj.photoURL ? <img className="profile-box" src={loginUser.photoURL} /> : <img className="profile-box" src={defaultProfile} />}
                                 <p>{loginUser.displayName}</p>
                             </div>
                         ) )}

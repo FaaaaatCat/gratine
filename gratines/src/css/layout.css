@@ -861,6 +861,10 @@ body #root .app-container .home-wrap .home-bg::before {
           flex: 3;
 }
 
+.side-area .member-area {
+  max-height: 187px;
+}
+
 .side-area .member-area .member-list-container {
   display: -webkit-box;
   display: -ms-flexbox;

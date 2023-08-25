@@ -7,8 +7,9 @@ import plantImg from '../images/plant.png'
 import dayjs from "dayjs";
 
 
-const Attend = ({ attendObj, userObj, refreshUser }) => {
+const Attend = ({ fbUserObj, userObj, refreshUser }) => {
     const [attendAble, setAttendAble] = useState(true);
+    const [userData, setUserData] = useState(null);
     //오늘 날짜
     // let today = new Date();
     let today = dayjs();
@@ -43,29 +44,56 @@ const Attend = ({ attendObj, userObj, refreshUser }) => {
     }
     startClock();
     //stopClock();
-        
+
+
+    //user 데이터 쿼리 불러오기
+    const getUserData = async () => {
+        const q = query(
+            collection(dbService, "user"),
+            where("uid", "==", userObj.uid)
+        );
+        const querySnapshot = await getDocs(q);
+        //새로고침시 출석 리셋기능
+        const lastAttendDate = querySnapshot.docs[0]._document.data.value.mapValue.fields.attendDate.stringValue
+        if (lastAttendDate === todayFormat) {
+            setAttendAble(false);
+            return;
+        }
+        else {
+            setAttendAble(true);
+        }
+        setUserData(querySnapshot)
+    };
+    useEffect(() => {
+        getUserData();
+    },[])
+
+
     //출석횟수 업데이트
     const countAttend = async () => {
         //출석을 안눌렀다면
         if (attendAble) {
             const q = query(
-                collection(dbService, "userGame"),
+                collection(dbService, "user"),
                 where("uid", "==", userObj.uid)
             );
             const querySnapshot = await getDocs(q);
-            const currentUserGameData = querySnapshot.docs[0]._document.data.value.mapValue.fields;
-            const currentUserGameData_Id = querySnapshot.docs[0].id;
-            const currentUserGameData_Total = Number(currentUserGameData.totalAttend.integerValue);
-            const currentUserGameData_AttendCount = Number(currentUserGameData.attendCount.integerValue);
-            let attendRanNum = Math.ceil(Math.random() * (10 - 1) + 1);
-            const ok = window.confirm("출석 완료! XX Gold를 드립니다. 소지금에 직접 추가해주세요!");
+            const UserGameData = querySnapshot.docs[0]._document.data.value.mapValue.fields;
+            const UserGameData_Id = querySnapshot.docs[0].id;
+            const UserGameData_Total = Number(UserGameData.totalAttend.integerValue);
+            const UserGameData_AttendCount = Number(UserGameData.attendCount.integerValue);
+            const UserGameData_Gold = Number(UserGameData.gold.integerValue);
+            let attendRanNum = Math.ceil(Math.random() * (15 - 5) + 5);
+            let attendGold = 100;
+            const ok = window.confirm(`출석 완료! ${attendGold}Gold를 드립니다.`);
             if (ok) {
-                const UserGameRef = doc(dbService, "userGame", currentUserGameData_Id);
+                const UserGameRef = doc(dbService, "user", UserGameData_Id);
                 await updateDoc(UserGameRef, {
                     attendRanNum : attendRanNum,
-                    attendCount : currentUserGameData_AttendCount + 1,
-                    totalAttend: currentUserGameData_Total + attendRanNum,
+                    attendCount : UserGameData_AttendCount + 1,
+                    totalAttend: UserGameData_Total + attendRanNum,
                     attendDate: todayFormat,
+                    gold: UserGameData_Gold + attendGold,
                 })
                 refreshUser();
             }
@@ -88,37 +116,11 @@ const Attend = ({ attendObj, userObj, refreshUser }) => {
         // await addDoc(collection(dbService, "nweets"), attendNweetObj);
     }
 
-
-    //새로고침시 출석 리셋기능
-    const refreshAttend = async () => {
-        const q = query(
-            collection(dbService, "userGame"),
-            where("uid", "==", userObj.uid), //내꺼만 필터링하기
-        );
-        const querySnapshot = await getDocs(q);
-        const lastAttendDate = querySnapshot.docs[0]._document.data.value.mapValue.fields.attendDate.stringValue
-        if (lastAttendDate === todayFormat) {
-            setAttendAble(false);
-            return;
-        }
-        else {
-            setAttendAble(true);
-        }
-    };
-    useEffect(() => {
-        refreshAttend();
-    },[])
-
     //출석점수 완전 리셋 기능
     const resetAttend = async () => {
-        const q = query(
-            collection(dbService, "userGame"),
-            where("uid", "==", userObj.uid)
-        );
-        const querySnapshot = await getDocs(q);
-        const currentUserGameData_Id = querySnapshot.docs[0].id;
+        const UserGameData_Id = userData.docs[0].id;
         const ok = window.confirm("화분 게이지를 진짜 삭제할래요?");
-        const UserGameRef = doc(dbService, "userGame", currentUserGameData_Id);
+        const UserGameRef = doc(dbService, "user", UserGameData_Id);
         if (ok) {
             await updateDoc(UserGameRef, {
                 totalAttend: 0,
@@ -127,6 +129,7 @@ const Attend = ({ attendObj, userObj, refreshUser }) => {
             refreshUser();
         }
     }
+
     return (
         <div className="content-wrap">
             <div className="attend-gauge-wrap">
@@ -134,9 +137,9 @@ const Attend = ({ attendObj, userObj, refreshUser }) => {
                 <CircularProgressbar
                     counterClockwise
                     background
-                    value={attendObj.totalAttend}
+                    value={fbUserObj.totalAttend}
                     maxValue={100}
-                    text={`${attendObj.totalAttend}%`}
+                    text={`${fbUserObj.totalAttend}%`}
                     styles={{
                         path: {
                             // stroke: `rgba(102, 234, 218, ${percentage / 100})`,
@@ -158,7 +161,7 @@ const Attend = ({ attendObj, userObj, refreshUser }) => {
                 />
             </div>
             <div className="attend-info">
-                <div><b>{attendObj.attendCount}</b>회 출석했습니다</div>
+                <div><b>{fbUserObj.attendCount}</b>회 출석했습니다</div>
                 <button
                     className={'gtn-btn ' + (attendAble? 'btn-mint' : 'btn-disable')}
                     onClick={countAttend}

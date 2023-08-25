@@ -15,7 +15,7 @@ const History = () => {
     useEffect(() => {
         const q = query(
             collection(dbService, "nweets"),
-            orderBy("createdDate", "asc")
+            orderBy("createdAt", "asc")
         );
         const unsubscribe = onSnapshot(q, (Snapshot) => {
             const nweetArray = Snapshot.docs.map((doc) => {

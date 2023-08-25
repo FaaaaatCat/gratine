@@ -15,7 +15,6 @@ const EditProfile = ({ refreshUser, userObj, fbUserObj }) => {
     //새 소지금액 인풋
     const onGoldChange = (e) => {
         setNewGold(Number(e.target.value));
-        console.log(newGold)
     };
     //새 소지품 인풋
     const onItemChange = (e) => {
@@ -36,25 +35,26 @@ const EditProfile = ({ refreshUser, userObj, fbUserObj }) => {
     const onSubmit = async (e) => {
         e.preventDefault();
         let creatorPicUrl = "";
-        //만일 프로필사진에 뭔가 들어있고, 그게 새 사진이라면
-        if (newProfilePic !== null && newProfilePic !== defaultProfile && newProfilePic !== userObj.photoURL) {
+        //만일 프로필사진을 새로 올렸다면
+        if (newProfilePic !== defaultProfile && newProfilePic !== userObj.photoURL) {
             const profileRef = ref(storageService, `${userObj.uid}/${uuidv4()}`);
             const profileResponse = await uploadString(profileRef, newProfilePic, "data_url");
             creatorPicUrl = await getDownloadURL(profileResponse.ref);
-            await updateProfile(auth.currentUser, {
-                displayName: newDisplayName,
-                photoURL: creatorPicUrl,
-            });
+        }
+        //만일 프로필사진을 변경하지 않았다면
+        else if (newProfilePic === fbUserObj.photoURL) {
+            creatorPicUrl = fbUserObj.photoURL;
         }
         //만일 프로필사진이 비어있다면
-        else if (newProfilePic === null || newProfilePic === defaultProfile) {
+        else if (newProfilePic === defaultProfile) {
             creatorPicUrl = defaultProfile;
-            await updateProfile(auth.currentUser, {
-                displayName: newDisplayName,
-                photoURL : defaultProfile,
-            });
         }
-        //소지금액 저장
+
+        //바뀐데이터 저장
+        await updateProfile(auth.currentUser, {
+            displayName: newDisplayName,
+            photoURL: creatorPicUrl,
+        });
         const q = query(
             collection(dbService, "user"),
             where("uid", "==", userObj.uid)
@@ -68,7 +68,6 @@ const EditProfile = ({ refreshUser, userObj, fbUserObj }) => {
             displayName: newDisplayName,
             photoURL: creatorPicUrl,
         })
-
 
         //완료
         refreshUser();
@@ -88,7 +87,8 @@ const EditProfile = ({ refreshUser, userObj, fbUserObj }) => {
     return (
         <>
             <div className="profile-box__my profile-edit">
-                {newProfilePic ? <img src={newProfilePic} /> : <img src={defaultProfile} />}
+                {/* {newProfilePic ? <img src={newProfilePic} /> : <img src={defaultProfile} />} */}
+                <img src={newProfilePic} />
                 <button onClick={onClearProfileUrl}>
                     <span className="material-icons-round">close</span>
                 </button>

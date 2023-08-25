@@ -12,21 +12,36 @@ import doll from '../images/doll.png'
 import Modal from 'react-modal';
 Modal.setAppElement('#root');
 
-const Vending = ({userObj, fbUserObj}) => {
+const Vending = ({userObj, fbUserObj, refreshUser}) => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
     //오늘 날짜
     let todayfull = new Date().toLocaleString();
+
+    //소지금 데이터 불러오기
+    const editGold = async (extractedNumber) => {
+        const q = query(
+            collection(dbService, "user"),
+            where("uid", "==", userObj.uid)
+        );
+        const querySnapshot = await getDocs(q);
+        const UserGameData_Id = querySnapshot.docs[0].id;
+        const UserGameRef = doc(dbService, "user", UserGameData_Id);
+        await updateDoc(UserGameRef, {
+            gold: fbUserObj.gold - extractedNumber,
+        })
+        refreshUser();
+    }
 
     //상품 구매 기능
     const doBuy = async (e) => {
         const itemName = e.target.children[1].children[0].innerText;
         const itemPrice = e.target.children[1].children[1].innerText;
         const extractedNumber = parseInt(itemPrice, 10);
-        const ok = window.confirm(`${itemName}(${itemPrice})을 구매하시겠습니까? 구매 후엔 직접 소지금을 수정해주세요.`);
+        const ok = window.confirm(`${itemName}(${itemPrice})을 구매하시겠습니까?`);
         if (ok) {
             if (extractedNumber <= fbUserObj.gold) {
-                const buyMention = `[구매완료] ${itemName}(${itemPrice})을 구매했습니다. 소지금을 수정하겠습니다. (${todayfull}) `
+                const buyMention = `[구매완료] ${itemName}(${itemPrice})을 구매했습니다. 남은 소지금은 ${fbUserObj.gold - extractedNumber} Gold 입니다. (${todayfull}) `
                 const buyNweetObj = {
                     text: buyMention,
                     createdAt: Date.now(),
@@ -39,6 +54,7 @@ const Vending = ({userObj, fbUserObj}) => {
                     buyPrice:itemPrice,
                 };
                 await addDoc(collection(dbService, "nweets"), buyNweetObj);
+                editGold(extractedNumber)
             }
             else {
                 window.confirm("소지금이 부족합니다ㅜㅜ");
@@ -60,10 +76,10 @@ const Vending = ({userObj, fbUserObj}) => {
         let random_bear = bearList[random_index]
         let attachmentUrl = random_bear;
 
-        const ok = window.confirm(`${itemName}(${itemPrice})을 구매하시겠습니까? 구매 후엔 직접 소지금을 수정해주세요.`);
+        const ok = window.confirm(`${itemName}(${itemPrice})을 구매하시겠습니까?`);
         if (ok) {
             if (extractedNumber <= fbUserObj.gold) {
-                const buyMention = `[구매완료] 인형을 구매했습니다. 소지금을 수정하겠습니다. (${todayfull}) `
+                const buyMention = `[구매완료] ${itemName}(${itemPrice})을 구매했습니다. 남은 소지금은 ${fbUserObj.gold - extractedNumber} Gold 입니다. (${todayfull}) `
                 const buyNweetObj = {
                     text: buyMention,
                     createdAt: Date.now(),
@@ -77,6 +93,7 @@ const Vending = ({userObj, fbUserObj}) => {
                     attachmentUrl,
                 };
                 await addDoc(collection(dbService, "nweets"), buyNweetObj);
+                editGold(extractedNumber)
             }
             else {
                 window.confirm("소지금이 부족합니다ㅜㅜ");
@@ -167,7 +184,7 @@ const Vending = ({userObj, fbUserObj}) => {
                         <img src={bearImg3} alt="" />
                     </div>
                     <div className="txt-box">
-                        <p>아이템 이름</p>
+                        <p>아이템 A</p>
                         <span>100 G</span>
                     </div>
                 </div>
@@ -176,8 +193,8 @@ const Vending = ({userObj, fbUserObj}) => {
                         <img src={bearImg2} alt="" />
                     </div>
                     <div className="txt-box">
-                        <p>아이템 이름</p>
-                        <span>100 G</span>
+                        <p>아이템 B</p>
+                        <span>120 G</span>
                     </div>
                 </div>
                 <div className="vending-item" onClick={doBuy}>
@@ -185,8 +202,8 @@ const Vending = ({userObj, fbUserObj}) => {
                         <img src={bearImg5} alt="" />
                     </div>
                     <div className="txt-box">
-                        <p>아이템 이름</p>
-                        <span>100 G</span>
+                        <p>아이템 C</p>
+                        <span>140 G</span>
                     </div>
                 </div>
             </div>
