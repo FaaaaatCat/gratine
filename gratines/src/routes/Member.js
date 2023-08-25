@@ -49,12 +49,18 @@ const Member = ({ isLoggedIn, fbUserObj, userObj }) => {
 
     //회원정보 삭제 기능
     const deleteUserData = async () => {
-        const userRef = doc(dbService, "user", `${loginUsers.id}`);
-        await deleteDoc(userRef);
+        const q = query(
+            collection(dbService, "user"),
+            where("uid", "==", userObj.uid)
+        );
+        const querySnapshot = await getDocs(q);
+        const UserData_Id = querySnapshot.docs[0].id;
+        const UserRef = doc(dbService, "user", UserData_Id);
+        await deleteDoc(UserRef);
     }
 
     // 회원탈퇴 기능
-    const deleteUserAccount = async() => {
+    const deleteUserAccount = async () => {
         const ok = window.confirm("탈퇴하시겠습니까? 개인정보는 안전하게 모두 삭제되지만, 채팅기록은 삭제되지 않습니다.")
         if (ok) {
             await deleteUser(user).then(() => {

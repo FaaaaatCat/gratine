@@ -31,7 +31,11 @@ body {
   & #root {
     position: relative;
     overflow: hidden !important;
+    //height: 100vh;
+    //height: calc(var(--vh, 1vh) * 100);
     height: 100vh;
+    height: -webkit-fill-available;
+    height: fill-available;
     background: linear-gradient(
         34deg,
         #e4ddd6 10%,
@@ -48,7 +52,7 @@ body {
         $brown-300 70%
       ),
       url(https://grainy-gradients.vercel.app/noise.svg);
-    &::after {
+    &::before {
       content: "created by @topports";
       position: absolute;
       bottom: 0.5rem;
@@ -425,7 +429,7 @@ body {
           width: 20px;
           height: 20px;
           border-radius: 100px;
-          background-color: $brown-800;
+          background-color: $brown-600;
           opacity: 0.85;
           position: absolute;
           top: 5px;
@@ -435,7 +439,10 @@ body {
           justify-content: center;
           & span {
             font-size: 14px;
-            color: white;
+            color: $brown-200 !important;
+          }
+          &:hover{
+            background-color: $brown-700;
           }
         }
       }
@@ -950,6 +957,9 @@ body {
   .home-wrap {
     padding: 0 !important;
   }
+  .home-bg{
+    display: none !important;
+  }
   .profile-area {
     display: none !important;
   }
@@ -960,6 +970,9 @@ body {
       box-shadow: $card-shadow;
     }
     & .chatting-form-box {
+      & .tooltip{
+        display: none;
+      }
       & button[type="submit"] {
         width: $form-height !important;
         height: $form-height !important;

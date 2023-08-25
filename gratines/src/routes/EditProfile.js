@@ -60,9 +60,9 @@ const EditProfile = ({ refreshUser, userObj, fbUserObj }) => {
             where("uid", "==", userObj.uid)
         );
         const querySnapshot = await getDocs(q);
-        const currentUserGameData_Id = querySnapshot.docs[0].id;
-        const UserGameRef = doc(dbService, "user", currentUserGameData_Id);
-        await updateDoc(UserGameRef, {
+        const UserData_Id = querySnapshot.docs[0].id;
+        const UserRef = doc(dbService, "user", UserData_Id);
+        await updateDoc(UserRef, {
             gold : newGold,
             item: newItem,
             displayName: newDisplayName,

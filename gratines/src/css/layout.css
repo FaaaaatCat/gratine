@@ -30,11 +30,14 @@ body #root {
   position: relative;
   overflow: hidden !important;
   height: 100vh;
+  height: -webkit-fill-available;
+  height: -moz-available;
+  height: fill-available;
   background: linear-gradient(34deg, #e4ddd6 10%, #eceae2 35%, transparent 50%, #e4ddd6 70%), url(https://grainy-gradients.vercel.app/noise.svg);
   background: linear-gradient(34deg, #D3D3C9 10%, #F2F1EE 35%, transparent 50%, #D3D3C9 70%), url(https://grainy-gradients.vercel.app/noise.svg);
 }
 
-body #root::after {
+body #root::before {
   content: "created by @topports";
   position: absolute;
   bottom: 0.5rem;
@@ -521,7 +524,7 @@ body #root .app-container .home-wrap .home-bg::before {
   width: 20px;
   height: 20px;
   border-radius: 100px;
-  background-color: #4D4D3F;
+  background-color: #96957E;
   opacity: 0.85;
   position: absolute;
   top: 5px;
@@ -539,7 +542,11 @@ body #root .app-container .home-wrap .home-bg::before {
 
 .chatting-list-container .chatting-list.wholeChat button span, .chatting-list-container .chatting-list.orderChat button span {
   font-size: 14px;
-  color: white;
+  color: #E2E2DC !important;
+}
+
+.chatting-list-container .chatting-list.wholeChat button:hover, .chatting-list-container .chatting-list.orderChat button:hover {
+  background-color: #73725D;
 }
 
 .chatting-list-container .chatting-list .profile-box {
@@ -1228,6 +1235,9 @@ body #root .app-container .home-wrap .home-bg::before {
   .home-wrap {
     padding: 0 !important;
   }
+  .home-bg {
+    display: none !important;
+  }
   .profile-area {
     display: none !important;
   }
@@ -1239,6 +1249,9 @@ body #root .app-container .home-wrap .home-bg::before {
     border-radius: 4px 4px 0 0;
     -webkit-box-shadow: 0rem 0.47rem 2.19rem rgba(8, 10, 37, 0.02), 0rem 0.94rem 1.41rem rgba(8, 10, 37, 0.02), 0rem 0.25rem 0.53rem rgba(8, 10, 37, 0.04), 0rem 0.13rem 0.19rem rgba(8, 10, 37, 0.02);
             box-shadow: 0rem 0.47rem 2.19rem rgba(8, 10, 37, 0.02), 0rem 0.94rem 1.41rem rgba(8, 10, 37, 0.02), 0rem 0.25rem 0.53rem rgba(8, 10, 37, 0.04), 0rem 0.13rem 0.19rem rgba(8, 10, 37, 0.02);
+  }
+  .chatting-area .chatting-form-box .tooltip {
+    display: none;
   }
   .chatting-area .chatting-form-box button[type="submit"] {
     width: 32px !important;
