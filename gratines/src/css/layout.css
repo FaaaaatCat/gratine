@@ -30,9 +30,10 @@ body #root {
   position: relative;
   overflow: hidden !important;
   height: 100vh;
-  height: -webkit-fill-available;
-  height: -moz-available;
-  height: fill-available;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  min-height: -moz-available;
+  min-height: fill-available;
   background: linear-gradient(34deg, #e4ddd6 10%, #eceae2 35%, transparent 50%, #e4ddd6 70%), url(https://grainy-gradients.vercel.app/noise.svg);
   background: linear-gradient(34deg, #D3D3C9 10%, #F2F1EE 35%, transparent 50%, #D3D3C9 70%), url(https://grainy-gradients.vercel.app/noise.svg);
 }

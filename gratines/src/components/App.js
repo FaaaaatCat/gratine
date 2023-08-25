@@ -68,6 +68,11 @@ function App() {
       //   logoutDB(auth.currentUser)
       // });
     });
+
+    //모바일을 위한 100vh 해결
+    let vh = 0;
+    const rootElement = document.getElementById('root');
+    rootElement.style.setProperty('--vh', `${vh}px`);
   }, [])
 
   //fbUser에 로그인값을 false로 만들기
