@@ -1,4 +1,4 @@
-#root .gtn-select {
+.gtn-select {
   height: 32px;
   padding: 0 0.5rem;
   border: none;
@@ -11,14 +11,14 @@
   font-family: Pretendard !important;
 }
 
-#root .gtn-select:hover {
+.gtn-select:hover {
   -webkit-filter: brightness(0.9);
           filter: brightness(0.9);
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
 }
 
-#root .gtn-input {
+.gtn-input {
   height: 32px;
   padding: 0 0.5rem;
   border: 1px solid #9591b1;
@@ -29,21 +29,21 @@
   font-family: Pretendard !important;
 }
 
-#root .gtn-input:hover {
+.gtn-input:hover {
   -webkit-filter: brightness(0.9);
           filter: brightness(0.9);
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
 }
 
-#root .gtn-input:focus {
+.gtn-input:focus {
   outline: none !important;
   border: 1px solid #505118;
   -webkit-box-shadow: 0rem 0.47rem 2.19rem rgba(8, 10, 37, 0.1), 0rem 0.94rem 1.41rem rgba(8, 10, 37, 0.1), 0rem 0.25rem 0.53rem rgba(8, 10, 37, 0.2), 0rem 0.13rem 0.19rem rgba(8, 10, 37, 0.1);
           box-shadow: 0rem 0.47rem 2.19rem rgba(8, 10, 37, 0.1), 0rem 0.94rem 1.41rem rgba(8, 10, 37, 0.1), 0rem 0.25rem 0.53rem rgba(8, 10, 37, 0.2), 0rem 0.13rem 0.19rem rgba(8, 10, 37, 0.1);
 }
 
-#root .gtn-input:focus:hover {
+.gtn-input:focus:hover {
   -webkit-filter: none !important;
           filter: none !important;
 }
@@ -221,11 +221,16 @@
   color: #313128;
 }
 
+.ReactModalPortal * {
+  font-family: 'Pretendard';
+}
+
 .ReactModalPortal > div {
   background-color: rgba(0, 0, 0, 0.1) !important;
 }
 
 .ReactModalPortal > div > div {
+  width: 400px;
   border-radius: 4px;
   -webkit-box-shadow: 0rem 0.47rem 2.19rem rgba(8, 10, 37, 0.02), 0rem 0.94rem 1.41rem rgba(8, 10, 37, 0.02), 0rem 0.25rem 0.53rem rgba(8, 10, 37, 0.04), 0rem 0.13rem 0.19rem rgba(8, 10, 37, 0.02);
           box-shadow: 0rem 0.47rem 2.19rem rgba(8, 10, 37, 0.02), 0rem 0.94rem 1.41rem rgba(8, 10, 37, 0.02), 0rem 0.25rem 0.53rem rgba(8, 10, 37, 0.04), 0rem 0.13rem 0.19rem rgba(8, 10, 37, 0.02);
@@ -263,7 +268,26 @@
 }
 
 .ReactModalPortal > div > div .modal-body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+  gap: 10px;
   padding: 1rem;
+}
+
+.ReactModalPortal > div > div .modal-body.flx-start {
+  text-align: left;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
 }
 
 .ReactModalPortal > div > div .modal-btn {

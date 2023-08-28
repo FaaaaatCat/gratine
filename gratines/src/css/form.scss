@@ -14,7 +14,7 @@
 
 #root {
   //셀렉트
-  & .gtn-select {
+  @at-root .gtn-select {
     height: $form-height;
     padding: 0 0.5rem;
     border: none;
@@ -25,7 +25,7 @@
   }
 
   //인풋
-  & .gtn-input {
+  @at-root .gtn-input {
     height: $form-height;
     padding: 0 $form-left-padding;
     // background-color: white !important; //왜 안되지?
@@ -171,11 +171,13 @@
 
 //모달
 .ReactModalPortal {
+  & * {
+    font-family: 'Pretendard';
+  }
   & > div {
     background-color: rgba(0, 0, 0, 0.1) !important;
     & > div {
-      // width: 400px;
-      // height: 400px;
+      width: 400px;
       border-radius: $card-radius;
       box-shadow: $card-shadow;
       background-color: white;
@@ -201,7 +203,16 @@
         }
       }
       & .modal-body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 10px;
         padding: 1rem;
+        &.flx-start{
+          text-align: left;
+          align-items: flex-start;
+        }
       }
       & .modal-btn {
         margin-top: 1rem;
