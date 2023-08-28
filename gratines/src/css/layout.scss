@@ -32,11 +32,8 @@ body {
     position: relative;
     overflow: hidden !important;
     height: 100vh;
-    //height: calc(var(--vh, 1vh) * 100);
-    // height: -webkit-fill-available;
-    // height: fill-available;
-    min-height: 100vh;
-    min-height: fill-available;
+    // min-height: 100vh;
+    // min-height: fill-available;
     background: linear-gradient(
         34deg,
         #e4ddd6 10%,
@@ -683,7 +680,7 @@ body {
   }
   //접속중 인원
   & .member-area {
-    max-height: 187px;
+    max-height: 115px;
     & .member-list-container {
       display: flex;
       flex-wrap: wrap;

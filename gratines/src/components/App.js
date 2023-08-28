@@ -70,9 +70,13 @@ function App() {
     });
 
     //모바일을 위한 100vh 해결
-    let vh = 0;
-    const rootElement = document.getElementById('root');
-    rootElement.style.setProperty('--vh', `${vh}px`);
+    function setDynamicHeight() {
+      const vh = window.innerHeight * 0.01;
+      const rootElement = document.getElementById('root');
+      rootElement.style.setProperty('--vh', `${vh}px`);
+    }
+    window.addEventListener('resize', setDynamicHeight);
+    setDynamicHeight();
   }, [])
 
   //fbUser에 로그인값을 false로 만들기
