@@ -126,7 +126,7 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
                                     <img src={light} alt="" />
                                 </div>
                                 <p>
-                                    출석시 1~10 사이의 랜덤 경험치를 생성합니다.<br />
+                                    출석시 5~15 사이의 랜덤 경험치를 생성합니다.<br />
                                     경험치를 모아 화분을 완성해보세요.
                                 </p>
                             </div>

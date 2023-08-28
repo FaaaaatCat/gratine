@@ -706,6 +706,14 @@ body #root .app-container .home-wrap .home-bg::before {
   font-size: 0.8rem;
 }
 
+.chatting-area .chatting-form-box form .tooltip .function-list-container .warning {
+  background-color: #313128;
+  color: pink;
+  padding: .5rem;
+  border-radius: 4px;
+  text-align: center;
+}
+
 .chatting-area .chatting-form-box form .tooltip .function-list-container .function-list {
   padding: 0.5rem;
   display: -webkit-box;

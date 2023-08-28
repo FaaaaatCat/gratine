@@ -4,7 +4,6 @@
 }
 
 .history-page .history-wrap {
-  width: 500px;
   height: 100%;
   margin: 0 auto;
   display: -webkit-box;
@@ -14,19 +13,28 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  gap: 1rem;
-  padding: 1rem 0;
 }
 
-.history-page .history-wrap .title {
+.history-page .history-wrap .title-wrap {
+  width: 300px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: .5rem;
+  padding: 1rem;
+}
+
+.history-page .history-wrap .title-wrap .title {
+  width: 300px;
   font-size: 2rem;
   font-weight: bold;
 }
 
-.history-page .history-wrap .pagination {
+.history-page .history-wrap .title-wrap .pagination {
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -40,7 +48,7 @@
   gap: 5px;
 }
 
-.history-page .history-wrap .pagination p {
+.history-page .history-wrap .title-wrap .pagination p {
   margin: 0 1rem;
 }
 

@@ -42,7 +42,6 @@ const History = () => {
     ];
     const [selectedOption, setSelectedOption] = useState(options[0].value);
     const handleOptionChange = (event) => {
-        window.location.reload();
         setSelectedOption(event.target.value);
     };
 
@@ -61,33 +60,36 @@ const History = () => {
     return (
         <div className='history-page'>
             <div className="history-wrap">
-                <div className="title">
-                    Chat Archive
+                <div className="title-wrap">
+                    <div className="title">
+                        Chat Archive
+                    </div>
+                    <div className="pagination">
+                        <button
+                            disabled={currentPage === 1}
+                            onClick={() => handlePageChange(currentPage - 1)}
+                            className="gtn-btn btn-icon-only"
+                        >
+                            <span className="material-icons-round">chevron_left</span>
+                        </button>
+                        <p>{currentPage} / {totalPages}</p>
+                        <button
+                            disabled={currentPage === totalPages}
+                            onClick={() => handlePageChange(currentPage + 1)}
+                            className="gtn-btn btn-icon-only"
+                        >
+                            <span className="material-icons-round">chevron_right</span>
+                        </button>
+                        <select className="gtn-select ml-auto" value={selectedOption} onChange={handleOptionChange}>
+                            {options.map((option) => (
+                            <option key={option.value} value={option.value}>
+                                {option.label}
+                            </option>
+                            ))}
+                        </select>
+                    </div>
                 </div>
-                <div className="pagination">
-                    <button
-                        disabled={currentPage === 1}
-                        onClick={() => handlePageChange(currentPage - 1)}
-                        className="gtn-btn btn-icon-only"
-                    >
-                        <span className="material-icons-round">chevron_left</span>
-                    </button>
-                    <p>{currentPage} / {totalPages}</p>
-                    <button
-                        disabled={currentPage === totalPages}
-                        onClick={() => handlePageChange(currentPage + 1)}
-                        className="gtn-btn btn-icon-only"
-                    >
-                        <span className="material-icons-round">chevron_right</span>
-                    </button>
-                    <select className="gtn-select ml-auto" value={selectedOption} onChange={handleOptionChange}>
-                        {options.map((option) => (
-                        <option key={option.value} value={option.value}>
-                            {option.label}
-                        </option>
-                        ))}
-                    </select>
-                </div>
+                
                 <div className="log-wrap">
                     <div className="chatting-list-container">
                         {currentPageData.map((nweet) => (

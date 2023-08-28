@@ -561,6 +561,13 @@ body {
               font-size: 0.8rem;
             }
           }
+          & .warning{
+            background-color: $brown-900;
+            color: pink;
+            padding: .5rem;
+            border-radius: $form-radius;
+            text-align: center;
+          }
           & .function-list {
             padding: 0.5rem;
             display: flex;

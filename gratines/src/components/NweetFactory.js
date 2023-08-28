@@ -28,7 +28,7 @@ const NweetFactory = ({ userObj, fbUserObj}) => {
         //특수 명령어 입력기능
         let orderWhat = '';
         let orderText = '';
-        let orderList = ['/전체','/주사위', '/칵테일', '/인형']
+        let orderList = ['/전체','/주사위', '/소지금추가']
         if (nweet[0] === '/') {
             orderWhat = nweet.split(" ")[0];
             if (orderList.includes(orderWhat)) {
@@ -48,6 +48,11 @@ const NweetFactory = ({ userObj, fbUserObj}) => {
             setNweet("");
             return;
         }
+
+        //소지금추가 기능
+        // if (orderWhat === '/소지금추가') {
+            
+        // }
 
         //주사위 기능
         let diceNum = 0;
@@ -74,21 +79,6 @@ const NweetFactory = ({ userObj, fbUserObj}) => {
                 }
             }
         }
-        //칵테일 기능
-        // let selectedCock = '';
-        // if (orderWhat === '/칵테일') {
-        //     let cockList = ['칵1', '칵2', '칵3', '칵4', '칵5', '칵6', '칵7', '칵8', '칵9', '칵10']
-        //     var random_index_1 = Math.floor(Math.random() * cockList.length);
-        //     var random_index_2 = Math.floor(Math.random() * cockList.length);
-        //     var random_index_3 = Math.floor(Math.random() * cockList.length);
-        //     var random_index_4 = Math.floor(Math.random() * cockList.length);
-        //     var random_cock_1 = cockList[random_index_1];
-        //     var random_cock_2 = cockList[random_index_2];
-        //     var random_cock_3 = cockList[random_index_3];
-        //     var random_cock_4 = cockList[random_index_4];
-        //     let selectedCockArr = [random_cock_1, random_cock_2, random_cock_3, random_cock_4]
-        //     selectedCock = selectedCockArr.join(' ,');
-        // }
 
         
         //이미지 첨부하지 않고 텍스트만 올리고 싶을 때도 있기 때문에 attachment가 있을때만 아래 코드 실행
@@ -102,31 +92,20 @@ const NweetFactory = ({ userObj, fbUserObj}) => {
             //storage 참조 경로에 있는 파일의 URL을 다운로드해서 attachmentUrl 변수에 넣어서 업데이트
             attachmentUrl = await getDownloadURL(response.ref);
         }
-
-        //인형 기능
-        // let random_bear = '';
-        // if (orderWhat === '/인형') {
-        //     let bear_1 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbears_1.JPG?alt=media&token=d1844607-6814-4969-95b7-f62a84d9d247'
-        //     let bear_2 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbears_2.JPG?alt=media&token=4942eb5d-6e7b-444f-ba5b-e71e58b70cf2'
-        //     let bear_3 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbears_3.JPG?alt=media&token=f54417dc-4018-4d53-949a-431810186f01'
-        //     let bear_4 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbears_4.JPG?alt=media&token=2640217f-6083-4b81-8314-4c1b6e384f55'
-        //     let bear_5 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbears_5.JPG?alt=media&token=bade5db1-55dd-4b02-ac9f-74fb6247bb54'
-        //     let bearList = [bear_1, bear_2, bear_3, bear_4, bear_5];
-        //     var random_index = Math.floor(Math.random() * bearList.length);
-        //     random_bear = bearList[random_index]
-        //     attachmentUrl = random_bear;
-        // }
-
-        let blackNweet = nweet.trim();
-        //이미지도 글자도 없을땐 무시한다.
-        if (nweet == '' && attachment == "") {
-            setNweet("");
-            return;
+        else {
+            //이미지도 글자도 없을땐 무시한다.
+            let blackNweet = nweet.trim();
+            if (nweet == '' && attachment == "") {
+                setNweet("");
+                return;
+            }
+            if (blackNweet == '' || nweet == null) {
+                setNweet("");
+                return;
+            }
         }
-        if (blackNweet == '' || nweet == null) {
-            setNweet("");
-            return;
-        }
+
+
 
         //////////////////////////////////////////////////////////////////////////////////////////////
         //트윗 오브젝트 저장
@@ -235,6 +214,15 @@ const NweetFactory = ({ userObj, fbUserObj}) => {
                                 <b>/전체</b>
                                 <p>전체 말하기</p>
                             </div>
+                            {/* <div className="function-list">
+                                <b>/소지금추가 @전체 $100</b>
+                                <p>입력한 금액($100)을 전체에 추가</p>
+                            </div>
+                            <div className="function-list">
+                                <b>/소지금추가 @유저이름 $100</b>
+                                <p>입력한 금액($100)을 @유저에 추가</p>
+                            </div> */}
+                            <p className="warning">* 러너는 '관리자 명령어' 사용을 금지합니다. *</p>
                         </div>
                     </div>
                 }
