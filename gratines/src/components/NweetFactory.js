@@ -8,18 +8,140 @@ const NweetFactory = ({ userObj, fbUserObj}) => {
     const [nweet, setNweet] = useState("");
     const [attachment, setAttachment] = useState("");
     const [tooltip, setTooltip] = useState(false);
+    const [usertooltip, setUsertooltip] = useState(false);
     const [textHeight, setTextHeight] = useState(0);
+    const [userArray, setUserArray] = useState([]);
 
     //텍스트 읽는 부분
-    const onInput = (e) => {
+    const onChange = (e) => {
         setNweet(e.target.value);
+        //슬래시 기능
         if (e.target.value[0] === '/') {
             setTooltip(true)
         }
         else {
             setTooltip(false)
         }
+        console.log(usertooltip)
     };
+
+
+    //유저이름 탐지
+    const dataList = ["빨간색", "파란색", "노란색", "검정색"];
+    const $autoComplete = document.querySelector(".autocomplete");
+    let nowIndex = 0;
+    const handleKeyUp = (e) => {
+        if (nweet == '') {
+            setTextHeight(32)
+            setUsertooltip(false)
+        }
+        else {
+            //@눌렀을때
+            if (nweet.includes('@')) {
+                console.log('yo')
+                showWholeList();
+                setUsertooltip(true)
+                // "@" 이전 단어 추출
+                const beforeAtMatch = nweet.match(/(\S+)\s*@/);
+                const beforeAtWord = beforeAtMatch ? beforeAtMatch[1] : '';
+                // "@" 이후 단어 추출
+                const afterAtMatch = nweet.match(/@(\S+)/);
+                const afterAtWord = afterAtMatch ? afterAtMatch[1] : '';
+                if (afterAtMatch && afterAtMatch[1]) {
+                    //매치되는 키워드를 입력하면, 매치된 데이터들 datalist에 담기
+                    const extractedUserName = afterAtMatch[1];
+                    const matchDataList = extractedUserName
+                        ? dataList.filter((label) => label.includes(extractedUserName))
+                        : [];
+                    //필요부분 잘라내기
+                    const indexOfExtractedWord = nweet.indexOf("@" + extractedUserName);
+                    let remainingPart = nweet;
+                    if (indexOfExtractedWord !== -1) {
+                        remainingPart = nweet.substring(0, indexOfExtractedWord) + " ";
+                    }
+                    switch (e.keyCode) {
+                        // UP KEY
+                        case 38:
+                            nowIndex = Math.max(nowIndex - 1, 0);
+                            break;
+
+                        // DOWN KEY
+                        case 40:
+                            nowIndex = Math.min(nowIndex + 1, matchDataList.length - 1);
+                            break;
+
+                        // ENTER KEY
+                        case 13:
+                            const replaceText = `<span style="color: red;">${matchDataList[nowIndex]}</span>`;
+                            //여기에 리플레이텍스트 넣으려다 실패함
+                            //1. textarea 대신 <div contentEditable="true"> 써보기
+                            //2. 그냥 @ 치면 showWholeList가 뜨지않음
+                            //3. @뒤에 ? 치면 오류남
+                            setNweet(remainingPart + matchDataList[nowIndex])
+                            // 초기화
+                            setUsertooltip(false)
+                            nowIndex = 0;
+                            matchDataList.length = 0;
+                            break;
+                        // 그외 다시 초기화
+                        default:
+                            nowIndex = 0;
+                            break;
+                    }
+                    showList(matchDataList, extractedUserName, nowIndex);
+                }
+                //매치되지 않는 키워드를 입력하면
+                else {
+                    setUsertooltip(false)
+                }
+            }
+            
+            else {
+                setUsertooltip(false)
+            }
+        }
+    };
+
+    // dataArray의 각 아이템을 검색하고 스타일을 적용
+    const decoUserTag = () => {
+        dataList.forEach(item => {
+            const searchRegExp = new RegExp(item, 'g');
+            const replaceText = `<span style="color: red;">${item}</span>`;
+            nweet = nweet.replace(searchRegExp, replaceText);
+        })
+    }
+
+    const showWholeList = () => {
+        const regex = new RegExp(`(${dataList})`, "g");
+        $autoComplete.innerHTML = dataList.map(
+        (label, index) => `
+            <div>
+                ${label.replace(regex, "<mark>$1</mark>")}
+            </div>
+        `).join("");
+    }
+    const showList = (matchDataList, extractedUserName, nowIndex) => {
+        const regex = new RegExp(`(${extractedUserName})`, "g");
+        $autoComplete.innerHTML = matchDataList
+        .map(
+        (label, index) => `
+        <div class='${nowIndex === index ? "active" : ""}'>
+            ${label.replace(regex, "<mark>$1</mark>")}
+        </div>
+        `
+        )
+        .join("");
+    };
+
+
+    //유저 이름들 읽는 부분
+    useEffect(() => {
+        // const q = query(
+        //   collection(dbService, "user")
+        // );
+        // const querySnapshot = await getDocs(q);
+        // setUserArray(querySnapshot.docs)
+    }, []);
 
     //전송
     const onSubmit = async (e) => {
@@ -28,13 +150,24 @@ const NweetFactory = ({ userObj, fbUserObj}) => {
         //특수 명령어 입력기능
         let orderWhat = '';
         let orderText = '';
-        let orderList = ['/전체','/주사위', '/소지금추가']
+        let orderList = ['/전체','/주사위','/전투','/소지금추가']
         if (nweet[0] === '/') {
             orderWhat = nweet.split(" ")[0];
             if (orderList.includes(orderWhat)) {
                 orderText = nweet.substr(orderWhat.length + 1);
             }
         }
+        //유저 찾기 기능
+        // const regex = /@([^ ]+)/;
+        // const match = nweet.match(regex);
+        // if (match && match[1]) {
+        //     const extractedText = match[1]; // 'user' 부분 추출
+        //     console.log(extractedText); // 출력: 'user'
+        // } else {
+        //     console.log('매치되는 부분이 없습니다.');
+        // }
+
+
         //채팅 쓴 날짜 기능
         let todayfull = new Date().toLocaleString();
 
@@ -146,21 +279,23 @@ const NweetFactory = ({ userObj, fbUserObj}) => {
     //사진파일 업로드 전 지우기
     const onClearAttachment = () => setAttachment("")
 
+
     //엔터 & shift+엔터
-    const handleKeyPress = (e) => {
+    const onKeyDown = (e) => {
         if (nweet == '') {
             setTextHeight(32)
         }
         if (e.keyCode == 13) {
             e.preventDefault();
+            if (usertooltip) {
+                return;
+            }
             if (e.shiftKey) {
                 const text = nweet;
                 const lines = text.split('\n').length;
                 const selectionStart = e.target.selectionStart;
                 const selectionEnd = e.target.selectionEnd;
-                const newText = text.substring(0, selectionStart) +
-                                '\n' +
-                                text.substring(selectionEnd);
+                const newText = text.substring(0, selectionStart) + '\n' + text.substring(selectionEnd);
                 setNweet(newText)
                 setTextHeight(32 + lines * 15)
 
@@ -228,16 +363,19 @@ const NweetFactory = ({ userObj, fbUserObj}) => {
                 }
                 <textarea
                     className="chatting-textarea"
+                    id="search"
+                    autoComplete="off"
                     role="textarea"
                     title="Text Chat Input"
-                    autoComplete="off"
                     value={nweet}
-                    onInput={onInput}
-                    onKeyDown={handleKeyPress}
+                    onChange={onChange}
+                    onKeyUp={handleKeyUp}
+                    onKeyDown={onKeyDown}
                     placeholder=""
                     style={{height: textHeight + 'px'}}
                     // maxLength={120} //글자제한
                 />
+                <div class={"autocomplete " + (usertooltip ? "" : "d-none")}></div>
                 <label htmlFor="file">
                     <div className="picture-upload-btn">
                         <span className="material-icons-round">image</span>

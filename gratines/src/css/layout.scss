@@ -585,6 +585,28 @@ body {
           }
         }
       }
+      //자동완성
+      & .autocomplete{
+        position: absolute;
+        bottom: calc(100% + 1rem);
+        left: 0;
+        right: 0.3rem;
+        background-color: $brown-800;
+        border-radius: $form-radius;
+        box-shadow: $form-shadow;
+        & > div{
+          background: $brown-800;
+          color: $brown-500;
+          padding: .3rem .6rem;
+          &.active{
+            background: $brown-900;
+            color: $yellow-300;
+          }
+          & mark{
+            background: $yellow-300;
+          }
+        }
+      }
     }
   }
 }

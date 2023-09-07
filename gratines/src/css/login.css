@@ -1,4 +1,5 @@
 @charset "UTF-8";
+/* load images */
 body::after {
   /* 소스만 다운받고 화면은 나태내지 않는다. (숨김 처리) */
   position: absolute;
@@ -6,8 +7,7 @@ body::after {
   height: 0;
   overflow: hidden;
   z-index: -1;
-  /* load images */
-  content: url("https://static.vecteezy.com/system/resources/thumbnails/007/128/160/original/lens-flare-bright-afternoon-sun-with-lens-flare-lens-flare-transition-light-effect-lens-flare-effect-on-black-background-light-streaks-lights-optical-lens-flares-free-video.jpg") url("https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2FspringBackground2.avif?alt=media&token=c423004b-139e-4768-afea-0c0e0682580d") url("https://images.unsplash.com/photo-1426170042593-200f250dfdaf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80") url("https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fframe.png?alt=media&token=88efe3ab-2819-4c38-a0df-f911263bc059");
+  content: url("https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2FspringBackground2.avif?alt=media&token=c423004b-139e-4768-afea-0c0e0682580d") url("https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fframe.png?alt=media&token=88efe3ab-2819-4c38-a0df-f911263bc059");
   /* 필요한 이미지 소스들 다운 */
 }
 
@@ -33,20 +33,6 @@ body::after {
   -webkit-transition: all 0.5s;
   transition: all 0.5s;
   overflow-y: auto;
-}
-
-.login-area::before {
-  content: "";
-  width: 100%;
-  height: 100%;
-  background-image: url("https://static.vecteezy.com/system/resources/thumbnails/007/128/160/original/lens-flare-bright-afternoon-sun-with-lens-flare-lens-flare-transition-light-effect-lens-flare-effect-on-black-background-light-streaks-lights-optical-lens-flares-free-video.jpg");
-  position: absolute;
-  -webkit-filter: hue-rotate(60deg) brightness(400%) grayscale(70%);
-          filter: hue-rotate(60deg) brightness(400%) grayscale(70%);
-  opacity: 0.5;
-  -webkit-transform: rotate(-180deg);
-          transform: rotate(-180deg);
-  mix-blend-mode: soft-light;
 }
 
 .login-area .logo {
@@ -555,7 +541,12 @@ body::after {
 }
 
 @media (max-width: 1000px) {
+  #root::before {
+    display: none !important;
+  }
   #root .login-area {
+    background-image: none !important;
+    background: #73725D !important;
     padding: 10px;
   }
   #root .login-area .logo {
@@ -583,6 +574,9 @@ body::after {
   }
   #root .login-area .login-letter .border {
     width: 80%;
+  }
+  #root .login-area .sunshine {
+    display: none;
   }
   #root .login-area .copyright {
     color: white;

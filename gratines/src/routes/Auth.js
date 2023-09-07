@@ -17,10 +17,10 @@ const Auth = ({ userObj, refreshUser, fbUserObj }) => {
             <div className="copyright">
                 Copyright 2023. @topports All rights reserved.
             </div>
-            <div className="theme-btn">
+            {/* <div className="theme-btn">
                 <button onClick={changeTheme}>spring</button>
                 <button onClick={changeTheme}>wood</button>
-            </div>
+            </div> */}
         </div>
     )
 }
