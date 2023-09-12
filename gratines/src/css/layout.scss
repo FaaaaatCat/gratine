@@ -586,7 +586,7 @@ body {
         }
       }
       //자동완성
-      & .autocomplete{
+      & .autoComplete{
         position: absolute;
         bottom: calc(100% + 1rem);
         left: 0;
@@ -594,11 +594,11 @@ body {
         background-color: $brown-800;
         border-radius: $form-radius;
         box-shadow: $form-shadow;
-        & > div{
+        & > li{
           background: $brown-800;
           color: $brown-500;
           padding: .3rem .6rem;
-          &.active{
+          &.active, &.selected{
             background: $brown-900;
             color: $yellow-300;
           }

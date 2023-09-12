@@ -25,8 +25,7 @@ const NweetFactory = ({ userObj, fbUserObj}) => {
         const nameArray = querySnapshot.docs.map(user => user._document.data.value.mapValue.fields.displayName.stringValue);
         setUserArray(nameArray)
     }
-    //const dataList = userArray;
-    const dataList = ['빨간색','파란색','노란색'];
+    const dataList = userArray;
 
     //텍스트 읽는 부분
     const onChange = (e) => {
@@ -45,7 +44,7 @@ const NweetFactory = ({ userObj, fbUserObj}) => {
         //"@" 유저태그 기능
         const atIndex = inputValue.lastIndexOf('@');
         if (atIndex !== -1) {
-            //readUserNames();
+            readUserNames();
             const searchTerm = inputValue.substring(atIndex + 1).toLowerCase();
             // 1. "@" 다음 문자와 dataList의 아이템을 비교하여 매치되는 아이템 추가
             if (searchTerm) {
@@ -66,38 +65,6 @@ const NweetFactory = ({ userObj, fbUserObj}) => {
         }
     };
 
-    //엔터 & shift+엔터
-    const enterWork = (e) => {
-        if (nweet == '') {
-            setTextHeight(32)
-        }
-        if (e.keyCode == 13) {
-            e.preventDefault();
-            if (usertooltip) {
-                return;
-            }
-            if (e.shiftKey) {
-                const text = nweet;
-                const lines = text.split('\n').length;
-                const selectionStart = e.target.selectionStart;
-                const selectionEnd = e.target.selectionEnd;
-                const newText = text.substring(0, selectionStart) + '\n' + text.substring(selectionEnd);
-                setNweet(newText)
-                setTextHeight(32 + lines * 15)
-
-                // 줄 바꾸기 이후 커서 위치 조정
-                const newCursorPos = selectionStart + 1;
-                e.target.selectionStart = newCursorPos;
-                e.target.selectionEnd = newCursorPos;
-            }
-            else {
-                onSubmit(e);
-                setTooltip(false)
-                setTextHeight(32)
-            }
-        }
-    }
-
     //키보드 위아래로 유저 셀렉트 하는 함수
     const handleKeyDown = (e) => {
         if (autoCompleteList.length === 0) return;
@@ -116,11 +83,10 @@ const NweetFactory = ({ userObj, fbUserObj}) => {
                 break;
             case 'Enter':
                 if (selectedItemIndex >= 0) {
-                    // 선택된 아이템을 입력란에 채우기
-                    setNweet(nweet + autoCompleteList[selectedItemIndex]);
-                    // 자동 완성 목록 초기화
-                    setAutoCompleteList([]);
-                    e.preventDefault(); // Enter 키 기본 동작 방지
+                // 선택된 아이템을 입력란에 채우기
+                setNweet(nweet + autoCompleteList[selectedItemIndex]);
+                // 자동 완성 목록 초기화
+                setAutoCompleteList([]);
                 }
                 break;
             default:
@@ -136,6 +102,7 @@ const NweetFactory = ({ userObj, fbUserObj}) => {
     // 입력한 단어를 하이라이트로 표시하는 함수
     const highlightMatch = (text, searchTerm) => {
         if (!searchTerm) {
+            console.log('와ㅣ이')
             return text;
         }
         else{
@@ -155,7 +122,7 @@ const NweetFactory = ({ userObj, fbUserObj}) => {
         }
     };
 
-
+    
     ///////////////////////////////////////////////////////////////////////
     //전송
     const onSubmit = async (e) => {
@@ -284,8 +251,6 @@ const NweetFactory = ({ userObj, fbUserObj}) => {
     const onClearAttachment = () => setAttachment("")
 
 
-
-
     return (
         <>
             {attachment &&
@@ -343,10 +308,7 @@ const NweetFactory = ({ userObj, fbUserObj}) => {
                     title="Text Chat Input"
                     value={nweet}
                     onChange={onChange}
-                    onKeyDown={(e) => {
-                        handleKeyDown(e);
-                        enterWork(e);
-                    }}
+                    onKeyDown={handleKeyDown}
                     placeholder=""
                     style={{height: textHeight + 'px'}}
                     // maxLength={120} //글자제한

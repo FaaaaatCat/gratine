@@ -737,7 +737,7 @@ body #root .app-container .home-wrap .home-bg::before {
   color: #C4C3B6;
 }
 
-.chatting-area .chatting-form-box form .autocomplete {
+.chatting-area .chatting-form-box form .autoComplete {
   position: absolute;
   bottom: calc(100% + 1rem);
   left: 0;
@@ -748,18 +748,18 @@ body #root .app-container .home-wrap .home-bg::before {
           box-shadow: 1.5px 1.5px 4.5px rgba(29, 12, 23, 0.18);
 }
 
-.chatting-area .chatting-form-box form .autocomplete > div {
+.chatting-area .chatting-form-box form .autoComplete > li {
   background: #4D4D3F;
   color: #ADAC9A;
   padding: .3rem .6rem;
 }
 
-.chatting-area .chatting-form-box form .autocomplete > div.active {
+.chatting-area .chatting-form-box form .autoComplete > li.active, .chatting-area .chatting-form-box form .autoComplete > li.selected {
   background: #313128;
   color: #DFE099;
 }
 
-.chatting-area .chatting-form-box form .autocomplete > div mark {
+.chatting-area .chatting-form-box form .autoComplete > li mark {
   background: #DFE099;
 }
 
