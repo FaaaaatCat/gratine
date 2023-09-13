@@ -6,49 +6,18 @@ import { Navigate, useNavigate } from "react-router-dom";
 import Modal from 'react-modal';
 Modal.setAppElement('#root');
 
-const Member = ({ isLoggedIn, fbUserObj, userObj }) => {
+const Member = ({ isLoggedIn, fbUserObj, userObj, loginUsers }) => {
     const auth = getAuth();
     const user = auth.currentUser;
     const navigate = useNavigate();
-    const [loginUsers, setLoginUsers] = useState([]);
+    //const [loginUsers, setLoginUsers] = useState([]);
     const [firstModalOpen, setFirstModalOpen] = useState(false);
     const [secondModalOpen, setSecondModalOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState('');
     const [password, setPassword] = useState('');
     const [isMe, setIsMe] = useState(false);
     const defaultProfile = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fdefault_profile.png?alt=media&token=9003c59f-8f33-4d0a-822c-034682416355';
-
-    useEffect(() => {
-        if (isLoggedIn) {
-            readLoginUser();
-        }
-        else {
-            //setLogOut();
-        }
-    }, []);
-
-    //로그인된 유저데이터 (user) 불러오는 기능
-    const readLoginUser = async () => {
-        const q = query(
-          collection(dbService, "user"),
-          //where("login", "==", true)
-        );
-        const unsubscribe = onSnapshot(q, (Snapshot) => {
-            const loginUserArray = Snapshot.docs.map((doc) => {
-                return {
-                    id: doc.id,
-                    ...doc.data(),
-                };
-            });
-            setLoginUsers(loginUserArray);
-        });
-        onAuthStateChanged(auth, (user) => {
-            if (user == null) {
-                unsubscribe();
-            }
-        });
-    }
-
+    
     // 회원탈퇴 기능
     const reauthenticateAndDelete = async () => {
         const credential = EmailAuthProvider.credential(user.email, password);
@@ -78,7 +47,7 @@ const Member = ({ isLoggedIn, fbUserObj, userObj }) => {
         const ok = window.confirm("탈퇴하시겠습니까? 개인정보는 안전하게 모두 삭제되지만, 채팅기록은 삭제되지 않습니다.")
         if (ok) {
             await deleteUser(user).then(() => {
-                window.confirm("회원탈퇴가 성공적으로 처리되었습니다.")
+                window.confirm("회원탈퇴가 성공적으로 처리되었ㄶㄴ습니다.")
                 deleteUserData(UserRef);
                 auth.signOut();
                 navigate("/login");

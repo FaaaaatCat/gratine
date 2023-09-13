@@ -4,30 +4,18 @@ import { v4 as uuidv4 } from 'uuid';
 import { collection, addDoc, query, orderBy, where, doc, getDocs, updateDoc} from "firebase/firestore";
 import { ref, uploadString, getDownloadURL } from "@firebase/storage";
 
-const NweetFactory = ({ userObj, fbUserObj}) => {
+const NweetFactory = ({ userObj, fbUserObj, loginUsers }) => {
     const [nweet, setNweet] = useState("");
     const [attachment, setAttachment] = useState("");
     const [tooltip, setTooltip] = useState(false);
     const [textHeight, setTextHeight] = useState(0);
-    const [userArray, setUserArray] = useState([]);
     const [autoCompleteList, setAutoCompleteList] = useState([]);
     const [selectedItemIndex, setSelectedItemIndex] = useState(0);
-    const usertooltip = autoCompleteList.length > 0;
+    const usertooltip = autoCompleteList.length > 0; //autoComplete가 켜져있다면 true
 
     //유저 이름들 읽는 부분
-    const readUserNames = async () => {
-        console.log('hi')
-        const q = query(
-          collection(dbService, "user")
-        );
-        const querySnapshot = await getDocs(q);
-        const nameArray = querySnapshot.docs.map(user => user._document.data.value.mapValue.fields.displayName.stringValue);
-        setUserArray(nameArray)
-    }
-    readUserNames();
-    const dataList = userArray;
-    //const dataList = ['빨간색','파란색','노란색'];
-    
+    const dataList = loginUsers.map(item => item.displayName);
+
     //텍스트 읽는 부분
     const onChange = (e) => {
         //nweet에 현재 텍스트 추가 기능
@@ -180,7 +168,7 @@ const NweetFactory = ({ userObj, fbUserObj}) => {
         //특수 명령어 입력기능
         let orderWhat = '';
         let orderText = '';
-        let orderList = ['/전체','/주사위','/전투','/소지금추가']
+        let orderList = ['/전체','/주사위','/공격','/치유']
         if (nweet[0] === '/') {
             orderWhat = nweet.split(" ")[0];
             if (orderList.includes(orderWhat)) {
@@ -201,11 +189,6 @@ const NweetFactory = ({ userObj, fbUserObj}) => {
             setNweet("");
             return;
         }
-
-        //소지금추가 기능
-        // if (orderWhat === '/소지금추가') {
-            
-        // }
 
         //주사위 기능
         let diceNum = 0;
@@ -231,6 +214,19 @@ const NweetFactory = ({ userObj, fbUserObj}) => {
                     }
                 }
             }
+        }
+
+        //공격 기능
+        const extractedData = orderText.replace('@', '');
+        if (orderWhat === '/공격' && dataList.includes(extractedData)) {
+            diceNum = Math.ceil(Math.random() * (50 - 1) + 1);
+            orderText = extractedData;
+        }
+
+        //치유 기능
+        if (orderWhat === '/치유' && dataList.includes(extractedData)) {
+            diceNum = Math.ceil(Math.random() * (50 - 1) + 1);
+            orderText = extractedData;
         }
 
         

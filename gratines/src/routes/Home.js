@@ -17,12 +17,20 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
     const navigate = useNavigate();
     const [nweets, setNweets] = useState([]);
     const [infoView, setInfoView] = useState(false);
+    const [loginUsers, setLoginUsers] = useState([]);
 
+    //유저이름 모음
+    const userList = loginUsers.map(item => item.displayName);
     //명령어 모음
     let orderList = ['10', '50', '100', '선택']
     
-    //트윗 읽어오기 기능
     useEffect(() => {
+        readLoginUser();
+        readNweet();
+    }, []);
+
+    //트윗 읽어오기 기능
+    const readNweet = () => {
         const q = query(
             collection(dbService, "nweets"),
             orderBy("createdAt", "desc")
@@ -41,9 +49,29 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
                 unsubscribe();
             }
         });
-    }, []);
+    }
 
-
+    //로그인한 유저 읽어오기 기능
+    const readLoginUser = async () => {
+        const q = query(
+          collection(dbService, "user"),
+          //where("login", "==", true)
+        );
+        const unsubscribe = onSnapshot(q, (Snapshot) => {
+            const loginUserArray = Snapshot.docs.map((doc) => {
+                return {
+                    id: doc.id,
+                    ...doc.data(),
+                };
+            });
+            setLoginUsers(loginUserArray);
+        });
+        onAuthStateChanged(auth, (user) => {
+            if (user == null) {
+                unsubscribe();
+            }
+        });
+    }
 
 
     //출석창 info hover 기능
@@ -89,6 +117,8 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
                             orderWhat={nweet.orderWhat}
                             isWhole={nweet.orderWhat === "/전체"}
                             isDice={nweet.orderWhat === "/주사위" && orderList.includes(nweet.orderText)}
+                            isAttack={nweet.orderWhat === "/공격" && userList.includes(nweet.orderText)}
+                            isCure={nweet.orderWhat === "/치유" && userList.includes(nweet.orderText)}
                             isBuy={nweet.buy === true}
                         />
                     ))}
@@ -98,6 +128,7 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
                         userObj={userObj}
                         refreshUser={refreshUser}
                         fbUserObj={fbUserObj}
+                        loginUsers={loginUsers}
                     />
                 </div>
             </div>
@@ -108,6 +139,7 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
                         userObj={userObj}
                         isLoggedIn={isLoggedIn}
                         fbUserObj={fbUserObj}
+                        loginUsers={loginUsers}
                     />
                 </div>
                 <div className="attend-area">

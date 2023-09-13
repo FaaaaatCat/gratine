@@ -4,7 +4,7 @@ import { doc, deleteDoc, updateDoc, collection, getDocs, query, addDoc, orderBy,
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 
-const Nweet = ({ nweetObj, isOwner, isOrder, orderWhat, orderText, isWhole, isDice, isBuy}) => {
+const Nweet = ({ nweetObj, isOwner, isOrder, orderWhat, orderText, isWhole, isDice, isBuy, isAttack, isCure}) => {
     const NweetTextRef = doc(dbService, "nweets", `${nweetObj.id}`); //nweetObj.id 는 쓴 트윗의 고유 id임. userObj.id와 다름.
     const NweetImgRef = ref(storageService, nweetObj.attachmentUrl); //nweetObj.attachmentUrl의 레퍼런스를 얻음
     //console.log(nweetObj.id) //쓴 데이터 갯수만큼 실행 됨 그래서 모든 트윗의 id를 보여줌.
@@ -40,20 +40,22 @@ const Nweet = ({ nweetObj, isOwner, isOrder, orderWhat, orderText, isWhole, isDi
 
     return (
         <>  
-            <div className={'chatting-list ' + (isOwner? 'myChat ':'') + (isDice? 'orderChat ':'') + (isBuy? 'buyChat ':'') + (isWhole? 'wholeChat ':'')}>
+            <div className={'chatting-list ' + (isOwner? 'myChat ':'') + (isDice || isAttack || isCure? 'orderChat ':'') + (isBuy? 'buyChat ':'') + (isWhole? 'wholeChat ':'')}>
                 <div className="profile-box">
                     {/* <img src={nweetObj.creatorImg} /> */}
                     {nweetObj.creatorImg ? <img src={nweetObj.creatorImg} /> : <img src={defaultProfile} />}
                 </div>
                 <div className="txt-box">
                     <b>{nweetObj.creatorName}</b>
-                    {isDice || isWhole ?
+                    {isDice || isWhole || isAttack || isCure ?
                         <>
                             {isWhole && <>
                                 <p>{nweetObj.orderText}</p>
                                 {isOwner && <button onClick={onDeleteClick}><span className="material-icons-round">close</span></button>}
                             </>}
-                            {isDice && <p>[주사위 {nweetObj.orderText}] <span>{nweetObj.creatorName}</span>님이 주사위 <span>{nweetObj.diceNum}</span>을 굴렸습니다. </p>}
+                            {isDice && <p>[🎲주사위 {nweetObj.orderText}] <span>{nweetObj.creatorName}</span>님이 주사위 <span>{nweetObj.diceNum}</span>을 굴렸습니다. </p>}
+                            {isAttack && <p>[🔪공격] <span>{nweetObj.creatorName}</span>님이 <span>{nweetObj.orderText}</span>님을 공격합니다! <span>{nweetObj.diceNum}</span>의 데미지가 들어갔습니다. </p>}
+                            {isCure && <p>[💖치유] <span>{nweetObj.creatorName}</span>님이 <span>{nweetObj.orderText}</span>님을 치유합니다. 세계수의 힘으로 <span>{nweetObj.diceNum}</span>의 체력이 복구됩니다. </p>}
                         </> :
                         <>
                             <pre>{nweetObj.text}</pre>
