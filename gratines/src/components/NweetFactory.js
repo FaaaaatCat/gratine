@@ -8,16 +8,15 @@ const NweetFactory = ({ userObj, fbUserObj}) => {
     const [nweet, setNweet] = useState("");
     const [attachment, setAttachment] = useState("");
     const [tooltip, setTooltip] = useState(false);
-    const [usertooltip, setUsertooltip] = useState(false);
     const [textHeight, setTextHeight] = useState(0);
     const [userArray, setUserArray] = useState([]);
     const [autoCompleteList, setAutoCompleteList] = useState([]);
     const [selectedItemIndex, setSelectedItemIndex] = useState(0);
-
-
+    const usertooltip = autoCompleteList.length > 0;
 
     //유저 이름들 읽는 부분
-    const readUserNames = async() => {
+    const readUserNames = async () => {
+        console.log('hi')
         const q = query(
           collection(dbService, "user")
         );
@@ -25,9 +24,10 @@ const NweetFactory = ({ userObj, fbUserObj}) => {
         const nameArray = querySnapshot.docs.map(user => user._document.data.value.mapValue.fields.displayName.stringValue);
         setUserArray(nameArray)
     }
-    //const dataList = userArray;
-    const dataList = ['빨간색','파란색','노란색'];
-
+    readUserNames();
+    const dataList = userArray;
+    //const dataList = ['빨간색','파란색','노란색'];
+    
     //텍스트 읽는 부분
     const onChange = (e) => {
         //nweet에 현재 텍스트 추가 기능
@@ -45,14 +45,13 @@ const NweetFactory = ({ userObj, fbUserObj}) => {
         //"@" 유저태그 기능
         const atIndex = inputValue.lastIndexOf('@');
         if (atIndex !== -1) {
-            //readUserNames();
             const searchTerm = inputValue.substring(atIndex + 1).toLowerCase();
             // 1. "@" 다음 문자와 dataList의 아이템을 비교하여 매치되는 아이템 추가
             if (searchTerm) {
                 const matchedItems = dataList.filter((item) =>
                     item.toLowerCase().includes(searchTerm)
-            );
-            setAutoCompleteList(matchedItems);
+                );
+                setAutoCompleteList(matchedItems);
             }
             // 2. "@"만 있는 경우
             else {
@@ -66,16 +65,29 @@ const NweetFactory = ({ userObj, fbUserObj}) => {
         }
     };
 
-    //엔터 & shift+엔터
-    const enterWork = (e) => {
-        if (nweet == '') {
-            setTextHeight(32)
-        }
-        if (e.keyCode == 13) {
-            e.preventDefault();
-            if (usertooltip) {
-                return;
+    //Enter관련 기능 (그냥 Enter, Shift+Enter, @+Enter)
+    const enterKeyWork = (e) => {
+        if (e.key !== "Enter") return;
+        if (usertooltip) {
+            //1. @ + Enter
+            if (selectedItemIndex >= 0) {
+                //필요부분 잘라내기
+                const afterAt = nweet.split('@')[1] || '';
+                const beforeAt = nweet.split('@')[0] || '';
+                const indexOfExtractedWord = nweet.indexOf("@" + afterAt);
+                let remainingPart = nweet;
+                if (indexOfExtractedWord !== -1) {
+                    remainingPart = nweet.substring(0, indexOfExtractedWord);
+                }
+                // 선택된 아이템을 입력란에 채우기
+                setNweet(remainingPart + '@' + autoCompleteList[selectedItemIndex]);
+                // 자동 완성 목록 초기화
+                setAutoCompleteList([]);
+                e.preventDefault(); // Enter 키 기본 동작 방지
             }
+        }
+        else {
+            //2. Shift + Enter
             if (e.shiftKey) {
                 const text = nweet;
                 const lines = text.split('\n').length;
@@ -90,6 +102,7 @@ const NweetFactory = ({ userObj, fbUserObj}) => {
                 e.target.selectionStart = newCursorPos;
                 e.target.selectionEnd = newCursorPos;
             }
+            //3. 그냥 Enter
             else {
                 onSubmit(e);
                 setTooltip(false)
@@ -98,9 +111,12 @@ const NweetFactory = ({ userObj, fbUserObj}) => {
         }
     }
 
+
     //키보드 위아래로 유저 셀렉트 하는 함수
     const handleKeyDown = (e) => {
-        if (autoCompleteList.length === 0) return;
+        if (autoCompleteList.length === 0) {
+            return;
+        }
         switch (e.key) {
             case 'ArrowUp':
                 e.preventDefault();
@@ -114,15 +130,15 @@ const NweetFactory = ({ userObj, fbUserObj}) => {
                 prevIndex < autoCompleteList.length - 1 ? prevIndex + 1 : 0
                 );
                 break;
-            case 'Enter':
-                if (selectedItemIndex >= 0) {
-                    // 선택된 아이템을 입력란에 채우기
-                    setNweet(nweet + autoCompleteList[selectedItemIndex]);
-                    // 자동 완성 목록 초기화
-                    setAutoCompleteList([]);
-                    e.preventDefault(); // Enter 키 기본 동작 방지
-                }
-                break;
+            // case 'Enter':
+            //     if (selectedItemIndex >= 0) {
+            //         // 선택된 아이템을 입력란에 채우기
+            //         setNweet(nweet + autoCompleteList[selectedItemIndex]);
+            //         // 자동 완성 목록 초기화
+            //         setAutoCompleteList([]);
+            //         e.preventDefault(); // Enter 키 기본 동작 방지
+            //     }
+            //     break;
             default:
                 break;
         }
@@ -343,25 +359,27 @@ const NweetFactory = ({ userObj, fbUserObj}) => {
                     title="Text Chat Input"
                     value={nweet}
                     onChange={onChange}
+                    //onKeyDown={handleKeyDown}
                     onKeyDown={(e) => {
                         handleKeyDown(e);
-                        enterWork(e);
+                        enterKeyWork(e);
                     }}
                     placeholder=""
                     style={{height: textHeight + 'px'}}
                     // maxLength={120} //글자제한
                 />
-                <ul className="autoComplete">
-                    {autoCompleteList.map((item, index) => (
-                    <li
-                        key={item}
-                        className={index === selectedItemIndex ? 'selected' : ''}
-                    >
-                        {highlightMatch(item, nweet.split('@')[1])}
-                    </li>
-                    ))}
-                </ul>
-                {/* <div class={"autoComplete " + (usertooltip ? "" : "d-none")}></div> */}
+                {usertooltip &&
+                    <ul className="autoComplete">
+                        {autoCompleteList.map((item, index) => (
+                        <li
+                            key={item}
+                            className={index === selectedItemIndex ? 'selected' : ''}
+                        >
+                            {highlightMatch(item, nweet.split('@')[1])}
+                        </li>
+                        ))}
+                    </ul>
+                }
                 <label htmlFor="file">
                     <div className="picture-upload-btn">
                         <span className="material-icons-round">image</span>
