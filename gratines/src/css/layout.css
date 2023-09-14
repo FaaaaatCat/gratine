@@ -723,12 +723,12 @@ body #root .app-container .home-wrap .home-bg::before {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  gap: 5px;
+  gap: 2px;
 }
 
 .chatting-area .chatting-form-box form .tooltip .function-list-container .function-list b {
   font-weight: 300;
-  font-size: 1rem;
+  font-size: 0.94rem;
   color: white;
 }
 

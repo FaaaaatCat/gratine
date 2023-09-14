@@ -99,7 +99,6 @@ const NweetFactory = ({ userObj, fbUserObj, loginUsers }) => {
         }
     }
 
-
     //키보드 위아래로 유저 셀렉트 하는 함수
     const handleKeyDown = (e) => {
         if (autoCompleteList.length === 0) {
@@ -328,20 +327,20 @@ const NweetFactory = ({ userObj, fbUserObj, loginUsers }) => {
                                 <b>/주사위 선택</b>
                                 <p>주사위굴리기 (Yes or No)</p>
                             </div>
+                            <div className="function-list">
+                                <b>/공격 @유저이름</b>
+                                <p>@유저에게 1~50사이 데미지 부과</p>
+                            </div>
+                            <div className="function-list">
+                                <b>/치유 @유저이름</b>
+                                <p>@유저에게 1~50사이 체력 회복</p>
+                            </div>
                         </div>
                         <div className="function-list-container">
                             <div className="title"><span className="material-icons-round">info_outline</span>관리자 명령어</div>
                             <div className="function-list">
                                 <b>/전체</b>
                                 <p>전체 말하기</p>
-                            </div>
-                            <div className="function-list">
-                                <b>/소지금추가 @전체@ $100</b>
-                                <p>입력한 금액($100)을 전체에 추가</p>
-                            </div>
-                            <div className="function-list">
-                                <b>/소지금추가 @유저@ $100</b>
-                                <p>입력한 금액($100)을 특정유저에 추가</p>
                             </div>
                             <p className="warning">* 러너는 '관리자 명령어' 사용을 금지합니다. *</p>
                         </div>
