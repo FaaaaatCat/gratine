@@ -61,6 +61,7 @@ const AuthForm = ({userObj, refreshUser}) => {
                     email: email,
                     gold: 0,
                     item: '완드, 학생증',
+                    hp: 100,
                     login: true,
                     displayName: auth.currentUser.email.split("@")[0],
                     photoURL: defaultProfile,

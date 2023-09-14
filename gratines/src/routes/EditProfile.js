@@ -9,6 +9,7 @@ const EditProfile = ({ refreshUser, userObj, fbUserObj }) => {
     const auth = getAuth();
     const [newDisplayName, setNewDisplayName] = useState(fbUserObj.displayName);
     const [newGold, setNewGold] = useState(fbUserObj.gold);
+    const [newHp, setNewHp] = useState(fbUserObj.hp);
     const [newItem, setNewItem] = useState(fbUserObj.item);
     const [newProfilePic, setNewProfilePic] = useState(fbUserObj.photoURL);
     const defaultProfile = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fdefault_profile.png?alt=media&token=9003c59f-8f33-4d0a-822c-034682416355';
@@ -24,6 +25,11 @@ const EditProfile = ({ refreshUser, userObj, fbUserObj }) => {
     const onNameChange = (e) => {
         setNewDisplayName(e.target.value);
     };
+    //새 hp 인풋
+    const onHpChange = (e) => {
+        setNewHp(Number(e.target.value));
+    };
+
 
     //사진파일 지우기
     const onClearProfileUrl = () => {
@@ -65,6 +71,7 @@ const EditProfile = ({ refreshUser, userObj, fbUserObj }) => {
         await updateDoc(UserRef, {
             gold : newGold,
             item: newItem,
+            hp: newHp,
             displayName: newDisplayName,
             photoURL: creatorPicUrl,
         })
@@ -130,6 +137,13 @@ const EditProfile = ({ refreshUser, userObj, fbUserObj }) => {
                     placeholder="소지품을 입력해주세요"
                     onChange={onItemChange}
                     value={newItem}
+                />
+                <div className="label">체력</div>
+                <input
+                    type="number"
+                    className="gtn-input"
+                    onChange={onHpChange}
+                    value={newHp}
                 />
                 <input
                     className="gtn-btn btn-brown mt-4"

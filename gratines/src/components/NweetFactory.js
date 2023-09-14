@@ -220,12 +220,36 @@ const NweetFactory = ({ userObj, fbUserObj, loginUsers }) => {
         if (orderWhat === '/공격' && dataList.includes(extractedData)) {
             diceNum = Math.ceil(Math.random() * (50 - 1) + 1);
             orderText = extractedData;
+            //공격받은 대상의 hp 깍는 기능
+            const q = query(
+                collection(dbService, "user"),
+                where("displayName", "==", orderText)
+            );
+            const querySnapshot = await getDocs(q);
+            const UserData_Id = querySnapshot.docs[0].id;
+            const UserHp = querySnapshot.docs[0]._document.data.value.mapValue.fields.hp.integerValue;
+            const UserRef = doc(dbService, "user", UserData_Id);
+            await updateDoc(UserRef, {
+                hp: UserHp - diceNum
+            })
         }
 
         //치유 기능
         if (orderWhat === '/치유' && dataList.includes(extractedData)) {
             diceNum = Math.ceil(Math.random() * (50 - 1) + 1);
             orderText = extractedData;
+            //치유받은 대상의 hp 채우는 기능
+            const q = query(
+                collection(dbService, "user"),
+                where("displayName", "==", orderText)
+            );
+            const querySnapshot = await getDocs(q);
+            const UserData_Id = querySnapshot.docs[0].id;
+            const UserHp = querySnapshot.docs[0]._document.data.value.mapValue.fields.hp.integerValue;
+            const UserRef = doc(dbService, "user", UserData_Id);
+            await updateDoc(UserRef, {
+                hp: UserHp + diceNum
+            })
         }
 
         
@@ -253,8 +277,6 @@ const NweetFactory = ({ userObj, fbUserObj, loginUsers }) => {
             }
         }
 
-
-
         //////////////////////////////////////////////////////////////////////////////////////////////
         //트윗 오브젝트 저장
         const nweetObj = {
@@ -268,10 +290,14 @@ const NweetFactory = ({ userObj, fbUserObj, loginUsers }) => {
             orderWhat: orderWhat,
             orderText: orderText,
             diceNum: diceNum,
+            hp: fbUserObj.hp,
             //nweets에 새로운 데이터를 넣고싶으면 이곳에 추가하기.
             //그리고 파이어베이스 가서 데이터(pre-made query) 추가하기.
             //우리가 이 쿼리를 사용할거라고 데이터베이스에게 알려줘야 함.
         };
+
+
+
 
         //addDoc은 문서를 추가하는 함수. nweetObj의 항목을 nweets의 데이터베이스에 저장함.
         await addDoc(collection(dbService, "nweets"), nweetObj);
@@ -293,7 +319,6 @@ const NweetFactory = ({ userObj, fbUserObj, loginUsers }) => {
     }
     //사진파일 업로드 전 지우기
     const onClearAttachment = () => setAttachment("")
-
 
 
 

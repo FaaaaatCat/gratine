@@ -383,6 +383,15 @@ body #root .app-container .home-wrap .home-bg::before {
   color: #73725D;
 }
 
+.profile-area .profile-wrap .profile-info .profile-item div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
 .profile-area .profile-wrap .profile-detail-wrap {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -403,6 +412,21 @@ body #root .app-container .home-wrap .home-bg::before {
   padding-top: 20px;
   padding-bottom: 3px;
   font-weight: bold;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.profile-area .profile-wrap .profile-detail-wrap .label .side-function {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  text-align: right;
+}
+
+.profile-area .profile-wrap .profile-detail-wrap .label .side-function span {
+  opacity: 0.8;
+  color: #007663;
 }
 
 .profile-area .profile-wrap .profile-detail-wrap .gtn-btn {
@@ -491,8 +515,8 @@ body #root .app-container .home-wrap .home-bg::before {
 }
 
 .chatting-list-container .chatting-list.wholeChat .profile-box,
-.chatting-list-container .chatting-list.wholeChat b, .chatting-list-container .chatting-list.orderChat .profile-box,
-.chatting-list-container .chatting-list.orderChat b {
+.chatting-list-container .chatting-list.wholeChat b, .chatting-list-container .chatting-list.wholeChat .hpValue, .chatting-list-container .chatting-list.orderChat .profile-box,
+.chatting-list-container .chatting-list.orderChat b, .chatting-list-container .chatting-list.orderChat .hpValue {
   display: none !important;
 }
 
@@ -580,6 +604,29 @@ body #root .app-container .home-wrap .home-bg::before {
       -ms-flex-direction: column;
           flex-direction: column;
   gap: 2px;
+}
+
+.chatting-list-container .chatting-list .txt-box .name-box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 5px;
+}
+
+.chatting-list-container .chatting-list .txt-box .name-box .hpValue {
+  background-color: #E2E2DC;
+  color: #674738;
+  padding: 0 8px;
+  border-radius: 100px;
+  font-size: 0.7rem;
+  font-weight: bold;
 }
 
 .chatting-list-container .chatting-list .txt-box b {
@@ -709,7 +756,7 @@ body #root .app-container .home-wrap .home-bg::before {
 .chatting-area .chatting-form-box form .tooltip .function-list-container .warning {
   background-color: #313128;
   color: pink;
-  padding: .5rem;
+  padding: 0.5rem;
   border-radius: 4px;
   text-align: center;
 }
@@ -742,20 +789,24 @@ body #root .app-container .home-wrap .home-bg::before {
   bottom: calc(100% + 1rem);
   left: 0;
   right: 0.3rem;
-  background-color: #4D4D3F;
   border-radius: 4px;
-  -webkit-box-shadow: 1.5px 1.5px 4.5px rgba(29, 12, 23, 0.18);
-          box-shadow: 1.5px 1.5px 4.5px rgba(29, 12, 23, 0.18);
+  -webkit-box-shadow: 0rem 0.47rem 2.19rem rgba(8, 10, 37, 0.1), 0rem 0.94rem 1.41rem rgba(8, 10, 37, 0.1), 0rem 0.25rem 0.53rem rgba(8, 10, 37, 0.2), 0rem 0.13rem 0.19rem rgba(8, 10, 37, 0.1);
+          box-shadow: 0rem 0.47rem 2.19rem rgba(8, 10, 37, 0.1), 0rem 0.94rem 1.41rem rgba(8, 10, 37, 0.1), 0rem 0.25rem 0.53rem rgba(8, 10, 37, 0.2), 0rem 0.13rem 0.19rem rgba(8, 10, 37, 0.1);
+  max-height: 200px;
+  overflow-y: auto;
+  padding: 5px;
+  background: #313128;
 }
 
 .chatting-area .chatting-form-box form .autoComplete > li {
-  background: #4D4D3F;
+  background: #313128;
   color: #ADAC9A;
-  padding: .3rem .6rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
 }
 
 .chatting-area .chatting-form-box form .autoComplete > li.active, .chatting-area .chatting-form-box form .autoComplete > li.selected {
-  background: #313128;
+  background: #251b1b;
   color: #DFE099;
 }
 

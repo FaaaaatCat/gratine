@@ -23,10 +23,28 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
     const userList = loginUsers.map(item => item.displayName);
     //명령어 모음
     let orderList = ['10', '50', '100', '선택']
+
+
+    //hp 체크여부
+    const [hpValue, setHpValue] = useState(false);
+    const handleHpCheckedChange = (newIsChecked) => {
+        setHpValue(newIsChecked);
+    };
+
+    //공격을 감지해서 hp를 깎는 기능
+    const minusHp = () => {
+        console.log(nweets[0])
+        console.log(nweets[0].orderWhat)
+        // if (nweets[0].orderWhat === "/공격" && userList.includes(nweets[0].orderText)) {
+        //     console.log('hi')
+        // }
+    }
     
+
     useEffect(() => {
         readLoginUser();
         readNweet();
+        //minusHp();
     }, []);
 
     //트윗 읽어오기 기능
@@ -49,6 +67,7 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
                 unsubscribe();
             }
         });
+        
     }
 
     //로그인한 유저 읽어오기 기능
@@ -95,6 +114,7 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
                 userObj={userObj}
                 refreshUser={refreshUser}
                 fbUserObj={fbUserObj}
+                onHpCheckedChange={handleHpCheckedChange}
             />
             <div className="chatting-area">
                 <div className="mobile-header">
@@ -120,6 +140,7 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
                             isAttack={nweet.orderWhat === "/공격" && userList.includes(nweet.orderText)}
                             isCure={nweet.orderWhat === "/치유" && userList.includes(nweet.orderText)}
                             isBuy={nweet.buy === true}
+                            hpValue={hpValue}
                         />
                     ))}
                 </div>

@@ -7,9 +7,17 @@ import EditProfile from "./EditProfile";
 import ShowProfile from "./ShowProfile";
 import bg from "../images/테스트_전신.png"
 
-const Profile = ({ refreshUser, userObj, fbUserObj }) => {
+const Profile = ({ refreshUser, userObj, fbUserObj, onHpCheckedChange  }) => {
     const auth = getAuth();
     const navigate = useNavigate();
+
+    ///////////////////////////////////////////////////////////////////////////////
+    //hp 정보 보여줄지말지
+    const [hpChecked, setHpChecked] = useState(false);
+    const handleToggleChange = (newChecked) => {
+        setHpChecked(newChecked); // isCheced 값을 show,edit.js로 전달
+        onHpCheckedChange(newChecked); // isChecked 값을 Parent.js로 전달
+    };
 
     ///////////////////////////////////////////////////////////////////////////////
     //1. 내 nweets 정보 얻기 (useEffect로 최초 한번만 실행)
@@ -75,6 +83,7 @@ const Profile = ({ refreshUser, userObj, fbUserObj }) => {
                             refreshUser={refreshUser}
                             userObj={userObj}
                             fbUserObj={fbUserObj}
+                            onToggleChange={handleToggleChange}
                         />
                     )
                 }

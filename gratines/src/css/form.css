@@ -153,6 +153,58 @@
   --n: 4;
 }
 
+#root .gtn-toggle {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+#root .gtn-toggle input[type="checkbox"] {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  position: relative;
+  border: 1px solid #C4C3B6;
+  border-radius: 1.25em;
+  width: 2.25em;
+  height: 1.25em;
+  margin: 0;
+}
+
+#root .gtn-toggle input[type="checkbox"]::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  -webkit-transform: scale(0.8);
+          transform: scale(0.8);
+  background-color: #C4C3B6;
+  -webkit-transition: left 250ms linear;
+  transition: left 250ms linear;
+}
+
+#root .gtn-toggle input[type="checkbox"]:checked {
+  background-color: #007663;
+  border-color: #007663;
+}
+
+#root .gtn-toggle input[type="checkbox"]:checked::before {
+  background-color: white;
+  left: 1em;
+}
+
+#root .gtn-toggle input[type="checkbox"]:enabled:hover {
+  -webkit-box-shadow: 0 0 10px lightgray;
+          box-shadow: 0 0 10px lightgray;
+}
+
 #root #file {
   display: none;
 }
@@ -222,7 +274,7 @@
 }
 
 .ReactModalPortal * {
-  font-family: 'Pretendard';
+  font-family: "Pretendard";
 }
 
 .ReactModalPortal > div {

@@ -1,10 +1,10 @@
 import { dbService, storageService } from "fbase";
 import { deleteObject, ref } from "@firebase/storage";
-import { doc, deleteDoc, updateDoc, collection, getDocs, query, addDoc, orderBy, onSnapshot  } from "firebase/firestore";
+import { doc, deleteDoc, updateDoc, collection, getDocs, query, addDoc, where, onSnapshot  } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 
-const Nweet = ({ nweetObj, isOwner, isOrder, orderWhat, orderText, isWhole, isDice, isBuy, isAttack, isCure}) => {
+const Nweet = ({ nweetObj, isOwner, isOrder, orderWhat, orderText, isWhole, isDice, isBuy, isAttack, isCure, hpValue}) => {
     const NweetTextRef = doc(dbService, "nweets", `${nweetObj.id}`); //nweetObj.id 는 쓴 트윗의 고유 id임. userObj.id와 다름.
     const NweetImgRef = ref(storageService, nweetObj.attachmentUrl); //nweetObj.attachmentUrl의 레퍼런스를 얻음
     //console.log(nweetObj.id) //쓴 데이터 갯수만큼 실행 됨 그래서 모든 트윗의 id를 보여줌.
@@ -12,6 +12,7 @@ const Nweet = ({ nweetObj, isOwner, isOrder, orderWhat, orderText, isWhole, isDi
     const [editing, setEditing] = useState(false);
     const [newNweet, setNewNweet] = useState(nweetObj.text);
     const defaultProfile = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fdefault_profile.png?alt=media&token=9003c59f-8f33-4d0a-822c-034682416355';
+
 
     //전체 공지 지우기
     const onDeleteClick = async () => {
@@ -46,7 +47,14 @@ const Nweet = ({ nweetObj, isOwner, isOrder, orderWhat, orderText, isWhole, isDi
                     {nweetObj.creatorImg ? <img src={nweetObj.creatorImg} /> : <img src={defaultProfile} />}
                 </div>
                 <div className="txt-box">
-                    <b>{nweetObj.creatorName}</b>
+                    <div className="name-box">
+                        <b>{nweetObj.creatorName}</b>
+                        {hpValue &&
+                            <p className="hpValue">
+                                hp : {nweetObj.hp}
+                            </p>
+                        }
+                    </div>
                     {isDice || isWhole || isAttack || isCure ?
                         <>
                             {isWhole && <>
