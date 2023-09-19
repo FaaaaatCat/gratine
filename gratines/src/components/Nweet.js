@@ -12,6 +12,24 @@ const Nweet = ({ nweetObj, isOwner, isOrder, orderWhat, orderText, isWhole, isDi
     const [editing, setEditing] = useState(false);
     const [newNweet, setNewNweet] = useState(nweetObj.text);
     const defaultProfile = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fdefault_profile.png?alt=media&token=9003c59f-8f33-4d0a-822c-034682416355';
+    const [smallVic, setSmallVic] = useState(false);
+    const [bigVic, setBigVic] = useState(false);
+    const [middleVic, setMiddleVic] = useState(false);
+
+    useEffect(() => {
+        if (isAttack || isCure) {
+            if (nweetObj.diceNum > 40) {
+                setBigVic(true)
+            }
+            else if (nweetObj.diceNum < 10) {
+                setSmallVic(true)
+            }
+            else {
+                setMiddleVic(true)
+            }
+        }
+        else return;
+    }, [nweetObj]);
 
 
     //전체 공지 지우기
@@ -62,8 +80,30 @@ const Nweet = ({ nweetObj, isOwner, isOrder, orderWhat, orderText, isWhole, isDi
                                 {isOwner && <button onClick={onDeleteClick}><span className="material-icons-round">close</span></button>}
                             </>}
                             {isDice && <p>[🎲주사위 {nweetObj.orderText}] <span>{nweetObj.creatorName}</span>님이 주사위 <span>{nweetObj.diceNum}</span>을 굴렸습니다. </p>}
-                            {isAttack && <p>[🔪공격] <span>{nweetObj.creatorName}</span>님이 <span>{nweetObj.orderText}</span>님을 공격합니다! <span>{nweetObj.diceNum}</span>의 데미지가 들어갔습니다. </p>}
-                            {isCure && <p>[💖치유] <span>{nweetObj.creatorName}</span>님이 <span>{nweetObj.orderText}</span>님을 치유합니다. 세계수의 힘으로 <span>{nweetObj.diceNum}</span>의 체력이 복구됩니다. </p>}
+                            {isAttack && <>
+                                {bigVic &&
+                                    <p>[🔪🔪공격 대성공!]<span>{nweetObj.creatorName}</span>님이 <span>{nweetObj.orderText}</span>님을 공격합니다!<span>{nweetObj.diceNum}</span> 크리티컬 데미지가 들어갔습니다!</p>
+                                }
+                                {middleVic &&
+                                    <p>[🔪공격]<span>{nweetObj.creatorName}</span>님이 <span>{nweetObj.orderText}</span>님을 공격합니다.<span>{nweetObj.diceNum}</span>데미지가 들어갔습니다.</p>
+                                }
+                                {smallVic &&
+                                    <p>[🔪공격..?]<span>{nweetObj.creatorName}</span>님이 <span>{nweetObj.orderText}</span>님을 공격했습니다만...<span>{nweetObj.diceNum}</span>데미지가 잔잔하게 스쳤습니다.</p>
+                                }
+                            </>
+                            }
+                            {isCure && <>
+                                {bigVic &&
+                                    <p>[💖💖치유 대성공!]<span>{nweetObj.creatorName}</span>님이 <span>{nweetObj.orderText}</span>님을 치유합니다! 세계수의 가호로 <span>{nweetObj.diceNum}</span>의 체력이 크게 복구됩니다. </p>
+                                }
+                                {middleVic &&
+                                    <p>[💖치유]<span>{nweetObj.creatorName}</span>님이 <span>{nweetObj.orderText}</span>님을 치유합니다.<span>{nweetObj.diceNum}</span>의 체력이 복구됩니다. </p>
+                                }
+                                {smallVic &&
+                                    <p>[💖침바르기]<span>{nweetObj.creatorName}</span>님이 <span>{nweetObj.orderText}</span>님께 침을 발랐습니다. <span>{nweetObj.diceNum}</span>의 미미한 체력이 복구됩니다. </p>
+                                }
+                            </>
+                            }
                         </> :
                         <>
                             <pre>{nweetObj.text}</pre>

@@ -6,7 +6,6 @@ import History from "./History";
 import Navigation from "./Navigation";
 
 const AppRouter = ({isLoggedIn, userObj, refreshUser, fbUserObj}) => {
-    // const [isLoggedIn, setIsLoggedIn] = useState(true);
     return(
         <div className="app-container">
             <Router>

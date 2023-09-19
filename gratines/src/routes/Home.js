@@ -21,31 +21,15 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
 
     //유저이름 모음
     const userList = loginUsers.map(item => item.displayName);
+
     //명령어 모음
     let orderList = ['10', '50', '100', '선택']
-
 
     //hp 체크여부
     const [hpValue, setHpValue] = useState(false);
     const handleHpCheckedChange = (newIsChecked) => {
         setHpValue(newIsChecked);
     };
-
-    //공격을 감지해서 hp를 깎는 기능
-    const minusHp = () => {
-        console.log(nweets[0])
-        console.log(nweets[0].orderWhat)
-        // if (nweets[0].orderWhat === "/공격" && userList.includes(nweets[0].orderText)) {
-        //     console.log('hi')
-        // }
-    }
-    
-
-    useEffect(() => {
-        readLoginUser();
-        readNweet();
-        //minusHp();
-    }, []);
 
     //트윗 읽어오기 기능
     const readNweet = () => {
@@ -67,11 +51,10 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
                 unsubscribe();
             }
         });
-        
     }
 
     //로그인한 유저 읽어오기 기능
-    const readLoginUser = async () => {
+    const readLoginUser = () => {
         const q = query(
           collection(dbService, "user"),
           //where("login", "==", true)
@@ -106,6 +89,11 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
         auth.signOut();
         navigate("/login");
     }
+    useEffect(() => {
+        readLoginUser();
+        readNweet();
+    }, []);
+
     
     return (
         <div className="home-wrap">
@@ -115,6 +103,8 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
                 refreshUser={refreshUser}
                 fbUserObj={fbUserObj}
                 onHpCheckedChange={handleHpCheckedChange}
+                nweetObj={nweets}
+                userList={userList}
             />
             <div className="chatting-area">
                 <div className="mobile-header">

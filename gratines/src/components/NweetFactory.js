@@ -221,17 +221,17 @@ const NweetFactory = ({ userObj, fbUserObj, loginUsers }) => {
             diceNum = Math.ceil(Math.random() * (50 - 1) + 1);
             orderText = extractedData;
             //공격받은 대상의 hp 깍는 기능
-            const q = query(
-                collection(dbService, "user"),
-                where("displayName", "==", orderText)
-            );
-            const querySnapshot = await getDocs(q);
-            const UserData_Id = querySnapshot.docs[0].id;
-            const UserHp = querySnapshot.docs[0]._document.data.value.mapValue.fields.hp.integerValue;
-            const UserRef = doc(dbService, "user", UserData_Id);
-            await updateDoc(UserRef, {
-                hp: UserHp - diceNum
-            })
+            // const q = query(
+            //     collection(dbService, "user"),
+            //     where("displayName", "==", orderText)
+            // );
+            // const querySnapshot = await getDocs(q);
+            // const UserData_Id = querySnapshot.docs[0].id;
+            // const UserHp = querySnapshot.docs[0]._document.data.value.mapValue.fields.hp.integerValue;
+            // const UserRef = doc(dbService, "user", UserData_Id);
+            // await updateDoc(UserRef, {
+            //     hp: UserHp - diceNum
+            // })
         }
 
         //치유 기능
@@ -239,17 +239,17 @@ const NweetFactory = ({ userObj, fbUserObj, loginUsers }) => {
             diceNum = Math.ceil(Math.random() * (50 - 1) + 1);
             orderText = extractedData;
             //치유받은 대상의 hp 채우는 기능
-            const q = query(
-                collection(dbService, "user"),
-                where("displayName", "==", orderText)
-            );
-            const querySnapshot = await getDocs(q);
-            const UserData_Id = querySnapshot.docs[0].id;
-            const UserHp = querySnapshot.docs[0]._document.data.value.mapValue.fields.hp.integerValue;
-            const UserRef = doc(dbService, "user", UserData_Id);
-            await updateDoc(UserRef, {
-                hp: UserHp + diceNum
-            })
+            // const q = query(
+            //     collection(dbService, "user"),
+            //     where("displayName", "==", orderText)
+            // );
+            // const querySnapshot = await getDocs(q);
+            // const UserData_Id = querySnapshot.docs[0].id;
+            // const UserHp = querySnapshot.docs[0]._document.data.value.mapValue.fields.hp.integerValue;
+            // const UserRef = doc(dbService, "user", UserData_Id);
+            // await updateDoc(UserRef, {
+            //     hp: UserHp + diceNum
+            // })
         }
 
         

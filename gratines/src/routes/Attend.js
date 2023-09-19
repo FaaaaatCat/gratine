@@ -32,18 +32,17 @@ const Attend = ({ fbUserObj, userObj, refreshUser }) => {
 
     // console.log(todayString);
 
-
-    let timer;
-    const startClock = () => {
-        function clock() {
-        }
-        timer = setInterval(clock, 1000);
-    }
-    const stopClock = () => {
-        clearInterval(timer);
-    }
-    startClock();
-    //stopClock();
+    // let timer;
+    // const startClock = () => {
+    //     function clock() {
+    //     }
+    //     timer = setInterval(clock, 1000);
+    // }
+    // const stopClock = () => {
+    //     clearInterval(timer);
+    // }
+    // startClock();
+    // stopClock();
 
 
     //user 데이터 쿼리 불러오기
