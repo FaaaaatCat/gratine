@@ -76,22 +76,14 @@ const NweetFactory = ({ userObj, fbUserObj, loginUsers }) => {
         }
         else {
             //2. Shift + Enter
-            if (e.shiftKey) {
-                const text = nweet;
-                const lines = text.split('\n').length;
-                const selectionStart = e.target.selectionStart;
-                const selectionEnd = e.target.selectionEnd;
-                const newText = text.substring(0, selectionStart) + '\n' + text.substring(selectionEnd);
-                setNweet(newText)
+            if (e.nativeEvent.isComposing) return;
+            if (e.key === 'Enter' && e.shiftKey) {
+                const lines = nweet.split('\n').length;
                 setTextHeight(32 + lines * 15)
-
-                // 줄 바꾸기 이후 커서 위치 조정
-                const newCursorPos = selectionStart + 1;
-                e.target.selectionStart = newCursorPos;
-                e.target.selectionEnd = newCursorPos;
+                return;
             }
             //3. 그냥 Enter
-            else {
+            else if (e.key === 'Enter') {
                 onSubmit(e);
                 setTooltip(false)
                 setTextHeight(32)
@@ -220,36 +212,12 @@ const NweetFactory = ({ userObj, fbUserObj, loginUsers }) => {
         if (orderWhat === '/공격' && dataList.includes(extractedData)) {
             diceNum = Math.ceil(Math.random() * (50 - 1) + 1);
             orderText = extractedData;
-            //공격받은 대상의 hp 깍는 기능
-            // const q = query(
-            //     collection(dbService, "user"),
-            //     where("displayName", "==", orderText)
-            // );
-            // const querySnapshot = await getDocs(q);
-            // const UserData_Id = querySnapshot.docs[0].id;
-            // const UserHp = querySnapshot.docs[0]._document.data.value.mapValue.fields.hp.integerValue;
-            // const UserRef = doc(dbService, "user", UserData_Id);
-            // await updateDoc(UserRef, {
-            //     hp: UserHp - diceNum
-            // })
         }
 
         //치유 기능
         if (orderWhat === '/치유' && dataList.includes(extractedData)) {
             diceNum = Math.ceil(Math.random() * (50 - 1) + 1);
             orderText = extractedData;
-            //치유받은 대상의 hp 채우는 기능
-            // const q = query(
-            //     collection(dbService, "user"),
-            //     where("displayName", "==", orderText)
-            // );
-            // const querySnapshot = await getDocs(q);
-            // const UserData_Id = querySnapshot.docs[0].id;
-            // const UserHp = querySnapshot.docs[0]._document.data.value.mapValue.fields.hp.integerValue;
-            // const UserRef = doc(dbService, "user", UserData_Id);
-            // await updateDoc(UserRef, {
-            //     hp: UserHp + diceNum
-            // })
         }
 
         
@@ -379,7 +347,6 @@ const NweetFactory = ({ userObj, fbUserObj, loginUsers }) => {
                     title="Text Chat Input"
                     value={nweet}
                     onChange={onChange}
-                    //onKeyDown={handleKeyDown}
                     onKeyDown={(e) => {
                         handleKeyDown(e);
                         enterKeyWork(e);
