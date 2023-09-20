@@ -558,6 +558,7 @@ body::after {
     width: 100%;
     padding: 2rem;
     padding-top: 0.5rem;
+    background: #4D4D3F !important;
   }
   #root .login-area .login-letter .login-cont-wrap {
     -webkit-box-orient: vertical;
@@ -569,6 +570,7 @@ body::after {
     text-align: center;
   }
   #root .login-area .login-letter .login-functions {
+    display: none;
     width: 110%;
     gap: 3px;
   }

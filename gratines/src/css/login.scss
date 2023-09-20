@@ -416,6 +416,7 @@ body::after{
         width: 100%;
         padding: 2rem;
         padding-top: 0.5rem;
+        background: $brown-800 !important;
         & .login-cont-wrap {
           flex-direction: column;
           & .login-txt-wrap {
@@ -423,6 +424,7 @@ body::after{
           }
         }
         & .login-functions {
+          display: none;
           width: 110%;
           gap: 3px;
         }

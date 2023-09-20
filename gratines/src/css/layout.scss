@@ -370,7 +370,7 @@ body {
   //채팅 보이는 영역
   @at-root .chatting-list-container {
     flex: 1;
-    background-color: lightgray;
+    background-color: $brown-200;
     display: flex;
     flex-direction: column-reverse;
     // 개별 채팅박스

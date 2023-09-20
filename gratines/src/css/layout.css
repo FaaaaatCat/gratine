@@ -458,7 +458,7 @@ body #root .app-container .home-wrap .home-bg::before {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
-  background-color: lightgray;
+  background-color: #E2E2DC;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
