@@ -646,9 +646,15 @@ body #root .app-container .home-wrap .home-bg::before {
 }
 
 .chatting-list-container .chatting-list .txt-box img {
-  height: 300px;
-  width: 300px;
-  border: 1px solid gray;
+  width: 200px;
+  max-width: 150px;
+  max-height: 140px;
+  -o-object-fit: scale-down;
+     object-fit: scale-down;
+  border: 1px solid #E2E2DC;
+  background-color: white;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
 .chatting-area .chatting-form-box {

@@ -43,6 +43,12 @@ const Nweet = ({ nweetObj, isOwner, isOrder, orderWhat, orderText, isWhole, isDi
         }
     }
 
+    //이미지 클릭시 새창에 띄워주기
+    const openImageInNewWindow = (imageUrl) => {
+        // 새 창을 열어 이미지를 표시합니다.
+        window.open(imageUrl, '_blank', 'noopener noreferrer');
+    };
+
     ///////////////////////////////////////////////////////////////////////////////
     //ect. 편집하기
     const toggleEditing = () => setEditing((prev) => !prev);
@@ -109,7 +115,7 @@ const Nweet = ({ nweetObj, isOwner, isOrder, orderWhat, orderText, isWhole, isDi
                             <pre>{nweetObj.text}</pre>
                         </>
                     }
-                    {nweetObj.attachmentUrl && <img src={nweetObj.attachmentUrl} />}
+                    {nweetObj.attachmentUrl && <img onClick={() => openImageInNewWindow(nweetObj.attachmentUrl)} src={nweetObj.attachmentUrl} />}
                 </div>
             </div>
         </>

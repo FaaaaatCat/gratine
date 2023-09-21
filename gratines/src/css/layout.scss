@@ -490,11 +490,13 @@ body {
             font-weight: bold;
           }
         }
+        //유저이름
         & b {
           font-size: 11px;
           font-weight: 500;
           color: $brown-700;
         }
+        //글 본문
         & pre {
           white-space: pre-wrap;
           font-family: "Iropke Batang";
@@ -504,10 +506,18 @@ body {
           font-weight: 400;
           color: $brown-900;
         }
+        //첨부이미지
         & img {
-          height: 300px;
-          width: 300px;
-          border: 1px solid gray;
+          //height: 300px;
+          //width: auto;
+          width: 200px;
+          max-width: 150px;
+          max-height: 140px;
+          object-fit: scale-down;
+          border: 1px solid $brown-200;
+          background-color: white;
+          border-radius: 10px;
+          cursor: pointer;
         }
       }
     }
