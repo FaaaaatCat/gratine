@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { dbService, storageService } from '../fbase';
-import { collection, addDoc, query, onSnapshot, orderBy,where, doc, getDocs, updateDoc } from "firebase/firestore";
+import { collection, addDoc, query, onSnapshot, orderBy,where, doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useNavigate, Link } from 'react-router-dom';
 import Nweet from "components/Nweet";
@@ -31,6 +31,14 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
         setHpValue(newIsChecked);
     };
 
+    //데이터 최대값 도달시 첫번째 데이터 삭제하기
+    let maxDataId = '';
+    const deleteMaxData = async () => {
+        console.log(maxDataId)
+        const NweetTextRef = doc(dbService, "nweets", maxDataId);
+        await deleteDoc(NweetTextRef);
+    }
+
     //트윗 읽어오기 기능
     const readNweet = () => {
         const q = query(
@@ -45,6 +53,13 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
                 };
             });
             setNweets(nweetArray); //nweets에 nweetArray 라는 배열을 집어 넣음. 배열엔 doc.id와 doc.data()가 있음
+
+            //데이터 최대값 도달시 첫번째 데이터 삭제하기
+            let maxData = 100;
+            if (nweetArray.length >= maxData) {
+                maxDataId = nweetArray[maxData - 1].id;
+                deleteMaxData()
+            }
         });
         onAuthStateChanged(auth, (user) => {
             if (user == null) {

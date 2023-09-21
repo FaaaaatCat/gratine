@@ -16,6 +16,7 @@ const Nweet = ({ nweetObj, isOwner, isOrder, orderWhat, orderText, isWhole, isDi
     const [bigVic, setBigVic] = useState(false);
     const [middleVic, setMiddleVic] = useState(false);
 
+    //최소,중간,최대 값대로 출력하기
     useEffect(() => {
         if (isAttack || isCure) {
             if (nweetObj.diceNum > 40) {
