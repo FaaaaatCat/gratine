@@ -187,7 +187,7 @@ function App() {
           userObj={userObj}
           fbUserObj={fbUserObj}
           refreshUser={refreshUser}
-        /> : "Initializing..."
+        /> : "loading..."
       }
       {/* <footer>$copy{new Date().getFullYear()} Gratine</footer> */}
     </>

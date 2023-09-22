@@ -123,7 +123,7 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
             />
             <div className="chatting-area">
                 <div className="mobile-header">
-                    <div className="logo"></div>
+                    <div className="logo "></div>
                     <button
                         className="gtn-btn"
                         onClick={onLogOutClick}

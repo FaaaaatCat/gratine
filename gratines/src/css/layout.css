@@ -433,6 +433,18 @@ body #root .app-container .home-wrap .home-bg::before {
   width: 100% !important;
 }
 
+.profile-area .profile-btns {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  gap: 10px;
+  width: 100%;
+}
+
 .chatting-area {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -515,8 +527,10 @@ body #root .app-container .home-wrap .home-bg::before {
 }
 
 .chatting-list-container .chatting-list.wholeChat .profile-box,
-.chatting-list-container .chatting-list.wholeChat b, .chatting-list-container .chatting-list.wholeChat .hpValue, .chatting-list-container .chatting-list.orderChat .profile-box,
-.chatting-list-container .chatting-list.orderChat b, .chatting-list-container .chatting-list.orderChat .hpValue {
+.chatting-list-container .chatting-list.wholeChat b,
+.chatting-list-container .chatting-list.wholeChat .hpValue, .chatting-list-container .chatting-list.orderChat .profile-box,
+.chatting-list-container .chatting-list.orderChat b,
+.chatting-list-container .chatting-list.orderChat .hpValue {
   display: none !important;
 }
 
@@ -1294,7 +1308,10 @@ body #root .app-container .home-wrap .home-bg::before {
   border-radius: 10px;
 }
 
-@media (max-width: 1000px) {
+@media only screen and (max-width: 1000px) {
+  #root {
+    height: calc(var(--var, 1vh) * 100);
+  }
   .side-area {
     display: none;
   }
@@ -1314,9 +1331,22 @@ body #root .app-container .home-wrap .home-bg::before {
   .profile-area .nameplate p {
     font-size: 0.5rem !important;
   }
+  .profile-area .profile-btns {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .profile-area .profile-btns button {
+    width: 100%;
+  }
+  .chatting-area .tooltip {
+    max-height: 200px;
+    overflow-y: auto;
+  }
 }
 
-@media (max-width: 480px) {
+@media only screen and (max-width: 480px) {
   #root::after {
     display: none !important;
   }

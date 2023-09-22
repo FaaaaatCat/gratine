@@ -139,7 +139,7 @@ const Profile = ({ refreshUser, userObj, fbUserObj, onHpCheckedChange, nweetObj,
                     <img src={bg} alt="" />
                 </div>
             </div>
-            <div className="flx-row gap-1 w-100">
+            <div className="profile-btns">
                 {editing ?
                     (
                         <button className="gtn-btn w-100" onClick={toggleEditing}>프로필 화면으로</button>

@@ -324,7 +324,7 @@ body {
         & span {
           color: $brown-700;
         }
-        & div{
+        & div {
           display: flex;
           justify-content: center;
         }
@@ -346,7 +346,7 @@ body {
         & .side-function {
           flex: 1;
           text-align: right;
-          & span{
+          & span {
             opacity: 0.8;
             color: $purple;
           }
@@ -356,6 +356,12 @@ body {
         width: 100% !important;
       }
     }
+  }
+  & .profile-btns {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
   }
 }
 
@@ -416,7 +422,8 @@ body {
         font-style: italic;
         position: relative;
         & .profile-box,
-        b, .hpValue{
+        b,
+        .hpValue {
           display: none !important;
         }
         & p {
@@ -476,12 +483,12 @@ body {
         display: flex;
         flex-direction: column;
         gap: 2px;
-        & .name-box{
+        & .name-box {
           display: flex;
           flex-direction: row;
           align-items: center;
           gap: 5px;
-          & .hpValue{
+          & .hpValue {
             background-color: $brown-200;
             color: $brown;
             padding: 0 8px;
@@ -998,7 +1005,10 @@ body {
 }
 
 //미디어쿼리
-@media (max-width: $breakpoint-labtop) {
+@media only screen and (max-width: $breakpoint-labtop) {
+  #root {
+    height: calc(var(--var, 1vh) * 100);
+  }
   .side-area {
     display: none;
   }
@@ -1017,9 +1027,21 @@ body {
         font-size: 0.5rem !important;
       }
     }
+    & .profile-btns{
+      flex-direction: column;
+      & button{
+        width: 100%;
+      }
+    }
+  }
+  .chatting-area{
+    & .tooltip {
+      max-height: 200px;
+      overflow-y: auto;
+    }
   }
 }
-@media (max-width: $breakpoint-mobile) {
+@media only screen and (max-width: $breakpoint-mobile) {
   #root::after {
     display: none !important;
   }
