@@ -2,22 +2,21 @@
 
 /* load images */
 // 1. lens Flare, 2. springBg, 3. autumBg, 4. Frame
-$url_1 : 'https://static.vecteezy.com/system/resources/thumbnails/007/128/160/original/lens-flare-bright-afternoon-sun-with-lens-flare-lens-flare-transition-light-effect-lens-flare-effect-on-black-background-light-streaks-lights-optical-lens-flares-free-video.jpg';
-$url_2 : 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2FspringBackground2.avif?alt=media&token=c423004b-139e-4768-afea-0c0e0682580d';
-$url_3 : 'https://images.unsplash.com/photo-1426170042593-200f250dfdaf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80';
-$url_4 : 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fframe.png?alt=media&token=88efe3ab-2819-4c38-a0df-f911263bc059';
+$url_1: "https://static.vecteezy.com/system/resources/thumbnails/007/128/160/original/lens-flare-bright-afternoon-sun-with-lens-flare-lens-flare-transition-light-effect-lens-flare-effect-on-black-background-light-streaks-lights-optical-lens-flares-free-video.jpg";
+$url_2: "https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2FspringBackground2.avif?alt=media&token=c423004b-139e-4768-afea-0c0e0682580d";
+$url_3: "https://images.unsplash.com/photo-1426170042593-200f250dfdaf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80";
+$url_4: "https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fframe.png?alt=media&token=88efe3ab-2819-4c38-a0df-f911263bc059";
 
 //이미지 미리 로딩
-body::after{
-	/* 소스만 다운받고 화면은 나태내지 않는다. (숨김 처리) */
-  position:absolute; 
-  width:0; 
-  height:0; 
-  overflow:hidden; 
-  z-index:-1;
-  content : url($url_2)  url($url_4); /* 필요한 이미지 소스들 다운 */
+body::after {
+  /* 소스만 다운받고 화면은 나태내지 않는다. (숨김 처리) */
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  z-index: -1;
+  content: url($url_2) url($url_4); /* 필요한 이미지 소스들 다운 */
 }
-
 
 //로그인
 .login-area {
@@ -393,15 +392,15 @@ body::after{
 }
 
 //미디어쿼리
-@media (max-height: 740px) {
+@media only screen and (max-height: 740px) {
   .login-area {
     justify-content: flex-start;
     padding: 1rem 0;
   }
 }
-@media (max-width: $breakpoint-labtop) {
+@media only screen and (max-width: $breakpoint-labtop) {
   #root {
-    &::before{
+    &::before {
       display: none !important;
     }
     & .login-area {
@@ -432,13 +431,32 @@ body::after{
           width: 80%;
         }
       }
-      & .sunshine{
+      & .sunshine {
         display: none;
       }
       & .copyright {
         color: white;
         position: relative;
         margin-top: 3rem;
+      }
+    }
+  }
+}
+@media only screen and (max-width: $breakpoint-mobile) {
+  #root {
+    & .login-area {
+      padding: 0;
+      background: $brown-800 !important;
+      justify-content: flex-start;
+      & .logo{
+        display: none;
+      }
+      & .login-letter {
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        & div[class*="frame-"] {
+          display: none;
+        }
       }
     }
   }

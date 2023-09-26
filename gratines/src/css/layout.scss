@@ -33,21 +33,13 @@ body {
     overflow: hidden !important;
     height: 100vh;
     // min-height: 100vh;
-    // min-height: fill-available;
-    background: linear-gradient(
-        34deg,
-        #e4ddd6 10%,
-        #eceae2 35%,
-        transparent 50%,
-        #e4ddd6 70%
-      ),
-      url(https://grainy-gradients.vercel.app/noise.svg);
+    min-height: fill-available;
     background: linear-gradient(
         34deg,
         $brown-300 10%,
         $brown-100 35%,
         transparent 50%,
-        $brown-300 70%
+        $brown-200 70%
       ),
       url(https://grainy-gradients.vercel.app/noise.svg);
     &::before {
@@ -99,8 +91,7 @@ body {
           &::after {
             content: "Gratines Garden";
             font-family: "Pinyon Script", cursive;
-            color: $brown-500;
-            background: -webkit-linear-gradient(white, $brown-500);
+            background: -webkit-linear-gradient(120deg, white, $brown-300);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             white-space: nowrap;
@@ -114,7 +105,6 @@ body {
           &::before {
             content: "Gratines Garden long story telling";
             font-family: "Pinyon Script", cursive;
-            color: $brown-400;
             background: -webkit-linear-gradient(white, $brown-500);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -266,19 +256,22 @@ body {
         $gray-300 100%
       );
       border: 1px solid white;
-      border-radius: 100px;
+      border-radius: 0 10px 0 10px;
       box-shadow: $nameplate-shadow;
       width: 100%;
+      min-width: 246px;
       margin: 1rem 0;
-      padding: 0.5rem;
+      padding: 0.5rem 0.3rem;
       font-size: 1.3rem;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 0px;
+      &::after {
+      }
       & img {
-        width: 38px;
-        height: 32px;
+        width: 32px;
+        height: 30px;
         &:last-child {
           transform: rotateY(180deg);
         }
@@ -411,6 +404,9 @@ body {
       //구매채팅
       &.buyChat {
         background-color: $brown-200;
+        & .hpValue {
+          display: none !important;
+        }
         & .txt-box p {
           font-weight: 500;
         }
@@ -748,23 +744,25 @@ body {
     }
     &.memeber-area {
       flex: 1;
+      min-width: 348px;
     }
     &.attend-area {
       flex: 2;
     }
     &.vending-area {
-      flex: 3;
+      flex: 4;
+      min-width: 348px;
     }
   }
   //접속중 인원
   & .member-area {
-    max-height: 115px;
+    max-height: 120px;
     & .member-list-container {
       display: flex;
       flex-wrap: wrap;
     }
     & .member-list {
-      width: 56px;
+      width: 42px;
       padding: 0.5rem;
       display: flex;
       flex-direction: column;
@@ -780,8 +778,8 @@ body {
       & .profile-box {
         transition: all 0.1s;
         background-color: white;
-        width: 40px;
-        height: 40px;
+        width: 30px;
+        height: 30px;
         border-radius: 6px;
       }
       & p {
@@ -793,12 +791,12 @@ body {
 
         width: 100%;
         overflow: hidden;
-        white-space: normal;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        word-break: keep-all;
+        white-space: nowrap;
+        //text-overflow: ellipsis;
+        // display: -webkit-box;
+        // -webkit-line-clamp: 1;
+        // -webkit-box-orient: vertical;
+        // word-break: keep-all;
       }
     }
   }
@@ -860,19 +858,34 @@ body {
         }
         & .eventTag {
           position: absolute;
-          top: -5px;
-          left: -5px;
-          width: 40px;
-          height: 20px;
-          border-radius: 100px;
-          background-color: $purple;
+          top: 0px;
+          left: 0px;
+          padding: 2px 5px;
+          border-radius: 0 0 5px 0;
+          background-color: $purple-200;
           display: flex;
           align-items: center;
           justify-content: center;
-          color: white;
-          font-weight: 400;
-          transform: rotate(-20deg);
+          color: $purple;
+          font-weight: 600;
+          font-size: 0.7rem;
         }
+        // & .eventTag {
+        //   position: absolute;
+        //   top: -5px;
+        //   left: -5px;
+        //   width: 40px;
+        //   height: 20px;
+        //   border-radius: 100px;
+        //   background-color: $purple;
+        //   display: flex;
+        //   align-items: center;
+        //   justify-content: center;
+        //   color: white;
+        //   font-weight: 400;
+        //   font-size: 0.7rem;
+        //   transform: rotate(-20deg);
+        // }
         & .img-box {
           width: 100%;
           height: 100px;
@@ -883,6 +896,8 @@ body {
           & img {
             width: 48px;
             height: 48px;
+            filter: invert(15%) sepia(2%) saturate(5914%) hue-rotate(333deg)
+              brightness(98%) contrast(83%);
           }
         }
         & .txt-box {
@@ -1027,14 +1042,14 @@ body {
         font-size: 0.5rem !important;
       }
     }
-    & .profile-btns{
+    & .profile-btns {
       flex-direction: column;
-      & button{
+      & button {
         width: 100%;
       }
     }
   }
-  .chatting-area{
+  .chatting-area {
     & .tooltip {
       max-height: 200px;
       overflow-y: auto;

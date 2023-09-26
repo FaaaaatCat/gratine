@@ -23,7 +23,7 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
     const userList = loginUsers.map(item => item.displayName);
 
     //명령어 모음
-    let orderList = ['10', '50', '100', '선택']
+    let orderList = ['10', '50', '100']
 
     //hp 체크여부
     const [hpValue, setHpValue] = useState(false);
@@ -197,14 +197,22 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
                     />
                 </div>
                 <div className="vending-area">
-                    <div className="title">상점</div>
+                    <div className="title">상점
+                        <span className="info-wrap">
+                            <div className="info-btn"
+                                onClick={() => { window.open('https://docs.google.com/document/d/1XAY2QgPkd3CiMfJeXDBkkA0VxvMBpapsXfLpWeKR9tw/edit', '_blank'); }}
+                            >
+                                <span className="material-icons-round">info</span>
+                            </div>
+                        </span>
+                    </div>
                     <Vending
                         userObj={userObj}
                         fbUserObj={fbUserObj}
                         refreshUser={refreshUser}
                     />
                 </div>
-                <div className="history-area">
+                {/* <div className="history-area">
                     <div className="title">지난 대화기록 보기
                         <Link
                             to="/History"
@@ -214,7 +222,7 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
                             <span className="material-icons-round">arrow_forward</span>
                         </Link>
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     );

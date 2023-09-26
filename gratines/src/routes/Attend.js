@@ -95,8 +95,8 @@ const Attend = ({ fbUserObj, userObj, refreshUser }) => {
                     gold: UserGameData_Gold + attendGold,
                 })
                 refreshUser();
+                setAttendAble(false);
             }
-            setAttendAble(false);
         }
         //출석을 이미 눌렀다면
         else {

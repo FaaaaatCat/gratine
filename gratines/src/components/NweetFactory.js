@@ -195,15 +195,15 @@ const NweetFactory = ({ userObj, fbUserObj, loginUsers }) => {
                 else if (orderText == '100') {
                     diceNum = Math.ceil(Math.random() * (100 - 1) + 1)
                 }
-                else if (orderText == '선택') {
-                    const rollDice = Math.ceil(Math.random() * (2 - 0) + 0)
-                    if (rollDice === 1) {
-                        diceNum = 'YES'
-                    }
-                    else {
-                        diceNum = 'NO'
-                    }
-                }
+                // else if (orderText == '선택') {
+                //     const rollDice = Math.ceil(Math.random() * (2 - 0) + 0)
+                //     if (rollDice === 1) {
+                //         diceNum = 'YES'
+                //     }
+                //     else {
+                //         diceNum = 'NO'
+                //     }
+                // }
             }
         }
 
@@ -316,10 +316,10 @@ const NweetFactory = ({ userObj, fbUserObj, loginUsers }) => {
                                 <b>/주사위 100</b>
                                 <p>주사위굴리기 (1~100사이)</p>
                             </div>
-                            <div className="function-list">
+                            {/* <div className="function-list">
                                 <b>/주사위 선택</b>
                                 <p>주사위굴리기 (Yes or No)</p>
-                            </div>
+                            </div> */}
                             <div className="function-list">
                                 <b>/공격 @유저이름</b>
                                 <p>@유저에게 1~50사이 데미지 부과</p>

@@ -531,7 +531,7 @@ body::after {
   background: #CED065;
 }
 
-@media (max-height: 740px) {
+@media only screen and (max-height: 740px) {
   .login-area {
     -webkit-box-pack: start;
         -ms-flex-pack: start;
@@ -540,7 +540,7 @@ body::after {
   }
 }
 
-@media (max-width: 1000px) {
+@media only screen and (max-width: 1000px) {
   #root::before {
     display: none !important;
   }
@@ -584,5 +584,26 @@ body::after {
     color: white;
     position: relative;
     margin-top: 3rem;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  #root .login-area {
+    padding: 0;
+    background: #4D4D3F !important;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+  }
+  #root .login-area .logo {
+    display: none;
+  }
+  #root .login-area .login-letter {
+    border-radius: 0 !important;
+    -webkit-box-shadow: none !important;
+            box-shadow: none !important;
+  }
+  #root .login-area .login-letter div[class*="frame-"] {
+    display: none;
   }
 }
