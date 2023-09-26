@@ -1104,8 +1104,54 @@ body {
       & .logo {
         transform: scale(0.7) translateX(-20%);
       }
-      & button {
-        width: unset;
+    }
+  }
+  .mobileMenu-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 1rem;
+    & .close-wrap {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+    }
+    & .menu-wrap {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      & .menu-item-wrap {
+        width: 100%;
+        background-color: white;
+        border-radius: $form-radius;
+        box-shadow: $card-strong-shadow;
+        & .menu-item {
+          height: 60px;
+          padding: 10px;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          font-size: 0.9rem;
+          font-weight: 800;
+          border-bottom: 1px solid $brown-200;
+          &:nth-of-type(1) .material-icons-round {
+            color: $yellow-500;
+          }
+          &:nth-of-type(2) .material-icons-round {
+            color: $purple-500;
+          }
+          &:nth-of-type(3) .material-icons-round {
+            color: $brown-500;
+          }
+        }
       }
     }
   }

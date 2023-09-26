@@ -18,6 +18,7 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
     const [nweets, setNweets] = useState([]);
     const [infoView, setInfoView] = useState(false);
     const [loginUsers, setLoginUsers] = useState([]);
+    const [mobileMenu, setMobileMenu] = useState(false);
 
     //유저이름 모음
     const userList = loginUsers.map(item => item.displayName);
@@ -33,8 +34,8 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
 
     //데이터 최대값 도달시 첫번째 데이터 삭제하기
     let maxDataId = '';
+    let maxData = 100;
     const deleteMaxData = async () => {
-        console.log(maxDataId)
         const NweetTextRef = doc(dbService, "nweets", maxDataId);
         await deleteDoc(NweetTextRef);
     }
@@ -55,7 +56,6 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
             setNweets(nweetArray); //nweets에 nweetArray 라는 배열을 집어 넣음. 배열엔 doc.id와 doc.data()가 있음
 
             //데이터 최대값 도달시 첫번째 데이터 삭제하기
-            let maxData = 100;
             if (nweetArray.length >= maxData) {
                 maxDataId = nweetArray[maxData - 1].id;
                 deleteMaxData()
@@ -104,6 +104,33 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
         auth.signOut();
         navigate("/login");
     }
+
+    //모바일메뉴 오픈 기능
+    const openMobileMenu = () => {
+        setMobileMenu(true)
+    }
+    const closeMobileMenu = () => {
+        setMobileMenu(false)
+    }
+    
+    // 체크 상태 변경 핸들러
+    const handleToggle  = () => {
+        const newChecked = !hpValue;
+        setHpValue(newChecked);
+        window.localStorage.setItem("hpToggle", newChecked)
+    };
+
+    // 페이지 로드 시 체크 상태 복원
+    useEffect(() => {
+        const storedIsChecked = localStorage.getItem('hpToggle');
+        if (storedIsChecked === 'true') {
+            setHpValue(true);
+        } else {
+            setHpValue(false);
+        }
+    }, []);
+
+    //그외
     useEffect(() => {
         readLoginUser();
         readNweet();
@@ -125,10 +152,10 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
                 <div className="mobile-header">
                     <div className="logo "></div>
                     <button
-                        className="gtn-btn"
-                        onClick={onLogOutClick}
+                        className="gtn-btn btn-icon-only"
+                        onClick={openMobileMenu}
                     >
-                        로그아웃
+                        <span className="material-icons-round">menu</span>
                     </button>
                 </div>
                 <div className="chatting-list-container">
@@ -224,6 +251,41 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
                     </div>
                 </div> */}
             </div>
+            {mobileMenu &&
+                <div className="mobileMenu-area">
+                    <div className="close-wrap">
+                        <button className="gtn-btn btn-icon-only" onClick={closeMobileMenu}>
+                            <span className="material-icons-round">close</span>
+                        </button>
+                    </div>
+                    <div className="menu-wrap">
+                        <div className="menu-item-wrap">
+                            <div className="menu-item">
+                                <span className="material-icons-round">favorite_border</span>
+                                hp표시하기
+                                <div className="mini-border ml-auto"></div>
+                                <label className="gtn-toggle ml-2">
+                                    <input
+                                        role="switch"
+                                        type="checkbox"
+                                        checked={hpValue}
+                                        onChange={handleToggle}
+                                    />
+                                </label>
+                            </div>
+                            {/* <div className="menu-item">
+                                <span className="material-icons-round">task_alt</span>
+                                출석하기
+                                <span></span>
+                            </div> */}
+                            <div className="menu-item" onClick={onLogOutClick}>
+                                <span className="material-icons-round">logout</span>
+                                로그아웃
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
         </div>
     );
 }

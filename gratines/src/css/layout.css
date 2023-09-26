@@ -1405,7 +1405,77 @@ body #root .app-container .home-wrap .home-bg::before {
     -webkit-transform: scale(0.7) translateX(-20%);
             transform: scale(0.7) translateX(-20%);
   }
-  .chatting-area .mobile-header button {
-    width: unset;
+  .mobileMenu-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 1rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+    gap: 1rem;
+  }
+  .mobileMenu-area .close-wrap {
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+  }
+  .mobileMenu-area .menu-wrap {
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .mobileMenu-area .menu-wrap .menu-item-wrap {
+    width: 100%;
+    background-color: white;
+    border-radius: 4px;
+    -webkit-box-shadow: 0rem 0.47rem 2.19rem rgba(8, 10, 37, 0.1), 0rem 0.94rem 1.41rem rgba(8, 10, 37, 0.1), 0rem 0.25rem 0.53rem rgba(8, 10, 37, 0.2), 0rem 0.13rem 0.19rem rgba(8, 10, 37, 0.1);
+            box-shadow: 0rem 0.47rem 2.19rem rgba(8, 10, 37, 0.1), 0rem 0.94rem 1.41rem rgba(8, 10, 37, 0.1), 0rem 0.25rem 0.53rem rgba(8, 10, 37, 0.2), 0rem 0.13rem 0.19rem rgba(8, 10, 37, 0.1);
+  }
+  .mobileMenu-area .menu-wrap .menu-item-wrap .menu-item {
+    height: 60px;
+    padding: 10px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    font-weight: 800;
+    border-bottom: 1px solid #E2E2DC;
+  }
+  .mobileMenu-area .menu-wrap .menu-item-wrap .menu-item:nth-of-type(1) .material-icons-round {
+    color: #C2C43E;
+  }
+  .mobileMenu-area .menu-wrap .menu-item-wrap .menu-item:nth-of-type(2) .material-icons-round {
+    color: #6EB06D;
+  }
+  .mobileMenu-area .menu-wrap .menu-item-wrap .menu-item:nth-of-type(3) .material-icons-round {
+    color: #ADAC9A;
   }
 }

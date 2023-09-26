@@ -10,40 +10,10 @@ import dayjs from "dayjs";
 const Attend = ({ fbUserObj, userObj, refreshUser }) => {
     const [attendAble, setAttendAble] = useState(true);
     const [userData, setUserData] = useState(null);
+
     //오늘 날짜
-    // let today = new Date();
     let today = dayjs();
     let todayFormat = today.format("YYYY.MM.DD");
-    let todayfull = new Date().toLocaleString();
-    // let todayTrim = todayfull.trim("오");
-
-    // console.log(today)
-    // console.log(todayfull)
-    // console.log(todayTrim)
-
-    //var date = dayjs("2023-08-16");
-    // var today = new Date();
-    // var year = today.getFullYear();
-    // var month = ('0' + (today.getMonth() + 1)).slice(-2);
-    // var day = ('0' + today.getDate()).slice(-2);
-    // var seconds = ('0' + today.getSeconds()).slice(-2);
-    
-    // var todayString = year + '-' + month  + '-' + day;
-
-    // console.log(todayString);
-
-    // let timer;
-    // const startClock = () => {
-    //     function clock() {
-    //     }
-    //     timer = setInterval(clock, 1000);
-    // }
-    // const stopClock = () => {
-    //     clearInterval(timer);
-    // }
-    // startClock();
-    // stopClock();
-
 
     //user 데이터 쿼리 불러오기
     const getUserData = async () => {
@@ -103,16 +73,6 @@ const Attend = ({ fbUserObj, userObj, refreshUser }) => {
             setAttendAble(false);
             return;
         }
-        //트윗으로도 알리기(오류도 있고 굳이 싶어 안넣음)
-        // const attendMention = `[출석완료] ${userObj.displayName} 님이 출석했습니다. ${todayfull} `
-        // const attendNweetObj = {
-        //     text: attendMention,
-        //     createdAt: Date.now(),
-        //     createdDate: todayfull,
-        //     creatorId: userObj.uid,
-        //     creatorName: userObj.displayName,
-        // };
-        // await addDoc(collection(dbService, "nweets"), attendNweetObj);
     }
 
     //출석점수 완전 리셋 기능

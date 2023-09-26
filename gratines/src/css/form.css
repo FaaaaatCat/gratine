@@ -153,6 +153,12 @@
   --n: 4;
 }
 
+#root .mini-border {
+  width: 1px;
+  height: 32px;
+  background-color: #D3D3C9;
+}
+
 #root .gtn-toggle {
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;

@@ -123,6 +123,12 @@
       }
     }
   }
+  //미니보더
+  .mini-border{
+    width: 1px;
+    height: $form-height;
+    background-color: $brown-300;
+  }
 
   //토글
   .gtn-toggle {
