@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getAuth } from "firebase/auth";
 import { authService, dbService, storageService } from "fbase";
-import { collection, getDocs, query, where, orderBy, doc, updateDoc } from "firebase/firestore";
+import { collection, getDocs, query, onSnapshot, where, orderBy, doc, updateDoc } from "firebase/firestore";
 import { Navigate, useNavigate } from "react-router-dom";
 import EditProfile from "./EditProfile";
 import ShowProfile from "./ShowProfile";
@@ -12,52 +12,84 @@ const Profile = ({ refreshUser, userObj, fbUserObj, onHpCheckedChange, nweetObj,
     const navigate = useNavigate();
 
 
-    //공격을 감지해서 hp를 깎는 기능
-    const minusHp = async() => {
-        const q = query(
-            collection(dbService, "user"),
-            where("displayName", "==", nweetObj[0].orderText)
-        );
-        const querySnapshot = await getDocs(q);
-        const UserData_Id = querySnapshot.docs[0].id;
-        const UserHp = querySnapshot.docs[0]._document.data.value.mapValue.fields.hp.integerValue;
-        const UserRef = doc(dbService, "user", UserData_Id);
-        const newHp = Number(UserHp) - nweetObj[0].diceNum
-        await updateDoc(UserRef, {
-            hp: newHp
-        })
-        refreshUser();
-    }
-    //치유를 감지해서 hp를 더하는 기능
-    const plusHp = async() => {
-        const q = query(
-            collection(dbService, "user"),
-            where("displayName", "==", nweetObj[0].orderText)
-        );
-        const querySnapshot = await getDocs(q);
-        const UserData_Id = querySnapshot.docs[0].id;
-        const UserHp = querySnapshot.docs[0]._document.data.value.mapValue.fields.hp.integerValue;
-        const UserRef = doc(dbService, "user", UserData_Id);
-        const newHp = Number(UserHp) + nweetObj[0].diceNum
-        await updateDoc(UserRef, { 
-            hp: newHp
-        })
-        refreshUser();
-    }
+    // //공격을 감지해서 hp를 깎는 기능
+    // const minusHp = async() => {
+    //     const q = query(
+    //         collection(dbService, "user"),
+    //         where("displayName", "==", nweetObj[0].orderText)
+    //     );
+    //     const querySnapshot = await getDocs(q);
+    //     const UserData_Id = querySnapshot.docs[0].id;
+    //     const UserHp = querySnapshot.docs[0]._document.data.value.mapValue.fields.hp.integerValue;
+    //     const UserRef = doc(dbService, "user", UserData_Id);
+    //     let newHp = Number(UserHp) - nweetObj[0].diceNum
+    //     if (newHp < 0) {
+    //         newHp = 0;
+    //     }
+    //     await updateDoc(UserRef, {
+    //         hp: newHp
+    //     })
+    //     refreshHp();
+    //     return;
+    // }
+    // //치유를 감지해서 hp를 더하는 기능
+    // const plusHp = async() => {
+    //     const q = query(
+    //         collection(dbService, "user"),
+    //         where("displayName", "==", nweetObj[0].orderText)
+    //     );
+    //     const querySnapshot = await getDocs(q);
+    //     const UserData_Id = querySnapshot.docs[0].id;
+    //     const UserHp = querySnapshot.docs[0]._document.data.value.mapValue.fields.hp.integerValue;
+    //     const UserRef = doc(dbService, "user", UserData_Id);
+    //     let newHp = Number(UserHp) + nweetObj[0].diceNum
+    //     if (newHp > 100) {
+    //         newHp = 100;
+    //     }
+    //     await updateDoc(UserRef, { 
+    //         hp: newHp
+    //     })
+    //     //console.log('치유했음')
+    //     //refreshHp();
+    //     return;
+    // }
 
-    useEffect(() => {
-        //공격,치유 할때만 refresh 함
-        if (userList.length == 0 || nweetObj.length == 0) return;
-        if (!nweetObj[0].orderText || nweetObj[0].orderText == '') return;
-        if (userList.includes(nweetObj[0].orderText)) {
-            if (nweetObj[0].orderWhat === "/공격") {
-                minusHp();
-            }
-            else if (nweetObj[0].orderWhat === "/치유") {
-                plusHp();
-            }
-        }
-    },[nweetObj])
+    // const refreshHp = async() => {
+    //     const q = query(
+    //         collection(dbService, "nweets"),
+    //         where("creatorName", "==", nweetObj[0].orderText)
+    //     )
+    //     const querySnapshot = await getDocs(q);
+    //     const EnemyHp = querySnapshot.docs[0]._document.data.value.mapValue.fields.hp.integerValue;
+    //     console.log(EnemyHp)
+    //     // querySnapshot.forEach((doc) => {
+    //     //     console.log('data =>',doc.data());
+    //     // })
+    //     // onSnapshot(doc(dbService, "user", "0VqgwHaXVl6RNcwWcNDb"), (doc) => {
+    //     //     //console.log('치유했음')
+    //     //     console.log("Current data: ", doc.data());
+    //     // });
+    // }
+
+    // //혼자할땐 괜찮지만, 다른유저를 공격,치유할땐 알수없는값으로 자동계산되어 우선 빼둠
+    // useEffect(() => {
+    //     //공격,치유 할때만 refresh 함
+    //     if (userList.length == 0 || nweetObj.length == 0) return;
+    //     if (!nweetObj[0].orderText || nweetObj[0].orderText == '') return;
+    //     if (userList.includes(nweetObj[0].orderText)) {
+    //         if (nweetObj[0].orderWhat === "/공격") {
+    //             console.log('공격감지함')
+    //             minusHp();
+    //             return;
+    //         }
+    //         else if (nweetObj[0].orderWhat === "/치유") {
+    //             console.log('치유감지함')
+    //             plusHp();
+    //             return;
+    //         }
+    //     }
+    //     else{return}
+    // },[nweetObj])
 
     ///////////////////////////////////////////////////////////////////////////////
     //hp 정보 보여줄지말지

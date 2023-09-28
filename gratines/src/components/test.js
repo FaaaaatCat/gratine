@@ -102,7 +102,6 @@ const NweetFactory = ({ userObj, fbUserObj}) => {
     // 입력한 단어를 하이라이트로 표시하는 함수
     const highlightMatch = (text, searchTerm) => {
         if (!searchTerm) {
-            console.log('와ㅣ이')
             return text;
         }
         else{

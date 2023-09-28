@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { collection, addDoc, query, orderBy, where, doc, getDocs, updateDoc} from "firebase/firestore";
 import { ref, uploadString, getDownloadURL } from "@firebase/storage";
 
-const NweetFactory = ({ userObj, fbUserObj, loginUsers }) => {
+const NweetFactory = ({ userObj, fbUserObj, loginUsers, refreshUser}) => {
     const [nweet, setNweet] = useState("");
     const [attachment, setAttachment] = useState("");
     const [tooltip, setTooltip] = useState(false);
@@ -207,19 +207,22 @@ const NweetFactory = ({ userObj, fbUserObj, loginUsers }) => {
             }
         }
 
-        //공격 기능
+        //공격, 치유 기능
         const extractedData = orderText.replace('@', '');
-        if (orderWhat === '/공격' && dataList.includes(extractedData)) {
+        if (dataList.includes(extractedData)) {
+            // if (orderWhat === '/공격' || orderWhat === '/치유') {
+            //     diceNum = Math.ceil(Math.random() * (50 - 1) + 1);
+            //     orderText = extractedData;
+            // }
             diceNum = Math.ceil(Math.random() * (50 - 1) + 1);
             orderText = extractedData;
+            if (orderWhat === '/공격') {
+                minusHp({ extractedData, diceNum });
+            }
+            else if (orderWhat === '/치유') {
+                plusHp({ extractedData, diceNum });
+            }
         }
-
-        //치유 기능
-        if (orderWhat === '/치유' && dataList.includes(extractedData)) {
-            diceNum = Math.ceil(Math.random() * (50 - 1) + 1);
-            orderText = extractedData;
-        }
-
         
         //이미지 첨부하지 않고 텍스트만 올리고 싶을 때도 있기 때문에 attachment가 있을때만 아래 코드 실행
         //이미지 첨부하지 않은 경우엔 attachmentUrl=""이 된다.
@@ -265,8 +268,6 @@ const NweetFactory = ({ userObj, fbUserObj, loginUsers }) => {
         };
 
 
-
-
         //addDoc은 문서를 추가하는 함수. nweetObj의 항목을 nweets의 데이터베이스에 저장함.
         await addDoc(collection(dbService, "nweets"), nweetObj);
 
@@ -274,6 +275,7 @@ const NweetFactory = ({ userObj, fbUserObj, loginUsers }) => {
         setNweet("");
         //파일 미리보기 img src 비워주기
         setAttachment("");
+        refreshUser();
     };
 
     //사진파일 추가
@@ -288,6 +290,43 @@ const NweetFactory = ({ userObj, fbUserObj, loginUsers }) => {
     //사진파일 업로드 전 지우기
     const onClearAttachment = () => setAttachment("")
 
+
+    //공격을 감지해서 hp를 깎는 기능
+    const minusHp = async({extractedData, diceNum}) => {
+        const q = query(
+            collection(dbService, "user"),
+            where("displayName", "==", extractedData)
+        );
+        const querySnapshot = await getDocs(q);
+        const UserData_Id = querySnapshot.docs[0].id;
+        const UserHp = querySnapshot.docs[0]._document.data.value.mapValue.fields.hp.integerValue;
+        const UserRef = doc(dbService, "user", UserData_Id);
+        let newHp = Number(UserHp) - diceNum
+        if (newHp < 0) {
+            newHp = 0;
+        }
+        await updateDoc(UserRef, {
+            hp: newHp
+        })
+    }
+    //치유를 감지해서 hp를 더하는 기능
+    const plusHp = async({extractedData, diceNum}) => {
+        const q = query(
+            collection(dbService, "user"),
+            where("displayName", "==", extractedData)
+        );
+        const querySnapshot = await getDocs(q);
+        const UserData_Id = querySnapshot.docs[0].id;
+        const UserHp = querySnapshot.docs[0]._document.data.value.mapValue.fields.hp.integerValue;
+        const UserRef = doc(dbService, "user", UserData_Id);
+        let newHp = Number(UserHp) + diceNum
+        if (newHp > 100) {
+            newHp = 100;
+        }
+        await updateDoc(UserRef, { 
+            hp: newHp
+        })
+    }
 
 
     return (

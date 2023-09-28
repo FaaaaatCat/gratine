@@ -548,7 +548,11 @@ body #root .app-container .home-wrap .home-bg::before {
   color: #007663;
 }
 
-.chatting-list-container .chatting-list.wholeChat p span:last-child, .chatting-list-container .chatting-list.orderChat p span:last-child {
+.chatting-list-container .chatting-list.wholeChat p b, .chatting-list-container .chatting-list.orderChat p b {
+  display: inline-block !important;
+  font-weight: 900 !important;
+  font-size: 0.8rem;
+  color: #007663;
   background-color: #F6FAF3;
   margin: 0 5px;
   padding: 2px 8px 2px 5px;

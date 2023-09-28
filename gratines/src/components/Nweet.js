@@ -4,7 +4,7 @@ import { doc, deleteDoc, updateDoc, collection, getDocs, query, addDoc, where, o
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 
-const Nweet = ({ nweetObj, isOwner, isOrder, orderWhat, orderText, isWhole, isDice, isBuy, isAttack, isCure, hpValue}) => {
+const Nweet = ({ nweetObj, isOwner, isOrder, orderWhat, orderText, isWhole, isDice, isBuy, isAttack, isCure, hpValue, enemyHp}) => {
     const NweetTextRef = doc(dbService, "nweets", `${nweetObj.id}`); //nweetObj.id 는 쓴 트윗의 고유 id임. userObj.id와 다름.
     const NweetImgRef = ref(storageService, nweetObj.attachmentUrl); //nweetObj.attachmentUrl의 레퍼런스를 얻음
     //console.log(nweetObj.id) //쓴 데이터 갯수만큼 실행 됨 그래서 모든 트윗의 id를 보여줌.
@@ -86,28 +86,29 @@ const Nweet = ({ nweetObj, isOwner, isOrder, orderWhat, orderText, isWhole, isDi
                                 <p>{nweetObj.orderText}</p>
                                 {isOwner && <button onClick={onDeleteClick}><span className="material-icons-round">close</span></button>}
                             </>}
-                            {isDice && <p>[🎲주사위 {nweetObj.orderText}] <span>{nweetObj.creatorName}</span>님이 주사위 <span>{nweetObj.diceNum}</span>을 굴렸습니다. </p>}
+                            {isDice && <p>[🎲주사위 {nweetObj.orderText}] <span>{nweetObj.creatorName}</span>님이 주사위 <b>{nweetObj.diceNum}</b>을 굴렸습니다. </p>}
                             {isAttack && <>
                                 {bigVic &&
-                                    <p>[🔪🔪공격 대성공!]<span>{nweetObj.creatorName}</span>님이 <span>{nweetObj.orderText}</span>님을 공격합니다!<span>{nweetObj.diceNum}</span> 크리티컬 데미지가 들어갔습니다!</p>
+                                    <p>[🔪🔪공격 대성공!]<span>{nweetObj.creatorName}</span>님이 <span>{nweetObj.orderText}</span>님을 공격합니다!<b>{nweetObj.diceNum}</b> 크리티컬 데미지가 들어갔습니다!</p>
                                 }
                                 {middleVic &&
-                                    <p>[🔪공격]<span>{nweetObj.creatorName}</span>님이 <span>{nweetObj.orderText}</span>님을 공격합니다.<span>{nweetObj.diceNum}</span>데미지가 들어갔습니다.</p>
+                                    <p>[🔪공격]<span>{nweetObj.creatorName}</span>님이 <span>{nweetObj.orderText}</span>님을 공격합니다.<b>{nweetObj.diceNum}</b>데미지가 들어갔습니다.</p>
                                 }
                                 {smallVic &&
-                                    <p>[🔪공격..?]<span>{nweetObj.creatorName}</span>님이 <span>{nweetObj.orderText}</span>님을 공격했습니다만...<span>{nweetObj.diceNum}</span>데미지가 잔잔하게 스쳤습니다.</p>
+                                    <p>[🔪공격..?]<span>{nweetObj.creatorName}</span>님이 <span>{nweetObj.orderText}</span>님을 공격했습니다만...<b>{nweetObj.diceNum}</b>데미지가 잔잔하게 스쳤습니다.</p>
                                 }
+                                {/* <p>[ <span>{nweetObj.creatorName}</span> : {nweetObj.hp} ] vs [ <span>{nweetObj.orderText}</span> : {enemyHp} ]</p> */}
                             </>
                             }
                             {isCure && <>
                                 {bigVic &&
-                                    <p>[💖💖치유 대성공!]<span>{nweetObj.creatorName}</span>님이 <span>{nweetObj.orderText}</span>님을 치유합니다! 세계수의 가호로 <span>{nweetObj.diceNum}</span>의 체력이 크게 복구됩니다. </p>
+                                    <p>[💖💖치유 대성공!]<span>{nweetObj.creatorName}</span>님이 <span>{nweetObj.orderText}</span>님을 치유합니다! 세계수의 가호로 <b>{nweetObj.diceNum}</b>의 체력이 크게 복구됩니다. </p>
                                 }
                                 {middleVic &&
-                                    <p>[💖치유]<span>{nweetObj.creatorName}</span>님이 <span>{nweetObj.orderText}</span>님을 치유합니다.<span>{nweetObj.diceNum}</span>의 체력이 복구됩니다. </p>
+                                    <p>[💖치유]<span>{nweetObj.creatorName}</span>님이 <span>{nweetObj.orderText}</span>님을 치유합니다.<b>{nweetObj.diceNum}</b>의 체력이 복구됩니다. </p>
                                 }
                                 {smallVic &&
-                                    <p>[💖침바르기]<span>{nweetObj.creatorName}</span>님이 <span>{nweetObj.orderText}</span>님께 침을 발랐습니다. <span>{nweetObj.diceNum}</span>의 미미한 체력이 복구됩니다. </p>
+                                    <p>[💖침바르기]<span>{nweetObj.creatorName}</span>님이 <span>{nweetObj.orderText}</span>님께 침을 발랐습니다. <b>{nweetObj.diceNum}</b>의 미미한 체력이 복구됩니다. </p>
                                 }
                             </>
                             }

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { dbService, storageService } from '../fbase';
 import { collection, addDoc, query, onSnapshot, orderBy,where, doc, deleteDoc, updateDoc } from "firebase/firestore";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth, onAuthStateChanged, updateCurrentUser } from "firebase/auth";
 import { useNavigate, Link } from 'react-router-dom';
 import Nweet from "components/Nweet";
 import NweetFactory from "components/NweetFactory";
@@ -19,6 +19,8 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
     const [infoView, setInfoView] = useState(false);
     const [loginUsers, setLoginUsers] = useState([]);
     const [mobileMenu, setMobileMenu] = useState(false);
+    const [myHp, setmyHp] = useState(null);
+    const [enemyHp, setEnemyHp] = useState(null);
 
     //유저이름 모음
     const userList = loginUsers.map(item => item.displayName);
@@ -40,12 +42,38 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
         await deleteDoc(NweetTextRef);
     }
 
-    //트윗 읽어오기 기능
-    const readNweet = () => {
+    const nweetQuery = useMemo(() => collection(dbService, "nweets"), []);
+    useEffect(() => {
         const q = query(
-            collection(dbService, "nweets"),
+            nweetQuery,
             orderBy("createdAt", "desc")
-        );
+        )
+        const unsubscribe = onSnapshot(q, (snapshot) => {
+            const nweetArray = snapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data(),
+            }));
+            setNweets(nweetArray);
+            const nweetOrder = nweetArray.map(item => item.orderWhat);
+            if (nweetOrder[0] == '/공격' || nweetOrder[0] == '/치유') {
+                setIsWar(true)
+            }
+            else {
+                setIsWar(false)
+            }
+        });
+        return () => { unsubscribe() }
+    }, [nweetQuery])
+    
+    const readNweet = () => {
+        // const q = query(
+        //     collection(dbService, "nweets"),
+        //     orderBy("createdAt", "desc")
+        // );
+        const q = query(
+            nweetQuery,
+            orderBy("createdAt", "desc")
+        )
         const unsubscribe = onSnapshot(q, (Snapshot) => {
             const nweetArray = Snapshot.docs.map((doc) => { //snapshot : 트윗을 받을때마다 알림 받는곳. 새로운 스냅샷을 받을때 nweetArray 라는 배열을 만듬
                 return {
@@ -54,6 +82,12 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
                 };
             });
             setNweets(nweetArray); //nweets에 nweetArray 라는 배열을 집어 넣음. 배열엔 doc.id와 doc.data()가 있음
+
+            //만일 쓰인 데이터가 공격,치유라면 감지한다.
+            const nweetOrder = nweetArray.map(item => item.orderWhat);
+            if (nweetOrder[0] == '/공격') {
+                console.log('공격함')
+            }
 
             //데이터 최대값 도달시 첫번째 데이터 삭제하기
             if (nweetArray.length >= maxData) {
@@ -66,13 +100,14 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
                 unsubscribe();
             }
         });
+        //return () => unsubscribe()
     }
 
     //로그인한 유저 읽어오기 기능
     const readLoginUser = () => {
         const q = query(
-          collection(dbService, "user"),
-          //where("login", "==", true)
+            collection(dbService, "user"),
+            //where("login", "==", true)
         );
         const unsubscribe = onSnapshot(q, (Snapshot) => {
             const loginUserArray = Snapshot.docs.map((doc) => {
@@ -100,7 +135,7 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
     }
 
     //로그아웃 기능
-    const onLogOutClick = async() => {
+    const onLogOutClick = async () => {
         auth.signOut();
         navigate("/login");
     }
@@ -114,7 +149,7 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
     }
     
     // 체크 상태 변경 핸들러
-    const handleToggle  = () => {
+    const handleToggle = () => {
         const newChecked = !hpValue;
         setHpValue(newChecked);
         window.localStorage.setItem("hpToggle", newChecked)
@@ -131,11 +166,25 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
     }, []);
 
     //그외
+    // useEffect(()=>{readNweet();},[nweetQuery])
     useEffect(() => {
         readLoginUser();
-        readNweet();
     }, []);
 
+    //전쟁중인지 아닌지
+    const [isWar, setIsWar] = useState(false);
+    useEffect(() => {
+        if (isWar) {
+            resetTest();
+        }
+        else return;
+    }, [nweets]);
+
+    //오늘 날짜
+    let todayfull = new Date().toLocaleString();
+
+    const resetTest = async() => {
+    }
     
     return (
         <div className="home-wrap">
@@ -147,6 +196,7 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
                 onHpCheckedChange={handleHpCheckedChange}
                 nweetObj={nweets}
                 userList={userList}
+                loginUsers={loginUsers}
             />
             <div className="chatting-area">
                 <div className="mobile-header">
@@ -173,6 +223,7 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
                             isCure={nweet.orderWhat === "/치유" && userList.includes(nweet.orderText)}
                             isBuy={nweet.buy === true}
                             hpValue={hpValue}
+                            enemyHp={enemyHp}
                         />
                     ))}
                 </div>

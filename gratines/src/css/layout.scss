@@ -427,13 +427,17 @@ body {
           & span {
             margin: 0 5px;
             color: $purple;
-            &:last-child {
-              background-color: $purple-100;
-              margin: 0 5px;
-              padding: 2px 8px 2px 5px;
-              border-radius: 100px;
-              color: $purple !important;
-            }
+          }
+          & b {
+            display: inline-block !important;
+            font-weight: 900 !important;
+            font-size: 0.8rem;
+            color: $purple;
+            background-color: $purple-100;
+            margin: 0 5px;
+            padding: 2px 8px 2px 5px;
+            border-radius: 100px;
+            color: $purple !important;
           }
         }
         & img {
