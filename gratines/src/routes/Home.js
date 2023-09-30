@@ -70,7 +70,6 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
 
             //공격 또는 치유를 감지한다.
             if (nweetOrder[0] == '/공격' || nweetOrder[0] == '/치유' || nweetOrder[0] == '/캐쉬리셋') {
-                console.log('공격감지')
                 setIsWar(true)
             }
             else {
