@@ -35,12 +35,13 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
     };
 
     //데이터 최대값 도달시 첫번째 데이터 삭제하기
-    let maxDataId = '';
     let maxData = 100;
+    const [maxDataId, setMaxDataId] = useState(null)
     const deleteMaxData = async () => {
         const NweetTextRef = doc(dbService, "nweets", maxDataId);
         await deleteDoc(NweetTextRef);
     }
+
 
     const nweetQuery = useMemo(() => collection(dbService, "nweets"), []);
     useEffect(() => {
@@ -55,56 +56,38 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
             }));
             setNweets(nweetArray);
             const nweetOrder = nweetArray.map(item => item.orderWhat);
-            if (nweetOrder[0] == '/공격' || nweetOrder[0] == '/치유') {
+
+            //데이터 최대값 도달시 첫번째 데이터 삭제하기
+            if (nweetArray.length >= maxData) {
+                //maxDataId = nweetArray[maxData - 1].id;
+                setMaxDataId(nweetArray[maxData - 1].id)
+                setIsMax(true)
+            }
+            else {
+                setMaxDataId(null)
+                setIsMax(false)
+            }
+
+            //공격 또는 치유를 감지한다.
+            if (nweetOrder[0] == '/공격' || nweetOrder[0] == '/치유' || nweetOrder[0] == '/캐쉬리셋') {
+                console.log('공격감지')
                 setIsWar(true)
             }
             else {
                 setIsWar(false)
             }
+
+            //캐쉬커팅용 글자
+            if (nweetArray[0].text == '태정') {
+                
+            }
         });
         return () => { unsubscribe() }
     }, [nweetQuery])
     
-    const readNweet = () => {
-        // const q = query(
-        //     collection(dbService, "nweets"),
-        //     orderBy("createdAt", "desc")
-        // );
-        const q = query(
-            nweetQuery,
-            orderBy("createdAt", "desc")
-        )
-        const unsubscribe = onSnapshot(q, (Snapshot) => {
-            const nweetArray = Snapshot.docs.map((doc) => { //snapshot : 트윗을 받을때마다 알림 받는곳. 새로운 스냅샷을 받을때 nweetArray 라는 배열을 만듬
-                return {
-                    id: doc.id,
-                    ...doc.data(), //...은 데이터의 내용물, 즉 spread attribute 기능임
-                };
-            });
-            setNweets(nweetArray); //nweets에 nweetArray 라는 배열을 집어 넣음. 배열엔 doc.id와 doc.data()가 있음
-
-            //만일 쓰인 데이터가 공격,치유라면 감지한다.
-            const nweetOrder = nweetArray.map(item => item.orderWhat);
-            if (nweetOrder[0] == '/공격') {
-                console.log('공격함')
-            }
-
-            //데이터 최대값 도달시 첫번째 데이터 삭제하기
-            if (nweetArray.length >= maxData) {
-                maxDataId = nweetArray[maxData - 1].id;
-                deleteMaxData()
-            }
-        });
-        onAuthStateChanged(auth, (user) => {
-            if (user == null) {
-                unsubscribe();
-            }
-        });
-        //return () => unsubscribe()
-    }
 
     //로그인한 유저 읽어오기 기능
-    const readLoginUser = () => {
+    useEffect(() => {
         const q = query(
             collection(dbService, "user"),
             //where("login", "==", true)
@@ -123,7 +106,7 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
                 unsubscribe();
             }
         });
-    }
+    }, []);
 
 
     //출석창 info hover 기능
@@ -165,25 +148,31 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
         }
     }, []);
 
-    //그외
-    // useEffect(()=>{readNweet();},[nweetQuery])
-    useEffect(() => {
-        readLoginUser();
-    }, []);
 
-    //전쟁중인지 아닌지
+    //useEffect와 onSnapshot 안에서 awiat(addDoc, updateDoc 등) 사용하면 이미있는 문서라고 오류나서
+    //상태값만 받아와서 다른 wrap 함수 안에서 사용함.
+    //알수없는 이유로... isWar이 true 일때만 isMax가 작동함.
+    //이를 위해 /리셋캐쉬 기능 추가
+    //해결하게 된다면 /리셋캐쉬 삭제
     const [isWar, setIsWar] = useState(false);
+    const [isMax, setIsMax] = useState(false);
     useEffect(() => {
         if (isWar) {
-            resetTest();
+            wrapRefreshUser();
+        }
+        else return;
+        if (isMax) {
+            wrapDeleteMaxData();
         }
         else return;
     }, [nweets]);
 
-    //오늘 날짜
-    let todayfull = new Date().toLocaleString();
 
-    const resetTest = async() => {
+    const wrapRefreshUser = async () => {
+        refreshUser();
+    }
+    const wrapDeleteMaxData = async () => {
+        deleteMaxData();
     }
     
     return (

@@ -210,10 +210,6 @@ const NweetFactory = ({ userObj, fbUserObj, loginUsers, refreshUser}) => {
         //공격, 치유 기능
         const extractedData = orderText.replace('@', '');
         if (dataList.includes(extractedData)) {
-            // if (orderWhat === '/공격' || orderWhat === '/치유') {
-            //     diceNum = Math.ceil(Math.random() * (50 - 1) + 1);
-            //     orderText = extractedData;
-            // }
             diceNum = Math.ceil(Math.random() * (50 - 1) + 1);
             orderText = extractedData;
             if (orderWhat === '/공격') {
@@ -373,6 +369,10 @@ const NweetFactory = ({ userObj, fbUserObj, loginUsers, refreshUser}) => {
                             <div className="function-list">
                                 <b>/전체</b>
                                 <p>전체 말하기</p>
+                            </div>
+                            <div className="function-list">
+                                <b>/캐쉬리셋</b>
+                                <p>캐쉬 리셋</p>
                             </div>
                             <p className="warning">* 러너는 '관리자 명령어' 사용을 금지합니다. *</p>
                         </div>

@@ -136,6 +136,7 @@ function App() {
       attendDate: fbUserData[0].attendDate
     })
   };
+
   //유저네임 변경시 자동 리프레쉬 업데이트
   const refreshUser = async () => {
     const user = auth.currentUser;
