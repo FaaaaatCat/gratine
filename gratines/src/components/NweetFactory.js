@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { dbService, storageService } from '../fbase';
 import { v4 as uuidv4 } from 'uuid';
 import { collection, addDoc, query, orderBy, where, doc, getDocs, updateDoc} from "firebase/firestore";
@@ -11,7 +11,15 @@ const NweetFactory = ({ userObj, fbUserObj, loginUsers, refreshUser}) => {
     const [textHeight, setTextHeight] = useState(0);
     const [autoCompleteList, setAutoCompleteList] = useState([]);
     const [selectedItemIndex, setSelectedItemIndex] = useState(0);
+    const [hideText, setHideText] = useState(false);
     const usertooltip = autoCompleteList.length > 0; //autoComplete가 켜져있다면 true
+
+
+    //input에 자동포커싱하는 기능
+    const inputRef = useRef(null);
+    useEffect(() => {
+        inputRef.current.focus();
+    }, [hideText]);
 
     //유저 이름들 읽는 부분
     const dataList = loginUsers.map(item => item.displayName);
@@ -52,7 +60,7 @@ const NweetFactory = ({ userObj, fbUserObj, loginUsers, refreshUser}) => {
             setAutoCompleteList([]);
         }
     };
-
+    
     //Enter관련 기능 (그냥 Enter, Shift+Enter, @+Enter)
     const enterKeyWork = (e) => {
         if (e.key !== "Enter") return;
@@ -84,9 +92,12 @@ const NweetFactory = ({ userObj, fbUserObj, loginUsers, refreshUser}) => {
             }
             //3. 그냥 Enter
             else if (e.key === 'Enter') {
-                onSubmit(e);
-                setTooltip(false)
                 setTextHeight(32)
+                setTooltip(false)
+                setHideText(true)
+                setTimeout(function () {
+                    onSubmit(e);
+                }, 500);
             }
         }
     }
@@ -210,12 +221,13 @@ const NweetFactory = ({ userObj, fbUserObj, loginUsers, refreshUser}) => {
         //공격, 치유 기능
         const extractedData = orderText.replace('@', '');
         if (dataList.includes(extractedData)) {
-            diceNum = Math.ceil(Math.random() * (50 - 1) + 1);
             orderText = extractedData;
             if (orderWhat === '/공격') {
+                diceNum = Math.ceil(Math.random() * (40 - 1) + 1);
                 minusHp({ extractedData, diceNum });
             }
             else if (orderWhat === '/치유') {
+                diceNum = Math.ceil(Math.random() * (50 - 1) + 1);
                 plusHp({ extractedData, diceNum });
             }
         }
@@ -272,6 +284,8 @@ const NweetFactory = ({ userObj, fbUserObj, loginUsers, refreshUser}) => {
         //파일 미리보기 img src 비워주기
         setAttachment("");
         refreshUser();
+        setHideText(false);
+        inputRef.current.focus();
     };
 
     //사진파일 추가
@@ -324,7 +338,6 @@ const NweetFactory = ({ userObj, fbUserObj, loginUsers, refreshUser}) => {
         })
     }
 
-
     return (
         <>
             {attachment &&
@@ -333,7 +346,7 @@ const NweetFactory = ({ userObj, fbUserObj, loginUsers, refreshUser}) => {
                     <button onClick={onClearAttachment}>이미지 삭제</button>
                 </div>
             }
-            <form onSubmit={onSubmit}>
+            <form onSubmit={onSubmit} className={(hideText ? 'loadingChat' : '')}>
                 {tooltip &&
                     <div className="tooltip">
                         <div className="function-list-container">
@@ -357,7 +370,7 @@ const NweetFactory = ({ userObj, fbUserObj, loginUsers, refreshUser}) => {
                             </div> */}
                             <div className="function-list">
                                 <b>/공격 @유저이름</b>
-                                <p>@유저에게 1~50사이 데미지 부과</p>
+                                <p>@유저에게 1~40사이 데미지 부과</p>
                             </div>
                             <div className="function-list">
                                 <b>/치유 @유저이름</b>
@@ -391,7 +404,8 @@ const NweetFactory = ({ userObj, fbUserObj, loginUsers, refreshUser}) => {
                         enterKeyWork(e);
                     }}
                     placeholder=""
-                    style={{height: textHeight + 'px'}}
+                    style={{ height: textHeight + 'px' }}
+                    ref={inputRef}
                     // maxLength={120} //글자제한
                 />
                 {usertooltip &&

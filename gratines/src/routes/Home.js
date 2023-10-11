@@ -160,10 +160,11 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
             wrapRefreshUser();
         }
         else return;
-        if (isMax) {
-            wrapDeleteMaxData();
-        }
-        else return;
+        // 100개 문서 제한해도 파이어베이스 일일 할당량을 어차피 초과하기에 일단 지워둠
+        // if (isMax) {
+        //     wrapDeleteMaxData();
+        // }
+        // else return;
     }, [nweets]);
 
 

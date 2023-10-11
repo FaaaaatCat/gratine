@@ -680,8 +680,25 @@ body #root .app-container .home-wrap .home-bg::before {
   cursor: pointer;
 }
 
+@-webkit-keyframes loading {
+  from {
+    right: 100%;
+  }
+  to {
+    right: 0;
+  }
+}
+
+@keyframes loading {
+  from {
+    right: 100%;
+  }
+  to {
+    right: 0;
+  }
+}
+
 .chatting-area .chatting-form-box {
-  min-height: 40px;
   background-color: #4D4D3F;
   padding: 0.5rem;
 }
@@ -722,6 +739,36 @@ body #root .app-container .home-wrap .home-bg::before {
           align-items: center;
   gap: 5px;
   position: relative;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+.chatting-area .chatting-form-box form.loadingChat {
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+  height: 0px;
+  position: relative;
+}
+
+.chatting-area .chatting-form-box form.loadingChat * {
+  opacity: 0;
+  display: none;
+}
+
+.chatting-area .chatting-form-box form.loadingChat::after {
+  content: '';
+  position: absolute;
+  height: 3px;
+  border-radius: 100px;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  background-color: #CED065;
+  display: block;
+  -webkit-animation-name: loading;
+          animation-name: loading;
+  -webkit-animation-duration: 0.5s;
+          animation-duration: 0.5s;
 }
 
 .chatting-area .chatting-form-box form button[type="submit"] {

@@ -530,9 +530,18 @@ body {
     }
   }
 
+  @keyframes loading {
+    from {
+      right: 100%;
+    }
+    to {
+      right: 0;
+    }
+  }
+
   //채팅 치는 영역
   & .chatting-form-box {
-    min-height: 40px;
+    //min-height: 40px;
     background-color: $brown-800;
     padding: 0.5rem;
     //이미지 썸네일
@@ -563,6 +572,29 @@ body {
       align-items: center;
       gap: 5px;
       position: relative;
+      transition: all 0.2s;
+      &.loadingChat {
+        transition: all 0.2s;
+        height: 0px;
+        position: relative;
+        & *{
+          opacity: 0;
+          display: none;
+        }
+        &::after{
+          content: '';
+          position: absolute;
+          height: 3px;
+          border-radius: 100px;
+          left: 0;
+          right: 0;
+          bottom: -1px;
+          background-color: $yellow-400;
+          display: block;
+          animation-name: loading;
+          animation-duration: 0.5s;
+        }
+      }
       & button[type="submit"] {
         width: 60px;
         background: $yellow-300;
