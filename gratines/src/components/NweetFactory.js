@@ -92,21 +92,38 @@ const NweetFactory = ({ userObj, fbUserObj, loginUsers, refreshUser}) => {
             }
             //3. 그냥 Enter
             else if (e.key === 'Enter') {
-                setTextHeight(32)
-                setTooltip(false)
-                setNweet('');
-                onSubmit(e);
-                let blackNweet = nweet.trim();
-                if (e.target.value == '' || blackNweet == '') {
-                    setHideText(false)
-                }
-                else {
-                    setHideText(true)
-                    setTimeout(function () {
-                        setHideText(false)
-                    }, 500);
-                }
+                doRealEnter(e)
+                // setTextHeight(32)
+                // setTooltip(false)
+                // setNweet('');
+                // onSubmit(e);
+                // let blackNweet = nweet.trim();
+                // if (e.target.value == '' || blackNweet == '') {
+                //     setHideText(false)
+                // }
+                // else {
+                //     setHideText(true)
+                //     setTimeout(function () {
+                //         setHideText(false)
+                //     }, 500);
+                // }
             }
+        }
+    }
+    const doRealEnter = (e) => {
+        setTextHeight(32)
+        setTooltip(false)
+        setNweet('');
+        onSubmit(e);
+        let blackNweet = nweet.trim();
+        if (e.target.value == '' || blackNweet == '') {
+            setHideText(false)
+        }
+        else {
+            setHideText(true)
+            setTimeout(function () {
+                setHideText(false)
+            }, 500);
         }
     }
 
@@ -468,6 +485,7 @@ const NweetFactory = ({ userObj, fbUserObj, loginUsers, refreshUser}) => {
                     className="gtn-btn"
                     type="submit"
                     value="전송"
+                    onClick={doRealEnter}
                 >
                     전송
                     <span className="material-icons-round">send</span>
