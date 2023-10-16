@@ -4,7 +4,7 @@ import { doc, deleteDoc, updateDoc, collection, getDocs, query, addDoc, where, o
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 
-const Nweet = ({ nweetObj, isOwner, isOrder, orderWhat, orderText, isWhole, isDice, isBuy, isAttack, isCure, hpValue, enemyHp}) => {
+const Nweet = ({ nweetObj, isOwner, isOrder, orderWhat, orderText, isWhole, isDice, isBuy, isAttack, isCure, hpValue, isHpRest}) => {
     const NweetTextRef = doc(dbService, "nweets", `${nweetObj.id}`); //nweetObj.id 는 쓴 트윗의 고유 id임. userObj.id와 다름.
     const NweetImgRef = ref(storageService, nweetObj.attachmentUrl); //nweetObj.attachmentUrl의 레퍼런스를 얻음
     //console.log(nweetObj.id) //쓴 데이터 갯수만큼 실행 됨 그래서 모든 트윗의 id를 보여줌.
@@ -14,12 +14,16 @@ const Nweet = ({ nweetObj, isOwner, isOrder, orderWhat, orderText, isWhole, isDi
     const defaultProfile = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fdefault_profile.png?alt=media&token=9003c59f-8f33-4d0a-822c-034682416355';
     const [smallVic, setSmallVic] = useState(false);
     const [bigVic, setBigVic] = useState(false);
+    const [fullVic, setFullVic] = useState(false);
     const [middleVic, setMiddleVic] = useState(false);
 
     //최소,중간,최대 값대로 출력하기
     useEffect(() => {
         if (isAttack || isCure) {
-            if (nweetObj.diceNum > 40) {
+            if (nweetObj.diceNum > 39) {
+                setFullVic(true)
+            }
+            else if (nweetObj.diceNum > 30) {
                 setBigVic(true)
             }
             else if (nweetObj.diceNum < 10) {
@@ -66,7 +70,7 @@ const Nweet = ({ nweetObj, isOwner, isOrder, orderWhat, orderText, isWhole, isDi
 
     return (
         <>  
-            <div className={'chatting-list ' + (isOwner? 'myChat ':'') + (isDice || isAttack || isCure? 'orderChat ':'') + (isBuy? 'buyChat ':'') + (isWhole? 'wholeChat ':'')}>
+            <div className={'chatting-list ' + (isOwner? 'myChat ':'') + (isDice || isAttack || isCure? 'orderChat ':'') + (isBuy? 'buyChat ':'') + (isWhole || isHpRest? 'wholeChat ':'')}>
                 <div className="profile-box">
                     {/* <img src={nweetObj.creatorImg} /> */}
                     {nweetObj.creatorImg ? <img src={nweetObj.creatorImg} /> : <img src={defaultProfile} />}
@@ -80,14 +84,18 @@ const Nweet = ({ nweetObj, isOwner, isOrder, orderWhat, orderText, isWhole, isDi
                             </p>
                         }
                     </div>
-                    {isDice || isWhole || isAttack || isCure ?
+                    {isDice || isWhole || isAttack || isCure || isHpRest ?
                         <>
+                            {isHpRest && <p>🍀 모두의 체력을 100으로 리셋했습니다. 🍀</p>}
                             {isWhole && <>
                                 <p>{nweetObj.orderText}</p>
                                 {isOwner && <button onClick={onDeleteClick}><span className="material-icons-round">close</span></button>}
                             </>}
                             {isDice && <p>[🎲주사위 {nweetObj.orderText}] <span>{nweetObj.creatorName}</span>님이 주사위 <b>{nweetObj.diceNum}</b>을 굴렸습니다. </p>}
                             {isAttack && <>
+                                {fullVic &&
+                                    <p>[🔪🔪🔪공격 최고성공!!]<span>{nweetObj.creatorName}</span>님이 <span>{nweetObj.orderText}</span>님을 진심을 담아 공격합니다!<b>{nweetObj.diceNum}</b> 어마어마한 데미지가 들어갔습니다!</p>
+                                }
                                 {bigVic &&
                                     <p>[🔪🔪공격 대성공!]<span>{nweetObj.creatorName}</span>님이 <span>{nweetObj.orderText}</span>님을 공격합니다!<b>{nweetObj.diceNum}</b> 크리티컬 데미지가 들어갔습니다!</p>
                                 }
@@ -101,6 +109,9 @@ const Nweet = ({ nweetObj, isOwner, isOrder, orderWhat, orderText, isWhole, isDi
                             </>
                             }
                             {isCure && <>
+                                {fullVic &&
+                                    <p>[💖💖💖치유 최고성공!!]<span>{nweetObj.creatorName}</span>님이 <span>{nweetObj.orderText}</span>님을 치유합니다! 세계수의 신이 강림해 <b>{nweetObj.diceNum}</b>의 체력을 거의 전부 복구시켰습니다. </p>
+                                }
                                 {bigVic &&
                                     <p>[💖💖치유 대성공!]<span>{nweetObj.creatorName}</span>님이 <span>{nweetObj.orderText}</span>님을 치유합니다! 세계수의 가호로 <b>{nweetObj.diceNum}</b>의 체력이 크게 복구됩니다. </p>
                                 }

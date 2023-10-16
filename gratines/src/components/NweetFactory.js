@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { dbService, storageService } from '../fbase';
 import { v4 as uuidv4 } from 'uuid';
-import { collection, addDoc, query, orderBy, where, doc, getDocs, updateDoc} from "firebase/firestore";
+import { collection, addDoc, query, writeBatch , where, doc, getDocs, updateDoc} from "firebase/firestore";
 import { ref, uploadString, getDownloadURL } from "@firebase/storage";
 
 const NweetFactory = ({ userObj, fbUserObj, loginUsers, refreshUser}) => {
@@ -94,10 +94,18 @@ const NweetFactory = ({ userObj, fbUserObj, loginUsers, refreshUser}) => {
             else if (e.key === 'Enter') {
                 setTextHeight(32)
                 setTooltip(false)
-                setHideText(true)
-                setTimeout(function () {
-                    onSubmit(e);
-                }, 500);
+                setNweet('');
+                onSubmit(e);
+                let blackNweet = nweet.trim();
+                if (e.target.value == '' || blackNweet == '') {
+                    setHideText(false)
+                }
+                else {
+                    setHideText(true)
+                    setTimeout(function () {
+                        setHideText(false)
+                    }, 500);
+                }
             }
         }
     }
@@ -231,6 +239,12 @@ const NweetFactory = ({ userObj, fbUserObj, loginUsers, refreshUser}) => {
                 plusHp({ extractedData, diceNum });
             }
         }
+
+        //체력리셋 기능
+        if (orderWhat === '/체력리셋') {
+            resetHp();
+        }
+        
         
         //이미지 첨부하지 않고 텍스트만 올리고 싶을 때도 있기 때문에 attachment가 있을때만 아래 코드 실행
         //이미지 첨부하지 않은 경우엔 attachmentUrl=""이 된다.
@@ -338,6 +352,22 @@ const NweetFactory = ({ userObj, fbUserObj, loginUsers, refreshUser}) => {
         })
     }
 
+    //체력리셋을 감지해서 hp를 100으로 만드는 기능
+    const batch = writeBatch(dbService);
+    const resetHp = async () => {
+        const q = query(
+            collection(dbService, "user")
+        );
+        const querySnapshot = await getDocs(q);
+        const wholeUserIdArray = querySnapshot.docs.map(item => item.id);
+        for (let i = 0; i < wholeUserIdArray.length; i++){
+            const hpRef = doc(dbService, "user", wholeUserIdArray[i]);
+            batch.update(hpRef, { "hp": 100 });
+        }
+        await batch.commit();
+    }
+
+
     return (
         <>
             {attachment &&
@@ -346,6 +376,7 @@ const NweetFactory = ({ userObj, fbUserObj, loginUsers, refreshUser}) => {
                     <button onClick={onClearAttachment}>이미지 삭제</button>
                 </div>
             }
+            {/* <form onSubmit={onSubmit} className={(hideText ? '' : '')}> */}
             <form onSubmit={onSubmit} className={(hideText ? 'loadingChat' : '')}>
                 {tooltip &&
                     <div className="tooltip">
@@ -384,8 +415,8 @@ const NweetFactory = ({ userObj, fbUserObj, loginUsers, refreshUser}) => {
                                 <p>전체 말하기</p>
                             </div>
                             <div className="function-list">
-                                <b>/캐쉬리셋</b>
-                                <p>캐쉬 리셋</p>
+                                <b>/체력리셋</b>
+                                <p>모두의 체력을 100으로</p>
                             </div>
                             <p className="warning">* 러너는 '관리자 명령어' 사용을 금지합니다. *</p>
                         </div>

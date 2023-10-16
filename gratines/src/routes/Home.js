@@ -68,17 +68,15 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
                 setIsMax(false)
             }
 
-            //공격 또는 치유를 감지한다.
-            if (nweetOrder[0] == '/공격' || nweetOrder[0] == '/치유' || nweetOrder[0] == '/캐쉬리셋') {
+//공격 또는 치유를 감지한다.
+            if (nweetOrder[0] == '/공격' || nweetOrder[0] == '/치유' || nweetOrder[0] == '/체력리셋') {
                 setIsWar(true)
             }
+            // if (nweetOrder[0] == '/공격' || nweetOrder[0] == '/치유' || nweetOrder[0] == '/체력리셋') {
+            //     setIsWar(true)
+            // }
             else {
                 setIsWar(false)
-            }
-
-            //캐쉬커팅용 글자
-            if (nweetArray[0].text == '태정') {
-                
             }
         });
         return () => { unsubscribe() }
@@ -210,6 +208,7 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
                             isDice={nweet.orderWhat === "/주사위" && orderList.includes(nweet.orderText)}
                             isAttack={nweet.orderWhat === "/공격" && userList.includes(nweet.orderText)}
                             isCure={nweet.orderWhat === "/치유" && userList.includes(nweet.orderText)}
+                            isHpRest={nweet.orderWhat === "/체력리셋"}
                             isBuy={nweet.buy === true}
                             hpValue={hpValue}
                             enemyHp={enemyHp}
