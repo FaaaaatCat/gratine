@@ -526,6 +526,14 @@ body {
           border-radius: 10px;
           cursor: pointer;
         }
+        //대량첨부이미지
+        & .img-alot{
+          & img{
+            width: 100px;
+            height: 100px;
+
+          }
+        }
       }
     }
   }

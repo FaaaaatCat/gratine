@@ -680,6 +680,11 @@ body #root .app-container .home-wrap .home-bg::before {
   cursor: pointer;
 }
 
+.chatting-list-container .chatting-list .txt-box .img-alot img {
+  width: 100px;
+  height: 100px;
+}
+
 @-webkit-keyframes loading {
   from {
     right: 100%;

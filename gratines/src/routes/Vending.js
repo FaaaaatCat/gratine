@@ -16,6 +16,7 @@ import magichatImg from '../images/item_magichat.png'
 import diamondImg from '../images/item_diamond.png'
 import storeImg from '../images/item_store.png'
 import duckImg from '../images/item_doll1.png'
+import ducksImg from '../images/item_doll2.png'
 import magiceggImg from '../images/item_magicegg.png'
 import pochunImg from '../images/item_fortune.png'
 import Modal from 'react-modal';
@@ -85,7 +86,7 @@ const Vending = ({userObj, fbUserObj, refreshUser}) => {
                         break;
                     case '행운의 돌':
                         diceNum = Math.ceil(Math.random() * (10 - 1) + 1)
-                        buyMention = `세계수의 힘으로 화분이 ${diceNum} 만큼 추가로 성장할것 같습니다...!\n(운영진에게 DM으로 알려주세요) \n\n[구매완료] ${itemName}(${itemPrice})을 구매했습니다. \n남은 소지금 : ${fbUserObj.gold - extractedNumber} Gold / 구매일자 : ${todayfull}`
+                        buyMention = `세계수의 힘으로 화분이 ${diceNum} 만큼 추가로 성장할것 같습니다...!\n(운영진에게 해당 화면을 찍어 DM 보내주세요) \n\n[구매완료] ${itemName}(${itemPrice})을 구매했습니다. \n남은 소지금 : ${fbUserObj.gold - extractedNumber} Gold / 구매일자 : ${todayfull}`
                         break;
                     default:
                         buyMention = `[구매완료] ${itemName}(${itemPrice})을 구매했습니다. \n남은 소지금 : ${fbUserObj.gold - extractedNumber} Gold / 구매일자 : ${todayfull}`
@@ -145,6 +146,58 @@ const Vending = ({userObj, fbUserObj, refreshUser}) => {
             }
         }
     }
+
+    //인형(랜덤)구매 여러개 기능
+    const doBuyFiveDolls = async (e) => {
+        const itemName = e.target.children[1].children[0].innerText;
+        const itemPrice = e.target.children[1].children[1].innerText;
+        const extractedNumber = parseInt(itemPrice, 10);
+        
+        const numbers = [];
+        while (numbers.length < 5) {
+            const randomNumber = Math.floor(Math.random() * duckList.length) + 0;
+            if (!numbers.includes(randomNumber)) {
+                numbers.push(randomNumber);
+            }
+        }
+
+        let attachmentUrl_1 = duckList[numbers[0]];
+        let attachmentUrl_2 = duckList[numbers[1]];
+        let attachmentUrl_3 = duckList[numbers[2]];
+        let attachmentUrl_4 = duckList[numbers[3]];
+        let attachmentUrl_5 = duckList[numbers[4]];
+
+        const ok = window.confirm(`${itemName}(${itemPrice})을 구매하시겠습니까?`);
+        if (ok) {
+            if (extractedNumber <= fbUserObj.gold) {
+                const buyMention = `[구매완료] ${itemName}(${itemPrice})을 구매했습니다. \n남은 소지금 : ${fbUserObj.gold - extractedNumber} Gold / 구매일자 : ${todayfull}`
+                const buyNweetObj = {
+                    text: buyMention,
+                    createdAt: Date.now(),
+                    createdDate: todayfull,
+                    creatorId: userObj.uid,
+                    creatorName: userObj.displayName,
+                    creatorImg: userObj.photoURL,
+                    buy: true,
+                    buyItem: itemName,
+                    buyPrice: itemPrice,
+                    imgBig: true,
+                    attachmentUrl_1,
+                    attachmentUrl_2,
+                    attachmentUrl_3,
+                    attachmentUrl_4,
+                    attachmentUrl_5,
+                };
+                await addDoc(collection(dbService, "nweets"), buyNweetObj);
+                editGold(extractedNumber)
+            }
+            else {
+                window.confirm("소지금이 부족합니다ㅜㅜ");
+            }
+        }
+    }
+
+
     //칵테일재료(4개 랜덤)구매 기능
     const doBuyCocktail = async (e) => {
         const itemName = e.target.children[1].children[0].innerText;
@@ -278,6 +331,16 @@ const Vending = ({userObj, fbUserObj, refreshUser}) => {
                         <p>오리인형(랜덤)</p>
                         <span>300 G</span>
                     </div>
+                </div>
+                <div className="vending-item" onClick={doBuyFiveDolls}>
+                    <div className="img-box">
+                        <img src={ducksImg} alt="" />
+                    </div>
+                    <div className="txt-box">
+                        <p>오리인형(랜덤)</p>
+                        <span>1500 G</span>
+                    </div>
+                    <div className='eventTag'>5 + 1 이벤트</div>
                 </div>
                 <div className="vending-item" onClick={doBuy}>
                     <div className="img-box">
