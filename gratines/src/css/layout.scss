@@ -531,7 +531,7 @@ body {
           & img{
             width: 100px;
             height: 100px;
-
+            background: white;
           }
         }
       }
@@ -833,7 +833,7 @@ body {
         line-height: 1;
         color: $brown-700;
 
-        width: 100%;
+        width: 110%;
         overflow: hidden;
         white-space: nowrap;
         //text-overflow: ellipsis;

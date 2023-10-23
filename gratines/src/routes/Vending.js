@@ -2,14 +2,7 @@ import React, { useState } from 'react';
 import { dbService, storageService } from '../fbase';
 import { collection, addDoc, query, onSnapshot, orderBy,where, doc, getDocs, updateDoc } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import bearImg1 from '../images/bears/bears_1.JPG'
-import bearImg2 from '../images/bears/bears_2.JPG'
-import bearImg3 from '../images/bears/bears_3.JPG'
-import bearImg4 from '../images/bears/bears_4.JPG'
-import bearImg5 from '../images/bears/bears_5.JPG'
-import cocktailImg from '../images/item_cocktail.png'
 import quillImg from '../images/item_quill.png'
-import dollImg from '../images/doll.png'
 import bookmarkImg from '../images/item_bookmark.png'
 import crystallImg from '../images/item_crystall.png'
 import magichatImg from '../images/item_magichat.png'
@@ -71,7 +64,7 @@ const Vending = ({userObj, fbUserObj, refreshUser}) => {
                 let diceNum;
                 switch (itemName) {
                     case '매직 에그':
-                        buyMention = `[구매완료] ${itemName}(${itemPrice})을 구매했습니다. \n남은 소지금 : ${fbUserObj.gold - extractedNumber} Gold / 구매일자 : ${todayfull}\n\n총 5가지 색상을 선택해 운영진DM으로 알려주세요.\n색상종류 : 빨강, 주황, 노랑, 초록, 파랑, 남색, 보라, 흰색, 검은색, 민트, 분홍,은색,금색, 갈색`
+                        buyMention = `[구매완료] ${itemName}(${itemPrice})을 구매했습니다. \n남은 소지금 : ${fbUserObj.gold - extractedNumber} Gold / 구매일자 : ${todayfull}\n\n아래 14개의 색상 중 총 5개를 선택해 진행계DM으로 알려주세요.\n색상종류 : 빨강, 주황, 노랑, 초록, 파랑, 남색, 보라, 흰색, 검은색, 민트, 분홍, 은색, 금색, 갈색`
                         break;
                     case '예언의 쿠키':
                         var random_index = Math.floor(Math.random() * fortuneList.length);

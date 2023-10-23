@@ -683,6 +683,7 @@ body #root .app-container .home-wrap .home-bg::before {
 .chatting-list-container .chatting-list .txt-box .img-alot img {
   width: 100px;
   height: 100px;
+  background: white;
 }
 
 @-webkit-keyframes loading {
@@ -1087,7 +1088,7 @@ body #root .app-container .home-wrap .home-bg::before {
   font-weight: 400;
   line-height: 1;
   color: #73725D;
-  width: 100%;
+  width: 110%;
   overflow: hidden;
   white-space: nowrap;
 }
