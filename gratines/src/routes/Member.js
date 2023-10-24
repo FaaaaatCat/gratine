@@ -134,21 +134,21 @@ const Member = ({ isLoggedIn, fbUserObj, userObj, loginUsers }) => {
     //오늘 날짜
     let todayfull = new Date().toLocaleString();
     //에그사진 모음
-    let egg_1 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2FmagicEgg%2F%EA%B0%88%EC%83%89.avif?alt=media&token=02845e8b-42f4-48dc-a3f1-c5da135696d0'
-    let egg_2 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2FmagicEgg%2F%EA%B2%80%EC%9D%80%EC%83%89.avif?alt=media&token=055489ab-0ed6-484a-b285-7b87af2e84f9'
-    let egg_3 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2FmagicEgg%2F%EA%B8%88%EC%83%89.avif?alt=media&token=2901ffb9-8a24-4b30-8af6-ded85d3a0905'
-    let egg_4 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2FmagicEgg%2F%EB%82%A8%EC%83%89.avif?alt=media&token=a0e56325-1983-406c-b803-7648991c556a'
-    let egg_5 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2FmagicEgg%2F%EB%85%B8%EB%9E%91.avif?alt=media&token=392dedb5-6f9b-4094-94ee-910ad12ad2b2'
-    let egg_6 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2FmagicEgg%2F%EB%AF%BC%ED%8A%B8%EC%83%89.avif?alt=media&token=cf6e658a-089a-4369-82cd-b55f55eb48f4'
-    let egg_7 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2FmagicEgg%2F%EB%B3%B4%EB%9D%BC.avif?alt=media&token=c10f4f4b-af5a-47bd-9a39-1dfa14d9ecd4'
-    let egg_8 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2FmagicEgg%2F%EB%B9%A8%EA%B0%95.avif?alt=media&token=a4ac7e4d-834d-4bbe-b600-322366433017'
-    let egg_9 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2FmagicEgg%2F%EC%9D%80%EC%83%89.avif?alt=media&token=14d062f1-16f3-43c6-ad05-cf535b02ce2e'
-    let egg_10 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2FmagicEgg%2F%EC%A3%BC%ED%99%A9.avif?alt=media&token=ea50dc39-1878-4ea9-962f-3c5869512383'
-    let egg_11 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2FmagicEgg%2F%EC%B4%88%EB%A1%9D.avif?alt=media&token=09231d83-c814-452f-8c8f-d6369ba7fbb7'
-    let egg_12 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2FmagicEgg%2F%ED%8C%8C%EB%9E%91.avif?alt=media&token=046f887c-ef02-45f9-b615-b40a482df91d'
-    let egg_13 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2FmagicEgg%2F%ED%95%91%ED%81%AC%EC%83%89.avif?alt=media&token=980c46f1-d4d5-4093-bf81-47f5c34a9cd6'
-    let egg_14 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2FmagicEgg%2F%ED%9D%B0%EC%83%89.avif?alt=media&token=834c7618-b07f-4585-932f-dbef884c1f57'
-    
+    let egg_1 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2FmagicEgg%2F%EA%B0%88%EC%83%89.avif?alt=media&token=25d66771-8b72-4ec1-b3be-02ea575f213b'
+    let egg_2 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2FmagicEgg%2F%EA%B2%80%EC%9D%80%EC%83%89.avif?alt=media&token=69ac9d0a-f508-4641-8f0f-ed48eb48e2b4'
+    let egg_3 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2FmagicEgg%2F%EA%B8%88%EC%83%89.avif?alt=media&token=c4a1d164-fbd5-48d5-aa8d-1f6410324e82'
+    let egg_4 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2FmagicEgg%2F%EB%82%A8%EC%83%89.avif?alt=media&token=34ad82a4-310c-42f4-baea-1b50d3922d13'
+    let egg_5 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2FmagicEgg%2F%EB%85%B8%EB%9E%91.avif?alt=media&token=0ba28006-8bb2-4285-a802-6d3c4116435b'
+    let egg_6 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2FmagicEgg%2F%EB%AF%BC%ED%8A%B8%EC%83%89.avif?alt=media&token=779df891-066a-45ad-a7ae-443a79705bc3'
+    let egg_7 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2FmagicEgg%2F%EB%B3%B4%EB%9D%BC.avif?alt=media&token=09f31efe-d97e-42da-ae43-acca5182c19c'
+    let egg_8 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2FmagicEgg%2F%EB%B9%A8%EA%B0%95.avif?alt=media&token=45102225-99d4-46bd-a8cd-923900cc0dd3'
+    let egg_9 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2FmagicEgg%2F%EC%9D%80%EC%83%89.avif?alt=media&token=5da855ca-84f4-4a8c-a3a0-190f1d5ada98'
+    let egg_10 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2FmagicEgg%2F%EC%A3%BC%ED%99%A9.avif?alt=media&token=692718c4-2336-4a9e-9378-4caeaf0df474'
+    let egg_11 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2FmagicEgg%2F%EC%B4%88%EB%A1%9D.avif?alt=media&token=7ec83673-cf10-46e4-9d77-d34494f34c42'
+    let egg_12 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2FmagicEgg%2F%ED%8C%8C%EB%9E%91.avif?alt=media&token=c8f1f704-88ab-4e2a-9858-681fc7e2b94c'
+    let egg_13 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2FmagicEgg%2F%ED%95%91%ED%81%AC%EC%83%89.avif?alt=media&token=3e38d098-d195-4ada-b1f7-224e90de1cd1'
+    let egg_14 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2FmagicEgg%2F%ED%9D%B0%EC%83%89.avif?alt=media&token=e28847a4-66c8-4628-98d3-197ef297b75a'
+
     let color_1 = '갈색'
     let color_2 = '검은색'
     let color_3 = '금색'
@@ -195,7 +195,7 @@ const Member = ({ isLoggedIn, fbUserObj, userObj, loginUsers }) => {
             creatorName: '관리자',
             creatorImg: manageProfile,
             buy: true,
-            imgBig: true,
+            imgNums_5: true,
             attachmentUrl_1,
             attachmentUrl_2,
             attachmentUrl_3,

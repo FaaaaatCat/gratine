@@ -128,8 +128,8 @@ const Nweet = ({ nweetObj, isOwner, isOrder, orderWhat, orderText, isWhole, isDi
                             <pre>{nweetObj.text}</pre>
                         </>
                     }
-                    {nweetObj.imgBig && 
-                        <div className="flx-row gap-1 img-alot">
+                    {nweetObj.imgNums_5 && 
+                        <div className="flx-row gap-1 imgNums_5">
                             <img src={nweetObj.attachmentUrl_1} onClick={() => openImageInNewWindow(nweetObj.attachmentUrl_1)} />
                             <img src={nweetObj.attachmentUrl_2} onClick={() => openImageInNewWindow(nweetObj.attachmentUrl_2)} />
                             <img src={nweetObj.attachmentUrl_3} onClick={() => openImageInNewWindow(nweetObj.attachmentUrl_3)} />
@@ -137,7 +137,16 @@ const Nweet = ({ nweetObj, isOwner, isOrder, orderWhat, orderText, isWhole, isDi
                             <img src={nweetObj.attachmentUrl_5} onClick={() => openImageInNewWindow(nweetObj.attachmentUrl_5)} />
                         </div>
                     }
-                    
+                    {nweetObj.imgNums_6 && 
+                        <div className="flx-row gap-1 imgNums_6">
+                            <img src={nweetObj.attachmentUrl_1} onClick={() => openImageInNewWindow(nweetObj.attachmentUrl_1)} />
+                            <img src={nweetObj.attachmentUrl_2} onClick={() => openImageInNewWindow(nweetObj.attachmentUrl_2)} />
+                            <img src={nweetObj.attachmentUrl_3} onClick={() => openImageInNewWindow(nweetObj.attachmentUrl_3)} />
+                            <img src={nweetObj.attachmentUrl_4} onClick={() => openImageInNewWindow(nweetObj.attachmentUrl_4)} />
+                            <img src={nweetObj.attachmentUrl_5} onClick={() => openImageInNewWindow(nweetObj.attachmentUrl_5)} />
+                            <img src={nweetObj.attachmentUrl_6} onClick={() => openImageInNewWindow(nweetObj.attachmentUrl_6)} />
+                        </div>
+                    }
                     {nweetObj.attachmentUrl && <img onClick={() => openImageInNewWindow(nweetObj.attachmentUrl)} src={nweetObj.attachmentUrl} />}
                 </div>
             </div>

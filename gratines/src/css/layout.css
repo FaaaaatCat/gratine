@@ -680,10 +680,15 @@ body #root .app-container .home-wrap .home-bg::before {
   cursor: pointer;
 }
 
-.chatting-list-container .chatting-list .txt-box .img-alot img {
+.chatting-list-container .chatting-list .txt-box .imgNums_5 img {
   width: 100px;
   height: 100px;
-  background: white;
+  background: #E2E2DC;
+}
+
+.chatting-list-container .chatting-list .txt-box .imgNums_6 img {
+  width: 84px;
+  height: 84px;
 }
 
 @-webkit-keyframes loading {

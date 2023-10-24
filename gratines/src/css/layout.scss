@@ -527,11 +527,17 @@ body {
           cursor: pointer;
         }
         //대량첨부이미지
-        & .img-alot{
+        & .imgNums_5{
           & img{
             width: 100px;
             height: 100px;
-            background: white;
+            background: $brown-200;
+          }
+        }
+        & .imgNums_6{
+          & img{
+            width: 84px;
+            height: 84px;
           }
         }
       }
