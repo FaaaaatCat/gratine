@@ -178,6 +178,10 @@
           flex: 1;
 }
 
+.w-unset {
+  width: unset !important;
+}
+
 .w-10 {
   width: 10% !important;
 }
@@ -623,6 +627,42 @@
 }
 
 .material-icons-round.md-48 {
+  font-size: 48px;
+}
+
+.txt-14 {
+  font-size: 14px;
+}
+
+.txt-16 {
+  font-size: 16px;
+}
+
+.txt-18 {
+  font-size: 18px;
+}
+
+.txt-20 {
+  font-size: 20px;
+}
+
+.txt-22 {
+  font-size: 22px;
+}
+
+.txt-24 {
+  font-size: 24px;
+}
+
+.txt-30 {
+  font-size: 30px;
+}
+
+.txt-36 {
+  font-size: 36px;
+}
+
+.txt-48 {
   font-size: 48px;
 }
 

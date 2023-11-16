@@ -527,15 +527,15 @@ body {
           cursor: pointer;
         }
         //대량첨부이미지
-        & .imgNums_5{
-          & img{
+        & .imgNums_5 {
+          & img {
             width: 100px;
             height: 100px;
             background: $brown-200;
           }
         }
-        & .imgNums_6{
-          & img{
+        & .imgNums_6 {
+          & img {
             width: 84px;
             height: 84px;
           }
@@ -591,12 +591,12 @@ body {
         transition: all 0.2s;
         height: 0px;
         position: relative;
-        & *{
+        & * {
           opacity: 0;
           display: none;
         }
-        &::after{
-          content: '';
+        &::after {
+          content: "";
           position: absolute;
           height: 3px;
           border-radius: 100px;
@@ -798,10 +798,39 @@ body {
     }
     &.attend-area {
       flex: 2;
+      &.not-now::after{
+        content: 'open at \A (Dec 13, 00:00)';
+      }
     }
     &.vending-area {
       flex: 4;
       min-width: 348px;
+      &.not-now::after{
+        content: 'open at \A (Dec 12, 22:00)';
+      }
+    }
+    &.not-now {
+      position: relative;
+      &::after {
+        content: "open";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(190, 190, 181, 0.8);
+        backdrop-filter: blur(5px);
+        display: flex;
+        flex-direction: column;
+        color: white;
+        font-size: 1.6rem;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        white-space: pre;
+      }
     }
   }
   //접속중 인원

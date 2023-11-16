@@ -18,6 +18,24 @@ Modal.setAppElement('#root');
 const Vending = ({userObj, fbUserObj, refreshUser}) => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
+    //오늘 날짜
+    let todayfull = new Date().toLocaleString();
+
+    //소지금 데이터 불러오기
+    const editGold = async (extractedNumber) => {
+        const q = query(
+            collection(dbService, "user"),
+            where("uid", "==", userObj.uid)
+        );
+        const querySnapshot = await getDocs(q);
+        const UserGameData_Id = querySnapshot.docs[0].id;
+        const UserGameRef = doc(dbService, "user", UserGameData_Id);
+        await updateDoc(UserGameRef, {
+            gold: fbUserObj.gold - extractedNumber,
+        })
+        refreshUser();
+    }
+
     //포춘글귀 모음
     let fortune_1 = '누군가의 말에 영감을 얻을 수 있어요. 주변을 잘 살펴보세요.';
     let fortune_2 = '원하던 것을 성취할 수 있어요. 대담하게 도전해 보세요.';
@@ -90,32 +108,6 @@ const Vending = ({userObj, fbUserObj, refreshUser}) => {
         fortuneList.push(eval(`fortune_${i}`));
     }
     
-    //오리인형 모음
-    let duck_1 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbears_1.JPG?alt=media&token=d1844607-6814-4969-95b7-f62a84d9d247'
-    let duck_2 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbears_2.JPG?alt=media&token=4942eb5d-6e7b-444f-ba5b-e71e58b70cf2'
-    let duck_3 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbears_3.JPG?alt=media&token=f54417dc-4018-4d53-949a-431810186f01'
-    let duck_4 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbears_4.JPG?alt=media&token=2640217f-6083-4b81-8314-4c1b6e384f55'
-    let duck_5 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbears_5.JPG?alt=media&token=bade5db1-55dd-4b02-ac9f-74fb6247bb54'
-    let duck_6 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbears_5.JPG?alt=media&token=bade5db1-55dd-4b02-ac9f-74fb6247bb54'
-    let duckList = [duck_1, duck_2, duck_3, duck_4, duck_5, duck_6];
-    
-    //오늘 날짜
-    let todayfull = new Date().toLocaleString();
-
-    //소지금 데이터 불러오기
-    const editGold = async (extractedNumber) => {
-        const q = query(
-            collection(dbService, "user"),
-            where("uid", "==", userObj.uid)
-        );
-        const querySnapshot = await getDocs(q);
-        const UserGameData_Id = querySnapshot.docs[0].id;
-        const UserGameRef = doc(dbService, "user", UserGameData_Id);
-        await updateDoc(UserGameRef, {
-            gold: fbUserObj.gold - extractedNumber,
-        })
-        refreshUser();
-    }
 
     //상품 구매 기능
     const doBuy = async (e) => {
@@ -170,6 +162,22 @@ const Vending = ({userObj, fbUserObj, refreshUser}) => {
         }
     }
 
+    //오리인형 모음
+    let duck_1 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2Fbears_1.JPG?alt=media&token=940ebd5f-f781-43b1-877e-73b84c4aed53'
+    let duck_2 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2Fbears_2.JPG?alt=media&token=e53820ad-f420-4752-b31b-2df9805348dc'
+    let duck_3 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2Fbears_3.JPG?alt=media&token=6fdf06dc-3de7-4b99-b583-e0889979925b'
+    let duck_4 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2Fbears_4.JPG?alt=media&token=830b5c42-0a8f-4b48-a8d2-b327dbcc9c04'
+    let duck_5 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2Fbears_5.JPG?alt=media&token=389c457b-aa3a-4b39-9c7a-7742fdf02edb'
+    let duck_6 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2Fbears_6.png?alt=media&token=5533f8d1-0a7b-4d90-8010-f3909070b239'
+    let name_1 = 'AA씨'
+    let name_2 = 'BB씨'
+    let name_3 = 'CC씨'
+    let name_4 = 'DD씨'
+    let name_5 = 'EE씨'
+    let name_6 = 'FF씨'
+    let duckList = [duck_1, duck_2, duck_3, duck_4, duck_5, duck_6];
+    let nameList = [name_1, name_2, name_3, name_4, name_5, name_6];
+
     //인형(랜덤)구매 기능
     const doBuyDolls = async (e) => {
         const itemName = e.target.children[1].children[0].innerText;
@@ -177,13 +185,13 @@ const Vending = ({userObj, fbUserObj, refreshUser}) => {
         const extractedNumber = parseInt(itemPrice, 10);
         
         var random_index = Math.floor(Math.random() * duckList.length);
-        let random_duck = duckList[random_index]
-        let attachmentUrl = random_duck;
+        let attachmentUrl = duckList[random_index];
 
         const ok = window.confirm(`${itemName}(${itemPrice})을 구매하시겠습니까?`);
         if (ok) {
             if (extractedNumber <= fbUserObj.gold) {
-                const buyMention = `[구매완료] ${itemName}(${itemPrice})을 구매했습니다. \n남은 소지금 : ${fbUserObj.gold - extractedNumber} Gold / 구매일자 : ${todayfull}`
+                const buyMention = `[구매완료] ${itemName}(${itemPrice})을 구매했습니다.\n뽑은 인형 : ${nameList[random_index]}
+                 \n남은 소지금 : ${fbUserObj.gold - extractedNumber} Gold / 구매일자 : ${todayfull}`
                 const buyNweetObj = {
                     text: buyMention,
                     createdAt: Date.now(),
@@ -229,7 +237,9 @@ const Vending = ({userObj, fbUserObj, refreshUser}) => {
         const ok = window.confirm(`${itemName}(${itemPrice})을 구매하시겠습니까?`);
         if (ok) {
             if (extractedNumber <= fbUserObj.gold) {
-                const buyMention = `[구매완료] ${itemName}(${itemPrice})을 구매했습니다. \n남은 소지금 : ${fbUserObj.gold - extractedNumber} Gold / 구매일자 : ${todayfull}`
+                const buyMention = `[구매완료] ${itemName}(${itemPrice})을 구매했습니다.
+                \n뽑은 인형 : ${nameList[[numbers[0]]]},${nameList[[numbers[1]]]},${nameList[[numbers[2]]]},${nameList[[numbers[3]]]},${nameList[[numbers[4]]]},${nameList[[numbers[5]]]}
+                 \n남은 소지금 : ${fbUserObj.gold - extractedNumber} Gold / 구매일자 : ${todayfull}`
                 const buyNweetObj = {
                     text: buyMention,
                     createdAt: Date.now(),

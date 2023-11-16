@@ -124,10 +124,14 @@
     }
   }
   //미니보더
-  .mini-border{
+  .mini-border {
     width: 1px;
     height: $form-height;
-    background-color: $brown-300;
+    background: $brown-300 !important;
+    &.border-long {
+      width: 100%;
+      height: 2px;
+    }
   }
 
   //토글

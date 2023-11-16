@@ -51,6 +51,8 @@ function App() {
         refreshUser();
         getFbUserObj(user);
         loginDB(user);
+        doVending();
+        doAttending();
       }
       //로그인 안되었다면
       else {
@@ -79,6 +81,38 @@ function App() {
     window.addEventListener('resize', setDynamicHeight);
     setDynamicHeight();
   }, [])
+
+
+  //상점기능 컨트롤
+  const [vendingManage, setVendingManage] = useState(null);
+  const doVending = async () => {
+    const q = query(
+      collection(dbService, "game")
+    );
+    const querySnapshot = await getDocs(q);
+    const gameVending = querySnapshot.docs[0]._document.data.value.mapValue.fields.vending.booleanValue;
+    if (gameVending === true) {
+      setVendingManage(true)
+    }
+    else {
+      setVendingManage(false)
+    }
+  }
+  //출석기능 컨트롤
+  const [attendManage, setAttendManage] = useState(null);
+  const doAttending = async () => {
+    const q = query(
+      collection(dbService, "game")
+    );
+    const querySnapshot = await getDocs(q);
+    const gameAttending = querySnapshot.docs[0]._document.data.value.mapValue.fields.attending.booleanValue;
+    if (gameAttending === true) {
+      setAttendManage(true)
+    }
+    else {
+      setAttendManage(false)
+    }
+  }
 
   //fbUser에 로그인값을 false로 만들기
   const logoutDB = async(user) => {
@@ -188,6 +222,8 @@ function App() {
           userObj={userObj}
           fbUserObj={fbUserObj}
           refreshUser={refreshUser}
+          vendingManage={vendingManage}
+          attendManage={attendManage}
         /> : "loading..."
       }
       {/* <footer>$copy{new Date().getFullYear()} Gratine</footer> */}

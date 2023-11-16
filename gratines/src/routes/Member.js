@@ -6,7 +6,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import Modal from 'react-modal';
 Modal.setAppElement('#root');
 
-const Member = ({ isLoggedIn, fbUserObj, userObj, loginUsers }) => {
+const Member = ({ isLoggedIn, fbUserObj, userObj, loginUsers, vendingManage, attendManage }) => {
     const auth = getAuth();
     const user = auth.currentUser;
     const navigate = useNavigate();
@@ -63,7 +63,7 @@ const Member = ({ isLoggedIn, fbUserObj, userObj, loginUsers }) => {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////
     //모달
-    const openFirstModal  = (loginUser) => {
+    const openFirstModal = (loginUser) => {
         setFirstModalOpen(true)
         setSelectedItem(loginUser);
         if (loginUser.uid == fbUserObj.uid) {
@@ -105,7 +105,7 @@ const Member = ({ isLoggedIn, fbUserObj, userObj, loginUsers }) => {
         setManagerPassword(e.target.value);
     };
 
-  const checkPassword = () => {
+    const checkPassword = () => {
         if (managerPassword === '1229') {
             alert('관리자가 맞습니다.');
             setFirstManageOpen(false);
@@ -126,9 +126,44 @@ const Member = ({ isLoggedIn, fbUserObj, userObj, loginUsers }) => {
         const currentUserGameData_Id = querySnapshot.docs[0].id;
         const UserGameRef = doc(dbService, "user", currentUserGameData_Id);
         await updateDoc(UserGameRef, {
-            login : false,
+            login: false,
         })
     }
+
+    
+    //상점오픈기능
+    const doVendingOpen = async () => {
+        const GameRef = doc(dbService, "game", 'DA2wcYWO6FIugdhHfSEw');
+        await updateDoc(GameRef, { 
+            vending: true
+        })
+        closeSecondManage();
+    }
+    const doVendingClose = async () => {
+        const GameRef = doc(dbService, "game", 'DA2wcYWO6FIugdhHfSEw');
+        await updateDoc(GameRef, { 
+            vending: false
+        })
+        closeSecondManage();
+    }
+
+    //출석오픈기능
+    const doAttendingOpen = async () => {
+        const GameRef = doc(dbService, "game", 'DA2wcYWO6FIugdhHfSEw');
+        await updateDoc(GameRef, { 
+            attending: true
+        })
+        closeSecondManage();
+    }
+    const doAttendingClose = async () => {
+        const GameRef = doc(dbService, "game", 'DA2wcYWO6FIugdhHfSEw');
+        await updateDoc(GameRef, { 
+            attending: false
+        })
+        closeSecondManage();
+    }
+
+
 
     //매직에그 돌리기
     //오늘 날짜
@@ -183,7 +218,7 @@ const Member = ({ isLoggedIn, fbUserObj, userObj, loginUsers }) => {
         let attachmentUrl_4 = eggList[numbers[3]];
         let attachmentUrl_5 = eggList[numbers[4]];
 
-        const buyMention = `[매직에그] 오늘의 매직에그를 발표합니다. \n당첨 에그 : ${colorList[[numbers[0]]]}, ${colorList[[numbers[1]]]}, ${colorList[[numbers[2]]]}, ${colorList[[numbers[3]]]}, ${colorList[[numbers[4]]]},
+        const buyMention = `[매직에그] 금주의 매직에그를 발표합니다. \n당첨 에그 : ${colorList[[numbers[0]]]}, ${colorList[[numbers[1]]]}, ${colorList[[numbers[2]]]}, ${colorList[[numbers[3]]]}, ${colorList[[numbers[4]]]},
         \n당첨자 분들은 당첨주 주말 내로 진행계DM으로 당첨사실을 알려주세요! \n(당첨주 주말이 지나면 보상이 사라집니다)
         \n3등(총 3개 정답): 300G\n2등(총 4개 정답): 500G\n1등(총 5개 정답): 1500G
         \n발표일자 : ${todayfull}`
@@ -307,12 +342,40 @@ const Member = ({ isLoggedIn, fbUserObj, userObj, loginUsers }) => {
                 </div>
                 <div className="modal-body flx-start">
                     <p>현재 시간이 <b>금요일 오후 6시</b> 인지 확인해주세요.</p>
-                    <p>오늘의 매직에그를 돌리겠습니까?</p>
+                    <p>금주의 매직에그를 돌리겠습니까?</p>
                     <button
                         onClick={()=> doMagicEgg()}
-                        // onClick={doMagicEgg()} //이게머람?????
                         className="gtn-btn btn-mint flx-row gap-2 mt-4"
                     >매직에그 돌리기 <span className="material-icons-round">arrow_forward</span></button>
+                    <p className="mt-4 opacity-03">-----------------------------------------------------------------------</p>
+                    <div>
+                        <b className="txt-14">⭐️그외 기능</b>
+                        <p className="mt-1">(선택 후 새로고침 (f5)을 꼭 해주세요.)</p>
+                    </div>
+                    <div className="flx-row gap-1 mt-3">
+                        <p>✦ 상점 : </p>
+                        <button
+                            onClick={()=> doVendingOpen()}
+                            className={'gtn-btn flx-row gap-2 w-unset ' + (vendingManage? 'btn-yellow':'btn-white')}
+                        >상점 열기</button>
+                        <button
+                            onClick={() => doVendingClose()}
+                            className={'gtn-btn flx-row gap-2 w-unset ' + (vendingManage? 'btn-white':'btn-yellow')}
+                            
+                        >상점 닫기</button>
+                    </div>
+                    <div className="flx-row gap-1">
+                        <p>✦ 출석 : </p>
+                        <button
+                            onClick={()=> doAttendingOpen()}
+                            className={'gtn-btn flx-row gap-2 w-unset ' + (attendManage? 'btn-yellow':'btn-white')}
+                        >출석 시작</button>
+                        <button
+                            onClick={() => doAttendingClose()}
+                            className={'gtn-btn flx-row gap-2 w-unset ' + (attendManage? 'btn-white':'btn-yellow')}
+                            
+                        >출석 닫기</button>
+                    </div>
                 </div>
                 <div className="modal-btn">
                     <button className="gtn-btn" onClick={()=> closeSecondManage()}>닫기</button>

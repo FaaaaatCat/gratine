@@ -12,14 +12,13 @@ import Attend from "./Attend";
 import plantImg from '../images/plant.png'
 import light from '../images/후광.png'
 
-const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
+const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, vendingManage, attendManage}) => {
     const auth = getAuth();
     const navigate = useNavigate();
     const [nweets, setNweets] = useState([]);
     const [infoView, setInfoView] = useState(false);
     const [loginUsers, setLoginUsers] = useState([]);
     const [mobileMenu, setMobileMenu] = useState(false);
-    const [myHp, setmyHp] = useState(null);
     const [enemyHp, setEnemyHp] = useState(null);
 
     //유저이름 모음
@@ -68,7 +67,7 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
                 setIsMax(false)
             }
 
-//공격 또는 치유를 감지한다.
+            //공격 또는 치유를 감지한다.
             if (nweetOrder[0] == '/공격' || nweetOrder[0] == '/치유' || nweetOrder[0] == '/체력리셋') {
                 setIsWar(true)
             }
@@ -172,6 +171,7 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
     const wrapDeleteMaxData = async () => {
         deleteMaxData();
     }
+
     
     return (
         <div className="home-wrap">
@@ -232,9 +232,11 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
                         isLoggedIn={isLoggedIn}
                         fbUserObj={fbUserObj}
                         loginUsers={loginUsers}
+                        vendingManage={vendingManage}
+                        attendManage={attendManage}
                     />
                 </div>
-                <div className="attend-area">
+                <div className={'attend-area ' + (attendManage? '':'not-now')}>
                     <div className="title">화분키우기 (출석 보상)
                         <span className="info-wrap">
                             <div
@@ -262,7 +264,7 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj }) => {
                         refreshUser={refreshUser}
                     />
                 </div>
-                <div className="vending-area">
+                <div className={'vending-area ' + (vendingManage? '':'not-now')}>
                     <div className="title">상점
                         <span className="info-wrap">
                             <div className="info-btn"
