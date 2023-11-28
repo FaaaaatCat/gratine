@@ -280,7 +280,7 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, vendingManage, atte
                         refreshUser={refreshUser}
                     />
                 </div>
-                {/* <div className="history-area">
+                <div className="history-area">
                     <div className="title">지난 대화기록 보기
                         <Link
                             to="/History"
@@ -290,7 +290,7 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, vendingManage, atte
                             <span className="material-icons-round">arrow_forward</span>
                         </Link>
                     </div>
-                </div> */}
+                </div>
             </div>
             {mobileMenu &&
                 <div className="mobileMenu-area">

@@ -65,10 +65,10 @@ body::after {
     filter: hue-rotate(60deg) brightness(400%) grayscale(70%);
     transform: rotate(0deg);
     mix-blend-mode: soft-light;
-    animation-name: rotateLight;
-    animation-duration: 6s;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+    // animation-name: rotateLight;
+    // animation-duration: 6s;
+    // animation-iteration-count: infinite;
+    // animation-direction: alternate;
   }
   //임시
   .theme-btn {
@@ -143,6 +143,12 @@ body::after {
     justify-content: center;
     align-items: center;
     background-color: $yellow-200;
+    text-align: center;
+    & b{
+      color: $brown-700;
+      font-size: 0.9rem;
+      padding: 5px 0;
+    }
     & p {
       color: $brown-700;
     }
@@ -401,21 +407,22 @@ body::after {
 @media only screen and (max-width: $breakpoint-labtop) {
   #root {
     &::before {
-      display: none !important;
+      //display: none !important;
     }
     & .login-area {
-      background-image: none !important;
-      background: $brown-700 !important;
+      //background-image: none !important;
+      //background: $brown-700 !important;
       padding: 10px;
       & .logo {
         transform: scale(0.5);
         margin: 0;
       }
       & .login-letter {
+        max-width: 400px;
         width: 100%;
         padding: 2rem;
         padding-top: 0.5rem;
-        background: $brown-800 !important;
+        //background: $brown-800 !important;
         & .login-cont-wrap {
           flex-direction: column;
           & .login-txt-wrap {

@@ -5,7 +5,6 @@ import { collection, getDocs, query, onSnapshot, where, orderBy, doc, updateDoc 
 import { Navigate, useNavigate } from "react-router-dom";
 import EditProfile from "./EditProfile";
 import ShowProfile from "./ShowProfile";
-import bg from "../images/테스트_전신.png"
 
 const Profile = ({ refreshUser, userObj, fbUserObj, onHpCheckedChange, nweetObj, userList}) => {
     const auth = getAuth();
@@ -88,9 +87,6 @@ const Profile = ({ refreshUser, userObj, fbUserObj, onHpCheckedChange, nweetObj,
                         />
                     )
                 }
-                <div className="bg-test d-none">
-                    <img src={bg} alt="" />
-                </div>
             </div>
             <div className="profile-btns">
                 {editing ?

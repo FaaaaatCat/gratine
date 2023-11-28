@@ -155,12 +155,18 @@ const AuthForm = ({userObj, refreshUser}) => {
                 {newAccount ? 
                     <>
                         <div className="notice-box">
-                            <p>가입 전, 공지사항을 확인해주세요!</p>
-                            <a href="https://www.naver.com/" target="_blank">▶ 공지사항 바로가기</a>
+                            <b>[ 회원가입 시 유의사항 ]</b>
+                            <p>아이디는 '자유@gratine.com' 으로 생성해주세요.</p>
+                            <p>비밀번호 찾기 기능이 없으므로 기억하기 쉬운 비밀번호로 가입하시는것을 권장합니다.</p>
+                            <p>회원가입 정보는 커뮤엔딩과 함께 모두 삭제됩니다.</p>
                         </div>
                     </> :
                     <>
-                        <div className="login-functions">
+                        <div className="notice-box">
+                            <p>커뮤니티 [그라티네의 정원]의 전용 사이트입니다.</p>
+                            <a href="https://docs.google.com/document/d/1Po3q7xZiM9nLc_9CzYb7xaNNjJLknul85RWugzW5Ljs/edit?usp=sharing" target="_blank">▶ 시스템 문서 바로가기</a>
+                        </div>
+                        {/* <div className="login-functions">
                             <div className="function-item">
                                 <div className="img"></div>
                                 <p>공지사항</p>
@@ -173,18 +179,9 @@ const AuthForm = ({userObj, refreshUser}) => {
                                 <div className="img"></div>
                                 <p>진행계</p>
                             </div>
-                        </div>
+                        </div> */}
                     </>
                 }
-                <div className="ending-ment d-none">
-                    <p>Two O Clock Party will begin </p>
-                    <p className="mt-2"></p>
-                    <p>White garden church </p>
-                    <p>Your Address Insert Here</p>
-                    <p>Country</p>
-                    <div className="signature"></div>
-                    {/* <p>Minerva McGonagall</p> */}
-                </div>
             </div>
         </>
     );

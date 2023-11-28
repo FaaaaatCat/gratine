@@ -175,15 +175,6 @@ body {
         //   linear-gradient(45deg, rgba(0, 0, 0, 0.2) 75%, #000000 75%),
         //   linear-gradient(-45deg, rgba(0, 0, 0, 0.2) 75%, #000000 75%);
       }
-      &::after {
-        content: "";
-        width: 100%;
-        height: 100%;
-        display: block;
-        position: absolute;
-        background-color: rgba(141, 77, 58, 0.712);
-        mix-blend-mode: overlay;
-      }
     }
     @at-root .profile-box__my {
       width: 120px;
@@ -288,7 +279,7 @@ body {
           color: $brown;
         }
         & p {
-          color: $yellow-700;
+          color: $brown-700;
           font-size: 0.7rem;
           white-space: nowrap;
           text-transform: capitalize;
@@ -798,15 +789,15 @@ body {
     }
     &.attend-area {
       flex: 2;
-      &.not-now::after{
-        content: 'open at \A (Dec 13, 00:00)';
+      &.not-now::after {
+        content: "open at \A (Dec 13, 00:00)";
       }
     }
     &.vending-area {
       flex: 4;
       min-width: 348px;
-      &.not-now::after{
-        content: 'open at \A (Dec 12, 22:00)';
+      &.not-now::after {
+        content: "open at \A (Dec 12, 22:00)";
       }
     }
     &.not-now {
@@ -1153,6 +1144,17 @@ body {
     & .chatting-list-container {
       border-radius: $card-radius $card-radius 0 0;
       box-shadow: $card-shadow;
+      & .txt-box {
+        width: 100%;
+        //대량첨부이미지
+        & .imgNums_5, & .imgNums_6 {
+          width: 100%;
+          & img{
+            width: 50px;
+            height: 50px;
+          }
+        }
+      }
     }
     & .chatting-form-box {
       & .tooltip {
