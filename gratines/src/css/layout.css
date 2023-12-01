@@ -354,11 +354,19 @@ body #root .app-container .home-wrap .home-bg::before {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  text-align: center;
   gap: 5px;
   margin-bottom: 5px;
 }
 
 .profile-area .profile-wrap .profile-info .profile-item p {
+  width: 60px;
   white-space: nowrap;
   color: white;
   background-color: #96957E;

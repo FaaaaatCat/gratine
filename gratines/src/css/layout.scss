@@ -293,9 +293,13 @@ body {
       & .profile-item {
         display: flex;
         flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
         gap: 5px;
         margin-bottom: 5px;
         & p {
+          width: 60px;
           white-space: nowrap;
           color: white;
           background-color: $brown-600;
