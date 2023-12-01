@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { dbService, storageService } from '../fbase';
-import { collection, addDoc, query, onSnapshot, orderBy,where, doc, getDocs, updateDoc } from "firebase/firestore";
+import { collection, addDoc, query, onSnapshot, orderBy, where, doc, getDocs, updateDoc } from "firebase/firestore";
+import { getStorage, ref, getMetadata, getDownloadURL   } from "firebase/storage";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import quillImg from '../images/item_quill.png'
 import bookmarkImg from '../images/item_bookmark.png'
@@ -165,22 +166,115 @@ const Vending = ({userObj, fbUserObj, refreshUser}) => {
             }
         }
     }
+    //성장전 오리 데이터 불러오기
+    // const beforeDuck = async () => {
+    //     const q = query(
+    //         collection(storageService, "gratine")
+    //     );
+    //     const querySnapshot = await getDocs(q);
+    //     querySnapshot.forEach((doc) => {
+    //         console.log(doc.id);
+    //         console.log(doc.data());
+    //     });
+    //     console.log(querySnapshot)
+    //     console.log('hi')
+    // }
+    // beforeDuck();\
+    // const testRef = ref(storageService, '/gratine/before_dolls');
+    // getMetadata(testRef)
+    //     .then((metadata) => {
+    //     console.log(metadata)
+    // })
+
+    // getDownloadURL(testRef)
+    //     .then((data) => {
+    //     console.log(data)
+    // })
 
     //오리인형 모음
-    let duck_1 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2Fbears_1.JPG?alt=media&token=940ebd5f-f781-43b1-877e-73b84c4aed53'
-    let duck_2 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2Fbears_2.JPG?alt=media&token=e53820ad-f420-4752-b31b-2df9805348dc'
-    let duck_3 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2Fbears_3.JPG?alt=media&token=6fdf06dc-3de7-4b99-b583-e0889979925b'
-    let duck_4 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2Fbears_4.JPG?alt=media&token=830b5c42-0a8f-4b48-a8d2-b327dbcc9c04'
-    let duck_5 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2Fbears_5.JPG?alt=media&token=389c457b-aa3a-4b39-9c7a-7742fdf02edb'
-    let duck_6 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2Fbears_6.png?alt=media&token=5533f8d1-0a7b-4d90-8010-f3909070b239'
-    let name_1 = 'AA씨'
-    let name_2 = 'BB씨'
-    let name_3 = 'CC씨'
-    let name_4 = 'DD씨'
-    let name_5 = 'EE씨'
-    let name_6 = 'FF씨'
-    let duckList = [duck_1, duck_2, duck_3, duck_4, duck_5, duck_6];
-    let nameList = [name_1, name_2, name_3, name_4, name_5, name_6];
+    let duck_1 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EB%94%94%EB%AF%B8%ED%8A%B8%EB%9D%BC%20%EC%98%A4%EC%8A%A4%EB%A8%BC%EB%93%9C.avif?alt=media&token=4e75935f-5a56-4332-8666-dc3759c21699'
+    let duck_2 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EB%9D%BC%EB%AF%B8%EC%8A%A4%ED%85%94%EB%9D%BC%20%EB%A3%A8%EC%B9%B4%EC%8A%A4.avif?alt=media&token=f9c968ef-fe78-4fac-8c42-f14fb4b1c160'
+    let duck_3 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EB%A1%9C%EB%85%B9%20%EC%97%90%ED%85%8C%EB%B0%80.avif?alt=media&token=3e3c00e9-be82-4a74-b189-ec0509d9f5ed'
+    let duck_4 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EB%A3%A8%EC%9D%B4%EC%8A%A4%20%EC%95%84%EC%84%9C%20%EB%8D%A4%ED%8E%A0%ED%8A%B8.avif?alt=media&token=0b4e1ae3-8193-4dfa-be5f-4ad5c78538bf'
+    let duck_5 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EB%A6%AC%EC%A6%88%EB%B2%A0%EC%8A%A4%20%EC%95%84%ED%83%80%EB%8B%88%EC%95%84.avif?alt=media&token=5f18b9b5-503e-42a3-902d-051d362ea58a'
+    let duck_6 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EB%A9%94%EB%A6%AC%20%EC%A0%9C%EC%9D%B8.avif?alt=media&token=eee2cca2-0ecc-4da0-982f-a021657a9539'
+    let duck_7 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EB%A9%94%EB%AA%A8%EB%A6%AC%EC%A6%88%20A.%EB%9D%BC%EC%9D%B4%ED%84%B0.avif?alt=media&token=d413a94a-46a2-4acf-b9eb-0eb99654bd66'
+    let duck_8 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EB%AF%B8%EC%95%84%20%EC%9D%B4%EC%BC%80%EB%A5%B4%20%ED%9E%90%EB%9D%BC%EB%A6%AC%EC%95%84.avif?alt=media&token=c63ae43b-5e5e-4c7b-ba85-9d1fef7816a1'
+    let duck_9 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EB%B0%94%EB%84%A4%EC%82%AC%20%EC%97%90%EB%B2%84%EA%B7%B8%EB%A6%B0.avif?alt=media&token=f3ce0911-171a-4d3a-9f40-5d996f04e602'
+    let duck_10 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EB%B0%9C%EB%A0%88%EB%A6%AC%EC%95%88%20%EB%A9%94%EC%9D%B4%EB%84%88%EB%93%9C.avif?alt=media&token=952c0bd7-ba23-4035-a9c3-e124bffd2b10'
+    let duck_11 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EB%B3%B4%EB%82%98%20%ED%8F%AC%EB%A5%B4%ED%85%8C.avif?alt=media&token=6aacb560-8d7c-4749-af42-71bed42a1718'
+    let duck_12 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EB%B9%84%EB%B9%84%EC%95%88.avif?alt=media&token=90006d2f-1c8a-445d-86cf-cbf4300d3a3c'
+    let duck_13 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EB%B9%85%EC%8A%A4%20%ED%8A%B8%EB%A0%88%EB%B0%98.avif?alt=media&token=03ced03b-9d0c-4bc8-85f8-9a96e29c15e3'
+    let duck_14 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EC%83%A4%EB%A5%BC%20%EC%95%84%EB%B2%A0%EB%8A%90.avif?alt=media&token=969f3925-19eb-4df8-9a83-ee3bb7bd604f'
+    let duck_15 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EC%84%B8%EB%A6%AC%EC%97%98%EB%9D%BC%20%EB%A1%9C%EB%B0%94%EB%85%B8%EC%9B%80.avif?alt=media&token=628c5c75-0d58-4c1c-bf88-382030f2a59a'
+    let duck_16 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EC%84%B8%EC%9D%B4%EB%94%94%20%EC%BC%88%EB%9F%AC.avif?alt=media&token=411b8fe8-99b0-4bd2-a933-e82a1911f55a'
+    let duck_17 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EC%8B%A0%EB%94%94%20%EB%A7%88%EB%A5%B4%ED%8B%B0%EB%84%A4%EC%A6%88.avif?alt=media&token=42e1f4de-5c1a-4769-be0b-9859d1edf28a'
+    let duck_18 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EC%95%84%EC%9D%B4%EA%B2%90%EA%B7%B8%EB%9D%BC%EC%9A%B0%20%ED%8F%B0%20%ED%97%A4%EC%84%BC.avif?alt=media&token=ef6c95c7-14ea-4a43-af93-c6e0fcf09282'
+    let duck_19 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EC%95%84%EC%9D%B4%EC%83%A4%20%EC%97%90%EC%9D%B4%EB%B8%8C%EB%A6%B4.avif?alt=media&token=4557346d-6665-43cf-8a17-ffd5625f70b2'
+    let duck_20 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EC%95%A0%EC%8A%88%EC%95%84%20%ED%9C%B4%20%EC%97%90%EC%8A%A4%ED%85%8C%EB%A5%B4.avif?alt=media&token=38f00a6d-1204-481e-aefd-05115a78cb86'
+    let duck_21 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EC%97%90%EB%93%9C%EA%B0%80%20%EA%B7%B8%EB%A6%B0.avif?alt=media&token=b95192f5-8be7-4871-9717-2f5fcef776c2'
+    let duck_22 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EC%97%90%EC%95%84%EB%A5%B4%20%ED%8F%AC%EB%A5%B4%EC%9C%A0.avif?alt=media&token=bd4902a1-450c-4315-a8f4-8499023cd80c'
+    let duck_23 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EC%97%90%EC%A0%80-%EB%9D%BC%EB%AA%AC%ED%8A%B8%20%ED%85%8C%EC%9D%BC%EB%9F%AC.avif?alt=media&token=e61c62e5-9e0f-4e71-af06-aad81bbc16b6'
+    let duck_24 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EC%97%98%EC%8B%9C%20%EC%BD%94%ED%95%84%EB%93%9C.avif?alt=media&token=37d53217-2ad0-4446-8470-d657698aca76'
+    let duck_25 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EC%98%A4%EC%A6%88%20%ED%83%80%EB%84%A4%EC%8B%9C%EC%95%84.avif?alt=media&token=745466f4-5601-4d84-bf7b-b3a8af23edb9'
+    let duck_26 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EC%9A%B8%ED%8E%98%EC%8B%9C%EC%B9%B4%20%EB%9D%BC%EC%BC%80%EB%AC%B4%EC%95%84%EC%8A%A4.avif?alt=media&token=04df774e-60d9-4d8b-8b67-152a6e0a71fa'
+    let duck_27 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EC%9C%88%ED%84%B0%20%EB%A3%A8%20%EB%B8%94%EB%A0%8C.avif?alt=media&token=bb6eedb7-4451-4adc-a9f8-b3f34ecce4f7'
+    let duck_28 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EC%BA%A3%20%EC%95%84%EB%AA%A8%EB%A5%B4%20%EC%84%B8%EB%A5%B4%ED%94%BC%EC%95%88%ED%85%8C.avif?alt=media&token=12878fe3-425b-4fe8-bbda-6691d351de9a'
+    let duck_29 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EC%BC%80%EC%9D%BC%EB%9F%BD%20%EC%97%98%EB%8D%B4%EB%B2%84%EA%B7%B8.avif?alt=media&token=f0d15b29-94ad-4b91-b0b3-10347a8cd1dd'
+    let duck_30 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%ED%8C%8C%EB%A9%9C%EB%9D%BC%20%EB%A7%88%EB%A5%B4%EC%8B%9C%EC%95%84.avif?alt=media&token=502a2781-3c6d-48d2-a2cc-d47646970886'
+    let duck_31 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%ED%8E%A0%EB%A6%AD%EC%8A%A4%20%EC%9C%84%EB%B2%84.avif?alt=media&token=2beef115-a689-4d20-87e9-db3daf028969'
+    let duck_32 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%ED%9E%88%EC%B9%B4%EB%A5%B4%EB%8F%84.avif?alt=media&token=38d3c667-cb2b-4d9a-a33c-3dddabfdb53f'
+    
+    let name_1 = '디미트라'
+    let name_2 = '라미스텔라'
+    let name_3 = '로녹'
+    let name_4 = '루이스'
+    let name_5 = '리즈베스'
+    let name_6 = '메리'
+    let name_7 = '메모리즈'
+    let name_8 = '미아'
+    let name_9 = '바네사'
+    let name_10 = '발레리안'
+    let name_11 = '보나'
+    let name_12 = '비비안'
+    let name_13 = '빅스'
+    let name_14 = '샤를'
+    let name_15 = '세리엘라'
+    let name_16 = '세이디'
+    let name_17 = '신디'
+    let name_18 = '아이겐그라우'
+    let name_19 = '아이샤'
+    let name_20 = '애슈아'
+    let name_21 = '에드가'
+    let name_22 = '에아르'
+    let name_23 = '에저-라몬트'
+    let name_24 = '엘시'
+    let name_25 = '오즈'
+    let name_26 = '울페시카'
+    let name_27 = '윈터'
+    let name_28 = '캣'
+    let name_29 = '케일럽'
+    let name_30 = '파멜라'
+    let name_31 = '펠릭스'
+    let name_32 = '히카르도'
+    let duckList = [
+        duck_1, duck_2, duck_3, duck_4, duck_5,
+        duck_6, duck_7, duck_8, duck_9, duck_10,
+        duck_11, duck_12, duck_13, duck_14, duck_15,
+        duck_16, duck_17, duck_18, duck_19, duck_20,
+        duck_21, duck_22, duck_23, duck_24, duck_25,
+        duck_26, duck_27, duck_28, duck_29, duck_30,
+        duck_31, duck_32
+    ];
+    let nameList = [
+        name_1, name_2, name_3, name_4, name_5,
+        name_6, name_7, name_8, name_9, name_10,
+        name_11, name_12, name_13, name_14, name_15,
+        name_16, name_17, name_18, name_19, name_20,
+        name_21, name_22, name_23, name_24, name_25,
+        name_26, name_27, name_28, name_29, name_30,
+        name_31, name_32
+    ];
 
     //인형(랜덤)구매 기능
     const doBuyDolls = async (e) => {
