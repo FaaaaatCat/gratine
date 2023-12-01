@@ -121,7 +121,7 @@ const Vending = ({userObj, fbUserObj, refreshUser}) => {
                 let diceNum;
                 switch (itemName) {
                     case '매직 에그':
-                        buyMention = `[구매완료] ${itemName}(${itemPrice})을 구매했습니다. \n남은 소지금 : ${fbUserObj.gold - extractedNumber} Gold / 구매일자 : ${todayfull}\n\n아래 14개의 색상 중 총 5개를 선택해 진행계DM으로 알려주세요.\n색상종류 : 빨강, 주황, 노랑, 초록, 파랑, 남색, 보라, 흰색, 검은색, 민트, 분홍, 은색, 금색, 갈색`
+                        buyMention = `[구매완료] ${itemName}(${itemPrice})을 구매했습니다. \n남은 소지금 : ${fbUserObj.gold - extractedNumber} Gold / 구매일자 : ${todayfull}\n\n아래 14개의 색상 중 총 5개를 선택해 진행계DM으로 보내주세요.\n색상종류 : 빨강, 주황, 노랑, 초록, 파랑, 남색, 보라, 흰색, 검은색, 민트, 분홍, 은색, 금색, 갈색`
                         break;
                     case '예언의 쿠키':
                         var random_index = Math.floor(Math.random() * fortuneList.length);
@@ -136,7 +136,11 @@ const Vending = ({userObj, fbUserObj, refreshUser}) => {
                         break;
                     case '행운의 돌':
                         diceNum = Math.ceil(Math.random() * (10 - 1) + 1)
-                        buyMention = `세계수의 힘으로 화분이 ${diceNum} 만큼 추가로 성장할것 같습니다...!\n(운영진에게 해당 화면을 찍어 DM 보내주세요) \n\n[구매완료] ${itemName}(${itemPrice})을 구매했습니다. \n남은 소지금 : ${fbUserObj.gold - extractedNumber} Gold / 구매일자 : ${todayfull}`
+                        buyMention = `세계수의 힘으로 화분이 ${diceNum} 만큼 추가로 성장할것 같습니다...!\n(본 내용의 스크린샷을 찍어 진행계DM으로 보내주세요) \n\n[구매완료] ${itemName}(${itemPrice})을 구매했습니다. \n남은 소지금 : ${fbUserObj.gold - extractedNumber} Gold / 구매일자 : ${todayfull}`
+                        break;
+                    case '1일 가판대':
+                        diceNum = Math.ceil(Math.random() * (10 - 1) + 1)
+                        buyMention = `하루 동안 내가 팔고 싶은 물건을 마음대로 팔 수 있는 가판대를 구매했습니다. \n아래 4개의 내용을 진행계 DM으로 보내주세요.\n(*주의사항이 많으니 상점문서를 필수로 읽어주시기 바랍니다.) \n\n 1. 희망하는 상점 개점 시간 \n 2. 판매할 물품 \n 3. 가격 \n 4. 총괄 측의 일일 상점 홍보지 지원 여부 \n\n[구매완료] ${itemName}(${itemPrice})을 구매했습니다. \n남은 소지금 : ${fbUserObj.gold - extractedNumber} Gold / 구매일자 : ${todayfull}`
                         break;
                     default:
                         buyMention = `[구매완료] ${itemName}(${itemPrice})을 구매했습니다. \n남은 소지금 : ${fbUserObj.gold - extractedNumber} Gold / 구매일자 : ${todayfull}`

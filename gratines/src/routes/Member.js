@@ -219,7 +219,7 @@ const Member = ({ isLoggedIn, fbUserObj, userObj, loginUsers, vendingManage, att
         let attachmentUrl_5 = eggList[numbers[4]];
 
         const buyMention = `[매직에그] 금주의 매직에그를 발표합니다. \n당첨 에그 : ${colorList[[numbers[0]]]}, ${colorList[[numbers[1]]]}, ${colorList[[numbers[2]]]}, ${colorList[[numbers[3]]]}, ${colorList[[numbers[4]]]},
-        \n당첨자 분들은 당첨주 주말 내로 진행계DM으로 당첨사실을 알려주세요! \n(당첨주 주말이 지나면 보상이 사라집니다)
+        \n당첨자 분들은 진행계 DM으로 오시면 보상을 드립니다! \n(※당첨 주 주말이 지나면 보상이 사라지니 주의해 주세요)
         \n3등(총 3개 정답): 300G\n2등(총 4개 정답): 500G\n1등(총 5개 정답): 1500G
         \n발표일자 : ${todayfull}`
         const buyNweetObj = {

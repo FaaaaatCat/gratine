@@ -1023,7 +1023,7 @@ body #root .app-container .home-wrap .home-bg::before {
 }
 
 .side-area > div.attend-area.not-now::after {
-  content: "open at \A (Dec 13, 00:00)";
+  content: "Opening Soon";
 }
 
 .side-area > div.vending-area {
@@ -1034,10 +1034,11 @@ body #root .app-container .home-wrap .home-bg::before {
 }
 
 .side-area > div.vending-area.not-now::after {
-  content: "open at \A (Dec 12, 22:00)";
+  content: "Opening Soon";
 }
 
 .side-area > div.not-now {
+  overflow: hidden;
   position: relative;
 }
 
@@ -1050,7 +1051,7 @@ body #root .app-container .home-wrap .home-bg::before {
   bottom: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(190, 190, 181, 0.8);
+  background-color: rgba(169, 169, 162, 0.8);
   -webkit-backdrop-filter: blur(5px);
           backdrop-filter: blur(5px);
   display: -webkit-box;

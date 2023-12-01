@@ -268,7 +268,7 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, vendingManage, atte
                     <div className="title">상점
                         <span className="info-wrap">
                             <div className="info-btn"
-                                onClick={() => { window.open('https://docs.google.com/document/d/1XAY2QgPkd3CiMfJeXDBkkA0VxvMBpapsXfLpWeKR9tw/edit', '_blank'); }}
+                                onClick={() => { window.open('https://docs.google.com/document/d/1XAY2QgPkd3CiMfJeXDBkkA0VxvMBpapsXfLpWeKR9tw/edit?usp=sharing', '_blank'); }}
                             >
                                 <span className="material-icons-round">info</span>
                             </div>
