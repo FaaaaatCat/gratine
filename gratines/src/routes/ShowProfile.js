@@ -46,7 +46,7 @@ const ShowProfile = ({userObj, refreshUser, fbUserObj, onToggleChange}) => {
                     <p>소지금</p>
                     <div>
                         <b>{fbUserObj.gold}</b>
-                        <span> Gold</span>
+                        <span> G</span>
                     </div>
                 </div>
                 <div className="profile-item">

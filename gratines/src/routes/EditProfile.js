@@ -123,7 +123,7 @@ const EditProfile = ({ refreshUser, userObj, fbUserObj }) => {
                     type="text"
                     placeholder="닉네임을 적어주세요"
                 />
-                <div className="label">소지금(Gold)</div>
+                <div className="label">소지금(G)</div>
                 <input
                     type="number"
                     className="gtn-input"
