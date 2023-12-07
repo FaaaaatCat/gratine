@@ -467,12 +467,26 @@ body #root .app-container .home-wrap .home-bg::before {
 
 .chatting-area .chatting-list-area {
   height: calc(100% - 48px);
-  overflow: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  overflow-y: auto;
+  -ms-flex-wrap: wrap-reverse;
+      flex-wrap: wrap-reverse;
 }
 
 .chatting-area .chatting-list-area .height-wrap {
   height: 3000px;
   overflow: hidden;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
 }
 
 .chatting-list-container {

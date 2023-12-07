@@ -363,14 +363,38 @@ body {
     display: none;
   }
   //채팅 보이는 영역
+  // & .chatting-list-area{
+  //   height: calc(100% - 48px);
+  //   overflow-y:auto;
+  //   // display: flex;
+  //   // align-items: flex-end;
+  //   & .height-wrap{
+  //     height: 3000px;
+  //     overflow: hidden;
+  //     & .chatting-list-container{
+  //       overflow-y: auto !important;
+  //     }
+  //   }
+  // }
   & .chatting-list-area{
     height: calc(100% - 48px);
-    overflow:auto;
+    display: flex;
+    align-items: flex-end;
+    overflow-y:auto;
+    flex-wrap: wrap-reverse;
     & .height-wrap{
       height: 3000px;
       overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      & .chatting-list-container{
+      }
     }
   }
+
+
+
+
   @at-root .chatting-list-container {
     flex: 1;
     background-color: $brown-200;
