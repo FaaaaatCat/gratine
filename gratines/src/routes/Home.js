@@ -195,25 +195,29 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, vendingManage, atte
                         <span className="material-icons-round">menu</span>
                     </button>
                 </div>
-                <div className="chatting-list-container">
-                    {nweets.map((nweet) => ( //map은 for과 유사함. 배열안의 값들을 다 불러와주는 기능 / 지금으로썬, nweets 배열안의 데이터(doc.id / doc.data())를 다 불러옴
-                        <Nweet
-                            key={nweet.id}
-                            nweetObj={nweet} //id, createdAt, text 등 생성한 값 갖고있음
-                            isOwner={nweet.creatorId === userObj.uid} //내가 실제 주인인지 //맞으면 true 값 뱉음
-                            isOrder={nweet.orderText !== ""}
-                            orderText={nweet.orderText}
-                            orderWhat={nweet.orderWhat}
-                            isWhole={nweet.orderWhat === "/전체"}
-                            isDice={nweet.orderWhat === "/주사위" && orderList.includes(nweet.orderText)}
-                            isAttack={nweet.orderWhat === "/공격" && userList.includes(nweet.orderText)}
-                            isCure={nweet.orderWhat === "/치유" && userList.includes(nweet.orderText)}
-                            isHpRest={nweet.orderWhat === "/체력리셋"}
-                            isBuy={nweet.buy === true}
-                            hpValue={hpValue}
-                            enemyHp={enemyHp}
-                        />
-                    ))}
+                <div className="chatting-list-area">
+                    <div className="height-wrap">
+                        <div className="chatting-list-container">
+                            {nweets.map((nweet) => ( //map은 for과 유사함. 배열안의 값들을 다 불러와주는 기능 / 지금으로썬, nweets 배열안의 데이터(doc.id / doc.data())를 다 불러옴
+                                <Nweet
+                                    key={nweet.id}
+                                    nweetObj={nweet} //id, createdAt, text 등 생성한 값 갖고있음
+                                    isOwner={nweet.creatorId === userObj.uid} //내가 실제 주인인지 //맞으면 true 값 뱉음
+                                    isOrder={nweet.orderText !== ""}
+                                    orderText={nweet.orderText}
+                                    orderWhat={nweet.orderWhat}
+                                    isWhole={nweet.orderWhat === "/전체"}
+                                    isDice={nweet.orderWhat === "/주사위" && orderList.includes(nweet.orderText)}
+                                    isAttack={nweet.orderWhat === "/공격" && userList.includes(nweet.orderText)}
+                                    isCure={nweet.orderWhat === "/치유" && userList.includes(nweet.orderText)}
+                                    isHpRest={nweet.orderWhat === "/체력리셋"}
+                                    isBuy={nweet.buy === true}
+                                    hpValue={hpValue}
+                                    enemyHp={enemyHp}
+                                />
+                            ))}
+                        </div>
+                    </div>
                 </div>
                 <div className="chatting-form-box">
                     <NweetFactory

@@ -212,7 +212,7 @@ const Vending = ({userObj, fbUserObj, refreshUser}) => {
     let duck_18 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EC%95%84%EC%9D%B4%EA%B2%90%EA%B7%B8%EB%9D%BC%EC%9A%B0%20%ED%8F%B0%20%ED%97%A4%EC%84%BC.avif?alt=media&token=ef6c95c7-14ea-4a43-af93-c6e0fcf09282'
     let duck_19 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EC%95%84%EC%9D%B4%EC%83%A4%20%EC%97%90%EC%9D%B4%EB%B8%8C%EB%A6%B4.avif?alt=media&token=4557346d-6665-43cf-8a17-ffd5625f70b2'
     let duck_20 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EC%95%A0%EC%8A%88%EC%95%84%20%ED%9C%B4%20%EC%97%90%EC%8A%A4%ED%85%8C%EB%A5%B4.avif?alt=media&token=38f00a6d-1204-481e-aefd-05115a78cb86'
-    let duck_21 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EC%97%90%EB%93%9C%EA%B0%80%20%EA%B7%B8%EB%A6%B0.avif?alt=media&token=b95192f5-8be7-4871-9717-2f5fcef776c2'
+    //let duck_21 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EC%97%90%EB%93%9C%EA%B0%80%20%EA%B7%B8%EB%A6%B0.avif?alt=media&token=b95192f5-8be7-4871-9717-2f5fcef776c2'
     let duck_22 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EC%97%90%EC%95%84%EB%A5%B4%20%ED%8F%AC%EB%A5%B4%EC%9C%A0.avif?alt=media&token=bd4902a1-450c-4315-a8f4-8499023cd80c'
     let duck_23 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EC%97%90%EC%A0%80-%EB%9D%BC%EB%AA%AC%ED%8A%B8%20%ED%85%8C%EC%9D%BC%EB%9F%AC.avif?alt=media&token=e61c62e5-9e0f-4e71-af06-aad81bbc16b6'
     let duck_24 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EC%97%98%EC%8B%9C%20%EC%BD%94%ED%95%84%EB%93%9C.avif?alt=media&token=37d53217-2ad0-4446-8470-d657698aca76'
@@ -245,7 +245,7 @@ const Vending = ({userObj, fbUserObj, refreshUser}) => {
     let name_18 = '아이겐그라우'
     let name_19 = '아이샤'
     let name_20 = '애슈아'
-    let name_21 = '에드가'
+    //let name_21 = '에드가'
     let name_22 = '에아르'
     let name_23 = '에저-라몬트'
     let name_24 = '엘시'
@@ -262,7 +262,7 @@ const Vending = ({userObj, fbUserObj, refreshUser}) => {
         duck_6, duck_7, duck_8, duck_9, duck_10,
         duck_11, duck_12, duck_13, duck_14, duck_15,
         duck_16, duck_17, duck_18, duck_19, duck_20,
-        duck_21, duck_22, duck_23, duck_24, duck_25,
+        duck_22, duck_23, duck_24, duck_25,
         duck_26, duck_27, duck_28, duck_29, duck_30,
         duck_31, duck_32
     ];
@@ -271,7 +271,7 @@ const Vending = ({userObj, fbUserObj, refreshUser}) => {
         name_6, name_7, name_8, name_9, name_10,
         name_11, name_12, name_13, name_14, name_15,
         name_16, name_17, name_18, name_19, name_20,
-        name_21, name_22, name_23, name_24, name_25,
+        name_22, name_23, name_24, name_25,
         name_26, name_27, name_28, name_29, name_30,
         name_31, name_32
     ];

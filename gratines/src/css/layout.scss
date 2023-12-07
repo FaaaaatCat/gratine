@@ -75,6 +75,7 @@ body {
           overflow: hidden !important;
           & .chatting-list-container {
             overflow-y: auto;
+            //max-height: ;
           }
         }
         //사이드 영역
@@ -362,6 +363,14 @@ body {
     display: none;
   }
   //채팅 보이는 영역
+  & .chatting-list-area{
+    height: calc(100% - 48px);
+    overflow:auto;
+    & .height-wrap{
+      height: 3000px;
+      overflow: hidden;
+    }
+  }
   @at-root .chatting-list-container {
     flex: 1;
     background-color: $brown-200;

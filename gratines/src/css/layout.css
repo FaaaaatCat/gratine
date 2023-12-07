@@ -465,6 +465,16 @@ body #root .app-container .home-wrap .home-bg::before {
   display: none;
 }
 
+.chatting-area .chatting-list-area {
+  height: calc(100% - 48px);
+  overflow: auto;
+}
+
+.chatting-area .chatting-list-area .height-wrap {
+  height: 3000px;
+  overflow: hidden;
+}
+
 .chatting-list-container {
   -webkit-box-flex: 1;
       -ms-flex: 1;
@@ -1593,3 +1603,4 @@ body #root .app-container .home-wrap .home-bg::before {
     color: #ADAC9A;
   }
 }
+/*# sourceMappingURL=layout.css.map */
