@@ -197,7 +197,7 @@ const Vending = ({userObj, fbUserObj, refreshUser}) => {
     let duck_3 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EB%A1%9C%EB%85%B9%20%EC%97%90%ED%85%8C%EB%B0%80.avif?alt=media&token=3e3c00e9-be82-4a74-b189-ec0509d9f5ed'
     let duck_4 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EB%A3%A8%EC%9D%B4%EC%8A%A4%20%EC%95%84%EC%84%9C%20%EB%8D%A4%ED%8E%A0%ED%8A%B8.avif?alt=media&token=0b4e1ae3-8193-4dfa-be5f-4ad5c78538bf'
     let duck_5 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EB%A6%AC%EC%A6%88%EB%B2%A0%EC%8A%A4%20%EC%95%84%ED%83%80%EB%8B%88%EC%95%84.avif?alt=media&token=5f18b9b5-503e-42a3-902d-051d362ea58a'
-    let duck_6 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EB%A9%94%EB%A6%AC%20%EC%A0%9C%EC%9D%B8.avif?alt=media&token=eee2cca2-0ecc-4da0-982f-a021657a9539'
+    //let duck_6 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EB%A9%94%EB%A6%AC%20%EC%A0%9C%EC%9D%B8.avif?alt=media&token=eee2cca2-0ecc-4da0-982f-a021657a9539'
     let duck_7 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EB%A9%94%EB%AA%A8%EB%A6%AC%EC%A6%88%20A.%EB%9D%BC%EC%9D%B4%ED%84%B0.avif?alt=media&token=d413a94a-46a2-4acf-b9eb-0eb99654bd66'
     let duck_8 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EB%AF%B8%EC%95%84%20%EC%9D%B4%EC%BC%80%EB%A5%B4%20%ED%9E%90%EB%9D%BC%EB%A6%AC%EC%95%84.avif?alt=media&token=c63ae43b-5e5e-4c7b-ba85-9d1fef7816a1'
     let duck_9 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EB%B0%94%EB%84%A4%EC%82%AC%20%EC%97%90%EB%B2%84%EA%B7%B8%EB%A6%B0.avif?alt=media&token=f3ce0911-171a-4d3a-9f40-5d996f04e602'
@@ -230,7 +230,7 @@ const Vending = ({userObj, fbUserObj, refreshUser}) => {
     let name_3 = '로녹'
     let name_4 = '루이스'
     let name_5 = '리즈베스'
-    let name_6 = '메리'
+    //let name_6 = '메리'
     let name_7 = '메모리즈'
     let name_8 = '미아'
     let name_9 = '바네사'
@@ -259,7 +259,7 @@ const Vending = ({userObj, fbUserObj, refreshUser}) => {
     let name_32 = '히카르도'
     let duckList = [
         duck_1, duck_2, duck_3, duck_4, duck_5,
-        duck_6, duck_7, duck_8, duck_9, duck_10,
+        duck_7, duck_8, duck_9, duck_10,
         duck_11, duck_12, duck_13, duck_14, duck_15,
         duck_16, duck_17, duck_18, duck_19, duck_20,
         duck_22, duck_23, duck_24, duck_25,
@@ -268,7 +268,7 @@ const Vending = ({userObj, fbUserObj, refreshUser}) => {
     ];
     let nameList = [
         name_1, name_2, name_3, name_4, name_5,
-        name_6, name_7, name_8, name_9, name_10,
+        name_7, name_8, name_9, name_10,
         name_11, name_12, name_13, name_14, name_15,
         name_16, name_17, name_18, name_19, name_20,
         name_22, name_23, name_24, name_25,
