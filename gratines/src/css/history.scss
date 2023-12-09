@@ -39,6 +39,9 @@
       overflow-y: auto;
       box-shadow: $card-strong-shadow;
       background-color: $brown-200;
+      & .chatting-list-container{
+        flex-direction: column !important;
+      }
     }
   }
 }

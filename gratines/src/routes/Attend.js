@@ -52,7 +52,8 @@ const Attend = ({ fbUserObj, userObj, refreshUser }) => {
             const UserGameData_Total = Number(UserGameData.totalAttend.integerValue);
             const UserGameData_AttendCount = Number(UserGameData.attendCount.integerValue);
             const UserGameData_Gold = Number(UserGameData.gold.integerValue);
-            let attendRanNum = Math.ceil(Math.random() * (15 - 5) + 5);
+            //let attendRanNum = Math.ceil(Math.random() * (15 - 5) + 5);
+            let attendRanNum = 15;
             let attendGold = 100;
             const ok = window.confirm(`출석 완료! ${attendGold}G를 드립니다.`);
             if (ok) {

@@ -362,20 +362,6 @@ body {
   & .mobile-header {
     display: none;
   }
-  //채팅 보이는 영역
-  // & .chatting-list-area{
-  //   height: calc(100% - 48px);
-  //   overflow-y:auto;
-  //   // display: flex;
-  //   // align-items: flex-end;
-  //   & .height-wrap{
-  //     height: 3000px;
-  //     overflow: hidden;
-  //     & .chatting-list-container{
-  //       overflow-y: auto !important;
-  //     }
-  //   }
-  // }
   & .chatting-list-area{
     height: calc(100% - 48px);
     display: flex;
@@ -387,8 +373,6 @@ body {
       overflow: hidden;
       display: flex;
       align-items: flex-end;
-      & .chatting-list-container{
-      }
     }
   }
 
