@@ -11,6 +11,7 @@ import Vending from "./Vending";
 import Attend from "./Attend";
 import plantImg from '../images/plant.png'
 import light from '../images/후광.png'
+import duckImg from '../images/item_doll1.png'
 
 const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, vendingManage, attendManage}) => {
     const auth = getAuth();
@@ -252,12 +253,12 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, vendingManage, atte
                             </div>
                             <div className={'info-box ' + (infoView? '':'d-none')}>
                                 <div className="img-wrap">
-                                    <img src={plantImg} alt="" />
+                                    <img src={duckImg} alt="" />
                                     <img src={light} alt="" />
                                 </div>
                                 <p>
                                     출석시 5~15 사이의 랜덤 경험치를 생성합니다.<br />
-                                    경험치를 모아 화분을 완성해보세요.
+                                    경험치를 모아 오틀의 선물을 받아보세요.
                                 </p>
                             </div>
                         </span>

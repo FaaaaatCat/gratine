@@ -103,7 +103,7 @@ const Attend = ({ fbUserObj, userObj, refreshUser }) => {
                     styles={{
                         path: {
                             // stroke: `rgba(102, 234, 218, ${percentage / 100})`,
-                            stroke: '#44D9C7',
+                            stroke: '#625bd3',
                             strokeLinecap: 'round', //butt
                             transition: 'stroke-dashoffset 0.5s ease 0s',
                             transformOrigin: 'center center',

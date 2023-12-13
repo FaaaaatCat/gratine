@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { dbService, storageService } from '../fbase';
 import { getAuth, onAuthStateChanged, reauthenticateWithCredential, EmailAuthProvider, deleteUser } from "firebase/auth";
-import { collection, onSnapshot, addDoc, deleteDoc, query, orderBy, where, doc, getDocs, updateDoc} from "firebase/firestore";
+import { collection, onSnapshot, writeBatch, addDoc, deleteDoc, query, orderBy, where, doc, getDocs, updateDoc} from "firebase/firestore";
 import { Navigate, useNavigate } from "react-router-dom";
 import Modal from 'react-modal';
 Modal.setAppElement('#root');
@@ -161,6 +161,25 @@ const Member = ({ isLoggedIn, fbUserObj, userObj, loginUsers, vendingManage, att
             attending: false
         })
         closeSecondManage();
+    }
+    //출석리셋기능
+    const batch = writeBatch(dbService);
+    const doAttendingReset = async () => {
+        const q = query(
+            collection(dbService, "user")
+        );
+        const querySnapshot = await getDocs(q);
+        const wholeUserIdArray = querySnapshot.docs.map(item => item.id);
+        for (let i = 0; i < wholeUserIdArray.length; i++){
+            const userRef = doc(dbService, "user", wholeUserIdArray[i]);
+            batch.update(userRef, {
+                "attendCount": 0,
+                "attendRanNum": 0,
+                "totalAttend": 0,
+                "attendDate":"",
+            });
+        }
+        await batch.commit();
     }
 
 
@@ -375,6 +394,12 @@ const Member = ({ isLoggedIn, fbUserObj, userObj, loginUsers, vendingManage, att
                             className={'gtn-btn flx-row gap-2 w-unset ' + (attendManage? 'btn-white':'btn-yellow')}
                             
                         >출석 닫기</button>
+                        <button
+                            onClick={() => doAttendingReset()}
+                            className={'gtn-btn flx-row gap-2 w-unset btn-white'}
+                            style={{ color: 'red' }}
+                            
+                        >*출석 리셋</button>
                     </div>
                 </div>
                 <div className="modal-btn">

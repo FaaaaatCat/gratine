@@ -418,7 +418,7 @@ const NweetFactory = ({ userObj, fbUserObj, loginUsers, refreshUser}) => {
                             </div> */}
                             <div className="function-list">
                                 <b>/공격 @유저이름</b>
-                                <p>@유저에게 1~40사이 데미지 부과</p>
+                                <p>@유저에게 1~40사이 대미지 부과</p>
                             </div>
                             <div className="function-list">
                                 <b>/치유 @유저이름</b>

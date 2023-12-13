@@ -63,8 +63,7 @@
 
 .history-page .history-wrap .log-wrap .chatting-list-container {
   -webkit-box-orient: vertical !important;
-  -webkit-box-direction: normal !important;
-      -ms-flex-direction: column !important;
-          flex-direction: column !important;
+  -webkit-box-direction: reverse !important;
+      -ms-flex-direction: column-reverse !important;
+          flex-direction: column-reverse !important;
 }
-/*# sourceMappingURL=history.css.map */

@@ -3,7 +3,7 @@ import AuthForm from "components/AuthForm";
 import sunShine from "../images/lensFlare.jpg"
 
 const Auth = ({ userObj, refreshUser, fbUserObj }) => {
-    const [theme, setTheme] = useState('theme-spring');
+    const [theme, setTheme] = useState('theme-wood');
     const changeTheme = (e) => {
         e.preventDefault();
         const selectedTheme = 'theme-' + e.target.innerHTML

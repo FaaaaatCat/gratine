@@ -475,11 +475,23 @@ body::after {
 }
 
 #root .app-container .login-area.theme-wood {
-  background-image: url("https://images.unsplash.com/photo-1426170042593-200f250dfdaf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80");
+  background-image: url("https://images.unsplash.com/photo-1513297887119-d46091b24bfa?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+  -webkit-animation-name: tiltDown;
+          animation-name: tiltDown;
+  -webkit-animation-duration: 100s;
+          animation-duration: 100s;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-direction: alternate;
+          animation-direction: alternate;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
 }
 
 #root .app-container .login-area.theme-wood .login-letter {
-  background-color: #352d22;
+  background-color: #052126ba;
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
   border-radius: 10px;
   -webkit-box-shadow: 0rem 0.47rem 2.19rem rgba(8, 10, 37, 0.02), 0rem 0.94rem 1.41rem rgba(8, 10, 37, 0.02), 0rem 0.25rem 0.53rem rgba(8, 10, 37, 0.04), 0rem 0.13rem 0.19rem rgba(8, 10, 37, 0.02);
           box-shadow: 0rem 0.47rem 2.19rem rgba(8, 10, 37, 0.02), 0rem 0.94rem 1.41rem rgba(8, 10, 37, 0.02), 0rem 0.25rem 0.53rem rgba(8, 10, 37, 0.04), 0rem 0.13rem 0.19rem rgba(8, 10, 37, 0.02);
@@ -495,8 +507,8 @@ body::after {
   height: 140px;
   background-repeat: none;
   background-size: contain;
-  -webkit-filter: invert(24%) sepia(9%) saturate(6371%) hue-rotate(23deg) brightness(150%) contrast(89%);
-          filter: invert(24%) sepia(9%) saturate(6371%) hue-rotate(23deg) brightness(150%) contrast(89%);
+  -webkit-filter: invert(24%) sepia(9%) saturate(6371%) hue-rotate(23deg) brightness(200%) contrast(89%);
+          filter: invert(24%) sepia(9%) saturate(6371%) hue-rotate(23deg) brightness(200%) contrast(89%);
   opacity: 0.5;
 }
 
@@ -601,4 +613,3 @@ body::after {
     display: none;
   }
 }
-/*# sourceMappingURL=login.css.map */

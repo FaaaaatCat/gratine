@@ -33,7 +33,7 @@ body #root {
   min-height: -webkit-fill-available;
   min-height: -moz-available;
   min-height: fill-available;
-  background: linear-gradient(34deg, #D3D3C9 10%, #F2F1EE 35%, transparent 50%, #E2E2DC 70%), url(https://grainy-gradients.vercel.app/noise.svg);
+  background: linear-gradient(34deg, #d8d7e7 10%, #f8f8fa 35%, transparent 50%, #e9e8f1 70%), url(https://grainy-gradients.vercel.app/noise.svg);
 }
 
 body #root::before {
@@ -42,7 +42,7 @@ body #root::before {
   bottom: 0.5rem;
   right: 0.5rem;
   color: #505118;
-  background-color: #F2F1EE;
+  background-color: #f8f8fa;
   padding: 0 5px;
   border-radius: 100px;
 }
@@ -98,7 +98,7 @@ body #root .app-container .home-wrap .home-bg {
 body #root .app-container .home-wrap .home-bg::after {
   content: "Gratines Garden";
   font-family: "Pinyon Script", cursive;
-  background: -webkit-linear-gradient(120deg, white, #D3D3C9);
+  background: -webkit-linear-gradient(120deg, white, #d8d7e7);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   white-space: nowrap;
@@ -114,7 +114,7 @@ body #root .app-container .home-wrap .home-bg::after {
 body #root .app-container .home-wrap .home-bg::before {
   content: "Gratines Garden long story telling";
   font-family: "Pinyon Script", cursive;
-  background: -webkit-linear-gradient(white, #ADAC9A);
+  background: -webkit-linear-gradient(white, #8a88af);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   white-space: nowrap;
@@ -206,7 +206,7 @@ body #root .app-container .home-wrap .home-bg::before {
 .profile-box__my {
   width: 120px;
   height: 120px;
-  background-color: #F2F1EE;
+  background-color: #f8f8fa;
   border: 1px solid white;
   -webkit-box-shadow: 0rem 0.47rem 2.19rem rgba(37, 8, 8, 0.06), 0rem 0.94rem 1.41rem rgba(37, 8, 8, 0.06), 0rem 0.25rem 0.53rem rgba(37, 8, 8, 0.1), 0rem 0.13rem 0.19rem rgba(37, 8, 8, 0.06);
           box-shadow: 0rem 0.47rem 2.19rem rgba(37, 8, 8, 0.06), 0rem 0.94rem 1.41rem rgba(37, 8, 8, 0.06), 0rem 0.25rem 0.53rem rgba(37, 8, 8, 0.1), 0rem 0.13rem 0.19rem rgba(37, 8, 8, 0.06);
@@ -269,9 +269,9 @@ body #root .app-container .home-wrap .home-bg::before {
 }
 
 .profile-area .profile-wrap .nameplate {
-  background-color: #D3D3C9;
+  background-color: #d8d7e7;
   background: linear-gradient(-45deg, #d2c8be 0%, #e9e7e5 30%, #f7f5f3 40%, #e9e7e5 50%, #d2c8be 70%, lightgray 100%);
-  background: linear-gradient(-45deg, #C4C3B6 0%, #E2E2DC 30%, #F2F1EE 40%, #D3D3C9, #C4C3B6, #dad7e3 100%);
+  background: linear-gradient(-45deg, #b2b0cb 0%, #e9e8f1 30%, #f8f8fa 40%, #d8d7e7, #b2b0cb, #dad7e3 100%);
   border: 1px solid white;
   border-radius: 0 10px 0 10px;
   -webkit-box-shadow: 0rem 0.47rem 2.19rem rgba(37, 8, 8, 0.06), 0rem 0.94rem 1.41rem rgba(37, 8, 8, 0.06), 0rem 0.25rem 0.53rem rgba(37, 8, 8, 0.1), 0rem 0.13rem 0.19rem rgba(37, 8, 8, 0.06);
@@ -296,6 +296,8 @@ body #root .app-container .home-wrap .home-bg::before {
 .profile-area .profile-wrap .nameplate img {
   width: 32px;
   height: 30px;
+  -webkit-filter: drop-shadow(0px 1px 5px #00000037);
+          filter: drop-shadow(0px 1px 5px #00000037);
 }
 
 .profile-area .profile-wrap .nameplate img:last-child {
@@ -325,11 +327,11 @@ body #root .app-container .home-wrap .home-bg::before {
 
 .profile-area .profile-wrap .nameplate .name-wrap h4 {
   font-size: 1.2rem;
-  color: #674738;
+  color: #625bd3;
 }
 
 .profile-area .profile-wrap .nameplate .name-wrap p {
-  color: #73725D;
+  color: #4f4d73;
   font-size: 0.7rem;
   white-space: nowrap;
   text-transform: capitalize;
@@ -369,17 +371,17 @@ body #root .app-container .home-wrap .home-bg::before {
   width: 60px;
   white-space: nowrap;
   color: white;
-  background-color: #96957E;
+  background-color: #6c699b;
   border-radius: 100px;
   padding: 0.1rem 0.4rem;
 }
 
 .profile-area .profile-wrap .profile-info .profile-item b {
-  color: #4D4D3F;
+  color: #33324a;
 }
 
 .profile-area .profile-wrap .profile-info .profile-item span {
-  color: #73725D;
+  color: #4f4d73;
 }
 
 .profile-area .profile-wrap .profile-info .profile-item div {
@@ -425,7 +427,7 @@ body #root .app-container .home-wrap .home-bg::before {
 
 .profile-area .profile-wrap .profile-detail-wrap .label .side-function span {
   opacity: 0.8;
-  color: #007663;
+  color: #625bd3;
 }
 
 .profile-area .profile-wrap .profile-detail-wrap .gtn-btn {
@@ -493,7 +495,7 @@ body #root .app-container .home-wrap .home-bg::before {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
-  background-color: #E2E2DC;
+  background-color: #e9e8f1;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -505,7 +507,7 @@ body #root .app-container .home-wrap .home-bg::before {
 
 .chatting-list-container .chatting-list {
   background-color: #f8f7f5;
-  border-bottom: 1px solid #D3D3C9;
+  border-bottom: 1px solid #d8d7e7;
   padding: 0.3rem;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -514,8 +516,8 @@ body #root .app-container .home-wrap .home-bg::before {
 }
 
 .chatting-list-container .chatting-list.myChat {
-  background-color: #E3F0E1;
-  border-bottom: 1px solid #CDE4C6;
+  background-color: #e9e8f1;
+  border-bottom: 1px solid #d8d7e7;
 }
 
 .chatting-list-container .chatting-list.wholeChat {
@@ -524,19 +526,19 @@ body #root .app-container .home-wrap .home-bg::before {
 }
 
 .chatting-list-container .chatting-list.wholeChat * {
-  color: #73725D !important;
+  color: #4f4d73 !important;
   line-height: 1.3rem;
 }
 
 .chatting-list-container .chatting-list.orderChat {
-  background-color: #CDE4C6 !important;
-  border-top: 1px solid #A7D1A0;
-  border-bottom: 2px solid #A7D1A0;
+  background-color: #d8d7e7 !important;
+  border-top: 1px solid #b2b0cb;
+  border-bottom: 2px solid #b2b0cb;
   padding: 0.3rem 0.8rem;
 }
 
 .chatting-list-container .chatting-list.buyChat {
-  background-color: #E2E2DC;
+  background-color: #e9e8f1;
 }
 
 .chatting-list-container .chatting-list.buyChat .hpValue {
@@ -567,19 +569,19 @@ body #root .app-container .home-wrap .home-bg::before {
 
 .chatting-list-container .chatting-list.wholeChat p span, .chatting-list-container .chatting-list.orderChat p span {
   margin: 0 5px;
-  color: #007663;
+  color: #625bd3;
 }
 
 .chatting-list-container .chatting-list.wholeChat p b, .chatting-list-container .chatting-list.orderChat p b {
   display: inline-block !important;
   font-weight: 900 !important;
   font-size: 0.8rem;
-  color: #007663;
-  background-color: #F6FAF3;
+  color: #625bd3;
+  background-color: #f8f8fa;
   margin: 0 5px;
   padding: 2px 8px 2px 5px;
   border-radius: 100px;
-  color: #007663 !important;
+  color: #625bd3 !important;
 }
 
 .chatting-list-container .chatting-list.wholeChat img, .chatting-list-container .chatting-list.orderChat img {
@@ -590,7 +592,7 @@ body #root .app-container .home-wrap .home-bg::before {
   width: 20px;
   height: 20px;
   border-radius: 100px;
-  background-color: #96957E;
+  background-color: #6c699b;
   opacity: 0.85;
   position: absolute;
   top: 5px;
@@ -608,15 +610,15 @@ body #root .app-container .home-wrap .home-bg::before {
 
 .chatting-list-container .chatting-list.wholeChat button span, .chatting-list-container .chatting-list.orderChat button span {
   font-size: 14px;
-  color: #E2E2DC !important;
+  color: #e9e8f1 !important;
 }
 
 .chatting-list-container .chatting-list.wholeChat button:hover, .chatting-list-container .chatting-list.orderChat button:hover {
-  background-color: #73725D;
+  background-color: #4f4d73;
 }
 
 .chatting-list-container .chatting-list .profile-box {
-  background-color: #ADAC9A;
+  background-color: #8a88af;
   width: 28px;
   height: 28px;
   border-radius: 200px;
@@ -666,8 +668,8 @@ body #root .app-container .home-wrap .home-bg::before {
 }
 
 .chatting-list-container .chatting-list .txt-box .name-box .hpValue {
-  background-color: #E2E2DC;
-  color: #674738;
+  background-color: #e9e8f1;
+  color: #625bd3;
   padding: 0 8px;
   border-radius: 100px;
   font-size: 0.7rem;
@@ -677,7 +679,7 @@ body #root .app-container .home-wrap .home-bg::before {
 .chatting-list-container .chatting-list .txt-box b {
   font-size: 11px;
   font-weight: 500;
-  color: #73725D;
+  color: #4f4d73;
 }
 
 .chatting-list-container .chatting-list .txt-box pre {
@@ -687,7 +689,7 @@ body #root .app-container .home-wrap .home-bg::before {
   font-size: 14px;
   line-height: 150%;
   font-weight: 400;
-  color: #313128;
+  color: #171622;
 }
 
 .chatting-list-container .chatting-list .txt-box img {
@@ -696,7 +698,7 @@ body #root .app-container .home-wrap .home-bg::before {
   max-height: 140px;
   -o-object-fit: scale-down;
      object-fit: scale-down;
-  border: 1px solid #E2E2DC;
+  border: 1px solid #e9e8f1;
   background-color: white;
   border-radius: 10px;
   cursor: pointer;
@@ -705,7 +707,7 @@ body #root .app-container .home-wrap .home-bg::before {
 .chatting-list-container .chatting-list .txt-box .imgNums_5 img {
   width: 100px;
   height: 100px;
-  background: #E2E2DC;
+  background: #e9e8f1;
 }
 
 .chatting-list-container .chatting-list .txt-box .imgNums_6 img {
@@ -732,7 +734,7 @@ body #root .app-container .home-wrap .home-bg::before {
 }
 
 .chatting-area .chatting-form-box {
-  background-color: #4D4D3F;
+  background-color: #33324a;
   padding: 0.5rem;
 }
 
@@ -750,7 +752,7 @@ body #root .app-container .home-wrap .home-bg::before {
   margin-left: 10px;
   padding: 0.2rem 0.5rem;
   font-family: "Pretendard";
-  background-color: #E2E2DC;
+  background-color: #e9e8f1;
   padding: 0.5rem;
   border-radius: 4px;
   -webkit-transition: all 0.2s;
@@ -760,7 +762,7 @@ body #root .app-container .home-wrap .home-bg::before {
 .chatting-area .chatting-form-box .img-thumb-area button:hover {
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
-  background-color: #C4C3B6;
+  background-color: #b2b0cb;
 }
 
 .chatting-area .chatting-form-box form {
@@ -820,7 +822,7 @@ body #root .app-container .home-wrap .home-bg::before {
   bottom: calc(100% + 1rem);
   left: 0;
   right: 0.3rem;
-  background-color: #4D4D3F;
+  background-color: #33324a;
   padding: 0.5rem;
   border-radius: 4px;
   -webkit-box-shadow: 1.5px 1.5px 4.5px rgba(29, 12, 23, 0.18);
@@ -834,7 +836,7 @@ body #root .app-container .home-wrap .home-bg::before {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
-  border-right: 1px solid #73725D;
+  border-right: 1px solid #4f4d73;
   padding-right: 1rem;
   margin-right: 1rem;
 }
@@ -845,7 +847,7 @@ body #root .app-container .home-wrap .home-bg::before {
 }
 
 .chatting-area .chatting-form-box form .tooltip .function-list-container .title {
-  color: #ADAC9A;
+  color: #8a88af;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -858,12 +860,12 @@ body #root .app-container .home-wrap .home-bg::before {
 }
 
 .chatting-area .chatting-form-box form .tooltip .function-list-container .title span {
-  color: #ADAC9A;
+  color: #8a88af;
   font-size: 0.8rem;
 }
 
 .chatting-area .chatting-form-box form .tooltip .function-list-container .warning {
-  background-color: #313128;
+  background-color: #171622;
   color: pink;
   padding: 0.5rem;
   border-radius: 4px;
@@ -890,7 +892,7 @@ body #root .app-container .home-wrap .home-bg::before {
 
 .chatting-area .chatting-form-box form .tooltip .function-list-container .function-list p {
   font-weight: 200;
-  color: #C4C3B6;
+  color: #b2b0cb;
 }
 
 .chatting-area .chatting-form-box form .autoComplete {
@@ -904,12 +906,12 @@ body #root .app-container .home-wrap .home-bg::before {
   max-height: 200px;
   overflow-y: auto;
   padding: 5px;
-  background: #313128;
+  background: #171622;
 }
 
 .chatting-area .chatting-form-box form .autoComplete > li {
-  background: #313128;
-  color: #ADAC9A;
+  background: #171622;
+  color: #8a88af;
   padding: 0.3rem 0.6rem;
   border-radius: 4px;
 }
@@ -950,7 +952,7 @@ body #root .app-container .home-wrap .home-bg::before {
   padding: 0.6rem;
   font-size: 1rem;
   font-weight: 700;
-  color: #4D4D3F;
+  color: #33324a;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -974,8 +976,8 @@ body #root .app-container .home-wrap .home-bg::before {
 }
 
 .side-area > div .title .info-wrap .info-box {
-  background: -webkit-gradient(linear, left bottom, left top, from(#ADAC9A), color-stop(50%, #C4C3B6), to(#D3D3C9));
-  background: linear-gradient(0deg, #ADAC9A 0%, #C4C3B6 50%, #D3D3C9 100%);
+  background: -webkit-gradient(linear, left bottom, left top, from(#8a88af), color-stop(50%, #b2b0cb), to(#d8d7e7));
+  background: linear-gradient(0deg, #8a88af 0%, #b2b0cb 50%, #d8d7e7 100%);
   border-top: 1px solid white;
   padding: 0.5rem;
   position: absolute;
@@ -1030,7 +1032,7 @@ body #root .app-container .home-wrap .home-bg::before {
 }
 
 .side-area > div .title .info-wrap .info-box p {
-  background-color: #96957E;
+  background-color: #6c699b;
   z-index: 20;
   line-height: 1.4rem;
   font-size: 0.9rem;
@@ -1083,7 +1085,7 @@ body #root .app-container .home-wrap .home-bg::before {
   bottom: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(169, 169, 162, 0.8);
+  background-color: rgba(162, 162, 169, 0.8);
   -webkit-backdrop-filter: blur(5px);
           backdrop-filter: blur(5px);
   display: -webkit-box;
@@ -1158,7 +1160,7 @@ body #root .app-container .home-wrap .home-bg::before {
   font-size: 0.7rem;
   font-weight: 400;
   line-height: 1;
-  color: #73725D;
+  color: #4f4d73;
   width: 110%;
   overflow: hidden;
   white-space: nowrap;
@@ -1179,7 +1181,7 @@ body #root .app-container .home-wrap .home-bg::before {
   border-radius: 8px;
   -webkit-box-shadow: 0rem 0.47rem 2.19rem rgba(8, 10, 37, 0.02), 0rem 0.94rem 1.41rem rgba(8, 10, 37, 0.02), 0rem 0.25rem 0.53rem rgba(8, 10, 37, 0.04), 0rem 0.13rem 0.19rem rgba(8, 10, 37, 0.02);
           box-shadow: 0rem 0.47rem 2.19rem rgba(8, 10, 37, 0.02), 0rem 0.94rem 1.41rem rgba(8, 10, 37, 0.02), 0rem 0.25rem 0.53rem rgba(8, 10, 37, 0.04), 0rem 0.13rem 0.19rem rgba(8, 10, 37, 0.02);
-  border: 1px solid #E2E2DC;
+  border: 1px solid #e9e8f1;
   width: 100px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1213,7 +1215,7 @@ body #root .app-container .home-wrap .home-bg::before {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  color: #674738;
+  color: #625bd3;
   font-size: 1rem;
   font-weight: 800;
   opacity: 0;
@@ -1226,7 +1228,7 @@ body #root .app-container .home-wrap .home-bg::before {
 
 .side-area .vending-area .vending-list-container .vending-item.soldOut::after {
   background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, #edeae6 100%);
-  color: #ADAC9A;
+  color: #8a88af;
   font-weight: 400;
   font-size: 0.9rem;
   cursor: not-allowed !important;
@@ -1240,7 +1242,7 @@ body #root .app-container .home-wrap .home-bg::before {
   left: 0px;
   padding: 2px 5px;
   border-radius: 0 0 5px 0;
-  background-color: #E3F0E1;
+  background-color: #e9e8f1;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1250,7 +1252,7 @@ body #root .app-container .home-wrap .home-bg::before {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  color: #007663;
+  color: #625bd3;
   font-weight: 600;
   font-size: 0.7rem;
 }
@@ -1258,7 +1260,7 @@ body #root .app-container .home-wrap .home-bg::before {
 .side-area .vending-area .vending-list-container .vending-item .img-box {
   width: 100%;
   height: 100px;
-  border-bottom: 1px solid #D3D3C9;
+  border-bottom: 1px solid #d8d7e7;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1300,8 +1302,9 @@ body #root .app-container .home-wrap .home-bg::before {
   text-align: center;
   font-size: 0.7rem;
   font-weight: 400;
-  line-height: 1;
-  color: #73725D;
+  line-height: 14px;
+  color: #4f4d73;
+  height: 14px;
   width: 100%;
   overflow: hidden;
   white-space: normal;
@@ -1313,7 +1316,7 @@ body #root .app-container .home-wrap .home-bg::before {
 }
 
 .side-area .vending-area .vending-list-container .vending-item .txt-box span {
-  background-color: #674738;
+  background-color: #625bd3;
   color: white;
   border-radius: 100px;
   text-align: center;
@@ -1361,7 +1364,7 @@ body #root .app-container .home-wrap .home-bg::before {
   position: absolute !important;
   z-index: 10;
   font-size: 20px;
-  fill: #007663;
+  fill: #625bd3;
   font-weight: 800;
 }
 
@@ -1392,8 +1395,8 @@ body #root .app-container .home-wrap .home-bg::before {
 }
 
 .side-area .attend-area .attend-info .btn-disable {
-  background: #E2E2DC !important;
-  color: #ADAC9A !important;
+  background: #e9e8f1 !important;
+  color: #8a88af !important;
   cursor: auto !important;
 }
 
@@ -1403,7 +1406,7 @@ body #root .app-container .home-wrap .home-bg::before {
 }
 
 .side-area .attend-area .attend-info b {
-  color: #007663;
+  color: #625bd3;
   font-size: 1.4rem;
   margin-right: 5px;
   font-weight: 700;
@@ -1535,7 +1538,7 @@ body #root .app-container .home-wrap .home-bg::before {
     gap: 10px;
     padding: 0 0.5rem;
     height: 40px;
-    border-bottom: 1px solid #ADAC9A;
+    border-bottom: 1px solid #8a88af;
     font-size: 1rem;
     font-weight: bold;
   }
@@ -1605,16 +1608,15 @@ body #root .app-container .home-wrap .home-bg::before {
     gap: 10px;
     font-size: 0.9rem;
     font-weight: 800;
-    border-bottom: 1px solid #E2E2DC;
+    border-bottom: 1px solid #e9e8f1;
   }
   .mobileMenu-area .menu-wrap .menu-item-wrap .menu-item:nth-of-type(1) .material-icons-round {
     color: #C2C43E;
   }
   .mobileMenu-area .menu-wrap .menu-item-wrap .menu-item:nth-of-type(2) .material-icons-round {
-    color: #6EB06D;
+    color: #8a88af;
   }
   .mobileMenu-area .menu-wrap .menu-item-wrap .menu-item:nth-of-type(3) .material-icons-round {
-    color: #ADAC9A;
+    color: #8a88af;
   }
 }
-/*# sourceMappingURL=layout.css.map */

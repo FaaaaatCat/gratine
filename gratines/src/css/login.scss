@@ -4,7 +4,7 @@
 // 1. lens Flare, 2. springBg, 3. autumBg, 4. Frame
 $url_1: "https://static.vecteezy.com/system/resources/thumbnails/007/128/160/original/lens-flare-bright-afternoon-sun-with-lens-flare-lens-flare-transition-light-effect-lens-flare-effect-on-black-background-light-streaks-lights-optical-lens-flares-free-video.jpg";
 $url_2: "https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2FspringBackground2.avif?alt=media&token=c423004b-139e-4768-afea-0c0e0682580d";
-$url_3: "https://images.unsplash.com/photo-1426170042593-200f250dfdaf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80";
+$url_3: "https://images.unsplash.com/photo-1513297887119-d46091b24bfa?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
 $url_4: "https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fframe.png?alt=media&token=88efe3ab-2819-4c38-a0df-f911263bc059";
 
 //이미지 미리 로딩
@@ -347,8 +347,14 @@ body::after {
   }
   &.theme-wood {
     background-image: url($url_3);
+    animation-name: tiltDown;
+    animation-duration: 100s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: linear;
     & .login-letter {
-      background-color: #352d22;
+      background-color: #052126ba;
+      backdrop-filter: blur(10px);
       border-radius: 10px;
       box-shadow: $card-shadow;
       & div[class*="frame-"] {
@@ -361,7 +367,7 @@ body::after {
         background-repeat: none;
         background-size: contain;
         filter: invert(24%) sepia(9%) saturate(6371%) hue-rotate(23deg)
-          brightness(150%) contrast(89%);
+          brightness(200%) contrast(89%);
         opacity: 0.5;
       }
       & .login-cont-wrap {

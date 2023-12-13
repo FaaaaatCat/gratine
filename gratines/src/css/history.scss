@@ -40,7 +40,7 @@
       box-shadow: $card-strong-shadow;
       background-color: $brown-200;
       & .chatting-list-container{
-        flex-direction: column !important;
+        flex-direction: column-reverse !important;
       }
     }
   }

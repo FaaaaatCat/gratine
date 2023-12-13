@@ -94,16 +94,16 @@ const Nweet = ({ nweetObj, isOwner, isOrder, orderWhat, orderText, isWhole, isDi
                             {isDice && <p>[🎲주사위 {nweetObj.orderText}] <span>{nweetObj.creatorName}</span>님이 주사위 <b>{nweetObj.diceNum}</b>을 굴렸습니다. </p>}
                             {isAttack && <>
                                 {fullVic &&
-                                    <p>[🔪🔪🔪공격 최고성공!!]<span>{nweetObj.creatorName}</span>님이 <span>{nweetObj.orderText}</span>님을 진심을 담아 공격합니다!<b>{nweetObj.diceNum}</b> 어마어마한 데미지가 들어갔습니다!</p>
+                                    <p>[🔪🔪🔪공격 최고성공!!]<span>{nweetObj.creatorName}</span>님이 <span>{nweetObj.orderText}</span>님을 진심을 담아 공격합니다!<b>{nweetObj.diceNum}</b> 어마어마한 대미지가 들어갔습니다!</p>
                                 }
                                 {bigVic &&
-                                    <p>[🔪🔪공격 대성공!]<span>{nweetObj.creatorName}</span>님이 <span>{nweetObj.orderText}</span>님을 공격합니다!<b>{nweetObj.diceNum}</b> 크리티컬 데미지가 들어갔습니다!</p>
+                                    <p>[🔪🔪공격 대성공!]<span>{nweetObj.creatorName}</span>님이 <span>{nweetObj.orderText}</span>님을 공격합니다!<b>{nweetObj.diceNum}</b> 크리티컬 대미지가 들어갔습니다!</p>
                                 }
                                 {middleVic &&
-                                    <p>[🔪공격]<span>{nweetObj.creatorName}</span>님이 <span>{nweetObj.orderText}</span>님을 공격합니다.<b>{nweetObj.diceNum}</b>데미지가 들어갔습니다.</p>
+                                    <p>[🔪공격]<span>{nweetObj.creatorName}</span>님이 <span>{nweetObj.orderText}</span>님을 공격합니다.<b>{nweetObj.diceNum}</b>대미지가 들어갔습니다.</p>
                                 }
                                 {smallVic &&
-                                    <p>[🔪공격..?]<span>{nweetObj.creatorName}</span>님이 <span>{nweetObj.orderText}</span>님을 공격했습니다만...<b>{nweetObj.diceNum}</b>데미지가 잔잔하게 스쳤습니다.</p>
+                                    <p>[🔪공격..?]<span>{nweetObj.creatorName}</span>님이 <span>{nweetObj.orderText}</span>님을 공격했습니다만...<b>{nweetObj.diceNum}</b>대미지가 잔잔하게 스쳤습니다.</p>
                                 }
                                 {/* <p>[ <span>{nweetObj.creatorName}</span> : {nweetObj.hp} ] vs [ <span>{nweetObj.orderText}</span> : {enemyHp} ]</p> */}
                             </>

@@ -74,6 +74,16 @@
   transition: all 0.2s;
 }
 
+.gtn-btn.btn-disable {
+  opacity: 0.3;
+}
+
+.gtn-btn.btn-disable:hover {
+  -webkit-filter: none !important;
+          filter: none !important;
+  cursor: auto;
+}
+
 .gtn-btn.btn-icon-only {
   width: 32px;
   height: 32px;
@@ -96,7 +106,7 @@
 }
 
 .gtn-btn.btn-mint {
-  background-color: #007663;
+  background-color: #625bd3;
   color: white;
 }
 
@@ -202,8 +212,8 @@
 }
 
 #root .gtn-toggle input[type="checkbox"]:checked {
-  background-color: #007663;
-  border-color: #007663;
+  background-color: #625bd3;
+  border-color: #625bd3;
 }
 
 #root .gtn-toggle input[type="checkbox"]:checked::before {
@@ -433,4 +443,3 @@
 .ReactModalPortal .modal__member .modal-body .profile-info .info-item p {
   color: #73725D;
 }
-/*# sourceMappingURL=form.css.map */

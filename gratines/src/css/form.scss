@@ -58,6 +58,13 @@
     font-weight: 600;
     @include hoverEffect();
     @include formFont();
+    &.btn-disable{
+      opacity: 0.3;
+      &:hover{
+        filter: none !important;
+        cursor: auto;
+      }
+    }
     &.btn-icon-only {
       width: $form-height;
       height: $form-height;
@@ -80,7 +87,7 @@
       color: $brown;
     }
     &.btn-mint {
-      background-color: $mint;
+      background-color: $purple;
       color: white;
     }
     &.btn-white {

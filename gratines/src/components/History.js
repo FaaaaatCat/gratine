@@ -15,7 +15,7 @@ const History = () => {
     useEffect(() => {
         const q = query(
             collection(dbService, "nweets"),
-            orderBy("createdAt", "asc")
+            orderBy("createdAt", "desc")
         );
         const unsubscribe = onSnapshot(q, (Snapshot) => {
             const nweetArray = Snapshot.docs.map((doc) => {
@@ -47,7 +47,8 @@ const History = () => {
 
     //페이지 넘기는 기능
     const data = nweets;
-    const ITEMS_PER_PAGE = selectedOption;
+    // const ITEMS_PER_PAGE = selectedOption;
+    const ITEMS_PER_PAGE = 200;
     const [currentPage, setCurrentPage] = useState(1);
     const totalPages = Math.ceil(data.length / ITEMS_PER_PAGE);
     const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
@@ -68,7 +69,7 @@ const History = () => {
                         <button
                             disabled={currentPage === 1}
                             onClick={() => handlePageChange(currentPage - 1)}
-                            className="gtn-btn btn-icon-only"
+                            className = {`gtn-btn btn-icon-only ${currentPage === 1 ? 'btn-disable' : ''}`}
                         >
                             <span className="material-icons-round">chevron_left</span>
                         </button>
@@ -76,17 +77,31 @@ const History = () => {
                         <button
                             disabled={currentPage === totalPages}
                             onClick={() => handlePageChange(currentPage + 1)}
-                            className="gtn-btn btn-icon-only"
+                            className = {`gtn-btn btn-icon-only ${currentPage === totalPages ? 'btn-disable' : ''}`}
                         >
                             <span className="material-icons-round">chevron_right</span>
                         </button>
-                        <select className="gtn-select ml-auto" value={selectedOption} onChange={handleOptionChange}>
+                        <div className="flx-row gap-1 ml-auto">
+                            <button
+                                onClick={() => handlePageChange(1)}
+                                className = {`gtn-btn btn-white w-unset ${currentPage === 1 ? 'btn-disable' : ''}`}
+                            >
+                                first
+                            </button>
+                            <button
+                                onClick={() => handlePageChange(totalPages)}
+                                className = {`gtn-btn btn-white w-unset ${currentPage === totalPages ? 'btn-disable' : ''}`}
+                            >
+                                last
+                            </button>
+                        </div>
+                        {/* <select className="gtn-select ml-auto" value={selectedOption} onChange={handleOptionChange}>
                             {options.map((option) => (
                             <option key={option.value} value={option.value}>
                                 {option.label}
                             </option>
                             ))}
-                        </select>
+                        </select> */}
                     </div>
                 </div>
                 
