@@ -269,8 +269,7 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, vendingManage, atte
                         refreshUser={refreshUser}
                     />
                 </div>
-                {/* <div className={'vending-area ' + (vendingManage? '':'not-now')}> */}
-                <div className={'vending-area '}>
+                <div className={'vending-area ' + (vendingManage? '':'not-now')}>
                     <div className="title">상점
                         <span className="info-wrap">
                             <div className="info-btn"
