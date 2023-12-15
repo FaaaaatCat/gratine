@@ -11,6 +11,8 @@ import diamondImg from '../images/item_diamond.png'
 import storeImg from '../images/item_store.png'
 import duckImg from '../images/item_doll1.png'
 import ducksImg from '../images/item_doll2.png'
+import nuiImg from '../images/item_doll3.png'
+import nuisImg from '../images/item_doll4.png'
 import magiceggImg from '../images/item_magicegg.png'
 import pochunImg from '../images/item_fortune.png'
 import Modal from 'react-modal';
@@ -137,7 +139,7 @@ const Vending = ({userObj, fbUserObj, refreshUser}) => {
                         break;
                     case '행운의 돌':
                         diceNum = Math.ceil(Math.random() * (10 - 1) + 1)
-                        buyMention = `세계수의 힘으로 화분이 ${diceNum} 만큼 추가로 성장할것 같습니다...!\n(본 내용의 스크린샷을 찍어 진행계DM으로 보내주세요) \n\n[구매완료] ${itemName}(${itemPrice})을 구매했습니다. \n남은 소지금 : ${fbUserObj.gold - extractedNumber} G / 구매일자 : ${todayfull}`
+                        buyMention = `오틀의 호감도가 ${diceNum} 만큼 추가로 오른 것 같습니다...!\n(본 내용의 스크린샷을 찍어 진행계DM으로 보내주세요) \n\n[구매완료] ${itemName}(${itemPrice})을 구매했습니다. \n남은 소지금 : ${fbUserObj.gold - extractedNumber} G / 구매일자 : ${todayfull}`
                         break;
                     case '1일 가판대':
                         diceNum = Math.ceil(Math.random() * (10 - 1) + 1)
@@ -214,7 +216,7 @@ const Vending = ({userObj, fbUserObj, refreshUser}) => {
     let duck_20 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EC%95%A0%EC%8A%88%EC%95%84%20%ED%9C%B4%20%EC%97%90%EC%8A%A4%ED%85%8C%EB%A5%B4.avif?alt=media&token=38f00a6d-1204-481e-aefd-05115a78cb86'
     //let duck_21 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EC%97%90%EB%93%9C%EA%B0%80%20%EA%B7%B8%EB%A6%B0.avif?alt=media&token=b95192f5-8be7-4871-9717-2f5fcef776c2'
     let duck_22 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EC%97%90%EC%95%84%EB%A5%B4%20%ED%8F%AC%EB%A5%B4%EC%9C%A0.avif?alt=media&token=bd4902a1-450c-4315-a8f4-8499023cd80c'
-    let duck_23 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EC%97%90%EC%A0%80-%EB%9D%BC%EB%AA%AC%ED%8A%B8%20%ED%85%8C%EC%9D%BC%EB%9F%AC.avif?alt=media&token=e61c62e5-9e0f-4e71-af06-aad81bbc16b6'
+    //let duck_23 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EC%97%90%EC%A0%80-%EB%9D%BC%EB%AA%AC%ED%8A%B8%20%ED%85%8C%EC%9D%BC%EB%9F%AC.avif?alt=media&token=e61c62e5-9e0f-4e71-af06-aad81bbc16b6'
     let duck_24 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EC%97%98%EC%8B%9C%20%EC%BD%94%ED%95%84%EB%93%9C.avif?alt=media&token=37d53217-2ad0-4446-8470-d657698aca76'
     let duck_25 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EC%98%A4%EC%A6%88%20%ED%83%80%EB%84%A4%EC%8B%9C%EC%95%84.avif?alt=media&token=745466f4-5601-4d84-bf7b-b3a8af23edb9'
     let duck_26 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%EC%9A%B8%ED%8E%98%EC%8B%9C%EC%B9%B4%20%EB%9D%BC%EC%BC%80%EB%AC%B4%EC%95%84%EC%8A%A4.avif?alt=media&token=04df774e-60d9-4d8b-8b67-152a6e0a71fa'
@@ -225,6 +227,40 @@ const Vending = ({userObj, fbUserObj, refreshUser}) => {
     let duck_31 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%ED%8E%A0%EB%A6%AD%EC%8A%A4%20%EC%9C%84%EB%B2%84.avif?alt=media&token=2beef115-a689-4d20-87e9-db3daf028969'
     let duck_32 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fbefore_dolls%2F%ED%9E%88%EC%B9%B4%EB%A5%B4%EB%8F%84.avif?alt=media&token=38d3c667-cb2b-4d9a-a33c-3dddabfdb53f'
     
+    //누이인형 모음
+    let nui_1 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fafter_dolls%2F%EB%94%94%EB%AF%B8%ED%8A%B8%EB%9D%BC.avif?alt=media&token=c3a3d754-8216-492c-9c74-00b09666f502'
+    let nui_2 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fafter_dolls%2F%EB%9D%BC%EB%AF%B8%EC%8A%A4%ED%85%94%EB%9D%BC.avif?alt=media&token=b1db73d2-dccb-4d29-938a-40c0a6c7dbd0'
+    let nui_3 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fafter_dolls%2F%EB%A1%9C%EB%85%B9.avif?alt=media&token=125a0297-f074-49e2-95a8-fa1484004a05'
+    let nui_4 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fafter_dolls%2F%EB%A3%A8%EC%9D%B4%EC%8A%A4.avif?alt=media&token=8f8f71e8-0ea9-4dda-b723-4afcddd44dae'
+    let nui_5 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fafter_dolls%2F%EB%A6%AC%EC%A6%88%EB%B2%A0%EC%8A%A4.avif?alt=media&token=c45d29a9-7e69-4be7-a329-3d2ff00b6817'
+    //let nui_6 = '메리'
+    let nui_7 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fafter_dolls%2F%EB%A9%94%EB%AA%A8%EB%A6%AC%EC%A6%88.avif?alt=media&token=7a6eabdb-3198-45db-8b54-143520c655e6'
+    let nui_8 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fafter_dolls%2F%EB%AF%B8%EC%95%84.avif?alt=media&token=3fd4a55a-bdac-431f-999b-369d8fbdaf87'
+    let nui_9 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fafter_dolls%2F%EB%B0%94%EB%84%A4%EC%82%AC.avif?alt=media&token=b71aa028-fc54-4c11-b48c-3fbf7812fce6'
+    let nui_10 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fafter_dolls%2F%EB%B0%9C%EB%A0%88%EB%A6%AC%EC%95%88.avif?alt=media&token=3cb7f7c4-f2c4-4958-83cb-70a1feac4e4c'
+    let nui_11 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fafter_dolls%2F%EB%B3%B4%EB%82%98.avif?alt=media&token=c61ee386-2774-4a90-b3b9-0c3143c5d18c'
+    let nui_12 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fafter_dolls%2F%EB%B9%84%EB%B9%84%EC%95%88.avif?alt=media&token=92a5975d-f8c3-4fc2-aa32-247df93cc71a'
+    let nui_13 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fafter_dolls%2F%EB%B9%85%EC%8A%A4.avif?alt=media&token=85f3db44-22e4-47e5-bb03-026564d22eae'
+    let nui_14 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fafter_dolls%2F%EC%83%A4%EB%A5%BC.avif?alt=media&token=2fc2dd2b-26e3-498b-890d-4db621289538'
+    let nui_15 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fafter_dolls%2F%EC%84%B8%EB%A6%AC%EC%97%98%EB%9D%BC.avif?alt=media&token=a323ddf5-2261-48da-9e24-9fcca63c851d'
+    let nui_16 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fafter_dolls%2F%EC%84%B8%EC%9D%B4%EB%94%94.avif?alt=media&token=1da5e665-6819-4d6e-8ca0-fddc2111f2a8'
+    let nui_17 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fafter_dolls%2F%EC%8B%A0%EB%94%94.avif?alt=media&token=1c1b92eb-5ae2-4d02-8e8e-a02cfe54606a'
+    let nui_18 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fafter_dolls%2F%EC%95%84%EC%9D%B4%EA%B2%90.avif?alt=media&token=635f70f9-fc7d-4efa-99a0-c3dc308bc3f2'
+    let nui_19 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fafter_dolls%2F%EC%95%84%EC%9D%B4%EC%83%A4.avif?alt=media&token=354683a9-29f6-41ef-b225-dec9da17dbbb'
+    let nui_20 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fafter_dolls%2F%EC%95%A0%EC%8A%88%EC%95%84.avif?alt=media&token=c9268fc2-003a-4559-8e95-b6d043a1c27c'
+    //let nui_21 = '에드가'
+    let nui_22 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fafter_dolls%2F%EC%97%90%EC%95%84%EB%A5%B4.avif?alt=media&token=59961209-18f0-4258-900a-6ab7f51b6373'
+    //let nui_23 = '에저-라몬트'
+    let nui_24 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fafter_dolls%2F%EC%97%98%EC%8B%9C.avif?alt=media&token=dfd2aa62-12d3-4ecb-b4ef-fad6478da03c'
+    let nui_25 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fafter_dolls%2F%EC%98%A4%EC%A6%88.avif?alt=media&token=9950f829-70c9-48a2-a1bc-a413e6463af7'
+    let nui_26 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fafter_dolls%2F%EC%9A%B8%ED%8E%98%EC%8B%9C%EC%B9%B4.avif?alt=media&token=cba53fe3-b049-45b8-a590-726c6595fe14'
+    let nui_27 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fafter_dolls%2F%EC%9C%88%ED%84%B0.avif?alt=media&token=8307824d-f833-4ccb-b811-e44fe0eccdc2'
+    let nui_28 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fafter_dolls%2F%EC%BA%A3.avif?alt=media&token=5732e464-00c1-46ff-9b32-439cc6612da2'
+    let nui_29 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fafter_dolls%2F%EC%BC%80%EC%9D%BC%EB%9F%BD.avif?alt=media&token=2a044b17-a631-4210-b924-d2fe4b13d7e0'
+    let nui_30 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fafter_dolls%2F%ED%8C%8C%EB%A9%9C%EB%9D%BC.avif?alt=media&token=14690307-3d39-4069-931c-4a43ace39cd8'
+    let nui_31 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fafter_dolls%2F%ED%8E%A0%EB%A6%AD%EC%8A%A4.avif?alt=media&token=8071e5fd-5968-4127-919a-1dc1fa8cc414'
+    let nui_32 = 'https://firebasestorage.googleapis.com/v0/b/gratia-2cdd0.appspot.com/o/gratine%2Fafter_dolls%2F%ED%9E%88%EC%B9%B4%EB%A5%B4%EB%8F%84.avif?alt=media&token=12e94b52-8105-4703-9b6a-e935400d1efc'
+
     let name_1 = '디미트라'
     let name_2 = '라미스텔라'
     let name_3 = '로녹'
@@ -247,7 +283,7 @@ const Vending = ({userObj, fbUserObj, refreshUser}) => {
     let name_20 = '애슈아'
     //let name_21 = '에드가'
     let name_22 = '에아르'
-    let name_23 = '에저-라몬트'
+    //let name_23 = '에저-라몬트'
     let name_24 = '엘시'
     let name_25 = '오즈'
     let name_26 = '울페시카'
@@ -262,21 +298,119 @@ const Vending = ({userObj, fbUserObj, refreshUser}) => {
         duck_7, duck_8, duck_9, duck_10,
         duck_11, duck_12, duck_13, duck_14, duck_15,
         duck_16, duck_17, duck_18, duck_19, duck_20,
-        duck_22, duck_23, duck_24, duck_25,
+        duck_22, duck_24, duck_25,
         duck_26, duck_27, duck_28, duck_29, duck_30,
         duck_31, duck_32
+    ];
+    let nuiList = [
+        nui_1, nui_2, nui_3, nui_4, nui_5,
+        nui_7, nui_8, nui_9, nui_10,
+        nui_11, nui_12, nui_13, nui_14, nui_15,
+        nui_16, nui_17, nui_18, nui_19, nui_20,
+        nui_22, nui_24, nui_25,
+        nui_26, nui_27, nui_28, nui_29, nui_30,
+        nui_31, nui_32
     ];
     let nameList = [
         name_1, name_2, name_3, name_4, name_5,
         name_7, name_8, name_9, name_10,
         name_11, name_12, name_13, name_14, name_15,
         name_16, name_17, name_18, name_19, name_20,
-        name_22, name_23, name_24, name_25,
+        name_22, name_24, name_25,
         name_26, name_27, name_28, name_29, name_30,
         name_31, name_32
     ];
+    //누이인형(랜덤)구매 기능
+    const doBuyNuiDolls = async (e) => {
+        const itemName = e.target.children[1].children[0].innerText;
+        const itemPrice = e.target.children[1].children[1].innerText;
+        const extractedNumber = parseInt(itemPrice, 10);
+        
+        var random_index = Math.floor(Math.random() * nuiList.length);
+        let attachmentUrl = nuiList[random_index];
 
-    //인형(랜덤)구매 기능
+        const ok = window.confirm(`${itemName}(${itemPrice})을 구매하시겠습니까?`);
+        if (ok) {
+            if (extractedNumber <= fbUserObj.gold) {
+                const buyMention = `[구매완료] ${itemName}(${itemPrice})을 구매했습니다.\n뽑은 인형 : ${nameList[random_index]}
+                 \n남은 소지금 : ${fbUserObj.gold - extractedNumber} G / 구매일자 : ${todayfull}`
+                const buyNweetObj = {
+                    text: buyMention,
+                    createdAt: Date.now(),
+                    createdDate: todayfull,
+                    creatorId: userObj.uid,
+                    creatorName: userObj.displayName,
+                    creatorImg: userObj.photoURL,
+                    buy: true,
+                    buyItem: itemName,
+                    buyPrice: itemPrice,
+                    attachmentUrl,
+                };
+                await addDoc(collection(dbService, "nweets"), buyNweetObj);
+                editGold(extractedNumber)
+            }
+            else {
+                window.confirm("소지금이 부족합니다ㅜㅜ");
+            }
+        }
+    }
+
+    //누이인형(랜덤)구매 여러개 기능
+    const doBuyFiveNuiDolls = async (e) => {
+        const itemName = e.target.children[1].children[0].innerText;
+        const itemPrice = e.target.children[1].children[1].innerText;
+        const extractedNumber = parseInt(itemPrice, 10);
+        
+        const numbers = [];
+        while (numbers.length < 6) {
+            const randomNumber = Math.floor(Math.random() * nuiList.length) + 0;
+            if (!numbers.includes(randomNumber)) {
+                numbers.push(randomNumber);
+            }
+        }
+
+        let attachmentUrl_1 = nuiList[numbers[0]];
+        let attachmentUrl_2 = nuiList[numbers[1]];
+        let attachmentUrl_3 = nuiList[numbers[2]];
+        let attachmentUrl_4 = nuiList[numbers[3]];
+        let attachmentUrl_5 = nuiList[numbers[4]];
+        let attachmentUrl_6 = nuiList[numbers[5]];
+
+        const ok = window.confirm(`${itemName}(${itemPrice})을 구매하시겠습니까?`);
+        if (ok) {
+            if (extractedNumber <= fbUserObj.gold) {
+                const buyMention = `[구매완료] ${itemName}(${itemPrice})을 구매했습니다.
+                \n뽑은 인형 : ${nameList[[numbers[0]]]},${nameList[[numbers[1]]]},${nameList[[numbers[2]]]},${nameList[[numbers[3]]]},${nameList[[numbers[4]]]},${nameList[[numbers[5]]]}
+                 \n남은 소지금 : ${fbUserObj.gold - extractedNumber} G / 구매일자 : ${todayfull}`
+                const buyNweetObj = {
+                    text: buyMention,
+                    createdAt: Date.now(),
+                    createdDate: todayfull,
+                    creatorId: userObj.uid,
+                    creatorName: userObj.displayName,
+                    creatorImg: userObj.photoURL,
+                    buy: true,
+                    buyItem: itemName,
+                    buyPrice: itemPrice,
+                    imgNums_6: true,
+                    attachmentUrl_1,
+                    attachmentUrl_2,
+                    attachmentUrl_3,
+                    attachmentUrl_4,
+                    attachmentUrl_5,
+                    attachmentUrl_6,
+                };
+                await addDoc(collection(dbService, "nweets"), buyNweetObj);
+                editGold(extractedNumber)
+            }
+            else {
+                window.confirm("소지금이 부족합니다ㅜㅜ");
+            }
+        }
+    }
+
+
+    //오리인형(랜덤)구매 기능
     const doBuyDolls = async (e) => {
         const itemName = e.target.children[1].children[0].innerText;
         const itemPrice = e.target.children[1].children[1].innerText;
@@ -311,7 +445,7 @@ const Vending = ({userObj, fbUserObj, refreshUser}) => {
         }
     }
 
-    //인형(랜덤)구매 여러개 기능
+    //오리인형(랜덤)구매 여러개 기능
     const doBuyFiveDolls = async (e) => {
         const itemName = e.target.children[1].children[0].innerText;
         const itemPrice = e.target.children[1].children[1].innerText;
@@ -490,6 +624,25 @@ const Vending = ({userObj, fbUserObj, refreshUser}) => {
                         <span>100 G</span>
                     </div>
                     <div className='eventTag'>주1회</div>
+                </div>
+                <div className="vending-item" onClick={doBuyNuiDolls}>
+                    <div className="img-box">
+                        <img src={nuiImg} alt="" />
+                    </div>
+                    <div className="txt-box">
+                        <p>빵떡인형(랜덤)</p>
+                        <span>300 G</span>
+                    </div>
+                </div>
+                <div className="vending-item" onClick={doBuyFiveNuiDolls}>
+                    <div className="img-box">
+                        <img src={nuisImg} alt="" />
+                    </div>
+                    <div className="txt-box">
+                        <p>빵떡인형(랜덤)</p>
+                        <span>1500 G</span>
+                    </div>
+                    <div className='eventTag'>5 + 1 이벤트</div>
                 </div>
                 <div className="vending-item" onClick={doBuyDolls}>
                     <div className="img-box">

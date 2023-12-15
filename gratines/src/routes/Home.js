@@ -209,7 +209,7 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, vendingManage, atte
                                     orderWhat={nweet.orderWhat}
                                     isWhole={nweet.orderWhat === "/전체"}
                                     isDice={nweet.orderWhat === "/주사위" && orderList.includes(nweet.orderText)}
-                                    isAttack={nweet.orderWhat === "/공격" && userList.includes(nweet.orderText)}
+                                    isAttack={nweet.orderWhat === "/공격"}
                                     isCure={nweet.orderWhat === "/치유" && userList.includes(nweet.orderText)}
                                     isHpRest={nweet.orderWhat === "/체력리셋"}
                                     isBuy={nweet.buy === true}
@@ -242,7 +242,7 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, vendingManage, atte
                     />
                 </div>
                 <div className={'attend-area ' + (attendManage? '':'not-now')}>
-                    <div className="title">화분키우기 (출석 보상)
+                    <div className="title">오틀 밥주기 (출석)
                         <span className="info-wrap">
                             <div
                                 className="info-btn"
@@ -257,8 +257,8 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, vendingManage, atte
                                     <img src={light} alt="" />
                                 </div>
                                 <p>
-                                    출석시 5~15 사이의 랜덤 경험치를 생성합니다.<br />
-                                    경험치를 모아 오틀의 선물을 받아보세요.
+                                    출석시 8~15 사이의 오틀의 호감도를 생성합니다.<br />
+                                    호감도를 모아 오틀의 선물을 받아보세요.
                                 </p>
                             </div>
                         </span>
@@ -269,7 +269,8 @@ const Home = ({ userObj, refreshUser, isLoggedIn, fbUserObj, vendingManage, atte
                         refreshUser={refreshUser}
                     />
                 </div>
-                <div className={'vending-area ' + (vendingManage? '':'not-now')}>
+                {/* <div className={'vending-area ' + (vendingManage? '':'not-now')}> */}
+                <div className={'vending-area '}>
                     <div className="title">상점
                         <span className="info-wrap">
                             <div className="info-btn"

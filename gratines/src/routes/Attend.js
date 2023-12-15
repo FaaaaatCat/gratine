@@ -52,8 +52,8 @@ const Attend = ({ fbUserObj, userObj, refreshUser }) => {
             const UserGameData_Total = Number(UserGameData.totalAttend.integerValue);
             const UserGameData_AttendCount = Number(UserGameData.attendCount.integerValue);
             const UserGameData_Gold = Number(UserGameData.gold.integerValue);
-            //let attendRanNum = Math.ceil(Math.random() * (15 - 5) + 5);
-            let attendRanNum = 15;
+            let attendRanNum = Math.ceil(Math.random() * (15 - 8) + 8);
+            //let attendRanNum = 15;
             let attendGold = 100;
             const ok = window.confirm(`출석 완료! ${attendGold}G를 드립니다.`);
             if (ok) {
@@ -79,7 +79,7 @@ const Attend = ({ fbUserObj, userObj, refreshUser }) => {
     //출석점수 완전 리셋 기능
     const resetAttend = async () => {
         const UserGameData_Id = userData.docs[0].id;
-        const ok = window.confirm("화분 게이지를 진짜 삭제할래요?");
+        const ok = window.confirm("게이지를 진짜 삭제할래요?");
         const UserGameRef = doc(dbService, "user", UserGameData_Id);
         if (ok) {
             await updateDoc(UserGameRef, {

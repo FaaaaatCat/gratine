@@ -109,7 +109,8 @@ const AuthForm = ({userObj, refreshUser}) => {
                         <div className="login-title">
                             {newAccount ?  <p><span>그라티네의 정원</span><br></br>가입하기</p> : <p><span>그라티네의 정원</span>에<br></br>어서오세요</p>}
                         </div>
-                        <span className="login-sub-txt" onClick={toggleAccount}>
+                        <p>*현재 회원가입을 <br></br> 받고 있지 않습니다.</p>
+                        {/* <span className="login-sub-txt" onClick={toggleAccount}>
                             {newAccount ?
                                 <div>이미 계정이 있나요?
                                     <span>로그인</span>
@@ -117,7 +118,7 @@ const AuthForm = ({userObj, refreshUser}) => {
                                 : <div>신입생인가요?
                                     <span>회원가입</span>
                                 </div>}
-                        </span>
+                        </span> */}
                     </div>
                     <form onSubmit={onSubmit}>
                         <input
