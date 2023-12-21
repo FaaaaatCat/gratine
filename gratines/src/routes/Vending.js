@@ -4,6 +4,7 @@ import { collection, addDoc, query, onSnapshot, orderBy, where, doc, getDocs, up
 import { getStorage, ref, getMetadata, getDownloadURL   } from "firebase/storage";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import quillImg from '../images/item_quill.png'
+import cocktailImg from '../images/item_cocktail.png'
 import bookmarkImg from '../images/item_bookmark.png'
 import crystallImg from '../images/item_crystall.png'
 import magichatImg from '../images/item_magichat.png'
@@ -520,7 +521,7 @@ const Vending = ({userObj, fbUserObj, refreshUser}) => {
         const ok = window.confirm("칵테일 재료를 구매하시겠습니까? 4개의 랜덤한 재료가 선택됩니다.");
         if (ok) {
             if (extractedNumber <= fbUserObj.gold) {
-                const buyMention = `[칵테일 제조] 칵테일 재료(${selectedCock})을 구매했어요. 네 개의 재료들로 맛있는 칵테일 완성~! (${todayfull}) `
+                const buyMention = `[칵테일 제조] 칵테일 재료(${selectedCock})을 골랐어요. 네 개의 재료들로 맛있는 칵테일 완성~! (${todayfull}) `
                 const buyNweetObj = {
                     text: buyMention,
                     createdAt: Date.now(),
@@ -560,8 +561,7 @@ const Vending = ({userObj, fbUserObj, refreshUser}) => {
                         <span>100 G</span>
                     </div>
                 </div> */}
-                {/* <div className="vending-item" onClick={doBuyCocktail}>
-                    <div className='eventTag'>event</div>
+                <div className="vending-item" onClick={doBuyCocktail}>
                     <div className="img-box">
                         <img src={cocktailImg} alt="" />
                     </div>
@@ -569,7 +569,8 @@ const Vending = ({userObj, fbUserObj, refreshUser}) => {
                         <p>칵테일 재료</p>
                         <span className='bg-purple'>0 G</span>
                     </div>
-                </div> */}
+                    <div className='eventTag'>event</div>
+                </div>
                 <div className="vending-item" onClick={doBuy}>
                     <div className="img-box">
                         <img src={pochunImg} alt="" />
